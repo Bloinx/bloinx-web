@@ -10,6 +10,8 @@
 
 ## To Do
 * Formar grupos de minimo 5 maximo 10 usuarios.
+* Definir la periodicidad de los pagos
+* Definir el monto de los pagos
 * Pagar a cada usuario cierta cantidad de tokens cada cierto tiempo.
 * Congelar la los tokens que el usuario puso como garantia y moverlos a un protocolo que genere rendimientos.
 * Definir fechas de pago de forma automatica
