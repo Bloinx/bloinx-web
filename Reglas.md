@@ -10,11 +10,17 @@
 
 ## To Do
 * Formar grupos de minimo 5 maximo 10 usuarios.
-* Definir la periodicidad de los pagos
+* Definir la periodicidad de los pagos (quincenal/mensual)
 * Definir el monto de los pagos
-* Pagar a cada usuario cierta cantidad de tokens cada cierto tiempo.
-* Congelar la los tokens que el usuario puso como garantia y moverlos a un protocolo que genere rendimientos.
+* Definir el orden de cobro de los participantes
+* Pagar a cada usuario de acuerdo a la cantidad de tokens y tiempo establecido.
+* Congelar los tokens que el usuario puso como garantia y moverlos a un protocolo que genere rendimientos.
 * Definir fechas de pago de forma automatica
 * Definir fechas de termino de forma automatica
-* Convertir Eth a Dai o a USD o a tora crypto
+* Convertir Eth a Dai o a USD o a otra crypto
 * Ux de la aplicación.
+* Con cada pago aumentar la reputación del usuario
+* Regresar la garantía al usuario al término del ciclo (esto podría no regresarse a menos que el usuario lo solicite)
+
+
+
