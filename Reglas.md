@@ -8,19 +8,26 @@
 
 3. El usuario debera poner como colateral cierta cantidad de tokens como forma de garantia.
 
-## To Do
-* Formar grupos de minimo 5 maximo 10 usuarios.
-* Definir la periodicidad de los pagos (quincenal/mensual)
-* Definir el monto de los pagos
-* Definir el orden de cobro de los participantes
-* Pagar a cada usuario de acuerdo a la cantidad de tokens y tiempo establecido.
-* Congelar los tokens que el usuario puso como garantia y moverlos a un protocolo que genere rendimientos.
-* Definir fechas de pago de forma automatica
+## To Do Sprint 1
+* 1 Ronda de 5 usuarios.
+* Definir la periodicidad de los pagos por medio de etapas (enum).
+* Pago de garantia 1 eth y enviarlo a root. 
+* Definir el monto de los pagos 1 eth
+* El orden de cobro de los participantes se define desde el orden de los usuarios en el constructor.
+* Pagar a cada usuario de acuerdo a la cantidad de tokens y tiempo establecido. 
+* Los usuarios ejecutaran la funcion de retiro por medio de un boton en el frontend
 * Definir fechas de termino de forma automatica
-* Convertir Eth a Dai o a USD o a otra crypto
-* Ux de la aplicación.
-* Con cada pago aumentar la reputación del usuario
 * Regresar la garantía al usuario al término del ciclo (esto podría no regresarse a menos que el usuario lo solicite)
 
 
+## Backlog
+* Congelar los tokens que el usuario puso como garantia y moverlos a un protocolo que genere rendimientos.
+* Convertir Eth a Dai o a USD o a otra crypto
+* Orden dependiente de reputacion del usuario
+* Definir variable de reputacion
+* Definir sistema para presion socal
+* Ux de la aplicación.
+* Con cada pago aumentar la reputación del usuario
+* Uso de compound para generar intereses
+* Evaluar otros metodos de generacion de rendimientos
 
