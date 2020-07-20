@@ -14,33 +14,34 @@ contract Groups {
         User user;
     }
     
-    mapping(uint => User) public users;
+    mapping(address => User) public users;
     mapping(uint => Room) public rooms;
     uint roomCounter = 1;
     uint usersCounter = 0;
-    
+    uint feeSize;
+
     User[] usersList;
-    Room[3][] roomsList;
-    
-    address public admin;
-    
-    constructor() public {
+    Room[] roomsList;
+
+    address payable public admin;
+
+    constructor(uint _fee) public {
         admin = msg.sender;
+        feeSize = _fee;
     }
-    
+
     function registerUser(string memory _userName) public {
         if(usersCounter >= 2) {
             revert("El grupo esta completo");
         }
         usersCounter ++;
-        users[usersCounter] = User(usersCounter, _userName, msg.sender, false);
-        usersList.push(users[usersCounter]);
+        users[msg.sender] = User(usersCounter, _userName, msg.sender, false);
+        usersList.push(users[msg.sender]);
     }
 
     function payFee() public payable {
-     // here is where user have to pay fee for guarantee
+      require(msg.value > 0, 'Fondos Insuficientes');
+        admin.transfer(msg.value);
+        users[msg.sender].fee = true;
     }
-    //function createRoom() public {
-       //rooms[roomCounter] = Room(roomCounter, users[1].userName)
-    //}
 }
