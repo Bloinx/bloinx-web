@@ -2,14 +2,14 @@ pragma solidity >=0.4.22 <0.7.0;
 pragma experimental ABIEncoderV2;
 
 contract Groups {
-    enum Stages {
-        //Stages of the round
-        setup, //receive the initial fees
-        save, //receive payments for stage number 1
-        pay, //send savings to user in 1rst number
-        finished //all users Withdrew their saving
-    }
 
+    enum Stages {   //Stages of the round
+        setup,      //receive the initial fees
+        save,     //receive payments for stage number 1
+        pay,      //send savings to user in 1rst number
+        finished  //all users Withdrew their saving
+    }
+    
     struct User {
         uint256 userId;
         string userName;
@@ -24,18 +24,18 @@ contract Groups {
     }
 
     mapping(address => User) public users;
-    mapping(uint256 => Room) public rooms;
-    uint256 roomCounter = 1;
-    uint256 usersCounter = 0;
-    uint256 cashIn;
-    uint256 saveAmount; //Monto de ahorro periodicamente
-    uint256 groupSize;
-    uint256 CashInPayeesCount = 0;
-    uint256 saveAmountPayeesCount = 0; //Cantidad de pagos que se realizan por stage
-    uint256 cycle = 0; //Sirve para saber el usuario en turno
-    uint256 totalSaveAmount = 0; //Monto del ahorro logrado en la tanda
-    uint256 totalCashIn = 0;
-
+    mapping(uint => Room) public rooms;
+    uint roomCounter = 1;
+    uint usersCounter = 0;
+    uint cashIn;
+    uint saveAmount; //Monto de ahorro periodicamente
+    uint groupSize;
+    uint CashInPayeesCount = 0;
+    uint saveAmountPayeesCount = 0;  //Cantidad de pagos que se realizan por stage
+    uint cycle = 0;   //Sirve para saber el usuario en turno
+    uint totalSaveAmount = 0;  //Monto del ahorro logrado en la tanda
+    uint totalCashIn = 0;
+    
     Stages stage;
 
     User[] public usersList;
@@ -44,26 +44,16 @@ contract Groups {
     address payable public admin;
 
     modifier isUsersTurn() {
-        require(
-            msg.sender == usersList[cycle].userAddr,
-            "Debes esperar tu turno para retirar"
-        );
+        require(msg.sender == usersList[cycle].userAddr, "Debes esperar tu turno para retirar");
         _;
     }
 
     modifier isRegisteredUser() {
-        require(
-            msg.sender == users[msg.sender].userAddr,
-            "Usuario no registrado"
-        );
+        require(msg.sender == users[msg.sender].userAddr, "Usuario no registrado");
         _;
     }
 
-    constructor(
-        uint256 _cashIn,
-        uint256 _saveAmount,
-        uint8 _groupSize
-    ) public {
+    constructor(uint _cashIn, uint _saveAmount, uint8 _groupSize) public {
         admin = msg.sender;
         cashIn = _cashIn;
         saveAmount = _saveAmount;
