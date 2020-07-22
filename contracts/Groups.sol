@@ -17,12 +17,12 @@ contract Groups {
         bool cashInFlag;
         bool saveAmountFlag;
     }
-    
+
     struct Room {
         uint256 roomId;
         User user;
     }
-    
+
     mapping(address => User) public users;
     mapping(uint => Room) public rooms;
     uint roomCounter = 1;
@@ -35,10 +35,10 @@ contract Groups {
     uint cycle = 0;   //Sirve para saber el usuario en turno
     uint totalSaveAmount = 0;  //Monto del ahorro logrado en la tanda
     uint totalCashIn = 0;
-
+    
     Stages stage;
 
-    User[] usersList;
+    User[] public usersList;
     Room[] roomsList;
 
     address payable public admin;
@@ -62,57 +62,73 @@ contract Groups {
     }
 
     function registerUser(string memory _userName) public {
-        require(stage == Stages.setup, "La tanda ya comenzo y no acepta nuevos usuarios");
+        require(
+            stage == Stages.setup,
+            "La tanda ya comenzo y no acepta nuevos usuarios"
+        );
         require(usersCounter < groupSize, "El grupo esta completo");
         usersCounter++;
-        users[msg.sender] = User(usersCounter, _userName, msg.sender, false, false);
+        users[msg.sender] = User(
+            usersCounter,
+            _userName,
+            msg.sender,
+            false,
+            false
+        );
         usersList.push(users[msg.sender]);
     }
 
-    function payFee() public isRegisteredUser payable {
+    function payCashIn() public payable isRegisteredUser {
         require(stage == Stages.setup, "Todos han pagado el fee exitosamente");
-        require(users[msg.sender].cashInFlag == false, "Ya tenemos regisrado tu CashIn");
-        require(msg.value >= cashIn, 'Fondos Insuficientes');
+        require(
+            users[msg.sender].cashInFlag == false,
+            "Ya tenemos regisrado tu CashIn"
+        );
+        require(msg.value >= cashIn, "Fondos Insuficientes");
         totalCashIn = totalCashIn + msg.value;
         users[msg.sender].cashInFlag = true;
         CashInPayeesCount++;
-        if (CashInPayeesCount == groupSize){
+        if (CashInPayeesCount == groupSize) {
             admin.transfer(totalCashIn);
             CashInPayeesCount = 0;
             stage = Stages.save;
         }
     }
 
-
-    function payRound() public isRegisteredUser payable {
+    function payRound() public payable isRegisteredUser {
         require(stage == Stages.save, "Espera una nueva ronda de ahorro");
-        require(users[msg.sender].saveAmountFlag == false, "Ya ahorraste esta ronda");
-        require(msg.value >= cashIn, 'Fondos Insuficientes');
-        users[msg.sender].saveAmountFlag = true;
+        require(
+            users[msg.sender].saveAmountFlag == false,
+            "Ya ahorraste esta ronda"
+        );
+        require(msg.value >= cashIn, "Fondos Insuficientes");
+        usersList[saveAmountPayeesCount].saveAmountFlag = true;
         saveAmountPayeesCount++;
         totalSaveAmount = totalSaveAmount + msg.value;
-        if (saveAmountPayeesCount == groupSize){
+        if (saveAmountPayeesCount == groupSize) {
             saveAmountPayeesCount = 0;
-            stage = Stages.pay;            //La tanda puede pagarse si todos ahorraron en la ronda
+            stage = Stages.pay; //La tanda puede pagarse si todos ahorraron en la ronda
         }
     }
-    
-    function WithdrawRound() public isRegisteredUser isUsersTurn payable {
-        require(stage == Stages.pay, "Espera a que tengamos el monto de tu ahorro");     //Se debe estar en fase de pago
+
+    function WithdrawRound() public payable isRegisteredUser isUsersTurn {
+        require(
+            stage == Stages.pay,
+            "Espera a que tengamos el monto de tu ahorro"
+        ); //Se debe estar en fase de pago
         stage = Stages.save;
         usersList[cycle].userAddr.transfer(totalSaveAmount);
         cycle++;
         stage = Stages.save;
         newRound();
-        if(cycle > groupSize){
+        if (cycle > groupSize) {
             stage = Stages.finished;
         }
     }
 
-    function newRound() internal {          //*********Esta funcion no sirve bien*** Revisar
-        for(uint8 i; i<groupSize; i++ ){
+    function newRound() internal {
+        for (uint256 i = 0; i < groupSize; i++) {
             usersList[i].saveAmountFlag = false;
         }
     }
-
 }
