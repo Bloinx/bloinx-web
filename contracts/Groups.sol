@@ -32,11 +32,7 @@ contract Groups {
     uint groupSize;
     uint CashInPayeesCount = 0;
     uint saveAmountPayeesCount = 0;  //Cantidad de pagos que se realizan por stage
-<<<<<<< HEAD
-    uint cycle = 0;   //Sirve para saber el usuario en turno
-=======
     uint cycle = 1;   //Sirve para saber el usuario en turno
->>>>>>> 87de8b440ba13b83e80629123b28dd9b38bc2ed8
     uint totalSaveAmount = 0;  //Monto del ahorro logrado en la tanda
     uint totalCashIn = 0;
 
@@ -48,11 +44,7 @@ contract Groups {
     address payable public admin;
 
     modifier isUsersTurn() {
-<<<<<<< HEAD
-        require(msg.sender == addressOrderList[cycle], "Debes esperar tu turno para retirar");
-=======
         require(msg.sender == addressOrderList[cycle-1], "Debes esperar tu turno para retirar");
->>>>>>> 87de8b440ba13b83e80629123b28dd9b38bc2ed8
         _;
     }
 
@@ -108,11 +100,7 @@ contract Groups {
     function WithdrawRound() payable isRegisteredUser isUsersTurn public {
         require(stage == Stages.pay, "Espera a que tengamos el monto de tu ahorro");     //Se debe estar en fase de pago
         stage = Stages.save;
-<<<<<<< HEAD
-        address addressUserInTurn = addressOrderList[cycle];
-=======
         address addressUserInTurn = addressOrderList[cycle-1];
->>>>>>> 87de8b440ba13b83e80629123b28dd9b38bc2ed8
         users[addressUserInTurn].userAddr.transfer(totalSaveAmount);
         cycle++;
         stage = Stages.save;
@@ -131,11 +119,7 @@ contract Groups {
         totalSaveAmount = 0;
     }
     
-<<<<<<< HEAD
-    function withdrawCashIn() public {  //*******Falta garantizar que los fondos se devolvieron al contrato*******
-=======
     function withdrawCashIn() payable public {  //*******Falta garantizar que los fondos se devolvieron al contrato*******
->>>>>>> 87de8b440ba13b83e80629123b28dd9b38bc2ed8
         require(stage == Stages.finished, "Debes esperar a que termine el circulo de ahorro");
         require(users[msg.sender].cashInFlag == true, "No tenemos registrado ninguna devolucion pendiente");
         msg.sender.transfer(cashIn);
@@ -143,8 +127,4 @@ contract Groups {
     }
     
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 87de8b440ba13b83e80629123b28dd9b38bc2ed8
