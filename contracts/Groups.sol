@@ -119,7 +119,7 @@ contract Groups {
         totalSaveAmount = 0;
     }
     
-    function withdrawCashIn() public {  //Falta garantizar que los fondos se devolvieron al contrato
+    function withdrawCashIn() public {  //*******Falta garantizar que los fondos se devolvieron al contrato*******
         require(stage == Stages.finished, "Debes esperar a que termine el circulo de ahorro");
         require(users[msg.sender].cashInFlag == true, "No tenemos registrado ninguna devolucion pendiente");
         msg.sender.transfer(cashIn);
