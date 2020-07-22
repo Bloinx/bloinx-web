@@ -88,7 +88,7 @@ contract Groups {
         usersList.push(users[msg.sender]);
     }
 
-    function payFee() public payable isRegisteredUser {
+    function payCashIn() public payable isRegisteredUser {
         require(stage == Stages.setup, "Todos han pagado el fee exitosamente");
         require(
             users[msg.sender].cashInFlag == false,
