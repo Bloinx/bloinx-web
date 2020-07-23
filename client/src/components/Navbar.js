@@ -7,7 +7,7 @@ export function Navbar({account}) {
     <React.Fragment>
       <nav className="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
       <a className="navbar-brand" href="/">
-        <img src="https://vignette.wikia.nocookie.net/gravity-falls-en-espanol/images/8/86/Pato_1.png" width="50" height="auto" className="d-inline-block align-top" alt="" />
+        {/* <img src="https://vignette.wikia.nocookie.net/gravity-falls-en-espanol/images/8/86/Pato_1.png" width="50" height="auto" className="d-inline-block align-top" alt="" /> */}
           bloinx
       </a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

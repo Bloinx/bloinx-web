@@ -11,9 +11,9 @@ function App() {
   const [web3, setWeb3] = useState(undefined);
   const [accounts, setAccounts] = useState(undefined);
   const [contract, setContract] = useState(undefined);
-  
+
   useEffect(() => {
-    const init = async() => {
+    const init = async () => {
       const web3 = await getWeb3();
       const accounts = await web3.eth.getAccounts();
       const networkId = await web3.eth.net.getId();
@@ -28,20 +28,58 @@ function App() {
     }
     init();
     window.ethereum.on('accountsChanged', accounts => {
-      setAccounts(accounts);
+      setAccounts(accounts[0]);
     });
   }, []);
-  
-    if (!web3) {
-      return <div>Loading Web3, accounts, and contract...</div>;
-    }
 
-    return (
-      <div className="App">
-        <Navbar account={accounts} />
-        <Home />
-      </div>
-    );
+  if (!web3) {
+    return <div>Loading Web3, accounts, and contract...</div>;
   }
+
+  async function registerUser(userName) {
+    await contract.methods.registerUser(userName).send({ from: accounts })
+    .once('receipt', async (receipt) => (
+      console.log(receipt)
+    ))
+    .on('error', async (error) => (
+      console.log(error)
+    ));
+  };
+
+  async function payCashIn() {
+    await contract.methods.payCashIn().send({ from: accounts, value: '000000990000' })
+    .once('receipt', async (receipt) => (
+      console.log(receipt)
+    ))
+    .on('error', async (error) => (
+      console.log(error)
+    ));
+  };
+
+  async function payRound() {
+    await contract.methods.payRound().send({ from: accounts, value: '000009999900' })
+    .once('receipt', async (receipt) => (
+      console.log(receipt)
+    ))
+    .on('error', async (error) => (
+      console.log(error)
+    ));
+  };
+
+  async function withdrawRound() {
+    await contract.methods.WithdrawRound()
+  }
+
+  return (
+    <div>
+      <Navbar account={accounts} />
+      <Home
+        registerUser={registerUser}
+        payCashIn={payCashIn} 
+        payRound={payRound}
+      />
+    </div>
+  );
+}
 
 export default App;
