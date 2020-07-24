@@ -1,7 +1,7 @@
 
 # Bloinx Defi
 
-`Proyecto de finanzas descentralizadas para el hackaton de AVA`
+`Proyecto de finanzas descentralizadas
 
 ## Heramientas Usadas.
 
