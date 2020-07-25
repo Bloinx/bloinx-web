@@ -1,0 +1,22 @@
+{
+  "titleHeading": "Bloinx",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse cursus euismod purus. Cras at tellus odio. Nulla rhoncus luctus metus, non luctus nibh ultricies sed. Etiam laoreet ligula quis iaculis pulvinar. Donec egestas consequat augue vel pretium.",
+  "cardsStages": {
+    "registerStage": {
+      "stageTitle": "Registrate a la Tanda",
+      "buttonAction": "Registrarme"
+    },
+    "payCashInStage": {
+      "stageTitle": "Paga la Garantia",
+      "buttonAction": "Pagar Garantia"
+    },
+    "saveAmountStage": {
+      "stageTitle": "Deposita tu Ahorro",
+      "buttonAction": "Depositar"
+    },
+    "withdrawStage": {
+      "stageTitle": "Recibe los Beneficios",
+      "buttonAction": "Retirar Ahorro"
+    }
+  }
+}

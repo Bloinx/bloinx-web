@@ -4,6 +4,7 @@ import getWeb3 from "./getWeb3";
 
 import Home from './containers/Home';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer/Footer';
 
 import "./App.css";
 
@@ -18,6 +19,7 @@ function App() {
       const accounts = await web3.eth.getAccounts();
       const networkId = await web3.eth.net.getId();
       const deployedNetwork = Groups.networks[networkId];
+      console.log(deployedNetwork);
       const contract = new web3.eth.Contract(
         Groups.abi,
         deployedNetwork && deployedNetwork.address,
@@ -67,7 +69,9 @@ function App() {
   };
 
   async function withdrawRound() {
-    await contract.methods.WithdrawRound()
+    console.log('----> ', contract);
+    const draw = await contract.methods.WithdrawRound().send({ from: '0xC82457b606C9D2D198a6cfae4C84cbbd72e274A8' , to: accounts, value: web3.utils.toWei('0.90', "ether")});
+    console.log(draw);
   }
 
   return (
@@ -77,7 +81,9 @@ function App() {
         registerUser={registerUser}
         payCashIn={payCashIn} 
         payRound={payRound}
+        withdrawRound={withdrawRound}
       />
+      <Footer />
     </div>
   );
 }

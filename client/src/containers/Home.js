@@ -1,42 +1,18 @@
 import React from 'react';
 
-export function Home({ registerUser, payCashIn, payRound }) {
+import TextHeading from '../components/TextHeading/TextHeading';
+import Card from '../components/Cards/Card';
+
+export function Home({ registerUser, payCashIn, payRound, withdrawRound }) {
   return (
-    <div className="my-5">
-      <div className="row">
-        <div className="col-6">
-          <button className="btn btn-primary my-3" onClick={(e) => {
-            registerUser(e.target.name, 'UserUno')
-          }}
-          >
-            Registrarme a la tanda
-          </button>
-        </div>
-        <div className="col-6">
-          <button className="btn btn-danger mx-auto my-3" onClick={(e) => {
-            payCashIn(e.target.name)
-          }}
-          >
-            Pagar Garantia
-          </button>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-6">
-          <button className="btn btn-info my-3" onClick={(e) => {
-            payRound(e.target.name)
-          }}
-          >
-            Ahorro
-          </button>
-        </div>
-        <div className="col-6">
-          <button className="btn btn-success mx-auto my-3" onClick={(e) => {
-            console.log(e);
-          }}
-          >
-            Retirar Ahorro
-          </button>
+    <div className="px">
+      <TextHeading />
+      <div className="container">
+        <div className="card-deck mb-3 text-center">
+          <Card stage="registerStage" action={registerUser} />
+          <Card stage="payCashInStage" action={payCashIn} />
+          <Card stage="saveAmountStage" action={payRound} />
+          <Card stage="withdrawStage" action={withdrawRound} />
         </div>
       </div>
     </div>
