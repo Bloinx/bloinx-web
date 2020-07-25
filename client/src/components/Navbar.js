@@ -1,14 +1,14 @@
 import React from 'react';
 
 import Avatar from './Avatar';
+import BloinxLogo from '../icons/BloinxFinal.svg';
 
 export function Navbar({account}) {
   return(
-    <React.Fragment>
+    <div className="mb-5 pb-5 py-4 border-bottom shadow">
       <nav className="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
       <a className="navbar-brand" href="/">
-        <img src="https://vignette.wikia.nocookie.net/gravity-falls-en-espanol/images/8/86/Pato_1.png" width="50" height="auto" className="d-inline-block align-top" alt="" />
-          bloinx
+       <img src={BloinxLogo} height="47" alt="logo" />
       </a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
@@ -29,7 +29,7 @@ export function Navbar({account}) {
         </ul>
       </div>
     </nav>
-    </React.Fragment>
+    </div>
   );
 }
 

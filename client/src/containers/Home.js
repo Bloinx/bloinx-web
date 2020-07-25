@@ -1,8 +1,21 @@
 import React from 'react';
 
-export function Home() {
+import TextHeading from '../components/TextHeading/TextHeading';
+import Card from '../components/Cards/Card';
+
+export function Home({ registerUser, payCashIn, payRound, withdrawRound }) {
   return (
-    <div>{'El home'}</div>
+    <div className="px">
+      <TextHeading />
+      <div className="container">
+        <div className="card-deck mb-3 text-center">
+          <Card stage="registerStage" action={registerUser} />
+          <Card stage="payCashInStage" action={payCashIn} />
+          <Card stage="saveAmountStage" action={payRound} />
+          <Card stage="withdrawStage" action={withdrawRound} />
+        </div>
+      </div>
+    </div>
   )
 }
 
