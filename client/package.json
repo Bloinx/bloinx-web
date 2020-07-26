@@ -10,6 +10,7 @@
     "react": "16.11.0",
     "react-dom": "16.11.0",
     "react-scripts": "^3.4.1",
+    "sweetalert2": "^9.17.1",
     "web3": "^1.2.11"
   },
   "scripts": {
