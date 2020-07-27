@@ -100,7 +100,7 @@ function App() {
   };
 
   async function withdrawRound() {
-    await contract.methods.WithdrawRound().send({ from: accounts, to: '0xC82457b606C9D2D198a6cfae4C84cbbd72e274A8', value: web3.utils.toWei('0.090', "ether")})
+    await contract.methods.withdrawRound().send({ from: accounts, to: contract._address, value: web3.utils.toWei('0.090', "ether")})
     .once('receipt', async (receipt) => (
       Swal.fire({
         icon: 'success',
