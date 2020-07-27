@@ -141,6 +141,8 @@ contract Groups {
         usersCounter = 0;
         addressOrderList = new address[](0);
         stage = Stages.setup;
+        totalSaveAmount = 0;
+        cycle=1;
     }
     
 
