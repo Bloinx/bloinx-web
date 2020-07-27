@@ -4,55 +4,55 @@ pragma experimental ABIEncoderV2;
 contract Groups {
 
     enum Stages {   //Stages of the round
-        setup,      //receive the initial fees
-        save,     //receive payments for stage number 1
-        pay,      //send savings to user in 1rst number
-        finished  //all users Withdrew their saving
+        setup,      //register and receive the initial cash in
+        save,     //receive payments
+        pay,      //withraw permited for the user assigned to the current period
+        finished  //Cash in is sent to the users
     }
     
-    struct User {
+    struct User {   //Information from each user
         uint8 userId;
         string userName;
         address payable userAddr;
         bool cashInFlag;
         bool saveAmountFlag;
-        bool current;
+        bool current;   //defines if the user is participating in the current round
     }
     
-    struct Room {
+    /*struct Room {
         uint8 roomId;
         User user;
-    }
+    }*/
     
     mapping(address => User) public users;
-    mapping(uint => Room) public rooms;
-    uint roomCounter = 1;
+    //mapping(uint => Room) public rooms;
+    //uint roomCounter = 1;
+    
+    address payable public admin;   //The user that deploy the contract is the administrator
+    
+    //Constructor deployment variables
+    uint cashIn;        //amount to be payed as commitment at the begining of the saving circle
+    uint saveAmount; //Payment on each round/cycle
+    uint groupSize; //Number of slots for users to participate on the saving circle
+    
+    //Counters and flags
     uint8 usersCounter = 0;
-    uint cashIn;
-    uint saveAmount; //Monto de ahorro periodicamente
-    uint groupSize;
-    uint CashInPayeesCount = 0;
-    uint saveAmountPayeesCount = 0;  //Cantidad de pagos que se realizan por stage
-    uint cycle = 1;   //Sirve para saber el usuario en turno
-    uint totalSaveAmount = 0;  //Monto del ahorro logrado en la tanda
-    uint totalCashIn = 0;
+    uint CashInPayeesCount = 0;     //Comitment payments counter
+    uint saveAmountPayeesCount = 0;  //Payments done in round counter
+    uint cycle = 1;   //Current cycle/round in the saving circle
+    
+    uint totalSaveAmount = 0;  //Collective saving on the round
+    uint totalCashIn = 0;   
 
     Stages public stage;
 
     address[] public addressOrderList;
-    Room[] roomsList;
+    //Room[] roomsList;
 
-    address payable public admin;
-
-    modifier isUsersTurn() {
+    modifier isUsersTurn() {    //Verifies if it is the users round to widraw
         require(msg.sender == addressOrderList[cycle-1], "Debes esperar tu turno para retirar");
         _;
     }
-
-    //modifier isRegisteredUser() {
-    //    require(msg.sender == users[useraddress].current = false;, "Usuario no registrado");
-    //    _;
-    //}
 
     constructor(uint _cashIn, uint _saveAmount, uint8 _groupSize) public {
         admin = msg.sender;
@@ -63,18 +63,18 @@ contract Groups {
     }
 
     function registerUser(string memory _userName) public {
-        require(stage == Stages.setup, "La tanda ya comenzo y no acepta nuevos usuarios");
-        require(usersCounter < groupSize, "El grupo esta completo");
+        require(stage == Stages.setup, "La tanda ya comenzo y no acepta nuevos usuarios");  //The saving circle has started and doesn't accept new users
+        require(usersCounter < groupSize, "El grupo esta completo");    //the saving circle is full
         usersCounter++;
         users[msg.sender] = User(usersCounter, _userName, msg.sender, false, false, true);
-        addressOrderList.push(msg.sender);
+        addressOrderList.push(msg.sender);  //store user
     }
 
-    function payCashIn() public payable {
+    function payCashIn() public payable {       //Receive the comitment payment
         require(stage == Stages.setup, "Todos han pagado su entrada exitosamente");
-        require(users[msg.sender].cashInFlag == false, "Ya tenemos regisrado tu CashIn");
-        require(users[msg.sender].current == true, "Usuario no registrado");
-        require(msg.value >= cashIn, 'Fondos Insuficientes');
+        require(users[msg.sender].cashInFlag == false, "Ya tenemos regisrado tu CashIn"); //you have payed the cash in
+        require(users[msg.sender].current == true, "Usuario no registrado");    //user not registered
+        require(msg.value >= cashIn, 'Fondos Insuficientes');   //insufucuent funds
         totalCashIn = totalCashIn + msg.value;
         users[msg.sender].cashInFlag = true;
         //users[msg.sender].current = true;
@@ -87,24 +87,24 @@ contract Groups {
     }
 
 
-    function payRound() public payable {
-        require(stage == Stages.save, "Espera una nueva ronda de ahorro");
-        require(users[msg.sender].saveAmountFlag == false, "Ya ahorraste esta ronda");
-        //require(users[msg.sender].current == true, "Usuario no registrado");
-        require(msg.value >= cashIn, 'Fondos Insuficientes');
+    function payRound() public payable {    //users make the payment for the cycle
+        require(stage == Stages.save, "Espera una nueva ronda de ahorro");  //wait for a new round
+        require(users[msg.sender].saveAmountFlag == false, "Ya ahorraste esta ronda");  //you have already saved this round
+        //require(users[msg.sender].current == true, "Usuario no registrado");  //unregistered user
+        require(msg.value >= cashIn, 'Fondos Insuficientes');   //insuficient funds
         users[msg.sender].saveAmountFlag = true;
         saveAmountPayeesCount++;
         totalSaveAmount = totalSaveAmount + msg.value;
         if (saveAmountPayeesCount == groupSize){
             saveAmountPayeesCount = 0;
-            stage = Stages.pay;            //La tanda puede pagarse si todos ahorraron en la ronda
+            stage = Stages.pay;            //When all the payments are done go to next stage
         }
     }
     
-    function WithdrawRound() payable isUsersTurn public {
+    function withdrawRound() payable isUsersTurn public {   //User assigned to the round can widraw
         require(stage == Stages.pay, "Espera a que tengamos el monto de tu ahorro");     //Se debe estar en fase de pago
         require(users[msg.sender].current == true, "Usuario no registrado");
-        stage = Stages.save;
+        //stage = Stages.save;
         address addressUserInTurn = addressOrderList[cycle-1];
         users[addressUserInTurn].userAddr.transfer(totalSaveAmount);
         cycle++;
@@ -117,7 +117,7 @@ contract Groups {
     }
     
     
-    function newRound() private{
+    function newRound() private{    //repeats the save and pay stages according to the saving circle size
         for(uint8 i = 0; i<groupSize; i++){
             address useraddress = addressOrderList[i];
             users[useraddress].saveAmountFlag = false;
@@ -126,9 +126,9 @@ contract Groups {
     }
     
     
-    function withdrawCashIn() payable public {
-        require(stage == Stages.finished, "Debes esperar a que termine el circulo de ahorro");
-        require(msg.sender == admin , "debes ser el administrador para ejecutar esta funcion");
+    function withdrawCashIn() payable public {  //When all the rounds are done the admin sends the cash in to the users
+        require(stage == Stages.finished, "Debes esperar a que termine el circulo de ahorro");//wait for the saving circle to end
+        require(msg.sender == admin , "Debes ser el administrador para ejecutar esta funcion");//only admins can execute this function
         require(msg.value >= cashIn * groupSize , "fondos insuficientes");
         for(uint8 i = 0; i<groupSize; i++){
             address useraddress = addressOrderList[i];
@@ -144,6 +144,4 @@ contract Groups {
         totalSaveAmount = 0;
         cycle=1;
     }
-    
-
 }
