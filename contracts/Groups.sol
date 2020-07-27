@@ -11,22 +11,23 @@ contract Groups {
     }
     
     struct User {
-        uint256 userId;
+        uint8 userId;
         string userName;
         address payable userAddr;
         bool cashInFlag;
         bool saveAmountFlag;
+        bool current;
     }
     
     struct Room {
-        uint256 roomId;
+        uint8 roomId;
         User user;
     }
     
     mapping(address => User) public users;
     mapping(uint => Room) public rooms;
     uint roomCounter = 1;
-    uint usersCounter = 0;
+    uint8 usersCounter = 0;
     uint cashIn;
     uint saveAmount; //Monto de ahorro periodicamente
     uint groupSize;
@@ -48,10 +49,10 @@ contract Groups {
         _;
     }
 
-    modifier isRegisteredUser() {
-        require(msg.sender == users[msg.sender].userAddr, "Usuario no registrado");
-        _;
-    }
+    //modifier isRegisteredUser() {
+    //    require(msg.sender == users[useraddress].current = false;, "Usuario no registrado");
+    //    _;
+    //}
 
     constructor(uint _cashIn, uint _saveAmount, uint8 _groupSize) public {
         admin = msg.sender;
@@ -65,16 +66,18 @@ contract Groups {
         require(stage == Stages.setup, "La tanda ya comenzo y no acepta nuevos usuarios");
         require(usersCounter < groupSize, "El grupo esta completo");
         usersCounter++;
-        users[msg.sender] = User(usersCounter, _userName, msg.sender, false, false);
+        users[msg.sender] = User(usersCounter, _userName, msg.sender, false, false, true);
         addressOrderList.push(msg.sender);
     }
 
-    function payCashIn() public isRegisteredUser payable {
+    function payCashIn() public payable {
         require(stage == Stages.setup, "Todos han pagado su entrada exitosamente");
         require(users[msg.sender].cashInFlag == false, "Ya tenemos regisrado tu CashIn");
+        require(users[msg.sender].current == true, "Usuario no registrado");
         require(msg.value >= cashIn, 'Fondos Insuficientes');
         totalCashIn = totalCashIn + msg.value;
         users[msg.sender].cashInFlag = true;
+        //users[msg.sender].current = true;
         CashInPayeesCount++;
         if (CashInPayeesCount == groupSize){
             admin.transfer(totalCashIn);
@@ -84,9 +87,10 @@ contract Groups {
     }
 
 
-    function payRound() public isRegisteredUser payable {
+    function payRound() public payable {
         require(stage == Stages.save, "Espera una nueva ronda de ahorro");
         require(users[msg.sender].saveAmountFlag == false, "Ya ahorraste esta ronda");
+        //require(users[msg.sender].current == true, "Usuario no registrado");
         require(msg.value >= cashIn, 'Fondos Insuficientes');
         users[msg.sender].saveAmountFlag = true;
         saveAmountPayeesCount++;
@@ -97,8 +101,9 @@ contract Groups {
         }
     }
     
-    function WithdrawRound() payable isRegisteredUser isUsersTurn public {
+    function WithdrawRound() payable isUsersTurn public {
         require(stage == Stages.pay, "Espera a que tengamos el monto de tu ahorro");     //Se debe estar en fase de pago
+        require(users[msg.sender].current == true, "Usuario no registrado");
         stage = Stages.save;
         address addressUserInTurn = addressOrderList[cycle-1];
         users[addressUserInTurn].userAddr.transfer(totalSaveAmount);
@@ -107,23 +112,35 @@ contract Groups {
         newRound();
         if(cycle > groupSize){
             stage = Stages.finished;
+            
         }
     }
     
     
-    function newRound() public {
-        for(uint256 i = 0; i<groupSize; i++){
+    function newRound() private{
+        for(uint8 i = 0; i<groupSize; i++){
             address useraddress = addressOrderList[i];
             users[useraddress].saveAmountFlag = false;
         }
         totalSaveAmount = 0;
     }
     
-    function withdrawCashIn() payable public {  //*******Falta garantizar que los fondos se devolvieron al contrato*******
+    
+    function withdrawCashIn() payable public {
         require(stage == Stages.finished, "Debes esperar a que termine el circulo de ahorro");
-        require(users[msg.sender].cashInFlag == true, "No tenemos registrado ninguna devolucion pendiente");
-        msg.sender.transfer(cashIn);
-        users[msg.sender].cashInFlag == false;
+        require(msg.sender == admin , "debes ser el administrador para ejecutar esta funcion");
+        require(msg.value >= cashIn * groupSize , "fondos insuficientes");
+        for(uint8 i = 0; i<groupSize; i++){
+            address useraddress = addressOrderList[i];
+            users[useraddress].cashInFlag = false;
+            users[useraddress].current = false;
+            users[useraddress].userAddr.transfer(cashIn);
+        }
+        totalCashIn=0;
+        CashInPayeesCount = 0;
+        usersCounter = 0;
+        addressOrderList = new address[](0);
+        stage = Stages.setup;
     }
     
 
