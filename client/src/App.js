@@ -13,6 +13,7 @@ function App() {
   const [web3, setWeb3] = useState(undefined);
   const [accounts, setAccounts] = useState(undefined);
   const [contract, setContract] = useState(undefined);
+  const [admin, setAdmin] = useState(undefined);
 
   useEffect(() => {
     const init = async () => {
@@ -24,9 +25,14 @@ function App() {
         Groups.abi,
         deployedNetwork && deployedNetwork.address,
       );
+      const admin = await contract.methods
+        .admin()
+        .call();
+
       setWeb3(web3);
       setAccounts(accounts[0]);
       setContract(contract);
+      setAdmin(admin);
     }
     init();
     window.ethereum.on('accountsChanged', accounts => {
@@ -40,83 +46,103 @@ function App() {
 
   async function registerUser(userName) {
     await contract.methods.registerUser(userName).send({ from: accounts })
-    .once('receipt', async (receipt) => (
-      Swal.fire({
-        icon: 'success',
-        title: 'La transacción se ejecuto correctamente!!',
-        showConfirmButton: false,
-        timer: 1600
-      })
-    ))
-    .on('error', async (error) => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Ooops..!!',
-        text: 'Ocurrio un Error en la Transacción!',
-        timer: 1600
-      })
-      console.log(error)
-    });
+      .once('receipt', async (receipt) => (
+        Swal.fire({
+          icon: 'success',
+          title: 'La transacción se ejecuto correctamente!!',
+          showConfirmButton: false,
+          timer: 1600
+        })
+      ))
+      .on('error', async (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Ooops..!!',
+          text: 'Ocurrio un Error en la Transacción!',
+          timer: 1600
+        })
+        console.log(error)
+      });
   };
 
   async function payCashIn() {
-    await contract.methods.payCashIn().send({ from: accounts, value: web3.utils.toWei('0.01100', 'ether')})
-    .once('receipt', async (receipt) => (
-      Swal.fire({
-        icon: 'success',
-        title: 'La transacción se ejecuto correctamente!!',
-        showConfirmButton: false,
-        timer: 1600
-      })
-    ))
-    .on('error', async (error) => (
-      Swal.fire({
-        icon: 'error',
-        title: 'Ooops..!!',
-        text: 'Ocurrio un Error en la Transacción!',
-        timer: 1600
-      })
-    ));
+    await contract.methods.payCashIn().send({ from: accounts, value: web3.utils.toWei('0.01100', 'ether') })
+      .once('receipt', async (receipt) => (
+        Swal.fire({
+          icon: 'success',
+          title: 'La transacción se ejecuto correctamente!!',
+          showConfirmButton: false,
+          timer: 1600
+        })
+      ))
+      .on('error', async (error) => (
+        Swal.fire({
+          icon: 'error',
+          title: 'Ooops..!!',
+          text: 'Ocurrio un Error en la Transacción!',
+          timer: 1600
+        })
+      ));
   };
 
   async function payRound() {
-    await contract.methods.payRound().send({ from: accounts, value: web3.utils.toWei('0.01100', 'ether')})
-    .once('receipt', async (receipt) => (
-      Swal.fire({
-        icon: 'success',
-        title: 'La transacción se ejecuto correctamente!!',
-        showConfirmButton: false,
-        timer: 1600
-      })
-    ))
-    .on('error', async (error) => (
-      Swal.fire({
-        icon: 'error',
-        title: 'Ooops..!!',
-        text: 'Ocurrio un Error en la Transacción!',
-        timer: 1600
-      })
-    ));
+    await contract.methods.payRound().send({ from: accounts, value: web3.utils.toWei('0.01100', 'ether') })
+      .once('receipt', async (receipt) => (
+        Swal.fire({
+          icon: 'success',
+          title: 'La transacción se ejecuto correctamente!!',
+          showConfirmButton: false,
+          timer: 1600
+        })
+      ))
+      .on('error', async (error) => (
+        Swal.fire({
+          icon: 'error',
+          title: 'Ooops..!!',
+          text: 'Ocurrio un Error en la Transacción!',
+          timer: 1600
+        })
+      ));
   };
 
   async function withdrawRound() {
-    await contract.methods.withdrawRound().send({ from: accounts, to: contract._address, value: web3.utils.toWei('0.090', "ether")})
-    .once('receipt', async (receipt) => (
-      Swal.fire({
-        icon: 'success',
-        title: 'La transacción se ejecuto correctamente!!',
-        showConfirmButton: false,
-        timer: 1600
-      })
-    ))
-    .on('error', async (error) => (
+    await contract.methods.withdrawRound().send({ from: accounts, to: contract._address, value: web3.utils.toWei('0.090', "ether") })
+      .once('receipt', async (receipt) => (
+        Swal.fire({
+          icon: 'success',
+          title: 'La transacción se ejecuto correctamente!!',
+          showConfirmButton: false,
+          timer: 1600
+        })
+      ))
+      .on('error', async (error) => (
+        Swal.fire({
+          icon: 'error',
+          title: 'Ooops..!!',
+          text: 'Ocurrio un Error en la Transacción!',
+          timer: 1600
+        })
+      ));
+  }
+
+  async function withdrawCashIn() {
+    if (accounts === admin) {
+      await contract.methods.withdrawCashIn().send({ from: admin, to: contract._address, value: web3.utils.toWei('0.99', 'ether') })
+        .once('receipt', async (receipt) => (
+          console.log(receipt)
+        ))
+        .on('error', async (error) => (
+          console.log(error)
+        ))
+    }
+    return (
       Swal.fire({
         icon: 'error',
         title: 'Ooops..!!',
-        text: 'Ocurrio un Error en la Transacción!',
+        text: 'Soló el admin puede ejecutar esta función!',
         timer: 1600
       })
-    ));
+    )
   }
 
   return (
@@ -124,9 +150,10 @@ function App() {
       <Navbar account={accounts} />
       <Home
         registerUser={registerUser}
-        payCashIn={payCashIn} 
+        payCashIn={payCashIn}
         payRound={payRound}
         withdrawRound={withdrawRound}
+        withdrawCashIn={withdrawCashIn}
       />
       <Footer />
     </div>

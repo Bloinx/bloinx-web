@@ -128,8 +128,8 @@ contract Groups {
     
     function withdrawCashIn() payable public {  //When all the rounds are done the admin sends the cash in to the users
         require(stage == Stages.finished, "Debes esperar a que termine el circulo de ahorro");//wait for the saving circle to end
-        require(msg.sender == admin , "Debes ser el administrador para ejecutar esta funcion");//only admins can execute this function
-        require(msg.value >= cashIn * groupSize , "fondos insuficientes");
+        require(msg.sender == admin, "Debes ser el administrador para ejecutar esta funcion");//only admins can execute this function
+        require(msg.value >= (cashIn * groupSize),"fondos insuficientes");
         for(uint8 i = 0; i<groupSize; i++){
             address useraddress = addressOrderList[i];
             users[useraddress].cashInFlag = false;

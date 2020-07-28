@@ -17,6 +17,10 @@
     "withdrawStage": {
       "stageTitle": "Recibe los Beneficios",
       "buttonAction": "Retirar Ahorro"
+    },
+    "finishedStage": {
+      "stageTitle": "Devolver Garantia",
+      "buttonAction": "Devolver Garantia"
     }
   }
 }
