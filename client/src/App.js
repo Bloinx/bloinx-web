@@ -66,7 +66,7 @@ function App() {
   };
 
   async function payCashIn() {
-    await contract.methods.payCashIn().send({ from: accounts, value: web3.utils.toWei('0.01100', 'ether') })
+    await contract.methods.payCashIn().send({ from: accounts, value: web3.utils.toWei('0.001', 'ether') })
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
@@ -86,7 +86,7 @@ function App() {
   };
 
   async function payRound() {
-    await contract.methods.payRound().send({ from: accounts, value: web3.utils.toWei('0.01100', 'ether') })
+    await contract.methods.payRound().send({ from: accounts, value: web3.utils.toWei('0.001', 'ether') })
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
@@ -127,7 +127,7 @@ function App() {
 
   async function withdrawCashIn() {
     if (accounts === admin) {
-      await contract.methods.withdrawCashIn().send({ from: accounts, to: contract._address, value: web3.utils.toWei('0.22', 'ether') })
+      await contract.methods.withdrawCashIn().send({ from: accounts, to: contract._address, value: web3.utils.toWei('0.002', 'ether') })
         .once('receipt', async (receipt) => (
           console.log(receipt)
         ))
