@@ -106,7 +106,7 @@ function App() {
   };
 
   async function withdrawRound() {
-    await contract.methods.withdrawRound().send({ from: accounts, to: contract._address, value: web3.utils.toWei('0.090', "ether") })
+    await contract.methods.withdrawRound().send({ from: accounts, to: contract._address})
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
@@ -127,7 +127,7 @@ function App() {
 
   async function withdrawCashIn() {
     if (accounts === admin) {
-      await contract.methods.withdrawCashIn().send({ from: admin, to: contract._address, value: web3.utils.toWei('0.99', 'ether') })
+      await contract.methods.withdrawCashIn().send({ from: accounts, to: contract._address, value: web3.utils.toWei('0.22', 'ether') })
         .once('receipt', async (receipt) => (
           console.log(receipt)
         ))
