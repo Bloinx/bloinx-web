@@ -14,6 +14,7 @@ function App() {
   const [accounts, setAccounts] = useState(undefined);
   const [contract, setContract] = useState(undefined);
   const [admin, setAdmin] = useState(undefined);
+  const [stage, setStage] = useState(undefined);
 
   useEffect(() => {
     const init = async () => {
@@ -28,11 +29,13 @@ function App() {
       const admin = await contract.methods
         .admin()
         .call();
+      const stage = await contract.methods.stage().call();
 
       setWeb3(web3);
       setAccounts(accounts[0]);
       setContract(contract);
       setAdmin(admin);
+      setStage(stage);
     }
     init();
     window.ethereum.on('accountsChanged', accounts => {
@@ -179,7 +182,7 @@ function App() {
         withdrawRound={withdrawRound}
         withdrawCashIn={withdrawCashIn}
       />
-      <Footer />
+      <Footer stage={stage} />
     </div>
   );
 }
