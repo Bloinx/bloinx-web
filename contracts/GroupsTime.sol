@@ -6,7 +6,7 @@ contract Groups {
     enum Stages {   //Stages of the round
         setup,      //register and receive the initial cash in
         save,     //receive payments
-        pay,      //withraw permited for the user assigned to the current period
+        //pay,      //withraw permited for the user assigned to the current period
         finished  //Cash in is sent to the users
     }
 
@@ -40,6 +40,7 @@ contract Groups {
     uint CashInPayeesCount = 0;     //Comitment payments counter
     uint saveAmountPayeesCount = 0;  //Payments done in round counter
     uint cycle = 1;   //Current cycle/round in the saving circle
+    uint public creationTime;
     uint public tandaTime;
 
     uint totalSaveAmount = 0;  //Collective saving on the round
@@ -54,6 +55,31 @@ contract Groups {
         require(msg.sender == addressOrderList[cycle-1], "Debes esperar tu turno para retirar");
         _;
     }
+    
+    modifier isRegisteredUser() {    //Verifies if it is the users round to widraw
+        require(users[msg.sender].current == true, "Usuario no registrado");
+        _;
+    }
+    
+    modifier stageSetupTime() {    //Verifies if it is the users round to widraw
+        require(now <= creationTime + 2 minutes, 'Se termino el tiempo de registro');
+        _;
+    }
+    
+    modifier isPayAmountCorrect() {    //Verifies if it is the users round to widraw
+        require(msg.value >= cashIn, 'Fondos Insuficientes');
+        _;
+    }
+    
+    //modifier timedTransitions() {
+    //    if (stage == Stages.setup && now >= creationTime + 2 minutes)
+    //        stage = Stages.save;
+        //if (stage == Stages.save && now >= tandaTime + 3 minutes)
+        //    Stages.finished;
+        //if (stage == Stages.finished && now >= tandaTime + 4 minutes)
+        //    nextStage();
+    //    _;
+    //}
 
     constructor(uint _cashIn, uint _saveAmount, uint8 _groupSize) public {
         admin = msg.sender;
@@ -64,58 +90,47 @@ contract Groups {
         tandaTime=now;
     }
 
-    function registerUser(string memory _userName) public {
+    function registerUser(string memory _userName) public stageSetupTime {
         require(stage == Stages.setup, "La tanda ya comenzo y no acepta nuevos usuarios");  //The saving circle has started and doesn't accept new users
         require(usersCounter < groupSize, "El grupo esta completo");    //the saving circle is full
-        require(now <= tandaTime + 2 minutes, 'Se termino el tiempo de registro');
         usersCounter++;
         users[msg.sender] = User(usersCounter, _userName, msg.sender, false, false, true);
         addressOrderList.push(msg.sender);  //store user
     }
 
-    function payCashIn() public payable {       //Receive the comitment payment
+    function payCashIn() public stageSetupTime isRegisteredUser isPayAmountCorrect payable {       //Receive the comitment payment
         require(stage == Stages.setup, "Todos han pagado su entrada exitosamente");
         require(users[msg.sender].cashInFlag == false, "Ya tenemos regisrado tu CashIn"); //you have payed the cash in
-        require(users[msg.sender].current == true, "Usuario no registrado");    //user not registered
-        require(msg.value >= cashIn, 'Fondos Insuficientes');   //insufucuent funds
-        require(now <= tandaTime + 2 minutes, 'Pago tardio');
         totalCashIn = totalCashIn + msg.value;
         users[msg.sender].cashInFlag = true;
-        //users[msg.sender].current = true;
         CashInPayeesCount++;
         if (CashInPayeesCount == groupSize){
             admin.transfer(totalCashIn);
             CashInPayeesCount = 0;
-            tandaTime=now;
+            //tandaTime=now;
             stage = Stages.save;
         }
     }
 
 
-    function payRound() public payable {    //users make the payment for the cycle
+    function payRound() public isRegisteredUser isPayAmountCorrect payable {    //users make the payment for the cycle
         require(stage == Stages.save, "Espera una nueva ronda de ahorro");  //wait for a new round
         require(users[msg.sender].saveAmountFlag == false, "Ya ahorraste esta ronda");  //you have already saved this round
-        //require(users[msg.sender].current == true, "Usuario no registrado");  //unregistered user
-        require(msg.value >= cashIn, 'Fondos Insuficientes');   //insuficient funds
         require(now <= tandaTime + 1 minutes, 'Pago tardio');
         users[msg.sender].saveAmountFlag = true;
         saveAmountPayeesCount++;
         totalSaveAmount = totalSaveAmount + msg.value;
         if (saveAmountPayeesCount == groupSize){
             saveAmountPayeesCount = 0;
-            stage = Stages.pay;            //When all the payments are done go to next stage
         }
     }
 
-    function WithdrawRound() payable isUsersTurn public {   //User assigned to the round can widraw
-        require(stage == Stages.pay, "Espera a que tengamos el monto de tu ahorro");     //Se debe estar en fase de pago
-        require(users[msg.sender].current == true, "Usuario no registrado");
-        //stage = Stages.save;
+    function WithdrawRound() payable isRegisteredUser isUsersTurn public {   //User assigned to the round can widraw
+        require(totalSaveAmount==groupSize*saveAmount, "Espera a que tengamos el monto de tu ahorro");     //Se debe estar en fase de pago
         address addressUserInTurn = addressOrderList[cycle-1];
         users[addressUserInTurn].userAddr.transfer(totalSaveAmount);
         cycle++;
         tandaTime=now;
-        stage = Stages.save;
         newRound();
         if(cycle > groupSize){
             stage = Stages.finished;
@@ -133,10 +148,8 @@ contract Groups {
     }
 
 
-    function withdrawCashIn() payable public {  //When all the rounds are done the admin sends the cash in to the users
+    function withdrawCashIn() payable isPayAmountCorrect public {  //When all the rounds are done the admin sends the cash in to the users
         require(stage == Stages.finished, "Debes esperar a que termine el circulo de ahorro");//wait for the saving circle to end
-        //require(msg.sender == admin , "Debes ser el administrador para ejecutar esta funcion");//only admins can execute this function
-        require(msg.value >= cashIn * groupSize , "fondos insuficientes");
         for(uint8 i = 0; i<groupSize; i++){
             address useraddress = addressOrderList[i];
             users[useraddress].cashInFlag = false;
