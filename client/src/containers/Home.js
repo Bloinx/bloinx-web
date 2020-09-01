@@ -11,19 +11,21 @@ export function Home({ registerUser, payCashIn, payRound, withdrawRound, withdra
         <div className="card-deck mb-3 text-center">
           {
             stage === '0' && (
-              <React.Fragment>
-                <Card stageFunction="registerStage" action={registerUser} />
-                <Card stageFunction="payCashInStage" action={payCashIn} />
-              </React.Fragment>
+              <Card stageFunction="registerStage" action={registerUser} />
             )
           }
           {
             stage === '1' && (
-              <Card stageFunction="saveAmountStage" action={payRound} />
+              <Card stageFunction="payCashInStage" action={payCashIn} />
             )
           }
           {
             stage === '2' && (
+              <Card stageFunction="saveAmountStage" action={payRound} />
+            )
+          }
+          {
+            stage === '3' && (
               <Card stageFunction="withdrawStage" action={withdrawRound} />
             )
           }

@@ -40,7 +40,7 @@ function App() {
     window.ethereum.on('accountsChanged', accounts => {
       window.location.reload();
     });
-  }, []);
+  }, [stage]);
 
   const isReady = () => {
     return (
