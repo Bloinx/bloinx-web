@@ -16,16 +16,11 @@ export function Home({ registerUser, payCashIn, payRound, withdrawRound, withdra
           }
           {
             stage === '1' && (
-              <Card stageFunction="payCashInStage" action={payCashIn} />
-            )
-          }
-          {
-            stage === '2' && (
               <Card stageFunction="saveAmountStage" action={payRound} />
             )
           }
           {
-            stage === '3' && (
+            stage === '2' && (
               <Card stageFunction="withdrawStage" action={withdrawRound} />
             )
           }
