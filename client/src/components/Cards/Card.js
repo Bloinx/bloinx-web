@@ -2,11 +2,11 @@ import React from 'react';
 
 import text from '../../textContent.json';
 
-export const Card = ({ stage, action }) => {
+export const Card = ({ stageFunction, action }) => {
   return (
     <div className="card mb-4 shadow-sm">
       <div className="card-body">
-        <h2 className="card-title">{text.cardsStages[stage].stageTitle}</h2>
+        <h2 className="card-title">{text.cardsStages[stageFunction].stageTitle}</h2>
         <ul className="list-unstyled mt-3 mb-4">
           <li>Ahorra de Forma Segura</li>
           <li>Genera ganancias</li>
@@ -18,7 +18,7 @@ export const Card = ({ stage, action }) => {
             action(e.target.name, 'UserUno')
           }}
         >
-          {text.cardsStages[stage].buttonAction}
+          {text.cardsStages[stageFunction].buttonAction}
         </button>
       </div>
     </div>
