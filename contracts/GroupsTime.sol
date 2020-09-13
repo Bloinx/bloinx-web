@@ -12,11 +12,12 @@ contract Groups {
 
     struct User {   //Information from each user
         uint8 userId;
-        string userName;
+        //string userName;
         address payable userAddr;
         bool cashInFlag;
         bool saveAmountFlag;
         bool current;   //defines if the user is participating in the current round
+        bool late;
     }
 
     /*struct Room {
@@ -28,7 +29,7 @@ contract Groups {
     //mapping(uint => Room) public rooms;
     //uint roomCounter = 1;
 
-    address payable public admin;   //The user that deploy the contract is the administrator
+    address payable admin;   //The user that deploy the contract is the administrator
 
     //Constructor deployment variables
     uint cashIn;        //amount to be payed as commitment at the begining of the saving circle
@@ -39,12 +40,12 @@ contract Groups {
     uint8 usersCounter = 0;
     uint CashInPayeesCount = 0;     //Comitment payments counter
     uint saveAmountPayeesCount = 0;  //Payments done in round counter
-    uint cycle = 1;   //Current cycle/round in the saving circle
-    uint public creationTime;
+    uint public cycle = 1;   //Current cycle/round in the saving circle
+    uint creationTime;
     //uint public tandaTime;
 
-    uint totalSaveAmount = 0;  //Collective saving on the round
-    uint totalCashIn = 0;
+    uint public totalSaveAmount = 0;  //Collective saving on the round
+    uint public totalCashIn = 0;
 
     Stages public stage;
 
@@ -72,9 +73,9 @@ contract Groups {
     }
     
     modifier timedTransitions() {
-        if (stage == Stages.setup && now >= creationTime + 2 minutes)
+        if (stage == Stages.setup && now >= creationTime + 1 minutes)
             stage = Stages.save;
-        if (stage == Stages.save && now >= creationTime + 2 minutes + groupSize*60)
+        if (stage == Stages.save && now >= creationTime + 1 minutes + groupSize*60 + 1 minutes)
             stage=Stages.finished;
         _;
     }
@@ -88,42 +89,49 @@ contract Groups {
         creationTime=now;
     }
 
-    function registerUser(string memory _userName) public timedTransitions atStage(Stages.setup){
+    function registerUser() public timedTransitions isPayAmountCorrect atStage(Stages.setup) payable{
         require(usersCounter < groupSize, "El grupo esta completo");    //the saving circle is full
         usersCounter++;
-        users[msg.sender] = User(usersCounter, _userName, msg.sender, false, false, true);
+        users[msg.sender] = User(usersCounter, msg.sender, false, false, true, false);
         addressOrderList.push(msg.sender);  //store user
-    }
-
-    function payCashIn() public timedTransitions isRegisteredUser isPayAmountCorrect atStage(Stages.setup) payable {       //Receive the comitment payment
-        require(users[msg.sender].cashInFlag == false, "Ya tenemos regisrado tu CashIn"); //you have payed the cash in
         totalCashIn = totalCashIn + msg.value;
         users[msg.sender].cashInFlag = true;
         CashInPayeesCount++;
         if (CashInPayeesCount == groupSize){
-            admin.transfer(totalCashIn);
+            //admin.transfer(totalCashIn);
             CashInPayeesCount = 0;
         }
     }
 
-
-    function payRound() public timedTransitions isRegisteredUser isPayAmountCorrect atStage(Stages.save) payable {    //users make the payment for the cycle
-        require(users[msg.sender].saveAmountFlag == false, "Ya ahorraste esta ronda");  //you have already saved this round
-        require(now <= creationTime + 2 minutes + cycle*60 , 'Pago tardio');
+    function payTurn() public timedTransitions isRegisteredUser isPayAmountCorrect atStage(Stages.save) payable {    //users make the payment for the cycle
+        require(users[msg.sender].saveAmountFlag == false, "Ya ahorraste este turno");  //you have already saved this round
+        require(now <= creationTime + 1 minutes + cycle*60 , 'Pago tardio');
+        
+        totalSaveAmount = totalSaveAmount + msg.value;
         users[msg.sender].saveAmountFlag = true;
         saveAmountPayeesCount++;
-        totalSaveAmount = totalSaveAmount + msg.value;
         if (saveAmountPayeesCount == groupSize){
             saveAmountPayeesCount = 0;
         }
     }
 
-    function WithdrawRound() payable timedTransitions isRegisteredUser isUsersTurn atStage(Stages.save) public {   //User assigned to the round can widraw
+    function WithdrawTurn() payable timedTransitions isRegisteredUser isUsersTurn atStage(Stages.save) public {   //User assigned to the round can widraw
+        
+        if(totalSaveAmount != groupSize*saveAmount){
+            for(uint8 i = 0; i<groupSize; i++){
+                address useraddress = addressOrderList[i];
+                if(now >= creationTime + 1 minutes + cycle*60 && users[useraddress].saveAmountFlag == false){
+                    users[useraddress].late = true;
+                    totalSaveAmount = totalSaveAmount + saveAmount;
+                    totalCashIn = totalCashIn - saveAmount;
+                }
+            }
+        }
         require(totalSaveAmount==groupSize*saveAmount, "Espera a que tengamos el monto de tu ahorro");     //Se debe estar en fase de pago
         address addressUserInTurn = addressOrderList[cycle-1];
         users[addressUserInTurn].userAddr.transfer(totalSaveAmount);
         cycle++;
-        newRound();
+        newTurn();
         /*if(cycle > groupSize){
             stage = Stages.finished;
 
@@ -131,7 +139,7 @@ contract Groups {
     }
 
 
-    function newRound() private{    //repeats the save and pay stages according to the saving circle size
+    function newTurn() private{    //repeats the save and pay stages according to the saving circle size
         for(uint8 i = 0; i<groupSize; i++){
             address useraddress = addressOrderList[i];
             users[useraddress].saveAmountFlag = false;
@@ -140,12 +148,14 @@ contract Groups {
     }
 
 
-    function withdrawCashIn() payable timedTransitions isPayAmountCorrect public atStage(Stages.finished){  //When all the rounds are done the admin sends the cash in to the users
+    function withdrawCashIn() payable timedTransitions public atStage(Stages.finished){  //When all the rounds are done the admin sends the cash in to the users
         for(uint8 i = 0; i<groupSize; i++){
             address useraddress = addressOrderList[i];
             users[useraddress].cashInFlag = false;
             users[useraddress].current = false;
+            if (users[useraddress].late = false){
             users[useraddress].userAddr.transfer(cashIn);
+            }
         }
         totalCashIn=0;
         CashInPayeesCount = 0;
