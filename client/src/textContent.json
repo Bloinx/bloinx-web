@@ -3,24 +3,24 @@
   "description": "Ayudando a las personas a construir comunidades de ahorro.",
   "cardsStages": {
     "registerStage": {
-      "stageTitle": "Registrate a la Tanda",
-      "buttonAction": "Registrarme"
+      "stageTitle": "Regístrate a la tanda",
+      "buttonAction": "Registrarse"
     },
     "payCashInStage": {
-      "stageTitle": "Paga la Garantia",
-      "buttonAction": "Pagar Garantia"
+      "stageTitle": "Paga la garantía",
+      "buttonAction": "Pagar garantía"
     },
     "saveAmountStage": {
-      "stageTitle": "Deposita tu Ahorro",
+      "stageTitle": "Deposita tu ahorro",
       "buttonAction": "Depositar"
     },
     "withdrawStage": {
-      "stageTitle": "Recibe los Beneficios",
-      "buttonAction": "Retirar Ahorro"
+      "stageTitle": "Recibe los beneficios",
+      "buttonAction": "Retirar ahorro"
     },
     "finishedStage": {
-      "stageTitle": "Devolver Garantia",
-      "buttonAction": "Devolver Garantia"
+      "stageTitle": "Devolver garantía",
+      "buttonAction": "Devolver garantía"
     }
   }
 }
