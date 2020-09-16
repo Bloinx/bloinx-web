@@ -30,7 +30,6 @@ function App() {
         .admin()
         .call();
       const stage = await contract.methods.stage().call();
-
       setWeb3(web3);
       setAccounts(accounts[0]);
       setContract(contract);
@@ -41,7 +40,7 @@ function App() {
     window.ethereum.on('accountsChanged', accounts => {
       window.location.reload();
     });
-  }, []);
+  }, [stage]);
 
   const isReady = () => {
     return (
@@ -181,6 +180,9 @@ function App() {
         payRound={payRound}
         withdrawRound={withdrawRound}
         withdrawCashIn={withdrawCashIn}
+        stage={stage}
+        admin={admin}
+        account={accounts}
       />
       <Footer stage={stage} />
     </div>
