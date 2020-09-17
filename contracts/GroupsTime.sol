@@ -6,18 +6,16 @@ contract Groups {
     enum Stages {   //Stages of the round
         setup,      //register and receive the initial cash in
         save,     //receive payments
-        //pay,      //withraw permited for the user assigned to the current period
         finished  //Cash in is sent to the users
     }
 
     struct User {   //Information from each user
         uint8 userId;
-        //string userName;
         address payable userAddr;
         bool cashInFlag;
         bool saveAmountFlag;
-        bool current;   //defines if the user is participating in the current round
-        bool late;
+        bool currentRoundFlag;   //defines if the user is participating in the current round
+        bool latePaymentFlag;
     }
 
     /*struct Room {
@@ -34,31 +32,30 @@ contract Groups {
     //Constructor deployment variables
     uint cashIn;        //amount to be payed as commitment at the begining of the saving circle
     uint saveAmount; //Payment on each round/cycle
-    uint groupSize; //Number of slots for users to participate on the saving circle
+    uint public groupSize; //Number of slots for users to participate on the saving circle
 
     //Counters and flags
     uint8 usersCounter = 0;
     uint CashInPayeesCount = 0;     //Comitment payments counter
     uint saveAmountPayeesCount = 0;  //Payments done in round counter
-    uint public cycle = 1;   //Current cycle/round in the saving circle
+    uint public turn = 1;   //Current cycle/round in the saving circle
     uint creationTime;
-    //uint public tandaTime;
 
     uint public totalSaveAmount = 0;  //Collective saving on the round
     uint public totalCashIn = 0;
 
     Stages public stage;
 
-    address[] addressOrderList;
+    address[] public addressOrderList;
     //Room[] roomsList;
 
     modifier isUsersTurn() {    //Verifies if it is the users round to widraw
-        require(msg.sender == addressOrderList[cycle-1], "Debes esperar tu turno para retirar");
+        require(msg.sender == addressOrderList[turn-1], "Debes esperar tu turno para retirar");
         _;
     }
     
     modifier isRegisteredUser() {    //Verifies if it is the users round to widraw
-        require(users[msg.sender].current == true, "Usuario no registrado");
+        require(users[msg.sender].currentRoundFlag == true, "Usuario no registrado");
         _;
     }
     
@@ -105,8 +102,7 @@ contract Groups {
 
     function payTurn() public timedTransitions isRegisteredUser isPayAmountCorrect atStage(Stages.save) payable {    //users make the payment for the cycle
         require(users[msg.sender].saveAmountFlag == false, "Ya ahorraste este turno");  //you have already saved this round
-        require(now <= creationTime + 1 minutes + cycle*60 , 'Pago tardio');
-        
+        require(now <= creationTime + 1 minutes + turn*60 , 'Pago tardio');
         totalSaveAmount = totalSaveAmount + msg.value;
         users[msg.sender].saveAmountFlag = true;
         saveAmountPayeesCount++;
@@ -120,22 +116,18 @@ contract Groups {
         if(totalSaveAmount != groupSize*saveAmount){
             for(uint8 i = 0; i<groupSize; i++){
                 address useraddress = addressOrderList[i];
-                if(now >= creationTime + 1 minutes + cycle*60 && users[useraddress].saveAmountFlag == false){
-                    users[useraddress].late = true;
+                if(now >= creationTime + 1 minutes + turn*60 && users[useraddress].saveAmountFlag == false){
+                    users[useraddress].latePaymentFlag = true;
                     totalSaveAmount = totalSaveAmount + saveAmount;
                     totalCashIn = totalCashIn - saveAmount;
                 }
             }
         }
         require(totalSaveAmount==groupSize*saveAmount, "Espera a que tengamos el monto de tu ahorro");     //Se debe estar en fase de pago
-        address addressUserInTurn = addressOrderList[cycle-1];
+        address addressUserInTurn = addressOrderList[turn-1];
         users[addressUserInTurn].userAddr.transfer(totalSaveAmount);
-        cycle++;
+        turn++;
         newTurn();
-        /*if(cycle > groupSize){
-            stage = Stages.finished;
-
-        }*/
     }
 
 
@@ -152,8 +144,8 @@ contract Groups {
         for(uint8 i = 0; i<groupSize; i++){
             address useraddress = addressOrderList[i];
             users[useraddress].cashInFlag = false;
-            users[useraddress].current = false;
-            if (users[useraddress].late = false){
+            users[useraddress].currentRoundFlag = false;
+            if (users[useraddress].latePaymentFlag = false){
             users[useraddress].userAddr.transfer(cashIn);
             }
         }
@@ -163,7 +155,7 @@ contract Groups {
         addressOrderList = new address[](0);
         stage = Stages.setup;
         totalSaveAmount = 0;
-        cycle=1;
+        turn=1;
         creationTime=now;
     }
 }
