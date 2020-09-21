@@ -1,7 +1,7 @@
 pragma solidity >=0.4.22 <0.7.0;
 pragma experimental ABIEncoderV2;
 
-contract Groups {
+contract GroupsTime {
 
     enum Stages {   //Stages of the round
         setup,      //register and receive the initial cash in
@@ -18,14 +18,8 @@ contract Groups {
         bool latePaymentFlag;
     }
 
-    /*struct Room {
-        uint8 roomId;
-        User user;
-    }*/
-
     mapping(address => User) public users;
-    //mapping(uint => Room) public rooms;
-    //uint roomCounter = 1;
+
 
     address payable admin;   //The user that deploy the contract is the administrator
 
@@ -47,7 +41,6 @@ contract Groups {
     Stages public stage;
 
     address[] public addressOrderList;
-    //Room[] roomsList;
 
     modifier isUsersTurn() {    //Verifies if it is the users round to widraw
         require(msg.sender == addressOrderList[turn-1], "Debes esperar tu turno para retirar");
@@ -95,7 +88,6 @@ contract Groups {
         users[msg.sender].cashInFlag = true;
         CashInPayeesCount++;
         if (CashInPayeesCount == groupSize){
-            //admin.transfer(totalCashIn);
             CashInPayeesCount = 0;
         }
     }
