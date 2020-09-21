@@ -1,5 +1,5 @@
-var Groups = artifacts.require("./Groups.sol");
+var GroupsTime = artifacts.require("./GroupsTime.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(Groups, 1e15, 1e15, 2);
+  deployer.deploy(GroupsTime, 1e15, 1e15, 2);
 };
