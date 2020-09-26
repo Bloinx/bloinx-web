@@ -116,7 +116,7 @@ function App() {
   }
 
   async function withdrawCashIn() {
-    await contract.methods.withdrawCashIn().send({ from: accounts, to: contract._address, value: web3.utils.toWei('0.002', 'ether') })
+    await contract.methods.withdrawCashIn().call()
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
@@ -141,11 +141,11 @@ function App() {
       <Navbar account={accounts} />
       <Home
         registerUser={registerUser}
-        payCashIn={payTurn}
+        payTurn={payTurn}
         withdrawRound={withdrawTurn}
         withdrawCashIn={withdrawCashIn}
         stage={stage}
-        account={accounts}
+        // account={accounts}
       />
       <Footer stage={stage} />
     </div>

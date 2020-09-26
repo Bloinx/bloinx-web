@@ -112,6 +112,7 @@ contract GroupsTime {
         CashInPayeesCount++;
         if (CashInPayeesCount == groupSize) {
             CashInPayeesCount = 0;
+            stage = Stages.save;
         }
     }
 
