@@ -4,9 +4,9 @@ pragma experimental ABIEncoderV2;
 contract GroupsTime {
     enum Stages {
         //Stages of the round
-        setup, //register and receive the initial cash in
-        save, //receive payments
-        finished //Cash in is sent to the users
+        Setup, //register and receive the initial cash in
+        Save, //receive payments
+        Finished //Cash in is sent to the users
     }
 
     struct User {
@@ -20,7 +20,7 @@ contract GroupsTime {
     }
 
     mapping(address => User) public users;
-    address payable admin; //The user that deploy the contract is the administrator
+    address payable public admin; //The user that deploy the contract is the administrator
 
     //Constructor deployment variables
     uint256 cashIn; //amount to be payed as commitment at the begining of the saving circle
@@ -47,7 +47,7 @@ contract GroupsTime {
         cashIn = _cashIn * 1e17;
         saveAmount = _saveAmount * 1e17;
         groupSize = _groupSize;
-        stage = Stages.setup;
+        stage = Stages.Setup;
         creationTime = now;
     }
 
@@ -81,12 +81,18 @@ contract GroupsTime {
     }
 
     modifier timedTransitions() {
-        // if (stage == Stages.setup && now >= creationTime + 5 minutes)
-        //     stage = Stages.save;
+        if (stage == Stages.Setup && now >= creationTime + 3 minutes) {
+            stage = Stages.Save;
+        }
         if (
-            stage == Stages.save &&
-            now >= creationTime + 1 minutes + groupSize * 60 + 1 minutes
-        ) stage = Stages.finished;
+            stage == Stages.Save &&
+            now >= creationTime + 3 minutes + groupSize * 60 + 1 minutes
+        ) stage = Stages.Finished;
+        _;
+    }
+
+    modifier onlyAdmin() {
+        require(msg.sender == admin, "Solo el admin puede llamar la funcion");
         _;
     }
 
@@ -94,7 +100,8 @@ contract GroupsTime {
         public
         payable
         isPayAmountCorrect
-        atStage(Stages.setup)
+        atStage(Stages.Setup)
+        timedTransitions
     {
         require(usersCounter < groupSize, "El grupo esta completo"); //the saving circle is full
         usersCounter++;
@@ -112,7 +119,7 @@ contract GroupsTime {
         CashInPayeesCount++;
         if (CashInPayeesCount == groupSize) {
             CashInPayeesCount = 0;
-            stage = Stages.save;
+            stage = Stages.Save;
         }
     }
 
@@ -121,14 +128,15 @@ contract GroupsTime {
         payable
         isRegisteredUser
         isPayAmountCorrect
-        atStage(Stages.save)
+        atStage(Stages.Save)
+        timedTransitions
     {
         //users make the payment for the cycle
         require(
             users[msg.sender].saveAmountFlag == false,
             "Ya ahorraste este turno"
         ); //you have already saved this round
-        require(now <= creationTime + 1 minutes + turn * 60, "Pago tardio");
+        // require(now <= creationTime + 2 minutes + turn * 60, "Pago tardio");
         totalSaveAmount = totalSaveAmount + msg.value;
         users[msg.sender].saveAmountFlag = true;
         saveAmountPayeesCount++;
@@ -142,7 +150,8 @@ contract GroupsTime {
         payable
         isRegisteredUser
         isUsersTurn
-        atStage(Stages.save)
+        atStage(Stages.Save)
+        timedTransitions
     {
         //User assigned to the round can widraw
         if (totalSaveAmount != groupSize * saveAmount) {
@@ -165,7 +174,7 @@ contract GroupsTime {
         address addressUserInTurn = addressOrderList[turn - 1];
         users[addressUserInTurn].userAddr.transfer(totalSaveAmount);
         if (turn >= groupSize) {
-            stage = Stages.finished;
+            stage = Stages.Finished;
         } else {
             newTurn();
         }
@@ -181,13 +190,13 @@ contract GroupsTime {
         totalSaveAmount = 0;
     }
 
-    function withdrawCashIn() public payable atStage(Stages.finished) {
+    function withdrawCashIn() public payable atStage(Stages.Finished) onlyAdmin {
         //When all the rounds are done the admin sends the cash in to the users
         for (uint8 i = 0; i < groupSize; i++) {
             address useraddress = addressOrderList[i];
             users[useraddress].cashInFlag = false;
             users[useraddress].currentRoundFlag = false;
-            if (users[useraddress].latePaymentFlag = false) {
+            if (users[useraddress].latePaymentFlag == false) {
                 users[useraddress].userAddr.transfer(cashIn);
             }
         }
@@ -195,9 +204,9 @@ contract GroupsTime {
         CashInPayeesCount = 0;
         usersCounter = 0;
         addressOrderList = new address[](0);
-        stage = Stages.setup;
+        stage = Stages.Setup;
         totalSaveAmount = 0;
         turn = 1;
-        creationTime = now;
+        creationTime = 0;
     }
 }
