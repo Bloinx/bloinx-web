@@ -3,7 +3,7 @@ import React from 'react';
 import TextHeading from '../components/TextHeading/TextHeading';
 import Card from '../components/Cards/Card';
 
-export function Home({ registerUser, payTurn, withdrawRound, withdrawCashIn, stage }) {
+export function Home({ registerUser, payTurn, withdrawRound, withdrawCashIn, stage, admin, account }) {
   return (
     <div className="px">
       <TextHeading />
@@ -25,7 +25,7 @@ export function Home({ registerUser, payTurn, withdrawRound, withdrawCashIn, sta
             )
           }
           {
-            stage === '2' && (
+            (stage === '2' && admin === account) && (
               <Card stageFunction="finishedStage" action={withdrawCashIn} />
             )
           }
