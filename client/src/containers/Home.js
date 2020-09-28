@@ -3,7 +3,7 @@ import React from 'react';
 import TextHeading from '../components/TextHeading/TextHeading';
 import Card from '../components/Cards/Card';
 
-export function Home({ registerUser, payCashIn, payRound, withdrawRound, withdrawCashIn, stage, admin, account }) {
+export function Home({ registerUser, payTurn, withdrawRound, withdrawCashIn, stage, admin, account }) {
   return (
     <div className="px">
       <TextHeading />
@@ -15,23 +15,23 @@ export function Home({ registerUser, payCashIn, payRound, withdrawRound, withdra
             )
           }
           {
-            stage === '0' && (
-              <Card stageFunction="payCashInStage" action={payCashIn} />
+            stage === '1' && (
+              <Card stageFunction="saveAmountStage" action={payTurn} />
             )
           }
           {
             stage === '1' && (
-              <Card stageFunction="saveAmountStage" action={payRound} />
-            )
-          }
-          {
-            stage === '2' && (
               <Card stageFunction="withdrawStage" action={withdrawRound} />
             )
           }
           {
-            admin === account && (
+            (stage === '2' && admin === account) && (
               <Card stageFunction="finishedStage" action={withdrawCashIn} />
+            )
+          }
+          {
+            (stage === '2' && account !== admin) && (
+              <h3 className="text-center">Espera a que inicie un nuevo circulo de ahorro</h3>
             )
           }
         </div>
