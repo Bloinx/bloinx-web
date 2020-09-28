@@ -101,7 +101,6 @@ contract GroupsTime {
         payable
         isPayAmountCorrect
         atStage(Stages.Setup)
-        timedTransitions
     {
         require(usersCounter < groupSize, "El grupo esta completo"); //the saving circle is full
         usersCounter++;
@@ -129,7 +128,6 @@ contract GroupsTime {
         isRegisteredUser
         isPayAmountCorrect
         atStage(Stages.Save)
-        timedTransitions
     {
         //users make the payment for the cycle
         require(
@@ -151,7 +149,6 @@ contract GroupsTime {
         isRegisteredUser
         isUsersTurn
         atStage(Stages.Save)
-        timedTransitions
     {
         //User assigned to the round can widraw
         if (totalSaveAmount != groupSize * saveAmount) {

@@ -36,9 +36,9 @@ function App() {
     }
     init();
     window.ethereum.on('accountsChanged', accounts => {
-      // window.location.reload();
+      setAccounts(accounts[0])
     });
-  }, [stage]);
+  }, []);
 
   const isReady = () => {
     return (

@@ -29,6 +29,11 @@ export function Home({ registerUser, payTurn, withdrawRound, withdrawCashIn, sta
               <Card stageFunction="finishedStage" action={withdrawCashIn} />
             )
           }
+          {
+            (stage === '2' && account !== admin) && (
+              <h3 className="text-center">Espera a que inicie un nuevo circulo de ahorro</h3>
+            )
+          }
         </div>
       </div>
     </div>
