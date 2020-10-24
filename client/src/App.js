@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Groups from "./contracts/Groups.json";
+import Groups from "./contracts/GroupsTime.json";
 import getWeb3 from "./getWeb3";
 import Swal from "sweetalert2";
 
@@ -26,9 +26,7 @@ function App() {
         Groups.abi,
         deployedNetwork && deployedNetwork.address,
       );
-      const admin = await contract.methods
-        .admin()
-        .call();
+      const admin = await contract.methods.admin().call();
       const stage = await contract.methods.stage().call();
       setWeb3(web3);
       setAccounts(accounts[0]);
@@ -38,24 +36,24 @@ function App() {
     }
     init();
     window.ethereum.on('accountsChanged', accounts => {
-      window.location.reload();
+      setAccounts(accounts[0])
     });
-  }, [stage]);
+  }, []);
 
   const isReady = () => {
     return (
       typeof contract !== 'undefined'
       && typeof web3 !== 'undefined'
       && typeof accounts !== 'undefined'
-      && typeof admin !== 'undefined'
+      && typeof stage !== 'undefined'
     );
   }
 
   if (!isReady()) {
     return <div>Loading Web3, accounts, and contract...</div>;
   }
-  async function registerUser(userName) {
-    await contract.methods.registerUser(userName).send({ from: accounts })
+  async function registerUser() {
+    await contract.methods.registerUser().send({ from: accounts, value: web3.utils.toWei('0.5', 'ether') })
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
@@ -75,8 +73,8 @@ function App() {
       });
   };
 
-  async function payCashIn() {
-    await contract.methods.payCashIn().send({ from: accounts, value: web3.utils.toWei('0.001', 'ether') })
+  async function payTurn() {
+    await contract.methods.payTurn().send({ from: accounts, value: web3.utils.toWei('0.5', 'ether') })
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
@@ -96,29 +94,8 @@ function App() {
       ));
   };
 
-  async function payRound() {
-    await contract.methods.payRound().send({ from: accounts, value: web3.utils.toWei('0.001', 'ether') })
-      .once('receipt', async (receipt) => (
-        Swal.fire({
-          icon: 'success',
-          title: 'La transacción se ejecuto correctamente!!',
-          showConfirmButton: false,
-          timer: 1600
-        })
-      ))
-      .on('error', async (error) => (
-        Swal.fire({
-          icon: 'error',
-          title: 'Ooops..!!',
-          text: 'Ocurrio un Error en la Transacción!',
-          showConfirmButton: false,
-          timer: 1600
-        })
-      ));
-  };
-
-  async function withdrawRound() {
-    await contract.methods.withdrawRound().send({ from: accounts, to: contract._address })
+  async function withdrawTurn() {
+    await contract.methods.withdrawTurn().send({ from: accounts, to: contract._address })
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
@@ -140,7 +117,7 @@ function App() {
 
   async function withdrawCashIn() {
     if (accounts === admin) {
-      await contract.methods.withdrawCashIn().send({ from: accounts, to: contract._address, value: web3.utils.toWei('0.002', 'ether') })
+      await contract.methods.withdrawCashIn().send({ from: accounts, to: contract._address })
         .once('receipt', async (receipt) => (
           Swal.fire({
             icon: 'success',
@@ -158,16 +135,6 @@ function App() {
             timer: 1600
           })
         ))
-    } else {
-      return (
-        Swal.fire({
-          icon: 'error',
-          title: 'Ooops..!!',
-          text: 'Soló el admin puede ejecutar esta función!',
-          showConfirmButton: false,
-          timer: 1600
-        })
-      )
     }
   }
 
@@ -176,13 +143,12 @@ function App() {
       <Navbar account={accounts} />
       <Home
         registerUser={registerUser}
-        payCashIn={payCashIn}
-        payRound={payRound}
-        withdrawRound={withdrawRound}
+        payTurn={payTurn}
+        withdrawRound={withdrawTurn}
         withdrawCashIn={withdrawCashIn}
         stage={stage}
-        admin={admin}
         account={accounts}
+        admin={admin}
       />
       <Footer stage={stage} />
     </div>
