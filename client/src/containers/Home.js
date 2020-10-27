@@ -3,10 +3,10 @@ import React from 'react';
 import TextHeading from '../components/TextHeading/TextHeading';
 import Card from '../components/Cards/Card';
 
-export function Home({ registerUser, payTurn, withdrawRound, withdrawCashIn, stage, admin, account }) {
+export function Home({ registerUser, payTurn, withdrawRound, withdrawCashIn, stage, admin, account, turn }) {
   return (
     <div className="px">
-      <TextHeading />
+      <TextHeading turn={turn}/>
       <div className="container">
         <div className="card-deck mb-3 text-center">
           {

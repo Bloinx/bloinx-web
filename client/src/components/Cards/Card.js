@@ -9,8 +9,6 @@ export const Card = ({ stageFunction, action }) => {
         <h2 className="card-title">{text.cardsStages[stageFunction].stageTitle}</h2>
         <ul className="list-unstyled mt-3 mb-4">
           <li>Ahorra de Forma Segura</li>
-          <li>Genera ganancias</li>
-          <li>Sistema Seguro</li>
         </ul>
         <button
           className="btn btn-lg btn-block btn-outline-primary"

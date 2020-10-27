@@ -15,6 +15,7 @@ function App() {
   const [contract, setContract] = useState(undefined);
   const [admin, setAdmin] = useState(undefined);
   const [stage, setStage] = useState(undefined);
+  const [turn, setTurn] = useState(undefined);
 
   useEffect(() => {
     const init = async () => {
@@ -28,11 +29,13 @@ function App() {
       );
       const admin = await contract.methods.admin().call();
       const stage = await contract.methods.stage().call();
+      const turn = await contract.methods.turn().call();
       setWeb3(web3);
       setAccounts(accounts[0]);
       setContract(contract);
       setAdmin(admin);
       setStage(stage);
+      setTurn(turn);
     }
     init();
     window.ethereum.on('accountsChanged', accounts => {
@@ -46,6 +49,7 @@ function App() {
       && typeof web3 !== 'undefined'
       && typeof accounts !== 'undefined'
       && typeof stage !== 'undefined'
+      && typeof turn !== 'undefined'
     );
   }
 
@@ -53,7 +57,7 @@ function App() {
     return <div>Loading Web3, accounts, and contract...</div>;
   }
   async function registerUser() {
-    await contract.methods.registerUser().send({ from: accounts, value: web3.utils.toWei('0.5', 'ether') })
+    await contract.methods.registerUser().send({ from: accounts, value: web3.utils.toWei('0.2', 'ether') })
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
@@ -74,7 +78,7 @@ function App() {
   };
 
   async function payTurn() {
-    await contract.methods.payTurn().send({ from: accounts, value: web3.utils.toWei('0.5', 'ether') })
+    await contract.methods.payTurn().send({ from: accounts, value: web3.utils.toWei('0.2', 'ether') })
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
@@ -147,6 +151,7 @@ function App() {
         withdrawRound={withdrawTurn}
         withdrawCashIn={withdrawCashIn}
         stage={stage}
+        turn={turn}
         account={accounts}
         admin={admin}
       />
