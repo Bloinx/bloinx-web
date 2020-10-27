@@ -21,5 +21,11 @@ module.exports = {
       provider: () => new HDWalletProvider(process.env.MNENOMIC, `https://ropsten.infura.io/v3/${process.env.PROJECT_ID}`),
       network_id: 3
     },
+    avalanche_fuji: {
+      provider: () => new HDWalletProvider(process.env.MNENOMIC, `https://api.avax-test.network/ext/bc/C/rpc}`),
+      port: 443,
+      chain_id:43113,
+      network_id: 1
+    },
   }
 };
