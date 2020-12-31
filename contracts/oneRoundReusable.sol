@@ -1,7 +1,7 @@
 pragma solidity >=0.4.22 <0.7.0;
 pragma experimental ABIEncoderV2;
 
-contract oneRoundReusable {
+contract oneRound {
     enum Stages {
         //Stages of the round
         Setup, //register and receive the initial cash in
@@ -42,7 +42,7 @@ contract oneRoundReusable {
     constructor(
         uint256 _cashIn,
         uint256 _saveAmount,
-        uint8 _groupSize
+        uint256 _groupSize
     ) public {
         admin = msg.sender;
         cashIn = _cashIn * 1e17;
@@ -111,6 +111,7 @@ modifier isNotUsersTurn() {
         public
         payable
         isPayAmountCorrect
+        atStage(Stages.Setup)
     {
         require(usersCounter < groupSize, "El grupo esta completo"); //the saving circle is full
         require(now <= creationTime + 3 minutes, "El tiempo de registro ha terminado");
@@ -139,6 +140,7 @@ modifier isNotUsersTurn() {
         isRegisteredUser
         isPayAmountCorrect
         isNotUsersTurn
+        atStage(Stages.Save)
     {
         //users make the payment for the cycle
         require(
@@ -158,18 +160,19 @@ modifier isNotUsersTurn() {
         public
         payable
         isRegisteredUser
+        atStage(Stages.Save)
         isUsersTurn
     {
         require(now <= creationTime + 3 minutes + (turn*3)*60 + (turn*1)*60 , "Termino el tiempo de retiro");
         //User assigned to the round can widraw
-        if (totalSaveAmount != groupSize * saveAmount) {
+        if (totalSaveAmount != (groupSize-1) * saveAmount) {
             for (uint8 i = 0; i < groupSize; i++) {
                 address useraddress = addressOrderList[i];
                 if (
-                    now >= creationTime + 3 minutes + (turn*3)*60 + ((turn-1)*1)*60 == false
-                    //users[useraddress].saveAmountFlag == false
+                    now >= creationTime + 3 minutes + (turn*3)*60 + ((turn-1)*1)*60 &&
+                    users[useraddress].saveAmountFlag == false
                 ) {
-                    users[useraddress].latePaymentFlag = true;
+                    //users[useraddress].latePaymentFlag = true;
                     totalSaveAmount = totalSaveAmount + saveAmount;
                     totalCashIn = totalCashIn - saveAmount;
                     cashOutUsers=cashOutUsers-1;
@@ -177,7 +180,7 @@ modifier isNotUsersTurn() {
             }
         }
         require(
-            totalSaveAmount == groupSize * saveAmount-1,
+            totalSaveAmount == (groupSize-1) * saveAmount,
             "Espera a que tengamos el monto de tu ahorro"
         ); //Se debe estar en fase de pago
         address addressUserInTurn = addressOrderList[turn - 1];
@@ -199,10 +202,11 @@ modifier isNotUsersTurn() {
         totalSaveAmount = 0;// si no se retira el ahorro se podrian quedar fondos en el contrato
     }
 
-    function withdrawCashIn() 
-        public 
-        payable 
-        onlyAdmin 
+    function withdrawCashIn()
+        public
+        payable
+        atStage(Stages.Finished)
+        onlyAdmin
     {
         //When all the rounds are done the admin sends the cash in to the users
         uint256 cashOut=totalCashIn/cashOutUsers;
@@ -222,6 +226,6 @@ modifier isNotUsersTurn() {
         stage = Stages.Save;
         totalSaveAmount = 0;
         turn = 1;
-        creationTime = now + 3 minutes; //remove 3 minutes from registration
+        creationTime = now - 3 minutes; //remove 3 minutes from registration
     }
 }
