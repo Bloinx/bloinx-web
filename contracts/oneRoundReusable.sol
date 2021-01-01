@@ -35,7 +35,7 @@ contract oneRound {
     uint256 creationTime;
     uint256 public totalSaveAmount = 0; //Collective saving on the round
     uint256 public totalCashIn = 0;
-    uint256 cashOutUsers;
+    uint256 public cashOutUsers;
     address[] public addressOrderList;
     Stages public stage;
 
@@ -66,7 +66,7 @@ modifier isNotUsersTurn() {
         //Verifies if it is the users round to widraw
         require(
             msg.sender != addressOrderList[turn - 1],
-            "Debes esperar tu turno para retirar"
+            "En este turno no depositas"
         );
         _;
     }
@@ -114,7 +114,7 @@ modifier isNotUsersTurn() {
         atStage(Stages.Setup)
     {
         require(usersCounter < groupSize, "El grupo esta completo"); //the saving circle is full
-        require(now <= creationTime + 3 minutes, "El tiempo de registro ha terminado");
+        require(now <= creationTime + 1 minutes, "El tiempo de registro ha terminado");
         usersCounter++;
         users[msg.sender] = User(
             usersCounter,
@@ -147,7 +147,7 @@ modifier isNotUsersTurn() {
             users[msg.sender].saveAmountFlag == false,
             "Ya ahorraste este turno"
         ); //you have already saved this round
-        require(now <= creationTime + 3 minutes + (turn*3)*60 + ((turn-1)*1)*60 , "Pago tardio");
+        require(now <= creationTime + 1 minutes + (turn*1)*60 + ((turn-1)*1)*60 , "Pago tardio");
         totalSaveAmount = totalSaveAmount + msg.value;
         users[msg.sender].saveAmountFlag = true;
         saveAmountPayeesCount++;
@@ -163,21 +163,22 @@ modifier isNotUsersTurn() {
         atStage(Stages.Save)
         isUsersTurn
     {
-        require(now <= creationTime + 3 minutes + (turn*3)*60 + (turn*1)*60 , "Termino el tiempo de retiro");
-        //User assigned to the round can widraw
-        if (totalSaveAmount != (groupSize-1) * saveAmount) {
+        require(now <= creationTime + 1 minutes + (turn*1)*60 + (turn*1)*60 , "Termino el tiempo de retiro");
+        if (
+            creationTime + 1 minutes + turn*1*60 + (turn-1)*1*60 < now
+        ) {
             for (uint8 i = 0; i < groupSize; i++) {
                 address useraddress = addressOrderList[i];
-                if (
-                    now >= creationTime + 3 minutes + (turn*3)*60 + ((turn-1)*1)*60 &&
-                    users[useraddress].saveAmountFlag == false
+                if (users[useraddress].saveAmountFlag == false && addressOrderList[turn - 1] != users[useraddress].userAddr
                 ) {
-                    //users[useraddress].latePaymentFlag = true;
-                    totalSaveAmount = totalSaveAmount + saveAmount;
                     totalCashIn = totalCashIn - saveAmount;
+                    totalSaveAmount = totalSaveAmount + saveAmount;
                     cashOutUsers=cashOutUsers-1;
+                    users[useraddress].latePaymentFlag = true;
                 }
-            }
+                    
+             }
+            
         }
         require(
             totalSaveAmount == (groupSize-1) * saveAmount,
@@ -185,6 +186,7 @@ modifier isNotUsersTurn() {
         ); //Se debe estar en fase de pago
         address addressUserInTurn = addressOrderList[turn - 1];
         users[addressUserInTurn].userAddr.transfer(totalSaveAmount);
+        totalSaveAmount = 0;
         if (turn >= groupSize) {
             stage = Stages.Finished;
         } else {
@@ -199,7 +201,6 @@ modifier isNotUsersTurn() {
             address useraddress = addressOrderList[i];
             users[useraddress].saveAmountFlag = false;
         }
-        totalSaveAmount = 0;// si no se retira el ahorro se podrian quedar fondos en el contrato
     }
 
     function withdrawCashIn()
@@ -226,6 +227,6 @@ modifier isNotUsersTurn() {
         stage = Stages.Save;
         totalSaveAmount = 0;
         turn = 1;
-        creationTime = now - 3 minutes; //remove 3 minutes from registration
+        creationTime = now - 1 minutes; //remove 3 minutes from registration
     }
 }
