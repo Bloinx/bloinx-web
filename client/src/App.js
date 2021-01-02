@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Groups from "./contracts/GroupsTime.json";
+import Groups from "./contracts/oneRoundReusable.json";
 import getWeb3 from "./getWeb3";
 import Swal from "sweetalert2";
 
