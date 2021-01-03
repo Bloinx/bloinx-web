@@ -103,7 +103,7 @@ modifier isNotUsersTurn() {
         atStage(Stages.Setup)
     {
         require(usersCounter < groupSize, "El grupo esta completo"); //the saving circle is full
-        require(now <= creationTime + 5 minutes, "El tiempo de registro ha terminado");
+        require(now <= creationTime + 1 minutes, "El tiempo de registro ha terminado");
         usersCounter++;
         users[msg.sender] = User(
             usersCounter,
@@ -136,7 +136,7 @@ modifier isNotUsersTurn() {
             users[msg.sender].saveAmountFlag == false,
             "Ya ahorraste este turno"
         ); //you have already saved this round
-        require(now <= creationTime + 5 minutes + (turn*5)*60 + ((turn-1)*5)*60 , "Pago tardio");
+        require(now <= creationTime + 1 minutes + (turn*1)*60 + ((turn-1)*1)*60 , "Pago tardio");
         totalSaveAmount = totalSaveAmount + msg.value;
         users[msg.sender].saveAmountFlag = true;
         saveAmountPayeesCount++;
@@ -152,9 +152,9 @@ modifier isNotUsersTurn() {
         atStage(Stages.Save)
         isUsersTurn
     {
-        require(now <= creationTime + 5 minutes + (turn*5)*60 + (turn*5)*60 , "Termino el tiempo de retiro");
+        require(now <= creationTime + 1 minutes + (turn*1)*60 + (turn*1)*60 , "Termino el tiempo de retiro");
         if (
-            creationTime + 5 minutes + turn*5*60 + (turn-1)*5*60 < now
+            creationTime + 1 minutes + turn*1*60 + (turn-1)*1*60 < now
         ) {
             for (uint8 i = 0; i < groupSize; i++) {
                 address useraddress = addressOrderList[i];
@@ -162,8 +162,10 @@ modifier isNotUsersTurn() {
                 ) {
                     totalCashIn = totalCashIn - saveAmount;
                     totalSaveAmount = totalSaveAmount + saveAmount;
-                    cashOutUsers=cashOutUsers-1;
-                    users[useraddress].latePaymentFlag = true;
+                    if (users[useraddress].latePaymentFlag == false){
+                        cashOutUsers=cashOutUsers-1;
+                        users[useraddress].latePaymentFlag = true;
+                    }
                 }
 
              }
