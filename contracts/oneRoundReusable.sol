@@ -11,7 +11,6 @@ contract oneRoundReusable {
 
     struct User {
         //Information from each user
-        uint8 userId;
         address payable userAddr;
         bool cashInFlag;
         bool saveAmountFlag;
@@ -20,7 +19,7 @@ contract oneRoundReusable {
     }
 
     mapping(address => User) public users;
-    address payable public admin; //The user that deploy the contract is the administrator
+    address payable admin; //The user that deploy the contract is the administrator
 
     //Constructor deployment variables
     uint256 cashIn; //amount to be payed as commitment at the begining of the saving circle
@@ -32,12 +31,18 @@ contract oneRoundReusable {
     uint256 CashInPayeesCount = 0; //Comitment payments counter
     uint256 saveAmountPayeesCount = 0; //Payments done in round counter
     uint256 public turn = 1; //Current cycle/round in the saving circle
-    uint256 creationTime;
+    uint256 startTime;
     uint256 public totalSaveAmount = 0; //Collective saving on the round
     uint256 public totalCashIn = 0;
     uint256 public cashOutUsers;
-    address[] public addressOrderList;
+    uint256 cashOut=0;
+    address[] public addressOrderList=[address(0),address(0),address(0)];
     Stages public stage;
+
+    //Time constants in seconds
+    uint256 registerTime = 1 * 60;
+    uint256 payTime = 1 * 60;
+    uint256 withdrawTime = 1 * 60;
 
     constructor(
         uint256 _cashIn,
@@ -50,7 +55,6 @@ contract oneRoundReusable {
         groupSize = _groupSize;
         cashOutUsers = groupSize;
         stage = Stages.Setup;
-        creationTime = now;
     }
 
     modifier isUsersTurn() {
@@ -63,7 +67,7 @@ contract oneRoundReusable {
     }
 
 modifier isNotUsersTurn() {
-        //Verifies if it is the users round to widraw
+        //Verifies if it is not the users round to widraw
         require(
             msg.sender != addressOrderList[turn - 1],
             "En este turno no depositas"
@@ -96,31 +100,35 @@ modifier isNotUsersTurn() {
         _;
     }
 
-    function registerUser()
+    function registerUser(uint256 _usrTurn)
         public
         payable
         isPayAmountCorrect
         atStage(Stages.Setup)
     {
         require(usersCounter < groupSize, "El grupo esta completo"); //the saving circle is full
-        require(now <= creationTime + 1 minutes, "El tiempo de registro ha terminado");
+        require(addressOrderList[_usrTurn-1]==address(0), "Este lugar ya esta ocupado" );
         usersCounter++;
+        totalCashIn = totalCashIn + msg.value;
         users[msg.sender] = User(
-            usersCounter,
             msg.sender,
-            false,
+            true,
             false,
             true,
             false
         );
-        addressOrderList.push(msg.sender); //store user
-        totalCashIn = totalCashIn + msg.value;
-        users[msg.sender].cashInFlag = true;
+        addressOrderList[_usrTurn-1]=msg.sender; //store user
         CashInPayeesCount++;
-        if (CashInPayeesCount == groupSize) {
-            CashInPayeesCount = 0;
-            stage = Stages.Save;
-        }
+    }
+
+    function startRound()
+        public
+        onlyAdmin
+        atStage(Stages.Setup)
+    {
+        require(CashInPayeesCount == groupSize, "Aun hay lugares sin asignar");
+        stage = Stages.Save;
+        startTime=now;
     }
 
     function payTurn()
@@ -136,7 +144,7 @@ modifier isNotUsersTurn() {
             users[msg.sender].saveAmountFlag == false,
             "Ya ahorraste este turno"
         ); //you have already saved this round
-        require(now <= creationTime + 1 minutes + (turn*1)*60 + ((turn-1)*1)*60 , "Pago tardio");
+        require(now <= startTime + turn*payTime + (turn-1)*withdrawTime , "Pago tardio");
         totalSaveAmount = totalSaveAmount + msg.value;
         users[msg.sender].saveAmountFlag = true;
         saveAmountPayeesCount++;
@@ -152,9 +160,9 @@ modifier isNotUsersTurn() {
         atStage(Stages.Save)
         isUsersTurn
     {
-        require(now <= creationTime + 1 minutes + (turn*1)*60 + (turn*1)*60 , "Termino el tiempo de retiro");
+        require(now <= startTime + turn*payTime + turn*withdrawTime , "Termino el tiempo de retiro");
         if (
-            creationTime + 1 minutes + turn*1*60 + (turn-1)*1*60 < now
+            startTime + turn*payTime + (turn-1)*withdrawTime < now
         ) {
             for (uint8 i = 0; i < groupSize; i++) {
                 address useraddress = addressOrderList[i];
@@ -163,8 +171,10 @@ modifier isNotUsersTurn() {
                     totalCashIn = totalCashIn - saveAmount;
                     totalSaveAmount = totalSaveAmount + saveAmount;
                     if (users[useraddress].latePaymentFlag == false){
-                        cashOutUsers=cashOutUsers-1;
+                        cashOutUsers--;
                         users[useraddress].latePaymentFlag = true;
+                        CashInPayeesCount--;
+                        users[useraddress].cashInFlag = false;
                     }
                 }
 
@@ -194,6 +204,45 @@ modifier isNotUsersTurn() {
         }
     }
 
+    function advanceTurn()
+        public
+        payable
+        onlyAdmin
+        atStage(Stages.Save)
+    {
+        require(startTime + turn*payTime + turn*withdrawTime < now , "El usuario en turno aun puede retirar");
+        if (
+            totalSaveAmount < (groupSize-1) * saveAmount
+            )
+        {
+            for (uint8 i = 0; i < groupSize; i++) {
+                address useraddress = addressOrderList[i];
+                if (users[useraddress].saveAmountFlag == false && addressOrderList[turn - 1] != users[useraddress].userAddr
+                ) {
+                    totalCashIn = totalCashIn - saveAmount;
+                    totalSaveAmount = totalSaveAmount + saveAmount;
+                    if (users[useraddress].latePaymentFlag == false){
+                        cashOutUsers--;
+                        users[useraddress].latePaymentFlag = true;
+                        CashInPayeesCount--;
+                        users[useraddress].cashInFlag = false;
+                    }
+                }
+
+             }
+        }
+
+        address addressUserInTurn = addressOrderList[turn - 1];
+        users[addressUserInTurn].userAddr.transfer(totalSaveAmount);
+        totalSaveAmount = 0;
+        if (turn >= groupSize) {
+            stage = Stages.Finished;
+        } else {
+            newTurn();
+        }
+        turn++;
+    }
+
     function withdrawCashIn()
         public
         payable
@@ -201,23 +250,57 @@ modifier isNotUsersTurn() {
         onlyAdmin
     {
         //When all the rounds are done the admin sends the cash in to the users
-        uint256 cashOut=totalCashIn/cashOutUsers;
+        cashOut=totalCashIn/cashOutUsers;
         for (uint8 i = 0; i < groupSize; i++) {
             address useraddress = addressOrderList[i];
-            users[useraddress].cashInFlag = false;
-            users[useraddress].currentRoundFlag = false;
             if (users[useraddress].latePaymentFlag == false) {
                 users[useraddress].userAddr.transfer(cashOut);
             }
         }
-        totalCashIn = 0;
-        CashInPayeesCount = 0;
+    }
+
+    function restartRound()
+        public
+        payable
+        atStage(Stages.Finished)
+        onlyAdmin
+    {
+        if(totalCashIn<cashIn*cashOutUsers){
+            cashOut=totalCashIn/cashOutUsers;
+            for(uint8 i = 0; i<groupSize; i++){
+                address useraddress = addressOrderList[i];
+                if (users[useraddress].latePaymentFlag == false) {
+                    users[useraddress].userAddr.transfer(cashOut);
+                }
+                users[useraddress].cashInFlag = false;
+                users[useraddress].latePaymentFlag = false;
+                users[useraddress].saveAmountFlag = false;
+            }
+            totalCashIn=0;
+        }
+        else if (totalCashIn==cashIn*cashOutUsers){
+            for (uint8 i = 0; i < groupSize; i++) {
+                address useraddress = addressOrderList[i];
+                users[useraddress].latePaymentFlag = false;
+                users[useraddress].saveAmountFlag = false;
+            }
+        }
         cashOutUsers = groupSize;
-        usersCounter = 0;
-        addressOrderList = new address[](0);
-        stage = Stages.Save;
         totalSaveAmount = 0;
         turn = 1;
-        creationTime = now - 5 minutes; //remove 3 minutes from registration
+        stage = Stages.Setup;
+    }
+
+    function payCashIn()
+        public
+        payable
+        atStage(Stages.Setup)
+        isRegisteredUser
+    {       //Receive the comitment payment
+        require(users[msg.sender].cashInFlag == false, "Ya tenemos regisrado tu CashIn"); //you have payed the cash in
+        require(msg.value == cashIn, 'Fondos Insuficientes');   //insufucuent funds
+        totalCashIn = totalCashIn + msg.value;
+        users[msg.sender].cashInFlag = true;
+        CashInPayeesCount++;
     }
 }
