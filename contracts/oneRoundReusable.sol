@@ -19,7 +19,7 @@ contract oneRoundReusable {
     }
 
     mapping(address => User) public users;
-    address payable admin; //The user that deploy the contract is the administrator
+    address payable public admin; //The user that deploy the contract is the administrator
 
     //Constructor deployment variables
     uint256 cashIn; //amount to be payed as commitment at the begining of the saving circle
@@ -40,8 +40,7 @@ contract oneRoundReusable {
     Stages public stage;
 
     //Time constants in seconds
-    uint256 registerTime = 1 * 60;
-    uint256 payTime = 1 * 60;
+    uint256 payTime = 2 * 60;
     uint256 withdrawTime = 1 * 60;
 
     constructor(

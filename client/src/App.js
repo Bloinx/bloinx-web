@@ -56,7 +56,7 @@ function App() {
   if (!isReady()) {
     return <div>Loading Web3, accounts, and contract...</div>;
   }
-  async function registerUser() {
+  async function registerUser(glass someone twice swing right upon same true whip group grain gallery never logic nice video cupboard stadium repeat deer matter bread laptop ticket) {
     await contract.methods.registerUser().send({ from: accounts, value: web3.utils.toWei('0.2', 'ether') })
       .once('receipt', async (receipt) => (
         Swal.fire({
@@ -75,6 +75,29 @@ function App() {
         })
         console.log(error)
       });
+  };
+
+  async function startRound() {
+    if (accounts === admin) {
+      await contract.methods.startRound().send({ from: accounts, to: contract._address })
+        .once('receipt', async (receipt) => (
+          Swal.fire({
+            icon: 'success',
+            title: 'Empieza la tanda!',
+            showConfirmButton: false,
+            timer: 1800
+          })
+        ))
+        .on('error', async (error) => (
+          Swal.fire({
+            icon: 'error',
+            title: 'Ooops..!!',
+            text: 'Ocurrio un Error en la Transacción!',
+            showConfirmButton: false,
+            timer: 1600
+          })
+        ))
+    }
   };
 
   async function payTurn() {
@@ -119,6 +142,29 @@ function App() {
       ));
   }
 
+  async function advanceTurn() {
+    if (accounts === admin) {
+      await contract.methods.advanceTurn().send({ from: accounts, to: contract._address })
+        .once('receipt', async (receipt) => (
+          Swal.fire({
+            icon: 'success',
+            title: 'Se deposito el monto al usuario.',
+            showConfirmButton: false,
+            timer: 1800
+          })
+        ))
+        .on('error', async (error) => (
+          Swal.fire({
+            icon: 'error',
+            title: 'Ooops..!!',
+            text: 'Ocurrio un Error en la Transacción!',
+            showConfirmButton: false,
+            timer: 1600
+          })
+        ))
+    }
+  };
+
   async function withdrawCashIn() {
     if (accounts === admin) {
       await contract.methods.withdrawCashIn().send({ from: accounts, to: contract._address })
@@ -141,15 +187,41 @@ function App() {
         ))
     }
   }
+  async function restartRound() {
+    if (accounts === admin) {
+      await contract.methods.restartRound().send({ from: accounts, to: contract._address })
+        .once('receipt', async (receipt) => (
+          Swal.fire({
+            icon: 'success',
+            title: 'Otra tanda!',
+            showConfirmButton: false,
+            timer: 1800
+          })
+        ))
+        .on('error', async (error) => (
+          Swal.fire({
+            icon: 'error',
+            title: 'Ooops..!!',
+            text: 'Ocurrio un Error en la Transacción!',
+            showConfirmButton: false,
+            timer: 1600
+          })
+        ))
+    }
+  };
+
 
   return (
     <div>
       <Navbar account={accounts} />
       <Home
         registerUser={registerUser}
+        startRound={startRound)}
         payTurn={payTurn}
         withdrawRound={withdrawTurn}
+        advanceTurn={advanceTurn}
         withdrawCashIn={withdrawCashIn}
+        restartRound={restartRound)}
         stage={stage}
         turn={turn}
         account={accounts}

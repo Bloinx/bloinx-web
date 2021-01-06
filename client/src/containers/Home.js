@@ -15,6 +15,11 @@ export function Home({ registerUser, payTurn, withdrawRound, withdrawCashIn, sta
             )
           }
           {
+            stage === '0' && admin == account && (
+              <Card stageFunction="startStage" action={startRound} />
+            )
+          }
+          {
             stage === '1' && (
               <Card stageFunction="saveAmountStage" action={payTurn} />
             )
@@ -25,8 +30,18 @@ export function Home({ registerUser, payTurn, withdrawRound, withdrawCashIn, sta
             )
           }
           {
+            stage === '1' && admin == account &&(
+              <Card stageFunction="advanceStage" action={advanceRound} />
+            )
+          }
+          {
             (stage === '2' && admin === account) && (
-              <Card stageFunction="finishedStage" action={withdrawCashIn} />
+              <Card stageFunction="withdrawStage" action={withdrawCashIn} />
+            )
+          }
+          {
+            (stage === '2' && admin === account) && (
+              <Card stageFunction="restartStage" action={restartRound} />
             )
           }
           {
