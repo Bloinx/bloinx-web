@@ -56,7 +56,7 @@ function App() {
   if (!isReady()) {
     return <div>Loading Web3, accounts, and contract...</div>;
   }
-  async function registerUser(glass someone twice swing right upon same true whip group grain gallery never logic nice video cupboard stadium repeat deer matter bread laptop ticket) {
+  async function registerUser() {
     await contract.methods.registerUser().send({ from: accounts, value: web3.utils.toWei('0.2', 'ether') })
       .once('receipt', async (receipt) => (
         Swal.fire({
@@ -216,12 +216,12 @@ function App() {
       <Navbar account={accounts} />
       <Home
         registerUser={registerUser}
-        startRound={startRound)}
+        startRound={startRound}
         payTurn={payTurn}
         withdrawRound={withdrawTurn}
         advanceTurn={advanceTurn}
         withdrawCashIn={withdrawCashIn}
-        restartRound={restartRound)}
+        restartRound={restartRound}
         stage={stage}
         turn={turn}
         account={accounts}
