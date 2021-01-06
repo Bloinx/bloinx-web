@@ -3,15 +3,20 @@ import React from 'react';
 import TextHeading from '../components/TextHeading/TextHeading';
 import Card from '../components/Cards/Card';
 
-export function Home({ registerUser, payTurn, withdrawRound, withdrawCashIn, stage, admin, account }) {
+export function Home({ registerUser, payTurn, withdrawRound, withdrawCashIn, stage, admin, account, turn }) {
   return (
     <div className="px">
-      <TextHeading />
+      <TextHeading turn={turn}/>
       <div className="container">
         <div className="card-deck mb-3 text-center">
           {
             stage === '0' && (
               <Card stageFunction="registerStage" action={registerUser} />
+            )
+          }
+          {
+            stage === '0' && admin == account && (
+              <Card stageFunction="startStage" action={startRound} />
             )
           }
           {
@@ -25,8 +30,18 @@ export function Home({ registerUser, payTurn, withdrawRound, withdrawCashIn, sta
             )
           }
           {
+            stage === '1' && admin == account &&(
+              <Card stageFunction="advanceStage" action={advanceRound} />
+            )
+          }
+          {
             (stage === '2' && admin === account) && (
-              <Card stageFunction="finishedStage" action={withdrawCashIn} />
+              <Card stageFunction="withdrawStage" action={withdrawCashIn} />
+            )
+          }
+          {
+            (stage === '2' && admin === account) && (
+              <Card stageFunction="restartStage" action={restartRound} />
             )
           }
           {

@@ -1,5 +1,5 @@
-var GroupsTime = artifacts.require("./GroupsTime.sol");
+var oneRoundReusable = artifacts.require("./oneRoundReusable.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(GroupsTime, 5, 5, 3);
+  deployer.deploy(oneRoundReusable, 2, 2, 3);
 };
