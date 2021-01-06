@@ -29,7 +29,7 @@
     "withdrawStage": {
       "stageTitle": "Devolver garantía",
       "buttonAction": "Devolver garantía"
-    }
+    },
     "restartStage": {
       "stageTitle": "Otra tanda?",
       "buttonAction": "Reinicia tanda"
