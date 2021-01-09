@@ -6,7 +6,7 @@ export const Card = ({ stageFunction, action }) => {
   return (
     <div className="card mb-4 shadow-sm">
       <div className="card-body">
-        <h2 className="card-title">{text.cardsStages[stageFunction].stageTitle}</h2>
+        <h4 className="card-title">{text.cardsStages[stageFunction].stageTitle}</h4>
         <ul className="list-unstyled mt-3 mb-4">
           <li>Ahorra de Forma Segura</li>
         </ul>
