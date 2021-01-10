@@ -46,6 +46,12 @@ Es un framework que nos da la estructura para compilar, testear e interactuar co
 3. Instala Ganache.
 
 4. Instala Metamask.
+    Avalanche FUJI Testnet Settings:
+    Network Name: Avalanche FUJI C-Chain
+    New RPC URL: https://api.avax-test.network/ext/bc/C/rpc
+    ChainID: 0xa869
+    Symbol: AVAX
+    Explorer: https://cchain.explorer.avax-test.network
 
 5. Instala Truffle `npm install -g truffle`.
 
