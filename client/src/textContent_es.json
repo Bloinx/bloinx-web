@@ -1,0 +1,38 @@
+{
+  "titleHeading": "Bloinx",
+  "description": " ",
+  "cardsStages": {
+    "registerStage": {
+      "stageTitle": "Regístrate a la tanda",
+      "buttonAction": "Registrarse"
+    },
+    "startStage": {
+      "stageTitle": "Ya estan registrados?",
+      "buttonAction": "Inicia la tanda"
+    },
+    "payCashInStage": {
+      "stageTitle": "Paga la garantía",
+      "buttonAction": "Pagar garantía"
+    },
+    "saveAmountStage": {
+      "stageTitle": "Deposita tu ahorro",
+      "buttonAction": "Depositar"
+    },
+    "withdrawStage": {
+      "stageTitle": "Recibe los beneficios",
+      "buttonAction": "Retirar ahorro"
+    },
+    "advanceStage": {
+      "stageTitle": "Si alguien olvidó retirar...",
+      "buttonAction": "Siguiente Turno"
+    },
+    "withdrawStage": {
+      "stageTitle": "Devolver garantía",
+      "buttonAction": "Devolver garantía"
+    },
+    "restartStage": {
+      "stageTitle": "Otra tanda?",
+      "buttonAction": "Reinicia tanda"
+    }
+  }
+}

@@ -13,7 +13,7 @@ export const TextHeading = ({turn}) => (
     <p className="lead">
       {textContent.description}
     </p>
-    <h5>Turno: {turn} </h5>
+    <h5>Turn: {turn} </h5>
   </div>
 );
 

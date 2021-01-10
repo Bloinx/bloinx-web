@@ -57,11 +57,11 @@ function App() {
     return <div>Loading Web3, accounts, and contract...</div>;
   }
   async function registerUser() {
-    await contract.methods.registerUser().send({ from: accounts, value: web3.utils.toWei('0.2', 'ether') })
+    await contract.methods.registerUser().send({ from: accounts, value: web3.utils.toWei('1', 'ether') })
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
-          title: 'La transacción se ejecuto correctamente!!',
+          title: 'The transaction was executed correctly!!',
           showConfirmButton: false,
           timer: 1600
         })
@@ -70,7 +70,7 @@ function App() {
         Swal.fire({
           icon: 'error',
           title: 'Ooops..!!',
-          text: 'Ocurrio un Error en la Transacción!',
+          text: 'An error in the transaction has occured!',
           timer: 1600
         })
         console.log(error)
@@ -83,7 +83,7 @@ function App() {
         .once('receipt', async (receipt) => (
           Swal.fire({
             icon: 'success',
-            title: 'Empieza la tanda!',
+            title: 'The round has started',
             showConfirmButton: false,
             timer: 1800
           })
@@ -92,7 +92,7 @@ function App() {
           Swal.fire({
             icon: 'error',
             title: 'Ooops..!!',
-            text: 'Ocurrio un Error en la Transacción!',
+            text: 'An error in the transaction has occured!',
             showConfirmButton: false,
             timer: 1600
           })
@@ -101,11 +101,11 @@ function App() {
   };
 
   async function payTurn() {
-    await contract.methods.payTurn().send({ from: accounts, value: web3.utils.toWei('0.2', 'ether') })
+    await contract.methods.payTurn().send({ from: accounts, value: web3.utils.toWei('1', 'ether') })
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
-          title: 'La transacción se ejecuto correctamente!!',
+          title: 'The transaction was executed correctly!!',
           showConfirmButton: false,
           timer: 1600
         })
@@ -114,7 +114,7 @@ function App() {
         Swal.fire({
           icon: 'error',
           title: 'Ooops..!!',
-          text: 'Ocurrio un Error en la Transacción!',
+          text: 'An error in the transaction has occured!',
           showConfirmButton: false,
           timer: 1600
         })
@@ -126,7 +126,7 @@ function App() {
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
-          title: 'La transacción se ejecuto correctamente!!',
+          title: 'The transaction was executed correctly!!',
           showConfirmButton: false,
           timer: 1600
         })
@@ -135,7 +135,7 @@ function App() {
         Swal.fire({
           icon: 'error',
           title: 'Ooops..!!',
-          text: 'Ocurrio un Error en la Transacción!',
+          text: 'An error in the transaction has occured!',
           showConfirmButton: false,
           timer: 1600
         })
@@ -148,7 +148,7 @@ function App() {
         .once('receipt', async (receipt) => (
           Swal.fire({
             icon: 'success',
-            title: 'Se deposito el monto al usuario.',
+            title: 'The savings were deposited.',
             showConfirmButton: false,
             timer: 1800
           })
@@ -157,7 +157,7 @@ function App() {
           Swal.fire({
             icon: 'error',
             title: 'Ooops..!!',
-            text: 'Ocurrio un Error en la Transacción!',
+            text: 'An error in the transaction has occured!',
             showConfirmButton: false,
             timer: 1600
           })
@@ -171,7 +171,7 @@ function App() {
         .once('receipt', async (receipt) => (
           Swal.fire({
             icon: 'success',
-            title: 'La garantia fue pagada a los usuarios!!',
+            title: 'The security deposit has been returned!',
             showConfirmButton: false,
             timer: 1800
           })
@@ -180,7 +180,7 @@ function App() {
           Swal.fire({
             icon: 'error',
             title: 'Ooops..!!',
-            text: 'Ocurrio un Error en la Transacción!',
+            text: 'An error in the transaction has occured!',
             showConfirmButton: false,
             timer: 1600
           })
@@ -193,7 +193,7 @@ function App() {
         .once('receipt', async (receipt) => (
           Swal.fire({
             icon: 'success',
-            title: 'Otra tanda!',
+            title: 'Get ready for an other round!',
             showConfirmButton: false,
             timer: 1800
           })
@@ -202,7 +202,7 @@ function App() {
           Swal.fire({
             icon: 'error',
             title: 'Ooops..!!',
-            text: 'Ocurrio un Error en la Transacción!',
+            text: 'An error in the transaction has occured!',
             showConfirmButton: false,
             timer: 1600
           })

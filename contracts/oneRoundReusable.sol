@@ -40,8 +40,8 @@ contract oneRoundReusable {
     Stages public stage;
 
     //Time constants in seconds
-    uint256 payTime = 2 * 60;
-    uint256 withdrawTime = 1 * 60;
+    uint256 payTime = 5 * 60;
+    uint256 withdrawTime = 2 * 60;
 
     constructor(
         uint256 _cashIn,

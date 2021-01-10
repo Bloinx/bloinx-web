@@ -8,7 +8,7 @@ export const Card = ({ stageFunction, action }) => {
       <div className="card-body">
         <h4 className="card-title">{text.cardsStages[stageFunction].stageTitle}</h4>
         <ul className="list-unstyled mt-3 mb-4">
-          <li>Ahorra de Forma Segura</li>
+          <li>Trust worthy saving rounds</li>
         </ul>
         <button
           className="btn btn-lg btn-block btn-outline-primary"

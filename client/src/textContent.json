@@ -3,36 +3,36 @@
   "description": " ",
   "cardsStages": {
     "registerStage": {
-      "stageTitle": "Regístrate a la tanda",
-      "buttonAction": "Registrarse"
+      "stageTitle": "Register to the saving round",
+      "buttonAction": "Register"
     },
     "startStage": {
-      "stageTitle": "Ya estan registrados?",
-      "buttonAction": "Inicia la tanda"
+      "stageTitle": "Has everyone registered?",
+      "buttonAction": "Start the round"
     },
     "payCashInStage": {
-      "stageTitle": "Paga la garantía",
-      "buttonAction": "Pagar garantía"
+      "stageTitle": "We dont have your segurity deposit yet",
+      "buttonAction": "Pay security deposit"
     },
     "saveAmountStage": {
-      "stageTitle": "Deposita tu ahorro",
-      "buttonAction": "Depositar"
+      "stageTitle": "Deposit to the saving round",
+      "buttonAction": "Deposit"
     },
     "withdrawStage": {
-      "stageTitle": "Recibe los beneficios",
-      "buttonAction": "Retirar ahorro"
+      "stageTitle": "Receive your savings",
+      "buttonAction": "Retire"
     },
     "advanceStage": {
-      "stageTitle": "Si alguien olvidó retirar...",
-      "buttonAction": "Siguiente Turno"
+      "stageTitle": "If someone forgot to retire their savings",
+      "buttonAction": "Advance turn"
     },
     "withdrawStage": {
-      "stageTitle": "Devolver garantía",
-      "buttonAction": "Devolver garantía"
+      "stageTitle": "Return security deposit",
+      "buttonAction": "Retire security deposit"
     },
     "restartStage": {
-      "stageTitle": "Otra tanda?",
-      "buttonAction": "Reinicia tanda"
+      "stageTitle": "Ready for an other round?",
+      "buttonAction": "Restart the round"
     }
   }
 }
