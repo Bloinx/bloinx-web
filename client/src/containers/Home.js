@@ -6,7 +6,7 @@ import Card from '../components/Cards/Card';
 export function Home({ registerUser, payTurn, withdrawRound, withdrawCashIn, stage, admin, account, turn, startRound, advanceRound, restartRound }) {
   return (
     <div className="px">
-      <TextHeading turn={turn}/>
+      <TextHeading turn={turn} />
       <div className="container">
         <div className="card-deck mb-3 text-center">
           {
@@ -30,7 +30,7 @@ export function Home({ registerUser, payTurn, withdrawRound, withdrawCashIn, sta
             )
           }
           {
-            stage === '1' && admin === account &&(
+            stage === '1' && admin === account && (
               <Card stageFunction="advanceStage" action={advanceRound} />
             )
           }

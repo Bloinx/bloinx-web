@@ -56,8 +56,8 @@ function App() {
   if (!isReady()) {
     return <div>Loading Web3, accounts, and contract...</div>;
   }
-  async function registerUser() {
-    await contract.methods.registerUser().send({ from: accounts, value: web3.utils.toWei('1', 'ether') })
+  async function registerUser(userTurn) {
+    await contract.methods.registerUser(userTurn).send({ from: accounts, value: web3.utils.toWei('1', 'ether') })
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
