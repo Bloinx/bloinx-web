@@ -3,7 +3,7 @@ import React from 'react';
 import TextHeading from '../components/TextHeading/TextHeading';
 import Card from '../components/Cards/Card';
 
-export function Home({ registerUser, payTurn, withdrawRound, withdrawCashIn, stage, admin, account, turn, startRound, advanceRound, restartRound }) {
+export function Home({ registerUser, payTurn, withdrawRound, withdrawCashIn, stage, admin, account, turn, startRound, advanceTurn, restartRound, payCashIn }) {
   return (
     <div className="px">
       <TextHeading turn={turn} />
@@ -12,6 +12,11 @@ export function Home({ registerUser, payTurn, withdrawRound, withdrawCashIn, sta
           {
             stage === '0' && (
               <Card stageFunction="registerStage" action={registerUser} />
+            )
+          }
+          {
+            stage === '0' && (
+              <Card stageFunction="payCashInStage" action={payCashIn} />
             )
           }
           {
@@ -31,12 +36,12 @@ export function Home({ registerUser, payTurn, withdrawRound, withdrawCashIn, sta
           }
           {
             stage === '1' && admin === account && (
-              <Card stageFunction="advanceStage" action={advanceRound} />
+              <Card stageFunction="advanceStage" action={advanceTurn} />
             )
           }
           {
             (stage === '2' && admin === account) && (
-              <Card stageFunction="withdrawStage" action={withdrawCashIn} />
+              <Card stageFunction="finishStage" action={withdrawCashIn} />
             )
           }
           {

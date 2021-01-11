@@ -57,7 +57,7 @@ function App() {
     return <div>Loading Web3, accounts, and contract...</div>;
   }
   async function registerUser(userTurn) {
-    await contract.methods.registerUser(userTurn).send({ from: accounts, value: web3.utils.toWei('1', 'ether') })
+    await contract.methods.registerUser(userTurn).send({ from: accounts, value: web3.utils.toWei('0.5', 'ether') })
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
@@ -101,7 +101,7 @@ function App() {
   };
 
   async function payTurn() {
-    await contract.methods.payTurn().send({ from: accounts, value: web3.utils.toWei('1', 'ether') })
+    await contract.methods.payTurn().send({ from: accounts, value: web3.utils.toWei('0.5', 'ether') })
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
@@ -208,6 +208,27 @@ function App() {
           })
         ))
     }
+  }
+
+  async function payCashIn() {
+    await contract.methods.payCashIn().send({ from: accounts, value: web3.utils.toWei('0.5', 'ether') })
+      .once('receipt', async (receipt) => (
+        Swal.fire({
+          icon: 'success',
+          title: 'The transaction was executed correctly!!',
+          showConfirmButton: false,
+          timer: 1600
+        })
+      ))
+      .on('error', async (error) => (
+        Swal.fire({
+          icon: 'error',
+          title: 'Ooops..!!',
+          text: 'An error in the transaction has occured!',
+          showConfirmButton: false,
+          timer: 1600
+        })
+      ));
   };
 
 
@@ -222,6 +243,7 @@ function App() {
         advanceTurn={advanceTurn}
         withdrawCashIn={withdrawCashIn}
         restartRound={restartRound}
+        payCashIn={payCashIn}
         stage={stage}
         turn={turn}
         account={accounts}
