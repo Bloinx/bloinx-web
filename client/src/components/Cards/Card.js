@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 import text from '../../textContent.json';
 
-export const Card = ({ stageFunction, action }) => {
+export const Card = ({ stageFunction, action, addressOrderList1, addressOrderList2, addressOrderList3}) => {
   const [userTurn, setUserTurn] = useState("1");
-  
+
   const handleClick = () => {
    action(userTurn)
   }
@@ -23,6 +23,24 @@ export const Card = ({ stageFunction, action }) => {
               <option value="2">2</option>
               <option value="3">3</option>
             </select>
+          )
+        }
+        {
+          stageFunction === "removeStage" && (
+            <select className="form-select" onChange={(e) => setUserTurn(e.target.value)}>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          )
+        }
+        {
+          stageFunction === "startStage" && (
+            <ol>
+              <li>{addressOrderList1}</li>
+              <li>{addressOrderList2}</li>
+              <li>{addressOrderList3}</li>
+            </ol>
           )
         }
         <button

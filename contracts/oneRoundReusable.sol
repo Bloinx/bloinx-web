@@ -4,9 +4,9 @@ pragma experimental ABIEncoderV2;
 contract oneRoundReusable {
     enum Stages {
         //Stages of the round
-        Setup, //register and receive the initial cash in
-        Save, //receive payments
-        Finished //Cash in is sent to the users
+        Setup,
+        Save,
+        Finished
     }
 
     struct User {
@@ -120,6 +120,24 @@ modifier isNotUsersTurn() {
         CashInPayeesCount++;
     }
 
+    function removeUser(uint256 _usrTurn)
+        public
+        payable
+        onlyAdmin
+        atStage(Stages.Setup)
+    {
+      require(addressOrderList[_usrTurn-1]!=address(0), "Este turno esta vacio");
+      if(users[msg.sender].cashInFlag == true){
+          totalCashIn = totalCashIn - msg.value;
+          users[msg.sender].userAddr.transfer(cashIn);
+          CashInPayeesCount--;
+          users[msg.sender].cashInFlag = false;
+      }
+      addressOrderList[_usrTurn-1]=address(0);
+      usersCounter--;
+      users[msg.sender].currentRoundFlag = false;
+    }
+
     function startRound()
         public
         onlyAdmin
@@ -149,6 +167,24 @@ modifier isNotUsersTurn() {
         saveAmountPayeesCount++;
         if (saveAmountPayeesCount == groupSize-1) {
             saveAmountPayeesCount = 0;
+        }
+    }
+
+    function payLateTurn()
+        public
+        payable
+        isRegisteredUser
+        isPayAmountCorrect
+        atStage(Stages.Save)
+    {
+        //users make the payment for the cycle
+        require(
+            users[msg.sender].latePaymentFlag == true,
+            "Estas al corriente en pagos"
+        ); //you have already saved this round
+        totalCashIn = totalCashIn + msg.value;
+        if (totalCashIn == groupSize*cashIn) {
+            users[msg.sender].latePaymentFlag == false;
         }
     }
 

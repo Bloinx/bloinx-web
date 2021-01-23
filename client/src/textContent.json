@@ -6,6 +6,10 @@
       "stageTitle": "Register to the saving round",
       "buttonAction": "Register"
     },
+    "removeStage": {
+      "stageTitle": "Remove a user so an other can take the spot",
+      "buttonAction": "Remove"
+    },
     "startStage": {
       "stageTitle": "Has everyone registered?",
       "buttonAction": "Start the round"
@@ -16,6 +20,10 @@
     },
     "saveAmountStage": {
       "stageTitle": "Deposit to the saving round",
+      "buttonAction": "Deposit"
+    },
+    "lateStage": {
+      "stageTitle": "Are you late in payments?",
       "buttonAction": "Deposit"
     },
     "withdrawStage": {
