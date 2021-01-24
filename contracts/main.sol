@@ -1,12 +1,13 @@
-pragma solidity ^0.7.2;
+pragma solidity >=0.4.22 <0.7.0;
 
-import "./oneRoundReusable.sol";
+import "./oneRoundReusableV2.sol";
 
-contract mainBloinx {
-    oneRoundReusable[] public childTanda;
-    
+contract main {
+    oneRoundReusableV2[] public childTanda;
+
     function createTanda(uint256 _garantia, uint256 _ahorro, uint256 _groupSize) external payable {
-        oneRoundReusable newTanda = new oneRoundReusable(_garantia, _ahorro, _groupSize);
+
+        oneRoundReusableV2 newTanda = new oneRoundReusableV2(_garantia, _ahorro, _groupSize, msg.sender);
         childTanda.push(newTanda);
     }
 }
