@@ -91,7 +91,7 @@ function App() {
 
   async function removeUser(userTurn) {
     if (accounts === admin) {
-      await contract.methods.removeUser(userTurn).send({ from: accounts, value: web3.utils.toWei('1', 'ether') })
+      await contract.methods.removeUser(userTurn).send({ from: accounts, to: contract._address })
         .once('receipt', async (receipt) => (
           Swal.fire({
             icon: 'success',

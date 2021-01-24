@@ -40,8 +40,8 @@ contract oneRoundReusable {
     Stages public stage;
 
     //Time constants in seconds
-    uint256 payTime = 5 * 60;
-    uint256 withdrawTime = 5 * 60;
+    uint256 payTime = 3 * 60;
+    uint256 withdrawTime = 3 * 60;
 
     constructor(
         uint256 _cashIn,
@@ -127,15 +127,16 @@ modifier isNotUsersTurn() {
         atStage(Stages.Setup)
     {
       require(addressOrderList[_usrTurn-1]!=address(0), "Este turno esta vacio");
-      if(users[msg.sender].cashInFlag == true){
-          totalCashIn = totalCashIn - msg.value;
-          users[msg.sender].userAddr.transfer(cashIn);
+      address removeAddress=addressOrderList[_usrTurn-1];
+      if(users[removeAddress].cashInFlag == true){
+          totalCashIn = totalCashIn - cashIn;
+          users[removeAddress].userAddr.transfer(cashIn);
           CashInPayeesCount--;
-          users[msg.sender].cashInFlag = false;
+          users[removeAddress].cashInFlag = false;
       }
       addressOrderList[_usrTurn-1]=address(0);
       usersCounter--;
-      users[msg.sender].currentRoundFlag = false;
+      users[removeAddress].currentRoundFlag = false;
     }
 
     function startRound()
@@ -183,8 +184,9 @@ modifier isNotUsersTurn() {
             "Estas al corriente en pagos"
         ); //you have already saved this round
         totalCashIn = totalCashIn + msg.value;
-        if (totalCashIn == groupSize*cashIn) {
+        if (totalCashIn == groupSize*cashIn) { //Issue: si alguien se pone al corriente pero hay alguien mas atrazado no se prende su bandera
             users[msg.sender].latePaymentFlag == false;
+            cashOutUsers++;
         }
     }
 
@@ -306,6 +308,7 @@ modifier isNotUsersTurn() {
                 address useraddress = addressOrderList[i];
                 if (users[useraddress].latePaymentFlag == false) {
                     users[useraddress].userAddr.transfer(cashOut);
+                    CashInPayeesCount--;
                 }
                 users[useraddress].cashInFlag = false;
                 users[useraddress].latePaymentFlag = false;
@@ -321,8 +324,8 @@ modifier isNotUsersTurn() {
             }
         }
         cashOutUsers = groupSize;
-        totalSaveAmount = 0;
         turn = 1;
+        totalSaveAmount = 0;
         stage = Stages.Setup;
     }
 
