@@ -12,10 +12,9 @@ contract oneRoundReusable {
     struct User {
         //Information from each user
         address payable userAddr;
-        bool cashInFlag;
         bool saveAmountFlag;
         bool currentRoundFlag; //defines if the user is participating in the current round
-        bool latePaymentFlag;
+        uint8 latePayments;
     }
 
     mapping(address => User) public users;
@@ -27,9 +26,7 @@ contract oneRoundReusable {
     uint256 public groupSize; //Number of slots for users to participate on the saving circle
 
     //Counters and flags
-    uint8 usersCounter = 0;
-    uint256 CashInPayeesCount = 0; //Comitment payments counter
-    uint256 saveAmountPayeesCount = 0; //Payments done in round counter
+    uint256 usersCounter = 0;
     uint256 public turn = 1; //Current cycle/round in the saving circle
     uint256 startTime;
     uint256 public totalSaveAmount = 0; //Collective saving on the round
@@ -40,8 +37,8 @@ contract oneRoundReusable {
     Stages public stage;
 
     //Time constants in seconds
-    uint256 payTime = 3 * 60;
-    uint256 withdrawTime = 3 * 60;
+    uint256 payTime = 1 * 60;
+    uint256 withdrawTime = 1 * 60;
 
     constructor(
         uint256 _cashIn,
@@ -52,7 +49,7 @@ contract oneRoundReusable {
         cashIn = _cashIn * 1e17;
         saveAmount = _saveAmount * 1e17;
         groupSize = _groupSize;
-        cashOutUsers = groupSize;
+        cashOutUsers = 0;
         stage = Stages.Setup;
     }
 
@@ -109,15 +106,14 @@ modifier isNotUsersTurn() {
         require(addressOrderList[_usrTurn-1]==address(0), "Este lugar ya esta ocupado" );
         usersCounter++;
         totalCashIn = totalCashIn + msg.value;
+        cashOutUsers++;
         users[msg.sender] = User(
             msg.sender,
-            true,
             false,
             true,
-            false
+            0
         );
         addressOrderList[_usrTurn-1]=msg.sender; //store user
-        CashInPayeesCount++;
     }
 
     function removeUser(uint256 _usrTurn)
@@ -128,14 +124,13 @@ modifier isNotUsersTurn() {
     {
       require(addressOrderList[_usrTurn-1]!=address(0), "Este turno esta vacio");
       address removeAddress=addressOrderList[_usrTurn-1];
-      if(users[removeAddress].cashInFlag == true){
+      if(users[removeAddress].latePayments == 0){
           totalCashIn = totalCashIn - cashIn;
           users[removeAddress].userAddr.transfer(cashIn);
-          CashInPayeesCount--;
-          users[removeAddress].cashInFlag = false;
       }
       addressOrderList[_usrTurn-1]=address(0);
       usersCounter--;
+      cashOutUsers--;
       users[removeAddress].currentRoundFlag = false;
     }
 
@@ -144,7 +139,7 @@ modifier isNotUsersTurn() {
         onlyAdmin
         atStage(Stages.Setup)
     {
-        require(CashInPayeesCount == groupSize, "Aun hay lugares sin asignar");
+        require(cashOutUsers == groupSize, "Aun hay lugares sin asignar o alguien no ha pagado la garantia");
         stage = Stages.Save;
         startTime=now;
     }
@@ -165,10 +160,6 @@ modifier isNotUsersTurn() {
         require(now <= startTime + turn*payTime + (turn-1)*withdrawTime , "Pago tardio");
         totalSaveAmount = totalSaveAmount + msg.value;
         users[msg.sender].saveAmountFlag = true;
-        saveAmountPayeesCount++;
-        if (saveAmountPayeesCount == groupSize-1) {
-            saveAmountPayeesCount = 0;
-        }
     }
 
     function payLateTurn()
@@ -180,12 +171,12 @@ modifier isNotUsersTurn() {
     {
         //users make the payment for the cycle
         require(
-            users[msg.sender].latePaymentFlag == true,
+            users[msg.sender].latePayments > 0,
             "Estas al corriente en pagos"
         ); //you have already saved this round
         totalCashIn = totalCashIn + msg.value;
-        if (totalCashIn == groupSize*cashIn) { //Issue: si alguien se pone al corriente pero hay alguien mas atrazado no se prende su bandera
-            users[msg.sender].latePaymentFlag == false;
+        users[msg.sender].latePayments--;
+        if (users[msg.sender].latePayments == 0) { //Issue: si alguien se pone al corriente pero hay alguien mas atrazado no se prende su bandera
             cashOutUsers++;
         }
     }
@@ -199,24 +190,9 @@ modifier isNotUsersTurn() {
     {
         require(now <= startTime + turn*payTime + turn*withdrawTime , "Termino el tiempo de retiro");
         if (
-            startTime + turn*payTime + (turn-1)*withdrawTime < now
+            startTime + turn*payTime + (turn-1)*withdrawTime < now && totalSaveAmount < (groupSize-1) * saveAmount
         ) {
-            for (uint8 i = 0; i < groupSize; i++) {
-                address useraddress = addressOrderList[i];
-                if (users[useraddress].saveAmountFlag == false && addressOrderList[turn - 1] != users[useraddress].userAddr
-                ) {
-                    totalCashIn = totalCashIn - saveAmount;
-                    totalSaveAmount = totalSaveAmount + saveAmount;
-                    if (users[useraddress].latePaymentFlag == false){
-                        cashOutUsers--;
-                        users[useraddress].latePaymentFlag = true;
-                        CashInPayeesCount--;
-                        users[useraddress].cashInFlag = false;
-                    }
-                }
-
-             }
-
+            findLateUser();
         }
         require(
             totalSaveAmount == (groupSize-1) * saveAmount,
@@ -241,6 +217,22 @@ modifier isNotUsersTurn() {
         }
     }
 
+    function findLateUser() private{
+      for (uint8 i = 0; i < groupSize; i++) {
+          address useraddress = addressOrderList[i];
+          if (users[useraddress].saveAmountFlag == false &&
+          addressOrderList[turn - 1] != users[useraddress].userAddr
+          ) {
+              totalCashIn = totalCashIn - saveAmount;
+              totalSaveAmount = totalSaveAmount + saveAmount;
+                if(users[useraddress].latePayments==0){
+                  cashOutUsers--;
+              }
+              users[useraddress].latePayments++;
+          }
+       }
+    }
+
     function advanceTurn()
         public
         payable
@@ -252,21 +244,7 @@ modifier isNotUsersTurn() {
             totalSaveAmount < (groupSize-1) * saveAmount
             )
         {
-            for (uint8 i = 0; i < groupSize; i++) {
-                address useraddress = addressOrderList[i];
-                if (users[useraddress].saveAmountFlag == false && addressOrderList[turn - 1] != users[useraddress].userAddr
-                ) {
-                    totalCashIn = totalCashIn - saveAmount;
-                    totalSaveAmount = totalSaveAmount + saveAmount;
-                    if (users[useraddress].latePaymentFlag == false){
-                        cashOutUsers--;
-                        users[useraddress].latePaymentFlag = true;
-                        CashInPayeesCount--;
-                        users[useraddress].cashInFlag = false;
-                    }
-                }
-
-             }
+          findLateUser();
         }
 
         address addressUserInTurn = addressOrderList[turn - 1];
@@ -290,7 +268,7 @@ modifier isNotUsersTurn() {
         cashOut=totalCashIn/cashOutUsers;
         for (uint8 i = 0; i < groupSize; i++) {
             address useraddress = addressOrderList[i];
-            if (users[useraddress].latePaymentFlag == false) {
+            if (users[useraddress].latePayments == 0) {
                 users[useraddress].userAddr.transfer(cashOut);
             }
         }
@@ -302,30 +280,19 @@ modifier isNotUsersTurn() {
         atStage(Stages.Finished)
         onlyAdmin
     {
-        if(totalCashIn<cashIn*cashOutUsers){
-            cashOut=totalCashIn/cashOutUsers;
-            for(uint8 i = 0; i<groupSize; i++){
-                address useraddress = addressOrderList[i];
-                if (users[useraddress].latePaymentFlag == false) {
+        cashOut=totalCashIn/cashOutUsers;
+        for(uint8 i = 0; i<groupSize; i++){
+            address useraddress = addressOrderList[i];
+            if(totalCashIn<cashIn*cashOutUsers){
+                if (users[useraddress].latePayments == 0) {
                     users[useraddress].userAddr.transfer(cashOut);
-                    CashInPayeesCount--;
+                    totalCashIn=totalCashIn-cashOut;
                 }
-                users[useraddress].cashInFlag = false;
-                users[useraddress].latePaymentFlag = false;
-                users[useraddress].saveAmountFlag = false;
+                users[useraddress].latePayments = 1;
             }
-            totalCashIn=0;
+            users[useraddress].saveAmountFlag = false;
         }
-        else if (totalCashIn==cashIn*cashOutUsers){
-            for (uint8 i = 0; i < groupSize; i++) {
-                address useraddress = addressOrderList[i];
-                users[useraddress].latePaymentFlag = false;
-                users[useraddress].saveAmountFlag = false;
-            }
-        }
-        cashOutUsers = groupSize;
         turn = 1;
-        totalSaveAmount = 0;
         stage = Stages.Setup;
     }
 
@@ -335,10 +302,10 @@ modifier isNotUsersTurn() {
         atStage(Stages.Setup)
         isRegisteredUser
     {       //Receive the comitment payment
-        require(users[msg.sender].cashInFlag == false, "Ya tenemos regisrado tu CashIn"); //you have payed the cash in
+        require(users[msg.sender].latePayments > 0, "Ya tenemos regisrado tu CashIn"); //you have payed the cash in
         require(msg.value == cashIn, 'Fondos Insuficientes');   //insufucuent funds
         totalCashIn = totalCashIn + msg.value;
-        users[msg.sender].cashInFlag = true;
-        CashInPayeesCount++;
+        users[msg.sender].latePayments--;
+        cashOutUsers++;
     }
 }
