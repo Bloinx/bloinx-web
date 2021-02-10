@@ -1,7 +1,10 @@
-pragma solidity >=0.4.22 <0.7.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.7.2;
 pragma experimental ABIEncoderV2;
 
-contract oneRoundReusable {
+import './Ownable.sol';
+
+contract oneRoundReusable is Ownable{
     enum Stages {
         //Stages of the round
         Setup,
@@ -53,53 +56,15 @@ contract oneRoundReusable {
         stage = Stages.Setup;
     }
 
-    modifier isUsersTurn() {
-        //Verifies if it is the users round to widraw
-        require(
-            msg.sender == addressOrderList[turn - 1],
-            "Debes esperar tu turno para retirar"
-        );
-        _;
-    }
-
-modifier isNotUsersTurn() {
-        //Verifies if it is not the users round to widraw
-        require(
-            msg.sender != addressOrderList[turn - 1],
-            "En este turno no depositas"
-        );
-        _;
-    }
-
-    modifier isRegisteredUser() {
-        //Verifies if it is the users round to widraw
-        require(
-            users[msg.sender].currentRoundFlag == true,
-            "Usuario no registrado"
-        );
-        _;
-    }
-
-    modifier isPayAmountCorrect() {
-        //Verifies if it is the users round to widraw
-        require(msg.value == cashIn, "Fondos Insuficientes");
-        _;
-    }
-
     modifier atStage(Stages _stage) {
         require(stage == _stage);
-        _;
-    }
-
-    modifier onlyAdmin() {
-        require(msg.sender == admin, "Solo el admin puede llamar la funcion");
         _;
     }
 
     function registerUser(uint256 _usrTurn)
         public
         payable
-        isPayAmountCorrect
+        isPayAmountCorrect(msg.value, cashIn)
         atStage(Stages.Setup)
     {
         require(usersCounter < groupSize, "El grupo esta completo"); //the saving circle is full
@@ -119,7 +84,7 @@ modifier isNotUsersTurn() {
     function removeUser(uint256 _usrTurn)
         public
         payable
-        onlyAdmin
+        onlyAdmin(admin)
         atStage(Stages.Setup)
     {
       require(addressOrderList[_usrTurn-1]!=address(0), "Este turno esta vacio");
@@ -136,20 +101,20 @@ modifier isNotUsersTurn() {
 
     function startRound()
         public
-        onlyAdmin
+        onlyAdmin(admin)
         atStage(Stages.Setup)
     {
         require(cashOutUsers == groupSize, "Aun hay lugares sin asignar o alguien no ha pagado la garantia");
         stage = Stages.Save;
-        startTime=now;
+        startTime= block.timestamp;
     }
 
     function payTurn()
         public
         payable
-        isRegisteredUser
-        isPayAmountCorrect
-        isNotUsersTurn
+        isRegisteredUser(users[msg.sender].currentRoundFlag)
+        isPayAmountCorrect(msg.value, cashIn)
+        isNotUsersTurn(addressOrderList[turn - 1])
         atStage(Stages.Save)
     {
         //users make the payment for the cycle
@@ -157,7 +122,7 @@ modifier isNotUsersTurn() {
             users[msg.sender].saveAmountFlag == false,
             "Ya ahorraste este turno"
         ); //you have already saved this round
-        require(now <= startTime + turn*payTime + (turn-1)*withdrawTime , "Pago tardio");
+        require(block.timestamp <= startTime + turn*payTime + (turn-1)*withdrawTime , "Pago tardio");
         totalSaveAmount = totalSaveAmount + msg.value;
         users[msg.sender].saveAmountFlag = true;
     }
@@ -165,8 +130,8 @@ modifier isNotUsersTurn() {
     function payLateTurn()
         public
         payable
-        isRegisteredUser
-        isPayAmountCorrect
+        isRegisteredUser(users[msg.sender].currentRoundFlag)
+        isPayAmountCorrect(msg.value, cashIn)
         atStage(Stages.Save)
     {
         //users make the payment for the cycle
@@ -184,13 +149,13 @@ modifier isNotUsersTurn() {
     function withdrawTurn()
         public
         payable
-        isRegisteredUser
+        isRegisteredUser(users[msg.sender].currentRoundFlag)
         atStage(Stages.Save)
-        isUsersTurn
+        isUsersTurn(addressOrderList[turn - 1])
     {
-        require(now <= startTime + turn*payTime + turn*withdrawTime , "Termino el tiempo de retiro");
+        require(block.timestamp <= startTime + turn*payTime + turn*withdrawTime , "Termino el tiempo de retiro");
         if (
-            startTime + turn*payTime + (turn-1)*withdrawTime < now && totalSaveAmount < (groupSize-1) * saveAmount
+            startTime + turn*payTime + (turn-1)*withdrawTime < block.timestamp && totalSaveAmount < (groupSize-1) * saveAmount
         ) {
             findLateUser();
         }
@@ -236,10 +201,10 @@ modifier isNotUsersTurn() {
     function advanceTurn()
         public
         payable
-        onlyAdmin
+        onlyAdmin(admin)
         atStage(Stages.Save)
     {
-        require(startTime + turn*payTime + turn*withdrawTime < now , "El usuario en turno aun puede retirar");
+        require(startTime + turn*payTime + turn*withdrawTime < block.timestamp , "El usuario en turno aun puede retirar");
         if (
             totalSaveAmount < (groupSize-1) * saveAmount
             )
@@ -262,7 +227,7 @@ modifier isNotUsersTurn() {
         public
         payable
         atStage(Stages.Finished)
-        onlyAdmin
+        onlyAdmin(admin)
     {
         //When all the rounds are done the admin sends the cash in to the users
         cashOut=totalCashIn/cashOutUsers;
@@ -278,7 +243,7 @@ modifier isNotUsersTurn() {
         public
         payable
         atStage(Stages.Finished)
-        onlyAdmin
+        onlyAdmin(admin)
     {
         cashOut=totalCashIn/cashOutUsers;
         for(uint8 i = 0; i<groupSize; i++){
@@ -300,7 +265,7 @@ modifier isNotUsersTurn() {
         public
         payable
         atStage(Stages.Setup)
-        isRegisteredUser
+        isRegisteredUser(users[msg.sender].currentRoundFlag)
     {       //Receive the comitment payment
         require(users[msg.sender].latePayments > 0, "Ya tenemos regisrado tu CashIn"); //you have payed the cash in
         require(msg.value == cashIn, 'Fondos Insuficientes');   //insufucuent funds
