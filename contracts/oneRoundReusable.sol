@@ -13,22 +13,23 @@ contract oneRoundReusable {
         //Information from each user
         address payable userAddr;
         bool saveAmountFlag;
-        bool currentRoundFlag;
+        bool currentRoundFlag; //defines if the user is participating in the current round
         uint8 latePayments;
     }
 
     mapping(address => User) public users;
-    address payable public admin;
+    address payable public admin; //The user that deploy the contract is the administrator
 
     //Constructor deployment variables
-    uint256 cashIn;
-    uint256 saveAmount;
-    uint256 public groupSize;
+    uint256 cashIn; //amount to be payed as commitment at the begining of the saving circle
+    uint256 saveAmount; //Payment on each round/cycle
+    uint256 public groupSize; //Number of slots for users to participate on the saving circle
+
     //Counters and flags
     uint256 usersCounter = 0;
-    uint256 public turn = 1;
+    uint256 public turn = 1; //Current cycle/round in the saving circle
     uint256 startTime;
-    uint256 public totalSaveAmount = 0;
+    uint256 public totalSaveAmount = 0; //Collective saving on the round
     uint256 public totalCashIn = 0;
     uint256 public cashOutUsers;
     uint256 cashOut=0;
@@ -175,7 +176,7 @@ modifier isNotUsersTurn() {
         ); //you have already saved this round
         totalCashIn = totalCashIn + msg.value;
         users[msg.sender].latePayments--;
-        if (users[msg.sender].latePayments == 0) {
+        if (users[msg.sender].latePayments == 0) { //Issue: si alguien se pone al corriente pero hay alguien mas atrazado no se prende su bandera
             cashOutUsers++;
         }
     }
@@ -301,7 +302,7 @@ modifier isNotUsersTurn() {
         atStage(Stages.Setup)
         isRegisteredUser
     {       //Receive the comitment payment
-        require(users[msg.sender].latePayments > 0, "Ya tenemos regisrado tu CashIn");
+        require(users[msg.sender].latePayments > 0, "Ya tenemos regisrado tu CashIn"); //you have payed the cash in
         require(msg.value == cashIn, 'Fondos Insuficientes');   //insufucuent funds
         totalCashIn = totalCashIn + msg.value;
         users[msg.sender].latePayments--;
