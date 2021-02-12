@@ -11,7 +11,7 @@ import "./App.css";
 
 function App() {
   const [web3, setWeb3] = useState(undefined);
-  const [accounts, setAccounts] = useState(undefined);
+  const [account, setAccount] = useState(undefined);
   const [contract, setContract] = useState(undefined);
   const [admin, setAdmin] = useState(undefined);
   const [stage, setStage] = useState(undefined);
@@ -37,7 +37,7 @@ function App() {
       const addressOrderList2 = await contract.methods.addressOrderList(1).call();
       const addressOrderList3 = await contract.methods.addressOrderList(2).call();
       setWeb3(web3);
-      setAccounts(accounts[0]);
+      setAccount(accounts[0]);
       setContract(contract);
       setAdmin(admin);
       setStage(stage);
@@ -48,20 +48,15 @@ function App() {
     }
     init();
     window.ethereum.on('accountsChanged', accounts => {
-      setAccounts(accounts[0])
+      setAccount(accounts[0])
     });
-  }, []);
+  }, [stage]);
 
   const isReady = () => {
     return (
       typeof contract !== 'undefined'
       && typeof web3 !== 'undefined'
-      && typeof accounts !== 'undefined'
-      && typeof stage !== 'undefined'
-      && typeof turn !== 'undefined'
-      && typeof addressOrderList1 !== 'undefined'
-      && typeof addressOrderList2 !== 'undefined'
-      && typeof addressOrderList3 !== 'undefined'
+      && typeof account !== 'undefined'
     );
   }
 
@@ -69,7 +64,7 @@ function App() {
     return <div>Loading Web3, accounts, and contract...</div>;
   }
   async function registerUser(userTurn) {
-    await contract.methods.registerUser(userTurn).send({ from: accounts, value: web3.utils.toWei('1', 'ether') })
+    await contract.methods.registerUser(userTurn).send({ from: account, value: web3.utils.toWei('1', 'ether') })
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
@@ -90,8 +85,8 @@ function App() {
   };
 
   async function removeUser(userTurn) {
-    if (accounts === admin) {
-      await contract.methods.removeUser(userTurn).send({ from: accounts, to: contract._address })
+    if (account === admin) {
+      await contract.methods.removeUser(userTurn).send({ from: account, to: contract._address })
         .once('receipt', async (receipt) => (
           Swal.fire({
             icon: 'success',
@@ -113,8 +108,8 @@ function App() {
   };
 
   async function startRound() {
-    if (accounts === admin) {
-      await contract.methods.startRound().send({ from: accounts, to: contract._address })
+    if (account === admin) {
+      await contract.methods.startRound().send({ from: account, to: contract._address })
         .once('receipt', async (receipt) => (
           Swal.fire({
             icon: 'success',
@@ -136,7 +131,7 @@ function App() {
   };
 
   async function payTurn() {
-    await contract.methods.payTurn().send({ from: accounts, value: web3.utils.toWei('1', 'ether') })
+    await contract.methods.payTurn().send({ from: account, value: web3.utils.toWei('1', 'ether') })
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
@@ -157,7 +152,7 @@ function App() {
   };
 
   async function payLateTurn() {
-    await contract.methods.payLateTurn().send({ from: accounts, value: web3.utils.toWei('1', 'ether') })
+    await contract.methods.payLateTurn().send({ from: account, value: web3.utils.toWei('1', 'ether') })
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
@@ -178,7 +173,7 @@ function App() {
   };
 
   async function withdrawTurn() {
-    await contract.methods.withdrawTurn().send({ from: accounts, to: contract._address })
+    await contract.methods.withdrawTurn().send({ from: account, to: contract._address })
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
@@ -199,8 +194,8 @@ function App() {
   }
 
   async function advanceTurn() {
-    if (accounts === admin) {
-      await contract.methods.advanceTurn().send({ from: accounts, to: contract._address })
+    if (account === admin) {
+      await contract.methods.advanceTurn().send({ from: account, to: contract._address })
         .once('receipt', async (receipt) => (
           Swal.fire({
             icon: 'success',
@@ -222,8 +217,8 @@ function App() {
   };
 
   async function withdrawCashIn() {
-    if (accounts === admin) {
-      await contract.methods.withdrawCashIn().send({ from: accounts, to: contract._address })
+    if (account === admin) {
+      await contract.methods.withdrawCashIn().send({ from: account, to: contract._address })
         .once('receipt', async (receipt) => (
           Swal.fire({
             icon: 'success',
@@ -244,8 +239,8 @@ function App() {
     }
   }
   async function restartRound() {
-    if (accounts === admin) {
-      await contract.methods.restartRound().send({ from: accounts, to: contract._address })
+    if (account === admin) {
+      await contract.methods.restartRound().send({ from: account, to: contract._address })
         .once('receipt', async (receipt) => (
           Swal.fire({
             icon: 'success',
@@ -267,7 +262,7 @@ function App() {
   }
 
   async function payCashIn() {
-    await contract.methods.payCashIn().send({ from: accounts, value: web3.utils.toWei('1', 'ether') })
+    await contract.methods.payCashIn().send({ from: account, value: web3.utils.toWei('1', 'ether') })
       .once('receipt', async (receipt) => (
         Swal.fire({
           icon: 'success',
@@ -290,7 +285,7 @@ function App() {
 
   return (
     <div>
-      <Navbar account={accounts} />
+      <Navbar account={account} />
       <Home
         registerUser={registerUser}
         removeUser={removeUser}
@@ -307,7 +302,7 @@ function App() {
         addressOrderList1={addressOrderList1}
         addressOrderList2={addressOrderList2}
         addressOrderList3={addressOrderList3}
-        account={accounts}
+        account={account}
         admin={admin}
       />
       <Footer stage={stage} />
