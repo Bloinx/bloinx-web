@@ -28,10 +28,10 @@ export function Home({ registerUser, removeUser, payTurn, payLateTurn, withdrawR
             stage === '0' && admin === account && (
               <Card
                 stageFunction="startStage" action={startRound}
-                Card addressOrderList1={addressOrderList1}
-                Card addressOrderList2={addressOrderList2}
-                Card addressOrderList3={addressOrderList3}
-                 />
+                addressOrderList1={addressOrderList1}
+                addressOrderList2={addressOrderList2}
+                addressOrderList3={addressOrderList3}
+              />
             )
           }
           {
