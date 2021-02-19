@@ -18,15 +18,20 @@ module.exports = {
       network_id: "*"
     },
     ropsten: {
-      provider: () => new HDWalletProvider(process.env.MNENOMIC, `https://ropsten.infura.io/v3/${process.env.PROJECT_ID}`),
+      provider: () => new HDWalletProvider(process.env.PRIVATE_KEY, `https://ropsten.infura.io/v3/${process.env.PROJECT_ID}`),
       network_id: 3
     },
     avalanche_fuji: {
-      provider: () => new HDWalletProvider(process.env.MNENOMIC, `https://api.avax-test.network/ext/bc/C/rpc}`),
+      provider: () => new HDWalletProvider(process.env.PRIVATE_KEY, `https://api.avax-test.network/ext/bc/C/rpc`),
       port: 443,
       chain_id:43113,
-      network_id: 1
+      network_id: "*",
+      gas: 3000000,
+      gasPrice: 470000000000
     },
+  },
+  mocha: {
+
   },
   compilers: {
     solc: {
