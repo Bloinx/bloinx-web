@@ -36,7 +36,7 @@ contract oneRoundReusable is Ownable{
     uint256 public totalCashIn = 0;
     uint256 public cashOutUsers;
     uint256 cashOut=0;
-    address[] public addressOrderList=[address(0),address(0),address(0)];
+    address[] public addressOrderList=[address(0),address(0),address(0), address(0)];
     Stages public stage;
 
     //Time constants in seconds
