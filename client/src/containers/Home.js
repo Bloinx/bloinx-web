@@ -3,7 +3,7 @@ import React from 'react';
 import TextHeading from '../components/TextHeading/TextHeading';
 import Card from '../components/Cards/Card';
 
-export function Home({ registerUser, removeUser, payTurn, payLateTurn, withdrawRound, withdrawCashIn, stage, admin, account, turn, startRound, advanceTurn, restartRound, payCashIn, addressOrderList1, addressOrderList2, addressOrderList3 }) {
+export function Home({ registerUser, removeUser, payTurn, payLateTurn, withdrawRound, withdrawCashIn, stage, admin, account, turn, startRound, advanceTurn, restartRound, payCashIn, addressOrderList1, addressOrderList2, addressOrderList3, addressOrderList4 }) {
   return (
     <div className="px">
       <TextHeading turn={turn} />
@@ -31,6 +31,7 @@ export function Home({ registerUser, removeUser, payTurn, payLateTurn, withdrawR
                 addressOrderList1={addressOrderList1}
                 addressOrderList2={addressOrderList2}
                 addressOrderList3={addressOrderList3}
+                addressOrderList4={addressOrderList4}
               />
             )
           }
