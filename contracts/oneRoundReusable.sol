@@ -40,8 +40,8 @@ contract oneRoundReusable is Ownable{
     Stages public stage;
 
     //Time constants in seconds
-    uint256 payTime = 1 * 60;
-    uint256 withdrawTime = 1 * 60;
+    uint256 payTime = 1 * 86400;
+    uint256 withdrawTime = 1 * (86400 * 2);
 
     constructor(
         uint256 _cashIn,
