@@ -21,8 +21,8 @@ export const Card = ({ stageFunction, action, addressOrderList1, addressOrderLis
             <select className="form-select" onChange={(e) => setUserTurn(e.target.value)}>
               <option value="1">1</option>
               <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
+              {/* <option value="3">3</option>
+              <option value="4">4</option> */}
             </select>
           )
         }

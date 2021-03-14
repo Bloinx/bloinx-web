@@ -30,8 +30,8 @@ export function Home({ registerUser, removeUser, payTurn, payLateTurn, withdrawR
                 stageFunction="startStage" action={startRound}
                 addressOrderList1={addressOrderList1}
                 addressOrderList2={addressOrderList2}
-                addressOrderList3={addressOrderList3}
-                addressOrderList4={addressOrderList4}
+                // addressOrderList3={addressOrderList3}
+                // addressOrderList4={addressOrderList4}
               />
             )
           }

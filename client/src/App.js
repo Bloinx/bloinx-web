@@ -18,8 +18,8 @@ function App() {
   const [turn, setTurn] = useState(undefined);
   const [addressOrderList1, setAddressOrderList1] = useState(undefined);
   const [addressOrderList2, setAddressOrderList2] = useState(undefined);
-  const [addressOrderList3, setAddressOrderList3] = useState(undefined);
-  const [addressOrderList4, setAddressOrderList4] = useState(undefined);
+  // const [addressOrderList3, setAddressOrderList3] = useState(undefined);
+  // const [addressOrderList4, setAddressOrderList4] = useState(undefined);
 
   useEffect(() => {
     const init = async () => {
@@ -36,8 +36,8 @@ function App() {
       const turn = await contract.methods.turn().call();
       const addressOrderList1 = await contract.methods.addressOrderList(0).call();
       const addressOrderList2 = await contract.methods.addressOrderList(1).call();
-      const addressOrderList3 = await contract.methods.addressOrderList(2).call();
-      const addressOrderList4 = await contract.methods.addressOrderList(3).call();
+      // const addressOrderList3 = await contract.methods.addressOrderList(2).call();
+      // const addressOrderList4 = await contract.methods.addressOrderList(3).call();
 
       setWeb3(web3);
       setAccount(accounts[0]);
@@ -47,8 +47,8 @@ function App() {
       setTurn(turn);
       setAddressOrderList1(addressOrderList1);
       setAddressOrderList2(addressOrderList2);
-      setAddressOrderList3(addressOrderList3);
-      setAddressOrderList4(addressOrderList4);
+      // setAddressOrderList3(addressOrderList3);
+      // setAddressOrderList4(addressOrderList4);
     }
     init();
     window.ethereum.on('accountsChanged', accounts => {
@@ -305,8 +305,8 @@ function App() {
         turn={turn}
         addressOrderList1={addressOrderList1}
         addressOrderList2={addressOrderList2}
-        addressOrderList3={addressOrderList3}
-        addressOrderList4={addressOrderList4}
+        // addressOrderList3={addressOrderList3}
+        // addressOrderList4={addressOrderList4}
         account={account}
         admin={admin}
       />
