@@ -18,8 +18,32 @@ module.exports = {
       network_id: "*"
     },
     ropsten: {
-      provider: () => new HDWalletProvider(process.env.MNENOMIC, `https://ropsten.infura.io/v3/${process.env.PROJECT_ID}`),
+      provider: () => new HDWalletProvider(process.env.PRIVATE_KEY, `https://ropsten.infura.io/v3/${process.env.PROJECT_ID}`),
       network_id: 3
     },
-  }
+    avalanche_fuji: {
+      provider: () => new HDWalletProvider(process.env.PRIVATE_KEY, `https://api.avax-test.network/ext/bc/C/rpc`),
+      port: 443,
+      chain_id:43113,
+      network_id: "*",
+      gas: 3000000,
+      gasPrice: 470000000000
+    },
+  },
+  mocha: {
+
+  },
+  compilers: {
+    solc: {
+      version: "0.7.2",    // Fetch exact version from solc-bin (default: truffle's version)
+      // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
+      // settings: {          // See the solidity docs for advice about optimization and evmVersion
+      //  optimizer: {
+      //    enabled: false,
+      //    runs: 200
+      //  },
+      //  evmVersion: "byzantium"
+      // }
+    },
+  },
 };
