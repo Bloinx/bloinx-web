@@ -2,9 +2,13 @@
 pragma solidity ^0.7.2;
 pragma experimental ABIEncoderV2;
 
+<<<<<<< HEAD
 import './Ownable.sol';
 
 contract oneRoundReusable is Ownable{
+=======
+contract oneRoundReusableV2 {
+>>>>>>> admin set as the user that executes the function
     enum Stages {
         //Stages of the round
         Setup,
@@ -46,9 +50,10 @@ contract oneRoundReusable is Ownable{
     constructor(
         uint256 _cashIn,
         uint256 _saveAmount,
-        uint256 _groupSize
+        uint256 _groupSize,
+        address payable _admin
     ) public {
-        admin = msg.sender;
+        admin = _admin;
         cashIn = _cashIn * 1e17;
         saveAmount = _saveAmount * 1e17;
         groupSize = _groupSize;
@@ -99,6 +104,25 @@ contract oneRoundReusable is Ownable{
       users[removeAddress].currentRoundFlag = false;
     }
 
+    function removeUser(uint256 _usrTurn)
+        public
+        payable
+        onlyAdmin
+        atStage(Stages.Setup)
+    {
+      require(addressOrderList[_usrTurn-1]!=address(0), "Este turno esta vacio");
+      address removeAddress=addressOrderList[_usrTurn-1];
+      if(users[removeAddress].cashInFlag == true){
+          totalCashIn = totalCashIn - cashIn;
+          users[removeAddress].userAddr.transfer(cashIn);
+          CashInPayeesCount--;
+          users[removeAddress].cashInFlag = false;
+      }
+      addressOrderList[_usrTurn-1]=address(0);
+      usersCounter--;
+      users[removeAddress].currentRoundFlag = false;
+    }
+
     function startRound()
         public
         onlyAdmin(admin)
@@ -143,6 +167,24 @@ contract oneRoundReusable is Ownable{
         users[msg.sender].latePayments--;
         if (users[msg.sender].latePayments == 0) { //Issue: si alguien se pone al corriente pero hay alguien mas atrazado no se prende su bandera
             cashOutUsers++;
+        }
+    }
+
+    function payLateTurn()
+        public
+        payable
+        isRegisteredUser
+        isPayAmountCorrect
+        atStage(Stages.Save)
+    {
+        //users make the payment for the cycle
+        require(
+            users[msg.sender].latePaymentFlag == true,
+            "Estas al corriente en pagos"
+        ); //you have already saved this round
+        totalCashIn = totalCashIn + msg.value;
+        if (totalCashIn == groupSize*cashIn) {
+            users[msg.sender].latePaymentFlag == false;
         }
     }
 
@@ -251,13 +293,22 @@ contract oneRoundReusable is Ownable{
             if(totalCashIn<cashIn*cashOutUsers){
                 if (users[useraddress].latePayments == 0) {
                     users[useraddress].userAddr.transfer(cashOut);
+<<<<<<< HEAD
                     totalCashIn=totalCashIn-cashOut;
+=======
+                    CashInPayeesCount--;
+>>>>>>> admin set as the user that executes the function
                 }
                 users[useraddress].latePayments = 1;
             }
             users[useraddress].saveAmountFlag = false;
         }
+<<<<<<< HEAD
+=======
+        cashOutUsers = groupSize;
+>>>>>>> admin set as the user that executes the function
         turn = 1;
+        totalSaveAmount = 0;
         stage = Stages.Setup;
     }
 
