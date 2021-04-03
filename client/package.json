@@ -13,7 +13,7 @@
     "post-rewrite": "npm install"
   },
   "lint-staged": {
-    "*.{js,jsx}": "pre-commit"
+    "*.{js,jsx}": "npm run lint"
   },
   "husky": {
     "hooks": {
