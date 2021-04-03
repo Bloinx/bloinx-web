@@ -12,6 +12,15 @@
     "post-merge": "npm install",
     "post-rewrite": "npm install"
   },
+  "lint-staged": {
+    "*.{js,jsx}": "eslint"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
   "dependencies": {
     "@drizzle/react-plugin": "^1.5.3",
     "@drizzle/store": "^1.5.3",
