@@ -8,7 +8,7 @@ const drizzleOptions = {
   },
   contracts: [OneRoundReusable],
   // events: {
-      // Aqui van los eventos del SC
+  // Aqui van los eventos del SC
   // }
 };
 
