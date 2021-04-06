@@ -1,5 +1,5 @@
-var oneRoundReusable = artifacts.require("./oneRoundReusable.sol");
+const Factory = artifacts.require("./main.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(oneRoundReusable, 10, 10, 2);
+  deployer.deploy(Factory)
 };
