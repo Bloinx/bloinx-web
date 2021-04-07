@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from '../../styles/Home.module.css';
 
-import { Navbar } from '../components/Navbar';
+import { Navbar } from '../components/Navbar/Navbar';
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Navbar />
+        <Navbar account={1234} />
 
         <p className={styles.description}>
           Get started by editing
