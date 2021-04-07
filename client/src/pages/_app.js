@@ -32,8 +32,8 @@ function App({ Component, pageProps }) {
               }
               return (
                 <>
-                  <Component {...pageProps} drizzle={drizzle} drizzleState={drizzleState} />
                   <CssBaseline />
+                  <Component {...pageProps} drizzle={drizzle} drizzleState={drizzleState} />
                 </>
               );
             }
