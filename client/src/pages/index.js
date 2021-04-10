@@ -1,6 +1,7 @@
 import Head from 'next/head';
 
 import { Navbar } from '../components/Navbar/Navbar';
+import CreateTanda from '../components/CreateTanda/CreateTanda';
 
 export default function Home() {
   return (
@@ -12,7 +13,7 @@ export default function Home() {
 
       <main>
         <Navbar account={1234} />
-
+        <CreateTanda />
       </main>
     </div>
   );
