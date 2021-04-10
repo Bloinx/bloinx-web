@@ -2,7 +2,10 @@ import Head from 'next/head';
 
 import { Navbar } from '../components/Navbar/Navbar';
 
-export default function Home() {
+export default function Home(props) {
+  const { drizzle, drizzleState } = props;
+  console.log(drizzle, drizzleState);
+
   return (
     <div>
       <Head>

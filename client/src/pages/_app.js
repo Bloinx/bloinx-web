@@ -26,14 +26,12 @@ function App({ Component, pageProps }) {
         <DrizzleContext.Consumer>
           {
             (drizzleContext) => {
-              const { drizzleState, initialized } = drizzleContext;
-              if (initialized) {
-                return 'Loading...';
-              }
+              // eslint-disable-next-line no-shadow
+              const { drizzle, drizzleState, initialized } = drizzleContext;
               return (
                 <>
                   <CssBaseline />
-                  <Component {...pageProps} drizzle={drizzle} drizzleState={drizzleState} />
+                  <Component {...pageProps} drizzle={drizzle} drizzleState={drizzleState} initialized={initialized} />
                 </>
               );
             }
