@@ -1,15 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.7.2;
 
-import "./oneRoundReusable.sol";
+import "./SavingGroups.sol";
 
 contract Main{
-    oneRoundReusable[] public childTanda;
-    event TandaCreated(oneRoundReusable childTanda);
+    event TandaCreated(SavingGroups childTanda);
 
     function createTanda(uint256 _garantia, uint256 _ahorro, uint256 _groupSize) external payable returns(address) {
 
-        oneRoundReusable newTanda = new oneRoundReusable(_garantia, _ahorro, _groupSize, msg.sender);
+        SavingGroups newTanda = new SavingGroups(_garantia, _ahorro, _groupSize, msg.sender);
         emit TandaCreated(newTanda);
         return address(newTanda);
     }
