@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AppBar, Grid, Toolbar } from '@material-ui/core';
 
 import NavLink from '../NavLink/NavLink';
 import styles from './styles.module.scss';
+import Wallets from '../Wallets/Wallets';
 
-// import Avatar from './Avatar';
+import Avatar from './Avatar';
 // import BloinxLogo from '../icons/BloinxFinal.svg';
 
-export function Navbar({ account }) {
+// eslint-disable-next-line no-unused-vars
+export function Navbar({ accountie }, props) {
+  const [account, setAccount] = useState('');
+  const [walletParsed, setWalletParsed] = useState('');
+
+  const handleAddress = (publicAddress) => {
+    const walletParsedConstruction = publicAddress ? `${publicAddress.substring(0, 2) + publicAddress.substring(2, 6).toUpperCase()}...${publicAddress.slice(-5, -1).toUpperCase()}` : '';
+    setAccount(publicAddress);
+    setWalletParsed(walletParsedConstruction);
+  };
+  // const handleProvider = (provider) => {
+  //   if (provider) props.provider(provider);
+  // };
   return (
     <AppBar position="fixed" className={styles.appBar}>
       <div>
@@ -26,8 +39,21 @@ export function Navbar({ account }) {
                   color="primary"
                   hover="primary"
                 />
-                { account }
+                <span className="font-weight-bolder text-white mr-2">
+                  <small>
+                    {walletParsed}
+                  </small>
+                </span>
+                {
+                account && (
+                  <Avatar userAddress={account} />
+                )
+              }
               </Grid>
+              <Wallets
+                getAddress={handleAddress}
+                // provider={handleProvider}
+              />
             </Grid>
           </Toolbar>
         </div>

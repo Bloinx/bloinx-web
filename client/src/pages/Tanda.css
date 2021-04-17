@@ -20,7 +20,7 @@
   border-bottom-right-radius: 50px;
   text-transform: uppercase;
   font-weight: 800;
-  margin-bottom: 5%;
+  margin-bottom: 60px;
   margin-top: 60px;
   letter-spacing: 2px;
 }
@@ -46,6 +46,7 @@
   padding-bottom: 20px;
   height: auto;
   min-height: 550px;
+  border-radius: 10px;
 }
 .GeneralData-container {
   padding: 5%;

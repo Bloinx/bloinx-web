@@ -72,7 +72,7 @@ const Configuration = (props) => {
               valueLabelDisplay="auto"
               step={1}
               marks
-              min={1}
+              min={3}
               max={10}
               value={props.data.participant}
               onChange={handleSlider}
