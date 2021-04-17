@@ -1,12 +1,12 @@
 import Web3 from 'web3';
-import OneRoundReusable from '../contracts/oneRoundReusable.json';
+import SavingGroups from '../src/contracts/SavingGroups.json';
 
 const drizzleOptions = {
   web3: {
     block: false,
     customProvider: new Web3('http://localhost:7545'),
   },
-  contracts: [OneRoundReusable],
+  contracts: [SavingGroups],
   // events: {
   // Aqui van los eventos del SC
   // }

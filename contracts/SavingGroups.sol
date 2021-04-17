@@ -4,7 +4,7 @@ pragma experimental ABIEncoderV2;
 
 import './Ownable.sol';
 
-contract oneRoundReusable is Ownable{
+contract SavingGroups is Ownable{
     enum Stages {
         //Stages of the round
         Setup,
