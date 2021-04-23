@@ -118,14 +118,6 @@ const Configuration = (props) => {
         />
       </div>
       <Button
-        color="secondary"
-        onClick={handlePrevStep}
-        style={{ marginBottom: '2%' }}
-        size="small"
-      >
-        Ve a Datos Generales
-      </Button>
-      <Button
         variant="outlined"
         color="primary"
         disabled={
@@ -137,6 +129,14 @@ const Configuration = (props) => {
         onClick={handleNextStep}
       >
         Siguiente
+      </Button>
+      <Button
+        color="secondary"
+        onClick={handlePrevStep}
+        style={{ margin: '2% 0' }}
+        size="small"
+      >
+        Ve a Datos Generales
       </Button>
     </div>
   );

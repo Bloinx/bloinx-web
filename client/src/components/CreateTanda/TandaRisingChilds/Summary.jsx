@@ -20,7 +20,7 @@ const Summary = (props) => {
   const handleNextStep = () => {
     let step = props.currentStep;
     // If the current step is 1 or 2, then add one on "next" button click
-    step = step >= 2 ? 3 : step + 1;
+    step += 1;
     props.stepMove(step);
   };
 
@@ -76,14 +76,6 @@ const Summary = (props) => {
         </Grid>
       </Grid>
       <Button
-        color="secondary"
-        onClick={handlePrevStep}
-        style={{ marginBottom: '2%' }}
-        size="small"
-      >
-        Ve a Configuración
-      </Button>
-      <Button
         variant="outlined"
         color="primary"
         disabled={
@@ -99,6 +91,14 @@ const Summary = (props) => {
         onClick={handleNextStep}
       >
         Crear Tanda
+      </Button>
+      <Button
+        color="secondary"
+        onClick={handlePrevStep}
+        style={{ margin: '2% 0' }}
+        size="small"
+      >
+        Ve a Configuración
       </Button>
     </div>
   );

@@ -1,17 +1,33 @@
 import React, { useState } from 'react';
 import Web3 from 'web3';
 import swal from 'sweetalert';
-import { WalletLink } from 'walletlink';
+// import { WalletLink } from 'walletlink';
+import Button from '@material-ui/core/Button';
 import detectEthereumProvider from '@metamask/detect-provider';
-// import '../../pages/Wallets.css';
-// import metamask_logo from '../icons/logo_meta.png';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
+// import metamaskLogo from '../../icons/logo_meta.png';
 // import coinbase_logo from '../icons/logo_coinbase.png';
 
 // require('dotenv').config();
 
+const Transition = React.forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
+
 const Wallets = (props) => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const [web3, setWeb3] = useState(undefined);
-  const { REACT_APP_INFURA_ROPSTEN_KEY } = process.env;
+  // const { REACT_APP_INFURA_ROPSTEN_KEY } = process.env;
 
   const loadPubKeyData = async (ethProvider) => {
     const accounts = await ethProvider.request({ method: 'eth_accounts' });
@@ -37,14 +53,13 @@ const Wallets = (props) => {
   };
 
   const loadWeb3Provider = async () => {
+    setOpen(false);
     const provider = await detectEthereumProvider();
     if (provider) {
       try {
         await provider.enable();
         const web3Loadie = new Web3(provider);
         setWeb3(web3Loadie);
-        const modal = document.getElementById('exampleModal');
-        modal.click();
       } catch (error) {
         console.error(error);
       }
@@ -84,74 +99,59 @@ const Wallets = (props) => {
     }
   };
 
-  const loadCoinBase = () => {
-    const APP_NAME = 'Bloinx Dapp';
-    const APP_LOGO_URL = '@/assets/images/logo.png';
-    const ETH_JSONRPC_URL = REACT_APP_INFURA_ROPSTEN_KEY;
-    // const ETH_JSONRPC_URL = 'https://ropsten.infura.io/v3/c1d213585ead4758adc7b7f06571bd00'
-    const CHAIN_ID = 3;
+  // const loadCoinBase = () => {
+  //   const APP_NAME = 'Bloinx Dapp';
+  //   const APP_LOGO_URL = '@/assets/images/logo.png';
+  //   const ETH_JSONRPC_URL = REACT_APP_INFURA_ROPSTEN_KEY;
+  //   // const ETH_JSONRPC_URL = 'https://ropsten.infura.io/v3/c1d213585ead4758adc7b7f06571bd00'
+  //   const CHAIN_ID = 3;
 
-    const walletLink = new WalletLink({
-      appName: APP_NAME,
-      appLogoUrl: APP_LOGO_URL,
-      darkMode: true,
-    });
-    const ethereum = walletLink.makeWeb3Provider(ETH_JSONRPC_URL, CHAIN_ID);
-    const web3Loadie = new Web3(ethereum);
-    ethereum.enable().then((accounts) => {
-      // eslint-disable-next-line prefer-destructuring
-      web3Loadie.eth.defaultAccount = accounts[0];
-      props.getAddress(accounts[0]);
-    });
-  };
+  //   const walletLink = new WalletLink({
+  //     appName: APP_NAME,
+  //     appLogoUrl: APP_LOGO_URL,
+  //     darkMode: true,
+  //   });
+  //   const ethereum = walletLink.makeWeb3Provider(ETH_JSONRPC_URL, CHAIN_ID);
+  //   const web3Loadie = new Web3(ethereum);
+  //   ethereum.enable().then((accounts) => {
+  //     // eslint-disable-next-line prefer-destructuring
+  //     web3Loadie.eth.defaultAccount = accounts[0];
+  //     props.getAddress(accounts[0]);
+  //   });
+  // };
 
   return (
     <div>
-      <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Conecta tu Wallet
-      </button>
-      <div className="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">Selecciona tu Wallet</h5>
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <div className="wallet-container">
-                <button
-                  className="metamask_wallet"
-                  onClick={loadWeb3Provider}
-                  type="button"
-                >
-                  {/* <img
-                    src={metamask_logo}
-                    alt="metamask_wallet"
-                    className="logo_metamask"
-                    width="35px"
-                  /> */}
-                  <span className="font-weight-bold">METAMASK</span>
-                </button>
-                <button
-                  className="coinbase_wallet"
-                  onClick={loadCoinBase}
-                  type="button"
-                >
-                  {/* <img
-                    src={coinbase_logo}
-                    alt="coinbase_wallet"
-                    className="logo_metamask"
-                    width="35px"
-                  /> */}
-                  <span className="font-weight-bold">COINBASE</span>
-                </button>
-              </div>
-            </div>
+      <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
+        Conecta Tu Wallet
+      </Button>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title">Elige tu Wallet dentro de Metamask</DialogTitle>
+        <DialogContent>
+          <div className="wallet-container">
+            <button
+              className="metamask_wallet"
+              onClick={loadWeb3Provider}
+              type="button"
+            >
+              {/* <img
+                src={metamaskLogo}
+                alt="metamask_wallet"
+                className="logo_metamask"
+                width="35px"
+              /> */}
+              <span className="font-weight-bold">METAMASK</span>
+            </button>
           </div>
-        </div>
-      </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

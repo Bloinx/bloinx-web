@@ -32,6 +32,14 @@
   align-items: center;
   margin-bottom: 7%;
 }
+@media screen and (max-width: 767px){
+  .createTanda-TandaANDStepper-container {
+    flex-wrap: wrap;
+  }
+  .stepper-container {
+    display: none;
+  }
+}
 .stepper-container {
   color: white;
   width: 100%;

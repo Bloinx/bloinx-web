@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import GeneralData from '../TandaRisingChilds/GeneralData';
 import Configuration from '../TandaRisingChilds/Configuration';
 import Summary from '../TandaRisingChilds/Summary';
+import Invitation from '../TandaRisingChilds/Invitation';
 
 const TandaRising = (props) => {
   const [currentStep, setStep] = useState(props.step || 1);
@@ -41,6 +42,12 @@ const TandaRising = (props) => {
         stepMove={handleStep}
       />
       <Summary
+        currentStep={currentStep}
+        handleChange={handleChange}
+        data={data}
+        stepMove={handleStep}
+      />
+      <Invitation
         currentStep={currentStep}
         handleChange={handleChange}
         data={data}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AppBar, Grid, Toolbar } from '@material-ui/core';
 
-import NavLink from '../NavLink/NavLink';
+// import NavLink from '../NavLink/NavLink';
 import styles from './styles.module.scss';
 import Wallets from '../Wallets/Wallets';
 
@@ -29,31 +29,33 @@ export function Navbar({ accountie }, props) {
             <Grid
               container
               direction="row"
-              justify="space-between"
+              justify="flex-end"
               alignItems="center"
             >
-              <Grid item xs={12} md={3} className={styles.navLink}>
-                <NavLink
-                  href="/"
-                  name="Account"
-                  color="primary"
-                  hover="primary"
-                />
-                <span className="font-weight-bolder text-white mr-2">
-                  <small>
-                    {walletParsed}
-                  </small>
-                </span>
-                {
-                account && (
-                  <Avatar userAddress={account} />
+              {
+                account && account.startsWith('0x') ? (
+                  <Grid container justify="space-evenly" alignItems="center" spacing={3} xs={12} md={3} className={styles.navLink}>
+                    {/* <NavLink
+                      href="/"
+                      color="primary"
+                      name="account"
+                      hover="primary"
+                    /> */}
+                    <span className="font-weight-bolder text-white mr-2" styles={{ margin: '0 auto' }}>
+                      <small>
+                        {walletParsed}
+                      </small>
+                    </span>
+                    <Avatar userAddress={account} />
+                  </Grid>
+                ) : (
+                  <Grid item xs={12} md={3} className={styles.navLink}>
+                    <Wallets
+                      getAddress={handleAddress}
+                    />
+                  </Grid>
                 )
               }
-              </Grid>
-              <Wallets
-                getAddress={handleAddress}
-                // provider={handleProvider}
-              />
             </Grid>
           </Toolbar>
         </div>
