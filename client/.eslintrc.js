@@ -31,7 +31,7 @@ module.exports = {
     'max-len': [
       'error',
       {
-        code: 120,
+        code: 200,
         ignoreUrls: true,
         ignoreComments: true,
       },
@@ -42,6 +42,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/jsx-props-no-spreading': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
     'react/prop-types': ['off'],
   },
 };

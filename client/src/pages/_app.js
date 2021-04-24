@@ -7,6 +7,8 @@ import { CssBaseline } from '@material-ui/core';
 import drizzleOptions from '../../Drizzle/drizzleOptions';
 import theme from '../Toolkit/theme';
 import './styles/global.scss';
+import './Tanda.css';
+import './Wallets.css';
 
 const drizzle = new Drizzle(drizzleOptions);
 

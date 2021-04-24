@@ -1,0 +1,158 @@
+/* Create Tanda Page */
+.createTanda-container {
+  width: 100%;
+  height: auto;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #16181b;
+}
+.createTanda-header {
+  color: white;
+  width: 75%;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fe6196;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  text-transform: uppercase;
+  font-weight: 800;
+  margin-bottom: 60px;
+  margin-top: 60px;
+  letter-spacing: 2px;
+}
+.createTanda-TandaANDStepper-container {
+  width: 90%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 7%;
+}
+@media screen and (max-width: 767px){
+  .createTanda-TandaANDStepper-container {
+    flex-wrap: wrap;
+  }
+  .stepper-container {
+    display: none;
+  }
+}
+.stepper-container {
+  color: white;
+  width: 100%;
+}
+.TandaRising-container {
+  color: white;
+  width: 100%;
+  background-color: #c9d9f8;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+  height: auto;
+  min-height: 550px;
+  border-radius: 10px;
+}
+.GeneralData-container {
+  padding: 5%;
+  padding-bottom: 0 !important;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.GeneralData-group {
+  color: black;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 5%;
+}
+.GeneralData-title {
+  color: #20315a;
+  font-weight: 700;
+  font-size: 2em;
+  margin: 4% 0;
+}
+.GeneralData-subtitle {
+  color: #16181b;
+  font-size: 17px;
+  line-height: normal;
+  text-align: center;
+}
+.MuiInputBase-root {
+  color: black !important;
+  width: 'auto' !important;
+}
+.GeneralData-label {
+  color: #4665ae;
+  margin: 0 auto;
+  margin-top: 5%;
+  margin-bottom: 1.5%;
+}
+.GeneralData-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 2% 0 4% 0;
+}
+.validated-border {
+  border: solid 1px #17b65a;
+}
+.Summary-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: left;
+}
+.Summary-Datalabel, .Summary-Data {
+  color: #4665ae;
+  font-size: 20px;
+  padding: 2% 0;
+}
+.Summary-Data {
+  color: black;
+}
+.figmaInputStyles {
+  background-color: white;
+  color: black;
+  border-radius: 4px;
+  width: 70%
+};
+.MuiFormHelperText-root {
+  color: #b0bec5;
+  margin: 0;
+  font-size: 0.75rem;
+  text-align: left;
+  font-family: Open Sans, sans-serif;
+  font-weight: 400;
+  line-height: 1.66;
+  background-color: #c9d9f8 !important;
+}
+.MuiFormHelperText-marginDense {
+  margin-top: none !important;
+}
+.MuiFormHelperText-contained {
+  margin: none !important;
+}
+.stepper-dots {
+  width: 40px;
+  height: 40px;
+}
+.stepper-dots:hover {
+  width: 40px;
+  height: 40px;
+  background-color: #4665ae !important;
+}
+.MuiTimelineConnector-root {
+  width: 4px;
+  flex-grow: 1;
+  background-color: #bdbdbd;
+  height: 50px;
+}

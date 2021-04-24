@@ -1,6 +1,7 @@
 import Head from 'next/head';
 
 import { Navbar } from '../components/Navbar/Navbar';
+import CreateTanda from '../components/CreateTanda/CreateTanda';
 
 export default function Home(props) {
   const { drizzle, drizzleState } = props;
@@ -15,7 +16,7 @@ export default function Home(props) {
 
       <main>
         <Navbar account={1234} />
-
+        <CreateTanda />
       </main>
     </div>
   );
