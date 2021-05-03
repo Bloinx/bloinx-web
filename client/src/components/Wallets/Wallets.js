@@ -49,7 +49,6 @@ const Wallets = (props) => {
         blockExplorerUrls: ['https://cchain.explorer.avax-test.network/'],
       }],
     });
-    // props.provider(ethProvider);
   };
 
   const loadWeb3Provider = async () => {

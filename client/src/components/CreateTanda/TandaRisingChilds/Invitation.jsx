@@ -13,7 +13,7 @@ const Summary = (props) => {
       const userEmail = 'gho0thubun@gmail.com';
       const subject = 'Invitaasdasdasdas';
       // await axios.post(`${this.urlEndpoints}/sendEmail`, {
-      await axios.post('http://localhost:5001/bloinxfunctions/us-central1/sendEmail', {
+      await axios.post('arn:aws:lambda:us-east-2:840563677513:function:sendMail', {
         personalizations: [
           {
             to: [
@@ -53,8 +53,8 @@ const Summary = (props) => {
       <span className="GeneralData-subtitle">
         Compartela con la gente con la que quieres inciar este círculo de ahorro enviandoles un correo electrónico.
       </span>
-      <Grid container justifyContent="center" alignItems="center">
-        <Grid container justifyContent="center" alignItems="center" className="Summary-Datalabel">
+      <Grid container alignItems="center">
+        <Grid container alignItems="center" className="Summary-Datalabel">
           <Button
             variant="contained"
             color="secondary"

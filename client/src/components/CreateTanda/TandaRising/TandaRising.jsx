@@ -11,10 +11,10 @@ const TandaRising = (props) => {
       name: '',
       date: new Date(),
       type: '',
-      longevity: '',
-      participant: undefined,
-      amount: undefined,
-      adminposition: undefined,
+      longevity: 'Semanal',
+      participant: 3,
+      amount: '',
+      adminposition: '',
     },
   );
 

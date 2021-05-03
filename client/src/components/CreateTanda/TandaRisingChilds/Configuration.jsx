@@ -62,7 +62,7 @@ const Configuration = (props) => {
           <Grid item>
             <EmojiPeople />
           </Grid>
-          <Grid item xs alignItems="center" style={{ display: 'flex', justifyContent: 'center' }}>
+          <Grid item xs style={{ display: 'flex', justifyContent: 'center' }}>
             <Slider
               id="participant"
               style={{ width: '75%' }}
