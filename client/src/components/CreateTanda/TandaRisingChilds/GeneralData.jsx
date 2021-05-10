@@ -40,7 +40,7 @@ const GeneralData = (props) => {
       <label htmlFor="name" className="GeneralData-label">Nombre de Tanda*</label>
       <TextField
         className="figmaInputStyles"
-        style={{ paddingLeft: '5%' }}
+        style={{ paddingLeft: '1%' }}
         name="name"
         value={props.data.name}
         onChange={handlePass}

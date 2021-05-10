@@ -4,7 +4,7 @@ import Configuration from '../TandaRisingChilds/Configuration';
 import Summary from '../TandaRisingChilds/Summary';
 import Invitation from '../TandaRisingChilds/Invitation';
 
-const TandaRising = (props) => {
+const ActualRound = (props) => {
   const [currentStep, setStep] = useState(props.step || 1);
   const [data, setData] = useState(
     {
@@ -56,4 +56,4 @@ const TandaRising = (props) => {
     </div>
   );
 };
-export default TandaRising;
+export default ActualRound;

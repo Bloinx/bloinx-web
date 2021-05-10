@@ -123,7 +123,7 @@
   background-color: white;
   color: black;
   border-radius: 4px;
-  width: 70%
+  width: 70%;
 };
 .MuiFormHelperText-root {
   color: #b0bec5;
@@ -134,6 +134,9 @@
   font-weight: 400;
   line-height: 1.66;
   background-color: #c9d9f8 !important;
+}
+.MuiInputBase-input {
+  font-size: 20px !important;
 }
 .MuiFormHelperText-marginDense {
   margin-top: none !important;
