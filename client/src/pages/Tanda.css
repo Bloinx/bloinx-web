@@ -56,6 +56,18 @@
   min-height: 550px;
   border-radius: 10px;
 }
+.Register-pay-container {
+  color: white;
+  width: 100%;
+  background-color: #c9d9f8;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+  height: auto;
+  min-height: 450px;
+  border-radius: 10px;
+}
 .GeneralData-container {
   padding: 5%;
   padding-bottom: 0 !important;
@@ -76,6 +88,12 @@
 }
 .GeneralData-title {
   color: #20315a;
+  font-weight: 700;
+  font-size: 2em;
+  margin: 4% 0;
+}
+.GeneralData-title_white{
+  color: white;
   font-weight: 700;
   font-size: 2em;
   margin: 4% 0;
@@ -158,4 +176,24 @@
   flex-grow: 1;
   background-color: #bdbdbd;
   height: 50px;
+}
+.divider-pay {
+  border-top: 3px dashed white;
+}
+.pay-Datalabel {
+  color: #407bff;
+  font-size: 20px;
+  padding: 2% 0 0 2%;
+}
+.pay-Data {
+  color: white;
+  font-size: 20px;
+  padding: 2% 0 0 2%;
+  text-align: right;
+}
+.pay-DataTotal {
+  color: #f78ae0;
+  font-size: 20px;
+  padding: 2% 0 0 2%;
+  text-align: right;
 }

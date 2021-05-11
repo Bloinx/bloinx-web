@@ -2,7 +2,7 @@ import Head from 'next/head';
 
 import { Navbar } from '../components/Navbar/Navbar';
 // eslint-disable-next-line import/no-named-as-default
-import MainController from '../components/CreateTanda/MainController';
+import MainController from '../components/MainController';
 
 export default function Home(props) {
   const { drizzle, drizzleState } = props;
@@ -16,8 +16,8 @@ export default function Home(props) {
       </Head>
 
       <main>
-        <Navbar account={1234} />
-        <MainController />
+        <Navbar />
+        <MainController account={drizzle} />
       </main>
     </div>
   );
