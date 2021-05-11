@@ -46,9 +46,10 @@ contract SavingGroups is Ownable{
     constructor(
         uint256 _cashIn,
         uint256 _saveAmount,
-        uint256 _groupSize
+        uint256 _groupSize,
+        address payable _admin
     ) public {
-        admin = msg.sender;
+        admin = _admin;
         cashIn = _cashIn * 1e17;
         saveAmount = _saveAmount * 1e17;
         groupSize = _groupSize;
