@@ -34,19 +34,28 @@ export function Navbar({ accountie }, props) {
             >
               {
                 account && account.startsWith('0x') ? (
-                  <Grid container justify="space-evenly" alignItems="center" spacing={3} xs={12} md={3} className={styles.navLink}>
-                    {/* <NavLink
-                      href="/"
-                      color="primary"
-                      name="account"
-                      hover="primary"
-                    /> */}
-                    <span className="font-weight-bolder text-white mr-2" styles={{ margin: '0 auto' }}>
-                      <small>
-                        {walletParsed}
-                      </small>
-                    </span>
-                    <Avatar userAddress={account} />
+                  <Grid
+                    container
+                    direction="row"
+                    justify="flex-end"
+                    alignItems="center"
+                  >
+                    <Grid item xs={12} md={1} styles={{ margin: '0 auto' }}>
+                      {/* <NavLink
+                        href="/"
+                        color="primary"
+                        name="account"
+                        hover="primary"
+                      /> */}
+                      <span className="font-weight-bolder text-white mr-2">
+                        <small>
+                          {walletParsed}
+                        </small>
+                      </span>
+                    </Grid>
+                    <Grid item xs={12} md={1} className={styles.navLink} styles={{ margin: '0 auto' }}>
+                      <Avatar userAddress={account} />
+                    </Grid>
                   </Grid>
                 ) : (
                   <Grid item xs={12} md={3} className={styles.navLink}>

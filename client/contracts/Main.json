@@ -1108,12 +1108,18 @@
         }
       },
       "links": {},
-      "address": "0xB0274D3Ec31805e728884F006b220F097A3Df264",
-      "transactionHash": "0x3335ed99d6ee52cf8f2cfe7f632580ab95c27add792a4489b3312e6e665cf3e7"
+      "address": "0x29B5604225B03F68ff949a8D4133a3739a3cd392",
+      "transactionHash": "0xcbfc93de82aaa51e4fcc6cfc6e79c0854427f27b5d522863a7f333ef6f0e5d26"
     }
   },
+<<<<<<< HEAD
+  "schemaVersion": "3.2.0",
+  "updatedAt": "2021-05-02T23:54:12.529Z",
+  "networkType": "ethereum",
+=======
   "schemaVersion": "3.3.1",
   "updatedAt": "2021-04-26T00:14:52.781Z",
+>>>>>>> 9871d484032a060bee295e37fe0685979675ae86
   "devdoc": {
     "kind": "dev",
     "methods": {},

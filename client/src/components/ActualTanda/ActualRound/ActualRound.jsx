@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import GeneralData from '../TandaRisingChilds/GeneralData';
-import Configuration from '../TandaRisingChilds/Configuration';
-import Summary from '../TandaRisingChilds/Summary';
-import Invitation from '../TandaRisingChilds/Invitation';
+import GeneralData from '../../CreateTanda/TandaRisingChilds/GeneralData';
+import Configuration from '../../CreateTanda/TandaRisingChilds/Configuration';
+import Summary from '../../CreateTanda/TandaRisingChilds/Summary';
+import Invitation from '../../CreateTanda/TandaRisingChilds/Invitation';
 
-const TandaRising = (props) => {
+const ActualRound = (props) => {
   const [currentStep, setStep] = useState(props.step || 1);
   const [data, setData] = useState(
     {
@@ -56,4 +56,4 @@ const TandaRising = (props) => {
     </div>
   );
 };
-export default TandaRising;
+export default ActualRound;
