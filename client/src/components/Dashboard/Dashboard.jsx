@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 
 import savingGroups from '../../abis/SavingGroups.json';
-import { getFactoryAddress, getSavingGroupsAddress } from '../../utils/addressHelpers';
+import { getSavingGroupsAddress } from '../../utils/addressHelpers';
 
 export const Dashboard = (props) => {
   const { account } = props;
@@ -20,14 +20,11 @@ export const Dashboard = (props) => {
     return useContract(savingGroupsAbi, getSavingGroupsAddress());
   };
 
-  // useEffect(() => {
-  //   getContracts();
-  // }, []);
-
   const getAdmin = async () => {
     try {
       const admon = await contract.methods.admin().call();
       setAdmin(admon);
+      return admin;
     } catch (error) {
       console.log(error);
       return 'Ocurrio un error inesperado';
