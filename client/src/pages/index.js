@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { Navbar } from '../components/Navbar/Navbar';
 // eslint-disable-next-line import/no-named-as-default
 import MainController from '../components/MainController';
-import { Dashboard } from '../components/Dashboard/Dashboard';
 
 export default function Home(props) {
   const { drizzle, drizzleState } = props;
@@ -19,7 +18,6 @@ export default function Home(props) {
       <main>
         <Navbar />
         <MainController account={drizzle} />
-        <Dashboard account={drizzle} />
       </main>
     </div>
   );
