@@ -1,35 +1,59 @@
 import React, { useState } from 'react';
 import Web3 from 'web3';
-import swal from 'sweetalert';
-// import { WalletLink } from 'walletlink';
-
-import { Button } from 'antd';
+import { DownloadOutlined } from '@ant-design/icons';
 import detectEthereumProvider from '@metamask/detect-provider';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Slide from '@material-ui/core/Slide';
-
-// import metamaskLogo from '../../icons/logo_meta.png';
-// import coinbase_logo from '../../icons/logo_meta.png';
+import {
+  Button, Drawer, Typography, Spin, message, Result,
+} from 'antd';
+// import { WalletLink } from 'walletlink';
 
 // require('dotenv').config();
 
-const Transition = React.forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
+const errorMessages = [{
+  code: '404M',
+  status: 'warning',
+  title: 'Metamask no encontrado',
+  description: 'Si estás desde un dispositivo móvil, prueba instalando Metamask Browser desde la tienda de tu plataforma.',
+  hrefs: [{
+    url: 'https://play.google.com/store/apps/details?id=io.metamask',
+    title: 'PayStore',
+  }, {
+    url: 'https://apps.apple.com/us/app/metamask/id1438144202',
+    title: 'AppStore',
+  }],
+}, {
+  code: '404W',
+  status: 'warning',
+  title: 'Metamask no encontrado',
+  description: 'Metamask no se encuentra instalado en tu navegador, por favor instalalo desde su pagina oficial.',
+  hrefs: [{
+    url: 'https://metamask.io/',
+    title: 'Ir al sitio',
+  }],
+}, {
+  code: 500,
+  status: 'error',
+  title: '',
+  description: '',
+  hrefs: [],
+}];
+
+const { Title } = Typography;
 
 export default function Wallets() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [web3, setWeb3] = useState(null);
 
-  const handleClickOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleToggleDrawer = () => setOpen(!open);
 
-  const [web3, setWeb3] = useState(undefined);
   // // const { REACT_APP_INFURA_ROPSTEN_KEY } = process.env;
 
   // eslint-disable-next-line no-unused-vars
   const loadPubKeyData = async (ethProvider) => {
-  //   const accounts = await ethProvider.request({ method: 'eth_accounts' });
-  //   props.getAddress(accounts[0]);
+    // const accounts = await ethProvider.request({ method: 'eth_accounts' });
+    // props.getAddress(accounts[0]);
   //   ethProvider.on('accountsChanged', (account) => {
   //     props.getAddress(account[0]);
   //   });
@@ -50,50 +74,23 @@ export default function Wallets() {
   };
 
   const loadWeb3Provider = async () => {
-    setOpen(false);
+    setLoading(true);
     const provider = await detectEthereumProvider();
     if (provider) {
       try {
         await provider.enable();
         const web3Loadie = new Web3(provider);
         setWeb3(web3Loadie);
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error(error);
+      } catch (err) {
+        message.error(err);
       }
       loadPubKeyData(provider);
-    } else if (
-      !web3
-      && !provider
-    ) {
-      const link = document.createElement('div');
-      link.innerHTML = `<p>Si estás desde un dispositivo móvil, prueba instalando Metamask Browser desde la tienda de tu plataforma</p>
-          <div class="meta_btn_container">
-            <a class='metamask_link' target='_blank' href='https://play.google.com/store/apps/details?id=io.metamask'>
-              <button class="logo_metamask_playstore">
-              </button>
-            </a>
-            <a class='metamask_link' target='_blank' href='https://apps.apple.com/us/app/metamask/id1438144202'>
-              <button class="logo_metamask_ios">
-              </button>
-            </a>
-          </div>
-        `;
-      swal({
-        title: 'Metamask no encontrado',
-        icon: 'warning',
-        content: link,
-        button: 'Aceptar',
-      });
+    } else if (!web3 && !provider) {
+      setLoading(false);
+      setError('404W');
     } else {
-      const link = document.createElement('div');
-      link.innerHTML = "Metamask no se encuentra instalado en tu navegador, por favor instalalo desde su  <a class='metamask_link' target='_blank' href='https://metamask.io/'>página oficial</a>";
-      swal({
-        title: 'Metamask no encontrado',
-        icon: 'warning',
-        content: link,
-        button: 'Aceptar',
-      });
+      setLoading(false);
+      setError('404W');
     }
   };
 
@@ -118,36 +115,54 @@ export default function Wallets() {
   //   });
   // };
 
+  const errorData = errorMessages.find((item) => item.code === error) || {};
+  const options = errorData.hrefs && errorData.hrefs.map((item) => (
+    <a target="_blank" href={item.url} rel="noreferrer">
+      <Button type="ghost">{item.title}</Button>
+    </a>
+  ));
+
   return (
     <div>
-      <Button ghost onClick={handleClickOpen}>Conecta Tu Wallet</Button>
-      <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
+      <Button ghost onClick={handleToggleDrawer}>Conecta Tu Wallet</Button>
+      <Drawer
+        title="My Wallet"
+        visible={open}
+        placement="right"
+        closable
+        onClose={handleToggleDrawer}
+        width={400}
       >
-        <DialogTitle id="alert-dialog-slide-title">Elige tu Wallet dentro de Metamask</DialogTitle>
-        <DialogContent>
-          <div className="wallet-container">
-            <button
-              className="metamask_wallet"
+        <Title level={4}>Elige tu Wallet dentro de Metamask</Title>
+        {
+          !loading && !error && (
+            <Button
+              type="primary"
+              icon={<DownloadOutlined />}
+              size="large"
+              shape="round"
               onClick={loadWeb3Provider}
-              type="button"
             >
-              {/* <img
-                src={metamaskLogo}
-                alt="metamask_wallet"
-                className="logo_metamask"
-                width="35px"
-              /> */}
-              <span className="font-weight-bold">METAMASK</span>
-            </button>
-          </div>
-        </DialogContent>
-      </Dialog>
+              METAMASK
+            </Button>
+          )
+        }
+        {
+          loading && (
+            <Spin size="large" tip="Loading..." />
+          )
+        }
+        {
+          !loading && error && (
+            <Result
+              status={errorData.status}
+              title={errorData.title}
+              subTitle={errorData.description}
+              extra={options}
+            />
+          )
+        }
+      </Drawer>
     </div>
   );
 }
