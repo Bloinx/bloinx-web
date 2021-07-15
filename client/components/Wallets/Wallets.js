@@ -1,30 +1,27 @@
 import React, { useState } from 'react';
-import Web3 from 'web3';
-import { DownloadOutlined } from '@ant-design/icons';
+import { DownloadOutlined, UserOutlined } from '@ant-design/icons';
 import detectEthereumProvider from '@metamask/detect-provider';
 import {
-  Button, Drawer, Typography, Spin, message, Result,
+  Button, Drawer, Typography, Spin, Result, Avatar,
 } from 'antd';
-// import { WalletLink } from 'walletlink';
 
-// require('dotenv').config();
+import getWeb3 from '../../utils/web3';
+
+import styles from './styles.module.scss';
 
 const errorMessages = [{
-  code: '404M',
+  code: 503,
   status: 'warning',
-  title: 'Metamask no encontrado',
-  description: 'Si estás desde un dispositivo móvil, prueba instalando Metamask Browser desde la tienda de tu plataforma.',
+  title: 'Servicio no disponible',
+  description: 'Metamask no se encuentra instalado en tu navegador, por favor instalalo desde su pagina oficial.',
   hrefs: [{
-    url: 'https://play.google.com/store/apps/details?id=io.metamask',
-    title: 'PayStore',
-  }, {
-    url: 'https://apps.apple.com/us/app/metamask/id1438144202',
-    title: 'AppStore',
+    url: 'https://metamask.io/',
+    title: 'Ir al sitio',
   }],
 }, {
-  code: '404W',
+  code: 502,
   status: 'warning',
-  title: 'Metamask no encontrado',
+  title: 'Implementacion erronea',
   description: 'Metamask no se encuentra instalado en tu navegador, por favor instalalo desde su pagina oficial.',
   hrefs: [{
     url: 'https://metamask.io/',
@@ -33,44 +30,63 @@ const errorMessages = [{
 }, {
   code: 500,
   status: 'error',
-  title: '',
+  title: 'No se pudo ejecutar',
   description: '',
   hrefs: [],
 }];
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 export default function Wallets() {
-  const [open, setOpen] = useState(false);
+  const [accountData, setAccountData] = useState({
+    publicAddress: null,
+    originalAdress: null,
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [web3, setWeb3] = useState(null);
+  const [open, setOpen] = useState(false);
 
   const handleToggleDrawer = () => setOpen(!open);
 
-  // // const { REACT_APP_INFURA_ROPSTEN_KEY } = process.env;
+  const handleReset = () => {
+    setAccountData({ publicAddress: null, originalAdress: null });
+    setError(null);
+  };
 
-  // eslint-disable-next-line no-unused-vars
+  function getAddress(originalAdress) {
+    let publicAddress = '';
+    if (originalAdress) {
+      const firstPart = `${originalAdress.substring(0, 2)}${originalAdress.substring(2, 6).toUpperCase()}`;
+      const secondPart = `${originalAdress.substring(originalAdress.length - 4, originalAdress.length).toUpperCase()}`;
+      publicAddress = `${firstPart}...${secondPart}`;
+    }
+    setAccountData({ publicAddress, originalAdress });
+  }
+
   const loadPubKeyData = async (ethProvider) => {
-    // const accounts = await ethProvider.request({ method: 'eth_accounts' });
-    // props.getAddress(accounts[0]);
-  //   ethProvider.on('accountsChanged', (account) => {
-  //     props.getAddress(account[0]);
-  //   });
-  //   ethProvider.request({
-  //     method: 'wallet_addEthereumChain',
-  //     params: [{
-  //       chainId: '0xa869',
-  //       chainName: 'Fuji Testnet',
-  //       nativeCurrency: {
-  //         name: 'AVAX',
-  //         symbol: 'AVAX',
-  //         decimals: 18,
-  //       },
-  //       rpcUrls: ['https://api.avax-test.network/ext/bc/C/rpc'],
-  //       blockExplorerUrls: ['https://cchain.explorer.avax-test.network/'],
-  //     }],
-  //   });
+    await ethProvider.on('accountsChanged', (newAccount) => {
+      setLoading(true);
+      setTimeout(() => {
+        getAddress(newAccount[0]);
+        setLoading(false);
+      }, 2000);
+    });
+    await ethProvider.request({
+      method: 'wallet_addEthereumChain',
+      params: [{
+        chainId: '0xa869',
+        chainName: 'Fuji Testnet',
+        nativeCurrency: {
+          name: 'AVAX',
+          symbol: 'AVAX',
+          decimals: 18,
+        },
+        rpcUrls: ['https://api.avax-test.network/ext/bc/C/rpc'],
+        blockExplorerUrls: ['https://cchain.explorer.avax-test.network/'],
+      }],
+    });
+    const accounts = await ethProvider.request({ method: 'eth_accounts' });
+    getAddress(accounts[0]);
   };
 
   const loadWeb3Provider = async () => {
@@ -79,41 +95,24 @@ export default function Wallets() {
     if (provider) {
       try {
         await provider.enable();
-        const web3Loadie = new Web3(provider);
-        setWeb3(web3Loadie);
+        const web3Loadie = getWeb3();
+        if (web3Loadie) {
+          loadPubKeyData(provider);
+          setLoading(false);
+          handleToggleDrawer();
+        } else {
+          setLoading(false);
+          setError(502);
+        }
       } catch (err) {
-        message.error(err);
+        setLoading(false);
+        setError(503);
       }
-      loadPubKeyData(provider);
-    } else if (!web3 && !provider) {
-      setLoading(false);
-      setError('404W');
     } else {
       setLoading(false);
-      setError('404W');
+      setError(500);
     }
   };
-
-  // const loadCoinBase = () => {
-  //   const APP_NAME = 'Bloinx Dapp';
-  //   const APP_LOGO_URL = '@/assets/images/logo.png';
-  //   const ETH_JSONRPC_URL = REACT_APP_INFURA_ROPSTEN_KEY;
-  //   // const ETH_JSONRPC_URL = 'https://ropsten.infura.io/v3/c1d213585ead4758adc7b7f06571bd00'
-  //   const CHAIN_ID = 3;
-
-  //   const walletLink = new WalletLink({
-  //     appName: APP_NAME,
-  //     appLogoUrl: APP_LOGO_URL,
-  //     darkMode: true,
-  //   });
-  //   const ethereum = walletLink.makeWeb3Provider(ETH_JSONRPC_URL, CHAIN_ID);
-  //   const web3Loadie = new Web3(ethereum);
-  //   ethereum.enable().then((accounts) => {
-  //     // eslint-disable-next-line prefer-destructuring
-  //     web3Loadie.eth.defaultAccount = accounts[0];
-  //     props.getAddress(accounts[0]);
-  //   });
-  // };
 
   const errorData = errorMessages.find((item) => item.code === error) || {};
   const options = errorData.hrefs && errorData.hrefs.map((item) => (
@@ -124,7 +123,27 @@ export default function Wallets() {
 
   return (
     <div>
-      <Button ghost onClick={handleToggleDrawer}>Conecta Tu Wallet</Button>
+      {accountData.publicAddress && accountData.publicAddress.startsWith('0x') && !loading && (
+        <div className={styles.AccountData}>
+          <Avatar
+            style={{ backgroundColor: '#87d068' }}
+            icon={<UserOutlined />}
+          />
+          <div className={styles.AccountPublicData}>
+            <Text code style={{ color: '#FFF' }}>{accountData.publicAddress}</Text>
+            <Button type="link" onClick={handleReset}>Cerrar</Button>
+          </div>
+        </div>
+      )}
+
+      {!accountData.publicAddress && (
+        <Button ghost onClick={handleToggleDrawer}>Conecta Tu Wallet</Button>
+      )}
+
+      {loading && (
+        <Spin size="medium" />
+      )}
+
       <Drawer
         title="My Wallet"
         visible={open}
@@ -133,9 +152,9 @@ export default function Wallets() {
         onClose={handleToggleDrawer}
         width={400}
       >
-        <Title level={4}>Elige tu Wallet dentro de Metamask</Title>
-        {
-          !loading && !error && (
+        <div className={styles.Loading}>
+          <Title level={5}>Elige tu Wallet dentro de Metamask</Title>
+          {!loading && !error && (
             <Button
               type="primary"
               icon={<DownloadOutlined />}
@@ -145,13 +164,9 @@ export default function Wallets() {
             >
               METAMASK
             </Button>
-          )
-        }
-        {
-          loading && (
-            <Spin size="large" tip="Loading..." />
-          )
-        }
+          )}
+          {loading && (<Spin size="large" tip="Loading..." />)}
+        </div>
         {
           !loading && error && (
             <Result
