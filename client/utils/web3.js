@@ -1,7 +1,5 @@
 import Web3 from 'web3';
-// import { HttpProviderOptions } from 'web3-core-helpers'
-// import { AbiItem } from 'web3-utils'
-// import { ContractOptions } from 'web3-eth-contract'
+
 import getRpcUrl from './getRpcUrl';
 
 const RPC_URL = getRpcUrl();
@@ -15,4 +13,9 @@ const getWeb3 = () => {
   return web3;
 };
 
-export default getWeb3;
+const getContract = (abi, address) => {
+  const web3 = getWeb3();
+  return new web3.eth.Contract(abi, address);
+};
+
+export { getWeb3, getContract };
