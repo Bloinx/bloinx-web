@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputOptionSelect renders correctly 1`] = `
+<span
+  className="InputOptionSelect"
+>
+  <span
+    className="ant-typography Label"
+    style={
+      Object {
+        "WebkitLineClamp": undefined,
+      }
+    }
+  >
+    some-label
+  </span>
+  <div
+    className="ant-radio-group ant-radio-group-outline"
+  />
+</span>
+`;

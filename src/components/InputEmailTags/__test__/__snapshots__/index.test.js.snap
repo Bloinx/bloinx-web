@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputEmailTags renders correctly 1`] = `
+<div
+  className="InputEmailTags"
+>
+  <span
+    className="ant-typography TextFieldLabel"
+    style={
+      Object {
+        "WebkitLineClamp": undefined,
+      }
+    }
+  >
+    some-label
+  </span>
+  <div
+    className="tagSection"
+  />
+  <input
+    className="ant-input"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyPress={[Function]}
+    placeholder="some-placeholder"
+    type="text"
+    value=""
+  />
+  <span
+    className="ant-typography"
+    style={
+      Object {
+        "WebkitLineClamp": undefined,
+      }
+    }
+  />
+</div>
+`;

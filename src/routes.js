@@ -1,8 +1,5 @@
-import {
-  Switch,
-  Route,
-  Redirect
-} from "react-router-dom";
+import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Dashboard from './containers/Dashboard';
 import CreateBatch from './containers/CreateBatch';
@@ -19,4 +16,4 @@ export default function Routes() {
       </Route>
     </Switch>
   );
-};
+}

@@ -1,9 +1,11 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'antd';
 import { FormattedMessage } from 'react-intl';
 
 import styles from './styles.module.scss';
 
-export default function ButtonNextStep({ onBack, onClick, disabled }) {
+export function ButtonNextStep({ onBack, onClick, disabled }) {
   return (
     <div className={styles.ButtonNextStep}>
       <Button onClick={onBack}>
@@ -15,3 +17,16 @@ export default function ButtonNextStep({ onBack, onClick, disabled }) {
     </div>
   );
 }
+
+ButtonNextStep.defaultProps = {
+  onBack: () => {},
+  disabled: false,
+};
+
+ButtonNextStep.propTypes = {
+  onBack: PropTypes.func,
+  onClick: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+};
+
+export default ButtonNextStep;

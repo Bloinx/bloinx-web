@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputSwitch renders correctly 1`] = `
+<div
+  className="InputSwitch"
+>
+  <span
+    className="ant-typography Label"
+    style={
+      Object {
+        "WebkitLineClamp": undefined,
+      }
+    }
+  >
+    some-label
+  </span>
+  <button
+    aria-checked={true}
+    className="ant-switch ant-switch-checked"
+    name="some-name"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="switch"
+    type="button"
+  >
+    <div
+      className="ant-switch-handle"
+    />
+    <span
+      className="ant-switch-inner"
+    />
+  </button>
+</div>
+`;

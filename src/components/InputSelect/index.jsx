@@ -1,3 +1,4 @@
+import React from 'react';
 import { Typography, Select } from 'antd';
 import PropTypes from 'prop-types';
 
@@ -25,7 +26,16 @@ export default function InputSelect({
   );
 }
 
+InputSelect.defaultProps = {
+  label: '',
+  value: '',
+  onChange: () => {},
+};
+
 InputSelect.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.string,
+  name: PropTypes.string.isRequired,
   options: PropTypes.shape({
     value: PropTypes.string,
     label: PropTypes.string,

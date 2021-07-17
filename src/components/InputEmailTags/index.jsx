@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Typography, Input, Tag } from 'antd';
 
@@ -63,9 +63,16 @@ export default function InputEmailTags({
   );
 }
 
+InputEmailTags.defaultProps = {
+  label: '',
+  placeholder: '',
+  value: [],
+};
+
 InputEmailTags.propTypes = {
   label: PropTypes.string,
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.instanceOf(Array),
 };

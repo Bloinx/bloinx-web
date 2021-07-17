@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputTextField renders correctly 1`] = `
+Array [
+  <span
+    className="ant-typography TextFieldLabel"
+    style={
+      Object {
+        "WebkitLineClamp": undefined,
+      }
+    }
+  >
+    some-label
+  </span>,
+  <input
+    className="ant-input"
+    name="some-name"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    placeholder="some-placeholder"
+    type="text"
+    value="some-value"
+  />,
+]
+`;

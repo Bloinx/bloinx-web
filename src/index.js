@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { IntlProvider } from 'react-intl';
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import reportWebVitals from './reportWebVitals';
@@ -14,6 +14,7 @@ import App from './App';
 import 'antd/dist/antd.css';
 import './index.scss';
 
+// eslint-disable-next-line no-undef
 const locale = (window.navigator.language).split('-')[0];
 const defaultLocale = 'es';
 
@@ -22,7 +23,11 @@ const messages = languages[locale];
 
 ReactDOM.render(
   <React.StrictMode>
-    <IntlProvider messages={flattenMessages(messages)} locale={locale} defaultLocale={defaultLocale}>
+    <IntlProvider
+      messages={flattenMessages(messages)}
+      locale={locale}
+      defaultLocale={defaultLocale}
+    >
       <BrowserRouter>
         <Provider store={store}>
           <App />
@@ -30,7 +35,8 @@ ReactDOM.render(
       </BrowserRouter>
     </IntlProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  // eslint-disable-next-line no-undef
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function

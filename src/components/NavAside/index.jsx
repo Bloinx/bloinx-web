@@ -1,5 +1,6 @@
+import React from 'react';
 import { Menu } from 'antd';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { DesktopOutlined, PieChartOutlined, FileOutlined } from '@ant-design/icons';
 

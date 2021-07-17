@@ -1,5 +1,6 @@
-import { Typography, Switch } from 'antd';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { Typography, Switch } from 'antd';
 
 import styles from './styles.module.scss';
 
@@ -17,8 +18,13 @@ export default function InputSwitch({ label, name, checked }) {
   );
 }
 
+InputSwitch.defaultProps = {
+  label: '',
+  checked: false,
+};
+
 InputSwitch.propTypes = {
   label: PropTypes.string,
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
   checked: PropTypes.bool,
 };

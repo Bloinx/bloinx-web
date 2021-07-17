@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import DateFnsUtils from '@date-io/date-fns';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 
@@ -31,3 +33,14 @@ export default function InputDatePicker({
     </MuiPickersUtilsProvider>
   );
 }
+
+InputDatePicker.defaultProps = {
+  value: new Date(),
+};
+
+InputDatePicker.propTypes = {
+  label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.instanceOf(Date),
+};
