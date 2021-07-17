@@ -5,7 +5,7 @@ import {
   Button, Drawer, Typography, Spin, Result, Avatar,
 } from 'antd';
 
-import getWeb3 from '../../utils/web3';
+import { getWeb3 } from '../../utils/web3';
 
 import styles from './styles.module.scss';
 
