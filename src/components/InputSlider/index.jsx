@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Typography, Slider } from 'antd';
 
@@ -22,6 +23,11 @@ export default function InputSlider({
     </div>
   );
 }
+
+InputSlider.defaultProps = {
+  label: '',
+  onChange: () => {},
+};
 
 InputSlider.propTypes = {
   label: PropTypes.string,

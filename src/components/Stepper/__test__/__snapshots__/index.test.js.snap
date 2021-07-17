@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Stepper renders correctly 1`] = `
+<div
+  className="ant-steps ant-steps-vertical"
+  style={Object {}}
+/>
+`;

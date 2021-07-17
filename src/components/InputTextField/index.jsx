@@ -1,5 +1,6 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Typography, Input } from 'antd';
-import { Fragment } from 'react';
 
 import styles from './styles.module.scss';
 
@@ -20,3 +21,18 @@ export default function InputTextField({
     </>
   );
 }
+
+InputTextField.defaultProps = {
+  placeholder: '',
+  label: '',
+  value: '',
+  onChange: () => {},
+};
+
+InputTextField.propTypes = {
+  placeholder: PropTypes.string,
+  label: PropTypes.string,
+  value: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+};

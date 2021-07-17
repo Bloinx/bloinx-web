@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Typography, Radio } from 'antd';
 
 import styles from './styles.module.scss';
@@ -20,3 +22,16 @@ export default function InputOptionSelect({
     </span>
   );
 }
+
+InputOptionSelect.defaultProps = {
+  label: '',
+  value: '',
+};
+
+InputOptionSelect.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.string,
+  options: PropTypes.instanceOf(Array).isRequired,
+  onChange: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+};

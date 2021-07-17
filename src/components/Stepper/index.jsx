@@ -1,3 +1,4 @@
+import React from 'react';
 import { Steps } from 'antd';
 import PropTypes from 'prop-types';
 
@@ -17,8 +18,6 @@ Stepper.defaultProps = {
 };
 
 Stepper.propTypes = {
-  steps: PropTypes.shape({
-    title: PropTypes.string,
-  }),
+  steps: PropTypes.arrayOf(PropTypes.object),
   current: PropTypes.number,
 };

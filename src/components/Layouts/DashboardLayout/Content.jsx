@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './Content.module.scss';
 
 export default function Content({ children }) {
@@ -7,3 +9,7 @@ export default function Content({ children }) {
     </div>
   );
 }
+
+Content.propTypes = {
+  children: PropTypes.node.isRequired,
+};

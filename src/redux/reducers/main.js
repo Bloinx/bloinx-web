@@ -1,5 +1,5 @@
 import {
-  INITIAL_CONTRACT_INSTANCE
+  INITIAL_CONTRACT_INSTANCE,
 } from '../types';
 
 const initialState = {

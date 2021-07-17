@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Table, Button, Typography } from 'antd';
 import { FormattedMessage } from 'react-intl';
-import { connect } from "react-redux"
+import { connect } from 'react-redux';
 
 import savingGroups from '../../abis/SavingGroups.json';
 // import { getSavingGroupsAddress } from '../../utils/addressHelpers';
@@ -110,7 +110,7 @@ function Dashboard({ drizzle }) {
 };
 
 const mapStateToProps = (state) => {
-  console.log('><><><',state);
+  console.log('><><><', state);
   return state;
 };
 const mapDispatchToProps = (dispatch) => ({});

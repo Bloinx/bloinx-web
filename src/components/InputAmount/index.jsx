@@ -1,3 +1,4 @@
+import React from 'react';
 import { InputNumber, Typography } from 'antd';
 import PropTypes from 'prop-types';
 
@@ -34,7 +35,9 @@ InputAmount.defaultProps = {
 };
 
 InputAmount.propTypes = {
-  label: PropTypes.string,
-  value: PropTypes.number,
   currency: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
 };
