@@ -1,48 +1,14 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Table, Button, Typography } from 'antd';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 
-import savingGroups from '../../abis/SavingGroups.json';
-// import { getSavingGroupsAddress } from '../../utils/addressHelpers';
-
 const { Title } = Typography;
 
-function Dashboard({ drizzle }) {
-  // console.log({ props });
-  // const [contract, setContract] = useState(null);
-  // const [admin, setAdmin] = useState('');
-
-  // useEffect(() => {
-  //   getContracts();
-  // }, [contract]);
-
-  // const getAdmin = async () => {
-  //   try {
-  //     const admon = await contract.methods.admin().call();
-  //     setAdmin(admon);
-  //     return admin;
-  //   } catch (error) {
-  //     console.log(error);
-  //     return 'Ocurrio un error inesperado';
-  //   }
-  // };
-
+function Dashboard(props) {
+  console.log({ props });
+  // eslint-disable-next-line no-unused-vars
   const [contract, setContract] = useState(null);
-
-  async function useContract(abi, address) {
-    const { web3 } = drizzle;
-    const { eth } = web3;
-    const { Contract } = eth;
-
-    setContract(await new Contract(abi, address));
-    return contract;
-  }
-
-  function getContracts() {
-    const savingGroupsAbi = savingGroups;
-    // return useContract(savingGroupsAbi, getSavingGroupsAddress());
-  }
 
   const dataSource = [
     {
@@ -100,19 +66,20 @@ function Dashboard({ drizzle }) {
 
   return (
     <>
-      <Button onClick={getContracts}>
+      <Button onClick={() => console.log('click')}>
         GetContract
       </Button>
       <Title level={4}><FormattedMessage id="dashboardPage.title" /></Title>
       <Table dataSource={dataSource} columns={columns} size="small" pagination={{ simple: true }} />
     </>
   );
-};
+}
 
 const mapStateToProps = (state) => {
   console.log('><><><', state);
   return state;
 };
+// eslint-disable-next-line no-unused-vars
 const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { DownloadOutlined, UserOutlined } from '@ant-design/icons';
 import detectEthereumProvider from '@metamask/detect-provider';
 import {
@@ -6,6 +8,7 @@ import {
 } from 'antd';
 
 import { getWeb3 } from '../../utils/web3';
+import { getCurrentWallet } from '../../redux/actions/main';
 
 import styles from './styles.module.scss';
 
@@ -37,7 +40,7 @@ const errorMessages = [{
 
 const { Title, Text } = Typography;
 
-export default function Wallets() {
+function Wallets({ currentAddressWallet }) {
   const [accountData, setAccountData] = useState({
     publicAddress: null,
     originalAdress: null,
@@ -59,6 +62,7 @@ export default function Wallets() {
       const firstPart = `${originalAdress.substring(0, 2)}${originalAdress.substring(2, 6).toUpperCase()}`;
       const secondPart = `${originalAdress.substring(originalAdress.length - 4, originalAdress.length).toUpperCase()}`;
       publicAddress = `${firstPart}...${secondPart}`;
+      currentAddressWallet(originalAdress);
     }
     setAccountData({ publicAddress, originalAdress });
   }
@@ -181,3 +185,17 @@ export default function Wallets() {
     </div>
   );
 }
+
+Wallets.defaultProps = {
+  currentAddressWallet: () => {},
+};
+
+Wallets.propTypes = {
+  currentAddressWallet: PropTypes.func,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  currentAddressWallet: (address) => dispatch(getCurrentWallet(address)),
+});
+
+export default connect(null, mapDispatchToProps)(Wallets);

@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Typography, Button, notification } from 'antd';
 import { FormattedMessage } from 'react-intl';
-import { connect } from "react-redux"
+import { connect } from 'react-redux';
 
 import InputEmailTags from '../../components/InputEmailTags';
 
@@ -101,9 +101,10 @@ function Invitation(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log('><><><',state);
+  console.log('><><><', state);
   return state;
 };
+// eslint-disable-next-line no-unused-vars
 const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Invitation);

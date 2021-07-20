@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { Typography, Row, Col } from 'antd';
 import { FormattedMessage } from 'react-intl';
-import { connect } from "react-redux"
+import { connect } from 'react-redux';
 
 import InputSelect from '../../components/InputSelect';
-import ButtonNextStep from '../../components/ButtonNextStep';
+import { ButtonNextStep } from '../../components/ButtonNextStep';
 
 const { Title, Paragraph } = Typography;
 
@@ -14,7 +15,8 @@ function Summary({ formData, goBack, onSuccess }) {
   const [isValidTurn, setValidTurn] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const handlePass = (event) => {
-    // if (event.target.name === 'adminposition' && (event.target.value >= 1 && event.target.value <= props.data.participant)) {
+    // if (event.target.name === 'adminposition' &&
+    // (event.target.value >= 1 && event.target.value <= props.data.participant)) {
     //   setValidTurn(true);
     // } else {
     //   setValidTurn(false);
@@ -97,9 +99,10 @@ function Summary({ formData, goBack, onSuccess }) {
 }
 
 const mapStateToProps = (state) => {
-  console.log('><><><',state);
+  console.log('><><><', state);
   return state;
 };
+// eslint-disable-next-line no-unused-vars
 const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Summary);
