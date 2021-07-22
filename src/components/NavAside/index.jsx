@@ -31,6 +31,13 @@ export default function NavAside() {
           </span>
         </Link>
       </Menu.Item>
+      <Menu.Item key="4" icon={<FileOutlined />}>
+        <Link to="/BatchDetails">
+          <span>
+            <FormattedMessage id="navAside.batchDetails" />
+          </span>
+        </Link>
+      </Menu.Item>
     </Menu>
   );
 }

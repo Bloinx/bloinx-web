@@ -1,5 +1,6 @@
 import {
   INITIAL_CONTRACT_INSTANCE,
+  CURRENT_ADDRESS_WALLET,
 } from '../types';
 
 const getInitialContractInstance = (instance) => ({
@@ -7,4 +8,9 @@ const getInitialContractInstance = (instance) => ({
   payload: instance,
 });
 
-export default getInitialContractInstance;
+const getCurrentWallet = (address) => ({
+  type: CURRENT_ADDRESS_WALLET,
+  payload: address,
+});
+
+export { getInitialContractInstance, getCurrentWallet };

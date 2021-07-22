@@ -1,12 +1,13 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { Typography } from 'antd';
 import { FormattedMessage } from 'react-intl';
-import { connect } from "react-redux"
+import { connect } from 'react-redux';
 
 import InputSlider from '../../components/InputSlider';
 import InputSelect from '../../components/InputSelect';
 import InputAmount from '../../components/InputAmount';
-import ButtonNextStep from '../../components/ButtonNextStep';
+import { ButtonNextStep } from '../../components/ButtonNextStep';
 
 const { Title, Paragraph } = Typography;
 
@@ -126,9 +127,10 @@ const Configuration = ({
 };
 
 const mapStateToProps = (state) => {
-  console.log('><><><',state);
+  console.log('><><><', state);
   return state;
 };
+// eslint-disable-next-line no-unused-vars
 const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Configuration);

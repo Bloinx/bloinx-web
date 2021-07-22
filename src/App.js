@@ -8,7 +8,7 @@ import NavAside from './components/NavAside';
 import Navbar from './components/Navbar';
 import Routes from './routes';
 import getSavingGroupsMethods from './utils/getSGContract';
-import getInitialContractInstance from './redux/actions/main';
+import { getInitialContractInstance } from './redux/actions/main';
 
 const {
   Header, Content, Footer, Sider,

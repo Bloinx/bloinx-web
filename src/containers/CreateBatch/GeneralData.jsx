@@ -1,7 +1,9 @@
+/* eslint-disable react/prop-types */
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Typography, Button } from 'antd';
 import { FormattedMessage } from 'react-intl';
-import { connect } from "react-redux"
+import { connect } from 'react-redux';
 
 import InputTextField from '../../components/InputTextField';
 import InputDatePicker from '../../components/InputDatePicker';
@@ -70,9 +72,10 @@ GeneralData.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  console.log('><><><',state);
+  console.log('><><><', state);
   return state;
 };
+// eslint-disable-next-line no-unused-vars
 const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(GeneralData);

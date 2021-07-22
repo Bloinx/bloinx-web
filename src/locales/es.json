@@ -2,7 +2,8 @@
   "navAside": {
     "dashboard": "Mis Tandas",
     "createbatch": "Crear Tanda",
-    "registerpay": "Pagos"
+    "registerpay": "Pagos",
+    "batchDetails": "Detalle"
   },
   "dashboardPage": {
     "title": "Mis Tandas",
