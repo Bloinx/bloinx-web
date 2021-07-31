@@ -12,12 +12,6 @@
     "eject": "react-scripts eject",
     "lint": "eslint ."
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "jest": {
     "collectCoverageFrom": [
       "**/*.{js,jsx}",

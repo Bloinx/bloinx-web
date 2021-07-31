@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Table, Button, Typography } from 'antd';
 import { FormattedMessage } from 'react-intl';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const { Title } = Typography;
 
-function Dashboard(props) {
-  console.log({ props });
+function Dashboard() {
   // eslint-disable-next-line no-unused-vars
   const [contract, setContract] = useState(null);
 
@@ -28,6 +28,15 @@ function Dashboard(props) {
       participants: '6',
       liquidity: '5,000.00 MXN',
       status: 'Terminada',
+    },
+    {
+      key: 0,
+      name: 'Tanda de la chamba',
+      address: '0x1234...rtfd',
+      startDate: '01/06/2021',
+      participants: '6',
+      liquidity: '5,000.00 MXN',
+      status: <Link to="/BatchDetails/key"><Button>Activa</Button></Link>,
     },
   ];
 
@@ -66,9 +75,6 @@ function Dashboard(props) {
 
   return (
     <>
-      <Button onClick={() => console.log('click')}>
-        GetContract
-      </Button>
       <Title level={4}><FormattedMessage id="dashboardPage.title" /></Title>
       <Table dataSource={dataSource} columns={columns} size="small" pagination={{ simple: true }} />
     </>
