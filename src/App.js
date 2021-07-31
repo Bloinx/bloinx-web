@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Layout } from 'antd';
 import { connect } from 'react-redux';
@@ -8,18 +8,27 @@ import NavAside from './components/NavAside';
 import Navbar from './components/Navbar';
 import Routes from './routes';
 import getSavingGroupsMethods from './utils/getSGContract';
+import useWindowDimensions from './utils/useWindowDimensions';
 import { getInitialContractInstance } from './redux/actions/main';
 
-const {
-  Header, Content, Footer, Sider,
-} = Layout;
+const { Header, Content, Footer } = Layout;
 
 function App({ initialContractInstance }) {
-  const [sliderStatus, setSliderStatus] = useState(false);
+  const { width } = useWindowDimensions();
+
+  const [visible, setVisible] = useState(false);
 
   const instanceContractsEnviroment = async () => {
     const instance = await getSavingGroupsMethods();
     initialContractInstance(instance);
+  };
+
+  const toggleDrawer = (status) => {
+    if (status) {
+      setVisible(!visible);
+    } else {
+      setVisible(status);
+    }
   };
 
   useEffect(() => {
@@ -28,16 +37,10 @@ function App({ initialContractInstance }) {
 
   return (
     <Layout className="appLayout">
-      <Sider
-        collapsible
-        collapsed={sliderStatus}
-        onCollapse={setSliderStatus}
-      >
-        <NavAside />
-      </Sider>
+      <NavAside width={width} toggleDrawer={toggleDrawer} visible={visible} />
       <Layout>
         <Header className="appHeader">
-          <Navbar />
+          <Navbar width={width} toggleDrawer={toggleDrawer} visible={visible} />
         </Header>
         <Content>
           <div className="appSiteLayoutBackground">

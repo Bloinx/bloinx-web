@@ -1,7 +1,12 @@
 .navbar{
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   height: 100%;
+}
+
+.menuIcon {
+  color: white !important;
+  font-size: large;
 }
