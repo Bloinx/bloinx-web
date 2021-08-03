@@ -1,0 +1,23 @@
+.RoundCardNew{
+    background-color: #2B2D33;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    color: white;
+    width: 100%;
+    min-width: 260px;
+}
+
+.RoundCardNewTitle {
+    color: white !important;
+}
+
+.RoundCardNewText{
+    color: white !important;
+    text-align: center;
+}
+
+.RoundCardNewOptions{
+    display: flex;
+    justify-content: center;
+}

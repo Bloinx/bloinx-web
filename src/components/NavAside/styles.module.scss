@@ -1,19 +1,39 @@
+@import '../../theme.scss';
+
 .NavAside{
-  margin-top: 70px;
-  height: 100px;
-  width: 100px;
-  border: 1px solid white;
-  display: flex;
-  flex-direction: column;
-  background-color: burlywood;
+  background-color: $gray !important;
 }
 
+.MenuOptions{
+  background-color: $gray !important;
+  border-right: 0px !important;
+}
+.MenuItem{
+  color: rgba($color: #FFF, $alpha: 0.6) !important;
+  a{
+    color: rgba($color: #FFF, $alpha: 0.6) !important;
+  }
+}
+.MenuItemSelected{
+  background-color: $pink-strong !important;
+}
 .logo {
-  height: 32px;
-  margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
+  height: 60px;
+  img{
+    height: 100%;
+  }
 }
-
-.drawer {
-  border: 1px solid red;
+.logoMobile img{
+  height: 60px;
+}
+.icon {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0px;
+}
+.NavAsideDrawer{
+  border: 1px solid red !important;
+  background-color: $gray !important;
 }

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { DownloadOutlined, UserOutlined } from '@ant-design/icons';
+import { DownloadOutlined } from '@ant-design/icons';
 import detectEthereumProvider from '@metamask/detect-provider';
 import {
-  Button, Drawer, Typography, Spin, Result, Avatar,
+  Button, Drawer, Typography, Spin, Result,
 } from 'antd';
 
 import { getWeb3 } from '../../utils/web3';
@@ -38,7 +38,7 @@ const errorMessages = [{
   hrefs: [],
 }];
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 function Wallets({ currentAddressWallet }) {
   const [accountData, setAccountData] = useState({
@@ -128,20 +128,11 @@ function Wallets({ currentAddressWallet }) {
   return (
     <div>
       {accountData.publicAddress && accountData.publicAddress.startsWith('0x') && !loading && (
-        <div className={styles.AccountData}>
-          <Avatar
-            style={{ backgroundColor: '#87d068' }}
-            icon={<UserOutlined />}
-          />
-          <div className={styles.AccountPublicData}>
-            <Text code style={{ color: '#FFF' }}>{accountData.publicAddress}</Text>
-            <Button type="link" onClick={handleReset}>Cerrar</Button>
-          </div>
-        </div>
+        <Button type="primary" shape="round" onClick={handleReset}>{accountData.publicAddress}</Button>
       )}
 
       {!accountData.publicAddress && (
-        <Button ghost onClick={handleToggleDrawer}>Conecta Tu Wallet</Button>
+        <Button type="primary" shape="round" onClick={handleToggleDrawer}>Conecta Tu Wallet</Button>
       )}
 
       {loading && (

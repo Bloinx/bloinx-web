@@ -1,0 +1,26 @@
+@import './theme.scss';
+
+.appLayout{
+  height: 100vh;
+  background-color: $black !important;
+}
+
+.appHeader{
+  position: 'fixed';
+  z-index: 1;
+  width: '100%';
+  padding: 0px 20px !important;
+  background-color: $gray !important;
+}
+
+.appSection{
+  padding: 20px;
+  background-color: $black !important;
+  overflow-y: auto;
+}
+
+.appFooter{
+  text-align: center;
+  color: #ffffff !important;
+  background-color: $black !important;
+}

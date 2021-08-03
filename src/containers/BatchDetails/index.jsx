@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { memo, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -9,7 +10,11 @@ import {
   Button,
   notification,
   Table,
+  PageHeader,
 } from 'antd';
+import { RightOutlined } from '@ant-design/icons';
+
+import styles from './index.module.scss';
 
 const { Title } = Typography;
 
@@ -122,26 +127,57 @@ function BatchDetails({ main }) {
   ];
 
   return (
-    <>
+    <div className={styles.BranchDetails}>
+      <PageHeader
+        className="site-page-header"
+        onBack={() => null}
+        title="Tanda de la chamba"
+        extra={[
+          <Button key="3">Operation</Button>,
+        ]}
+      />
+      <div className={styles.BranchDetailsContent}>
+        <Row>
+          <Col span={24}>
+            asdasdasdaas d asd as d as d asd as d as d asd asd asd asdas dasdasd d sf adsvs
+          </Col>
+        </Row>
+        <Row>
+          <Col span={12}>
+            Round 2
+          </Col>
+          <Col span={12}>
+            <Button type="primary" onClick={handleStartRound}>Iniciar Tanda</Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={12}>
+            Payed
+          </Col>
+          <Col span={10}>
+            asd
+          </Col>
+          <Col span={2}>
+            <RightOutlined />
+          </Col>
+        </Row>
+        <Row>
+          <Col span={12}>
+            Payed
+          </Col>
+          <Col span={10}>
+            asd
+          </Col>
+          <Col span={2}>
+            <RightOutlined />
+          </Col>
+        </Row>
+      </div>
       {contextHolder}
-      <Row>
-        <Col span={12}>
-          <Title>Tanda de la chamba</Title>
-          <h5 className="GeneralData-subtitle">
-            Preiodicidad:
-            <span>Quincenal</span>
-          </h5>
-          <p>
-            Monto:
-            <span>300 MXN</span>
-          </p>
-        </Col>
-      </Row>
 
-      <Title level={4} className="GeneralData-subtitle">Usuarios Registrados</Title>
-      {registeredUsers.length > 0 && (
+      {/* {registeredUsers.length > 0 && (
         <Button onClick={handleStartRound}>Iniciar Tanda</Button>
-      )}
+      )} */}
       <Table
         dataSource={registeredUsers}
         columns={columns}
@@ -149,7 +185,7 @@ function BatchDetails({ main }) {
         loading={loading}
         pagination={null}
       />
-    </>
+    </div>
   );
 }
 

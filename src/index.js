@@ -12,7 +12,7 @@ import en from './locales/en.json';
 import App from './App';
 
 import 'antd/dist/antd.css';
-import './index.scss';
+import './index.less';
 
 // eslint-disable-next-line no-undef
 const locale = (window.navigator.language).split('-')[0];

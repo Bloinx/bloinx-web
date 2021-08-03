@@ -5,18 +5,23 @@ import { MenuOutlined, CloseOutlined } from '@ant-design/icons';
 import styles from './styles.module.scss';
 import Wallets from '../Wallets/Wallets';
 
+import icon from '../../assets/icon.png';
+
 export default function Navbar({ width, toggleDrawer, visible }) {
   const Icon = visible ? CloseOutlined : MenuOutlined;
   return (
     <div className={styles.navbar}>
-      <span>
+      <div>
         {width <= 768 && (
-          <Icon
-            className={styles.menuIcon}
-            onClick={toggleDrawer}
-          />
+          <>
+            <img src={icon} alt="bloinx-icon" />
+            <Icon
+              className={styles.menuIcon}
+              onClick={toggleDrawer}
+            />
+          </>
         )}
-      </span>
+      </div>
       <Wallets />
     </div>
   );

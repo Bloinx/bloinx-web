@@ -11,6 +11,8 @@ import getSavingGroupsMethods from './utils/getSGContract';
 import useWindowDimensions from './utils/useWindowDimensions';
 import { getInitialContractInstance } from './redux/actions/main';
 
+import './App.scss';
+
 const { Header, Content, Footer } = Layout;
 
 function App({ initialContractInstance }) {
@@ -42,10 +44,8 @@ function App({ initialContractInstance }) {
         <Header className="appHeader">
           <Navbar width={width} toggleDrawer={toggleDrawer} visible={visible} />
         </Header>
-        <Content>
-          <div className="appSiteLayoutBackground">
-            <Routes />
-          </div>
+        <Content className="appSection">
+          <Routes />
         </Content>
         <Footer className="appFooter">
           <FormattedMessage id="copyright" />

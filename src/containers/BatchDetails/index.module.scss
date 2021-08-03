@@ -1,0 +1,13 @@
+@import '../../theme.scss';
+
+.BranchDetails{
+  background-color: $blue-strong;
+  height: 100%;
+  width: 100%;
+}
+.BranchDetailsTitle{
+  color: white !important;
+}
+.BranchDetailsContent{
+  padding: 0px 20px 20px 55px;
+}
