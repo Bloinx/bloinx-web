@@ -89,7 +89,7 @@ function Wallets({ currentAddressWallet }) {
         blockExplorerUrls: ['https://cchain.explorer.avax-test.network/'],
       }],
     });
-    const accounts = await ethProvider.request({ method: 'eth_accounts' });
+    const accounts = await ethProvider.request({ method: 'eth_requestAccounts' });
     getAddress(accounts[0]);
   };
 
@@ -98,7 +98,6 @@ function Wallets({ currentAddressWallet }) {
     const provider = await detectEthereumProvider();
     if (provider) {
       try {
-        await provider.enable();
         const web3Loadie = getWeb3();
         if (web3Loadie) {
           loadPubKeyData(provider);

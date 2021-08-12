@@ -10,7 +10,7 @@ import {
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
-import { getWeb3 } from '../../utils/web3';
+// import { getWeb3 } from '../../utils/web3';
 import InputSelect from '../../components/InputSelect';
 import InputSwitch from '../../components/InputSwitch';
 
@@ -60,32 +60,32 @@ function RegisterPay({ main }) {
 
   const registerUser = async (userTurn) => {
     console.log('-->> ', userTurn);
-    await contract.methods
-      .registerUser(turn)
-      .send({
-        from: currentAddress,
-        value: getWeb3().utils.toWei('1', 'ether'),
-      })
-      .once('receipt', async (receipt) => console.log('success', receipt))
-      .on('error', async (error) => console.log('Error: ', error));
+    // await contract.methods
+    //   .registerUser(turn)
+    //   .send({
+    //     from: currentAddress,
+    //     value: getWeb3().utils.toWei('1', 'ether'),
+    //   })
+    //   .once('receipt', async (receipt) => console.log('success', receipt))
+    //   .on('error', async (error) => console.log('Error: ', error));
   };
 
   const payTurn = async () => {
-    await contract.methods.payTurn().send({
-      from: currentAddress,
-      value: getWeb3().utils.toWei('1', 'ether'),
-    })
-      .once('receipt', async (receipt) => console.log('success... ', receipt))
-      .on('error', async (error) => console.log('Error: ', error));
+    // await contract.methods.payTurn().send({
+    //   from: currentAddress,
+    //   value: getWeb3().utils.toWei('1', 'ether'),
+    // })
+    //   .once('receipt', async (receipt) => console.log('success... ', receipt))
+    //   .on('error', async (error) => console.log('Error: ', error));
   };
 
   const payLateTurn = async () => {
-    await contract.methods.payLateTurn().send({
-      from: currentAddress,
-      value: getWeb3().utils.toWei('1', 'ether'),
-    })
-      .once('receipt', async (receipt) => console.log('success... ', receipt))
-      .on('error', async (error) => console.log('Error: ', error));
+    // await contract.methods.payLateTurn().send({
+    //   from: currentAddress,
+    //   value: getWeb3().utils.toWei('1', 'ether'),
+    // })
+    //   .once('receipt', async (receipt) => console.log('success... ', receipt))
+    //   .on('error', async (error) => console.log('Error: ', error));
   };
 
   // eslint-disable-next-line no-unused-vars
