@@ -27,8 +27,12 @@ export default function Navbar({ width, toggleDrawer, visible }) {
   );
 }
 
+Navbar.defaultProps = {
+  visible: false,
+};
+
 Navbar.propTypes = {
   width: PropTypes.number.isRequired,
-  visible: PropTypes.bool.isRequired,
+  visible: PropTypes.bool,
   toggleDrawer: PropTypes.func.isRequired,
 };

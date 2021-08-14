@@ -8,17 +8,17 @@ const { Option } = Select;
 const { Text } = Typography;
 
 export default function InputSelect({
-  label, options = [], value, onChange, name,
+  label, options = [], value, onChange, name, placeholder, disabled,
 }) {
   const handleOnChange = (arg) => onChange({ target: { value: arg, name } });
 
   return (
     <div className={styles.InputSelect}>
       <Text className={styles.Label}>{label}</Text>
-      <Select value={value} onChange={handleOnChange}>
+      <Select disabled={disabled} placeholder={placeholder} value={value} onChange={handleOnChange}>
         {
           options.map((item) => (
-            <Option value={item.value}>{item.label}</Option>
+            <Option key={item.value} value={item.value}>{item.label}</Option>
           ))
         }
       </Select>
@@ -29,16 +29,26 @@ export default function InputSelect({
 InputSelect.defaultProps = {
   label: '',
   value: '',
+  placeholder: '',
+  disabled: false,
   onChange: () => {},
 };
 
 InputSelect.propTypes = {
   label: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   name: PropTypes.string.isRequired,
-  options: PropTypes.shape({
-    value: PropTypes.string,
-    label: PropTypes.string,
-  }).isRequired,
+  options: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({
+      value: PropTypes.string,
+      label: PropTypes.string,
+    }),
+  ]).isRequired,
   onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  disabled: PropTypes.bool,
 };

@@ -3,6 +3,15 @@ export function validateEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
+export function formatAddress(originalAddress) {
+  if (!originalAddress) { return ''; }
+
+  const firstPart = `${originalAddress.substring(0, 2)}${originalAddress.substring(2, 6).toUpperCase()}`;
+  const secondPart = `${originalAddress.substring(originalAddress.length - 4, originalAddress.length).toUpperCase()}`;
+  return `${firstPart}...${secondPart}`;
+}
+
 export default ({
   validateEmail,
+  formatAddress,
 });

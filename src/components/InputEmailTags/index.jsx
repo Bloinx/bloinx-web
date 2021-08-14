@@ -50,7 +50,9 @@ export default function InputEmailTags({
     <div className={styles.InputEmailTags}>
       <Text className={styles.TextFieldLabel}>{label}</Text>
       <div className={styles.tagSection}>
-        {tags.map((item, index) => <Tag closable onClose={() => handleOnClose(index)}>{item}</Tag>)}
+        {tags.map((item, index) => (
+          <Tag closable key={item} onClose={() => handleOnClose(index)}>{item}</Tag>
+        ))}
       </div>
       <Input
         onKeyPress={handleAddTag}

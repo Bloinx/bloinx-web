@@ -1,0 +1,17 @@
+@import '../../theme.scss';
+
+.UsersModal{
+  margin-top: 20px;
+}
+
+.UsersModalItem{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.UsersModalItemNumber{
+  font-weight: bold;
+  margin-right: 20px;
+  color: $pink;
+}

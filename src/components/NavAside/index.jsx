@@ -5,9 +5,9 @@ import { Menu, Layout, Drawer } from 'antd';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import {
-  DesktopOutlined,
+  // DesktopOutlined,
   HomeFilled,
-  FileOutlined,
+  // FileOutlined,
 } from '@ant-design/icons';
 
 import styles from './styles.module.scss';
@@ -52,13 +52,13 @@ export default function NavAside({ width, toggleDrawer, visible }) {
         icon={<HomeFilled />}
         onClick={toggleDrawer}
       >
-        <Link to="/Dashboard">
+        <Link to="/dashboard">
           <span>
             <FormattedMessage id="navAside.dashboard" />
           </span>
         </Link>
       </Menu.Item>
-      <Menu.Item
+      {/* <Menu.Item
         className={classnames(
           styles.MenuItem,
           selected === 2 && styles.MenuItemSelected,
@@ -72,8 +72,8 @@ export default function NavAside({ width, toggleDrawer, visible }) {
             <FormattedMessage id="navAside.createbatch" />
           </span>
         </Link>
-      </Menu.Item>
-      <Menu.Item
+      </Menu.Item> */}
+      {/* <Menu.Item
         className={classnames(
           styles.MenuItem,
           selected === 3 && styles.MenuItemSelected,
@@ -82,13 +82,13 @@ export default function NavAside({ width, toggleDrawer, visible }) {
         icon={<FileOutlined />}
         onClick={toggleDrawer}
       >
-        <Link to="/RegisterPay">
+        <Link to="/degisterPay">
           <span>
             <FormattedMessage id="navAside.registerpay" />
           </span>
         </Link>
-      </Menu.Item>
-      <Menu.Item
+      </Menu.Item> */}
+      {/* <Menu.Item
         className={classnames(
           styles.MenuItem,
           selected === 4 && styles.MenuItemSelected,
@@ -102,7 +102,7 @@ export default function NavAside({ width, toggleDrawer, visible }) {
             <FormattedMessage id="navAside.batchDetails" />
           </span>
         </Link>
-      </Menu.Item>
+      </Menu.Item> */}
     </Menu>
   );
 
@@ -150,7 +150,11 @@ export default function NavAside({ width, toggleDrawer, visible }) {
 }
 
 NavAside.propTypes = {
+  visible: PropTypes.bool,
   width: PropTypes.number.isRequired,
-  visible: PropTypes.bool.isRequired,
   toggleDrawer: PropTypes.func.isRequired,
+};
+
+NavAside.defaultProps = {
+  visible: false,
 };

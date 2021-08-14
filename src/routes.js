@@ -14,7 +14,7 @@ export default function Routes() {
       <Route exact path="/createbatch" component={CreateBatch} />
       <Route exact path="/registeruser" component={RegisterUser} />
       <Route exact path="/registerpay" component={RegisterPay} />
-      <Route exact path="/batchDetails" component={BatchDetails} />
+      <Route exact path="/batch-details/:savingGroup" component={BatchDetails} />
       <Route exact path="/">
         <Redirect to="/dashboard" />
       </Route>
