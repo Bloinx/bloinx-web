@@ -17,9 +17,14 @@
 				"type": "uint256"
 			},
 			{
-				"internalType": "address payable",
-				"name": "_admin",
-				"type": "address"
+				"internalType": "uint256",
+				"name": "_payTime",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_withdrawTime",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "nonpayable",
@@ -106,6 +111,19 @@
 	},
 	{
 		"inputs": [],
+		"name": "payTime",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "payTurn",
 		"outputs": [],
 		"stateMutability": "payable",
@@ -162,6 +180,19 @@
 		"name": "startRound",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "startTime",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -242,6 +273,19 @@
 		"name": "withdrawCashIn",
 		"outputs": [],
 		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "withdrawTime",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
