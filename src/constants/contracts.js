@@ -7,6 +7,21 @@ export default {
     // Mainnet
     43114: '',
   },
+  distribution: [{
+    43113: '',
+    users: [
+      'a',
+      'b',
+      'c',
+    ],
+  }, {
+    43113: '',
+    users: [
+      'a',
+      'b',
+      'c',
+    ],
+  }],
   savingGroups: {
     // bloinx user
     // 43113: '0xd5a1F01498c4f528E74232Fc530D67F83C05cc99', // Completa para inciar

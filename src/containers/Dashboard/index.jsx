@@ -15,8 +15,8 @@ import styles from './index.module.scss';
 
 import contracts from '../../constants/contracts';
 import ContractInstance from '../../utils/contractInstance';
-import APIGetContractStage from '../../api/getContractStage';
 import APIGetContractDetail from '../../api/getContractDetail';
+import APIGetRoundWithdrawPay from '../../api/getRoundWithdrawPay';
 import APISetPayLatedRound from '../../api/setPayLatedRound';
 import APISetPayRound from '../../api/setPayRound';
 
@@ -26,49 +26,54 @@ function Dashboard({ currentAddress }) {
   const history = useHistory();
   const { contract: { methods } } = ContractInstance();
 
-  const [batchStatus, setBatchStatus] = useState(null);
   const [contractDetail, setContractDetail] = useState({});
 
   const getContractStage = async () => {
-    const { roundStage } = await APIGetContractStage(methods);
-    setBatchStatus(roundStage);
-
     const data = await APIGetContractDetail(methods);
-    console.log(data);
-    setContractDetail(data);
+    const positionToWithdrawPay = await APIGetRoundWithdrawPay(methods, currentAddress);
+    setContractDetail({ ...data, positionToWithdrawPay });
   };
 
   const handleRegisterMe = () => {
     history.push('/registeruser');
   };
 
-  const handleToPay = async () => {
-    // if (contractDetail.totalSaveAmount > 0) {
-    const data = await APISetPayLatedRound(methods, { currentAddress });
-    // } else {
-    //   const data = await APISetPayRound(methods, { currentAddress });
+  const handleToPayAction = async () => {
+    // if (currentAddress === contractDetail.whoWithdrawPay) {
+
+    // } else if () {
+
     // }
+    // // if (contractDetail.totalSaveAmount > 0) {
+    // const data = await APISetPayLatedRound(methods, { currentAddress });
+    // // } else {
+    // //   const data = await APISetPayRound(methods, { currentAddress });
+    // // }
   };
+
+  console.log(contractDetail);
 
   useEffect(() => {
     getContractStage();
-  }, []);
+  }, [currentAddress]);
 
   return (
     <>
       <Title level={4} className={styles.dashboardTitle}><FormattedMessage id="dashboardPage.title" /></Title>
       <div className={styles.RoundCards}>
-        {batchStatus === 'ON_REGISTER_STAGE' && (
+        {contractDetail.roundStage === 'ON_REGISTER_STAGE' && (
           <RoundCardNew onClick={handleRegisterMe} />
         )}
-        {batchStatus === 'ON_ROUND_ACTIVE' && (
+        {contractDetail.roundStage === 'ON_ROUND_ACTIVE' && (
           <RoundCard
             disabled={!currentAddress}
             contractKey={contractDetail.address}
             groupSize={contractDetail.groupSize}
+            positionToWithdrawPay={contractDetail.positionToWithdrawPay}
             turn={contractDetail.turn}
             linkTo={`/batch-details/${contracts.savingGroups[43113]}`}
-            toPay={handleToPay}
+            toPay={handleToPayAction}
+            buttonText={currentAddress === contractDetail.whoWithdrawPay ? 'Cobrar' : 'Pagar'}
           />
         )}
       </div>

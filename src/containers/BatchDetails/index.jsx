@@ -203,7 +203,7 @@ function BatchDetails({ main }) {
       </div>
       <ParticipantList
         isOpen={openParticipantModal}
-        onAccept={handleToggleParticipantsModal}
+        onCancel={handleToggleParticipantsModal}
       />
       <ParticipantDates
         isOpen={openPaymentsDates}
