@@ -13,7 +13,6 @@ const getAvailablePlaces = (methods) => new Promise((resolve) => {
         let user;
         try {
           const address = await userBatch.call();
-          console.log(userIndex, address);
           if (address !== '0x0000000000000000000000000000000000000000') {
             user = {
               userIndex, position: userIndex + 1, status: 'NoAvailable', address,
@@ -24,7 +23,6 @@ const getAvailablePlaces = (methods) => new Promise((resolve) => {
             };
           }
         } catch (err) {
-          console.log(userIndex, 'aqui');
           user = {
             userIndex, position: userIndex + 1, status: 'Error', address: null,
           };
@@ -32,7 +30,6 @@ const getAvailablePlaces = (methods) => new Promise((resolve) => {
         return user;
       }),
     ).then((users) => {
-      console.log(users);
       const availablePlaces = users.filter((userItem) => userItem.status !== 'NoAvailable' && userItem.status !== 'Error');
       resolve({ roundCapacity: times, availablePlaces, contract: contracts.savingGroups[43113] });
     });

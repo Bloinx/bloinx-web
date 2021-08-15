@@ -126,10 +126,8 @@ const Configuration = ({
   );
 };
 
-const mapStateToProps = (state) => {
-  console.log('><><><', state);
-  return state;
-};
+const mapStateToProps = (state) => state;
+
 // eslint-disable-next-line no-unused-vars
 const mapDispatchToProps = (dispatch) => ({});
 

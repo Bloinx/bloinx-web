@@ -1,7 +1,6 @@
 import { getWeb3 } from '../utils/web3';
 
 const api = (methods, payload) => new Promise((resolve) => {
-  console.log({ methods, payload });
   methods
     .payLateTurn()
     .send({
@@ -9,11 +8,9 @@ const api = (methods, payload) => new Promise((resolve) => {
       value: getWeb3().utils.toWei('1', 'ether'),
     })
     .once('receipt', async (receipt) => {
-      console.log('success', receipt);
       resolve({ status: 'success', receipt });
     })
     .on('error', async (error) => {
-      console.log('Error: ', error);
       resolve({ status: 'error', error });
     });
 });

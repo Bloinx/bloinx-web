@@ -52,16 +52,14 @@ function RegisterPay({ main }) {
     if (contract) {
       (async () => {
         const stage = await contract.methods.stage().call();
-        console.log('-->>> ', stage);
         setStatus(stage);
       })();
     }
   }, []);
 
   const registerUser = async (userTurn) => {
-    console.log('-->> ', userTurn);
     await contract.methods
-      .registerUser(turn)
+      .registerUser(userTurn)
       .send({
         from: currentAddress,
         value: getWeb3().utils.toWei('1', 'ether'),

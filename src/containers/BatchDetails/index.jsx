@@ -150,9 +150,6 @@ function BatchDetails({ main }) {
     getContractDetail();
   }, []);
 
-  console.log(detail);
-  console.log(methods);
-
   return (
     <div className={styles.BranchDetails}>
       <PageHeader

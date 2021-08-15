@@ -51,8 +51,6 @@ function Dashboard({ currentAddress }) {
     // // }
   };
 
-  console.log(contractDetail);
-
   useEffect(() => {
     getContractStage();
   }, [currentAddress]);
