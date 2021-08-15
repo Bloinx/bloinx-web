@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
