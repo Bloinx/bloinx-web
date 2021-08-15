@@ -65,8 +65,8 @@ function RegisterPay({ main }) {
         from: currentAddress,
         value: getWeb3().utils.toWei('1', 'ether'),
       })
-      .once('receipt', async (receipt) => console.log('success', receipt))
-      .on('error', async (error) => console.log('Error: ', error));
+      .once('receipt', async (receipt) => receipt)
+      .on('error', async (error) => error);
   };
 
   const payTurn = async () => {
@@ -74,8 +74,8 @@ function RegisterPay({ main }) {
       from: currentAddress,
       value: getWeb3().utils.toWei('1', 'ether'),
     })
-      .once('receipt', async (receipt) => console.log('success... ', receipt))
-      .on('error', async (error) => console.log('Error: ', error));
+      .once('receipt', async (receipt) => receipt)
+      .on('error', async (error) => error);
   };
 
   const payLateTurn = async () => {
@@ -83,8 +83,8 @@ function RegisterPay({ main }) {
       from: currentAddress,
       value: getWeb3().utils.toWei('1', 'ether'),
     })
-      .once('receipt', async (receipt) => console.log('success... ', receipt))
-      .on('error', async (error) => console.log('Error: ', error));
+      .once('receipt', async (receipt) => receipt)
+      .on('error', async (error) => error);
   };
 
   // eslint-disable-next-line no-unused-vars
@@ -219,10 +219,7 @@ function RegisterPay({ main }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  console.log('><><><', state);
-  return state;
-};
+const mapStateToProps = (state) => state;
 // eslint-disable-next-line no-unused-vars
 const mapDispatchToProps = (dispatch) => ({});
 
