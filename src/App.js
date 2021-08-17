@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { Layout } from 'antd';
-import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { Layout } from "antd";
+import { connect } from "react-redux";
+import { FormattedMessage } from "react-intl";
 
-import NavAside from './components/NavAside';
-import Navbar from './components/Navbar';
-import Routes from './routes';
-import getSavingGroupsMethods from './utils/getSGContract';
-import useWindowDimensions from './utils/useWindowDimensions';
-import { getInitialContractInstance } from './redux/actions/main';
+import NavAside from "./components/NavAside";
+import Navbar from "./components/Navbar";
+import Routes from "./routes";
+import getSavingGroupsMethods from "./utils/getSGContract";
+import useWindowDimensions from "./utils/useWindowDimensions";
+import { getInitialContractInstance } from "./redux/actions/main";
 
-import './App.scss';
+import "./App.scss";
 
 const { Header, Content, Footer } = Layout;
 
@@ -67,7 +67,8 @@ App.propTypes = {
 const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch) => ({
-  initialContractInstance: (instance) => dispatch(getInitialContractInstance(instance)),
+  initialContractInstance: (instance) =>
+    dispatch(getInitialContractInstance(instance)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

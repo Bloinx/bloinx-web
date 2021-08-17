@@ -1,4 +1,4 @@
-import addresses from '../constants/contracts';
+import addresses from "../constants/contracts";
 
 export const getAddress = (address) => {
   const mainNetChainId = 43114;

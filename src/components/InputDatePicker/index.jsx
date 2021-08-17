@@ -1,17 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import DateFnsUtils from '@date-io/date-fns';
-import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import React from "react";
+import PropTypes from "prop-types";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider,
+} from "@material-ui/pickers";
 
-export default function InputDatePicker({
-  label, value, onChange, name,
-}) {
-  const prepareData = (arg) => onChange({
-    target: {
-      value: new Date(arg),
-      name,
-    },
-  });
+export default function InputDatePicker({ label, value, onChange, name }) {
+  const prepareData = (arg) =>
+    onChange({
+      target: {
+        value: new Date(arg),
+        name,
+      },
+    });
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -27,7 +29,7 @@ export default function InputDatePicker({
         value={value}
         onChange={prepareData}
         KeyboardButtonProps={{
-          'aria-label': 'change date',
+          "aria-label": "change date",
         }}
       />
     </MuiPickersUtilsProvider>

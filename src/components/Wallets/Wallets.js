@@ -1,42 +1,50 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { DownloadOutlined } from '@ant-design/icons';
-import detectEthereumProvider from '@metamask/detect-provider';
-import {
-  Button, Drawer, Typography, Spin, Result,
-} from 'antd';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { DownloadOutlined } from "@ant-design/icons";
+import detectEthereumProvider from "@metamask/detect-provider";
+import { Button, Drawer, Typography, Spin, Result } from "antd";
 
-import { getWeb3 } from '../../utils/web3';
-import { getCurrentWallet } from '../../redux/actions/main';
+import { getWeb3 } from "../../utils/web3";
+import { getCurrentWallet } from "../../redux/actions/main";
 
-import styles from './styles.module.scss';
+import styles from "./styles.module.scss";
 
-const errorMessages = [{
-  code: 503,
-  status: 'warning',
-  title: 'Servicio no disponible',
-  description: 'Metamask no se encuentra instalado en tu navegador, por favor instalalo desde su pagina oficial.',
-  hrefs: [{
-    url: 'https://metamask.io/',
-    title: 'Ir al sitio',
-  }],
-}, {
-  code: 502,
-  status: 'warning',
-  title: 'Implementacion erronea',
-  description: 'Metamask no se encuentra instalado en tu navegador, por favor instalalo desde su pagina oficial.',
-  hrefs: [{
-    url: 'https://metamask.io/',
-    title: 'Ir al sitio',
-  }],
-}, {
-  code: 500,
-  status: 'error',
-  title: 'No se pudo ejecutar',
-  description: '',
-  hrefs: [],
-}];
+const errorMessages = [
+  {
+    code: 503,
+    status: "warning",
+    title: "Servicio no disponible",
+    description:
+      "Metamask no se encuentra instalado en tu navegador, por favor instalalo desde su pagina oficial.",
+    hrefs: [
+      {
+        url: "https://metamask.io/",
+        title: "Ir al sitio",
+      },
+    ],
+  },
+  {
+    code: 502,
+    status: "warning",
+    title: "Implementacion erronea",
+    description:
+      "Metamask no se encuentra instalado en tu navegador, por favor instalalo desde su pagina oficial.",
+    hrefs: [
+      {
+        url: "https://metamask.io/",
+        title: "Ir al sitio",
+      },
+    ],
+  },
+  {
+    code: 500,
+    status: "error",
+    title: "No se pudo ejecutar",
+    description: "",
+    hrefs: [],
+  },
+];
 
 const { Title } = Typography;
 
@@ -57,10 +65,14 @@ function Wallets({ currentAddressWallet }) {
   };
 
   function getAddress(originalAdress) {
-    let publicAddress = '';
+    let publicAddress = "";
     if (originalAdress) {
-      const firstPart = `${originalAdress.substring(0, 2)}${originalAdress.substring(2, 6).toUpperCase()}`;
-      const secondPart = `${originalAdress.substring(originalAdress.length - 4, originalAdress.length).toUpperCase()}`;
+      const firstPart = `${originalAdress.substring(0, 2)}${originalAdress
+        .substring(2, 6)
+        .toUpperCase()}`;
+      const secondPart = `${originalAdress
+        .substring(originalAdress.length - 4, originalAdress.length)
+        .toUpperCase()}`;
       publicAddress = `${firstPart}...${secondPart}`;
       currentAddressWallet(originalAdress);
     }
@@ -68,7 +80,7 @@ function Wallets({ currentAddressWallet }) {
   }
 
   const loadPubKeyData = async (ethProvider) => {
-    await ethProvider.on('accountsChanged', (newAccount) => {
+    await ethProvider.on("accountsChanged", (newAccount) => {
       setLoading(true);
       setTimeout(() => {
         getAddress(newAccount[0]);
@@ -76,20 +88,22 @@ function Wallets({ currentAddressWallet }) {
       }, 2000);
     });
     await ethProvider.request({
-      method: 'wallet_addEthereumChain',
-      params: [{
-        chainId: '0xa869',
-        chainName: 'Fuji Testnet',
-        nativeCurrency: {
-          name: 'AVAX',
-          symbol: 'AVAX',
-          decimals: 18,
+      method: "wallet_addEthereumChain",
+      params: [
+        {
+          chainId: "0xa869",
+          chainName: "Fuji Testnet",
+          nativeCurrency: {
+            name: "AVAX",
+            symbol: "AVAX",
+            decimals: 18,
+          },
+          rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
+          blockExplorerUrls: ["https://cchain.explorer.avax-test.network/"],
         },
-        rpcUrls: ['https://api.avax-test.network/ext/bc/C/rpc'],
-        blockExplorerUrls: ['https://cchain.explorer.avax-test.network/'],
-      }],
+      ],
     });
-    const accounts = await ethProvider.request({ method: 'eth_accounts' });
+    const accounts = await ethProvider.request({ method: "eth_accounts" });
     getAddress(accounts[0]);
   };
 
@@ -119,25 +133,31 @@ function Wallets({ currentAddressWallet }) {
   };
 
   const errorData = errorMessages.find((item) => item.code === error) || {};
-  const options = errorData.hrefs && errorData.hrefs.map((item) => (
-    <a target="_blank" href={item.url} rel="noreferrer">
-      <Button type="ghost">{item.title}</Button>
-    </a>
-  ));
+  const options =
+    errorData.hrefs &&
+    errorData.hrefs.map((item) => (
+      <a target="_blank" href={item.url} rel="noreferrer">
+        <Button type="ghost">{item.title}</Button>
+      </a>
+    ));
 
   return (
     <div>
-      {accountData.publicAddress && accountData.publicAddress.startsWith('0x') && !loading && (
-        <Button type="primary" shape="round" onClick={handleReset}>{accountData.publicAddress}</Button>
-      )}
+      {accountData.publicAddress &&
+        accountData.publicAddress.startsWith("0x") &&
+        !loading && (
+          <Button type="primary" shape="round" onClick={handleReset}>
+            {accountData.publicAddress}
+          </Button>
+        )}
 
       {!accountData.publicAddress && (
-        <Button type="primary" shape="round" onClick={handleToggleDrawer}>Conecta Tu Wallet</Button>
+        <Button type="primary" shape="round" onClick={handleToggleDrawer}>
+          Conecta Tu Wallet
+        </Button>
       )}
 
-      {loading && (
-        <Spin size="medium" />
-      )}
+      {loading && <Spin size="medium" />}
 
       <Drawer
         title="My Wallet"
@@ -160,18 +180,16 @@ function Wallets({ currentAddressWallet }) {
               METAMASK
             </Button>
           )}
-          {loading && (<Spin size="large" tip="Loading..." />)}
+          {loading && <Spin size="large" tip="Loading..." />}
         </div>
-        {
-          !loading && error && (
-            <Result
-              status={errorData.status}
-              title={errorData.title}
-              subTitle={errorData.description}
-              extra={options}
-            />
-          )
-        }
+        {!loading && error && (
+          <Result
+            status={errorData.status}
+            title={errorData.title}
+            subTitle={errorData.description}
+            extra={options}
+          />
+        )}
       </Drawer>
     </div>
   );

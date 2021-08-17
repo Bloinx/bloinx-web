@@ -1,47 +1,41 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
-import {
-  Typography,
-  Row,
-  Col,
-  Button,
-  Space,
-} from 'antd';
-import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import React, { useState, useEffect } from "react";
+import { Typography, Row, Col, Button, Space } from "antd";
+import { connect } from "react-redux";
+import { FormattedMessage } from "react-intl";
 
-import { getWeb3 } from '../../utils/web3';
-import InputSelect from '../../components/InputSelect';
-import InputSwitch from '../../components/InputSwitch';
+import { getWeb3 } from "../../utils/web3";
+import InputSelect from "../../components/InputSelect";
+import InputSwitch from "../../components/InputSwitch";
 
 const { Title } = Typography;
 
 const turns = [
   {
-    value: '1',
-    label: '1',
+    value: "1",
+    label: "1",
   },
   {
-    value: '2',
-    label: '2',
+    value: "2",
+    label: "2",
   },
   {
-    value: '3',
-    label: '3',
+    value: "3",
+    label: "3",
   },
   {
-    value: '4',
-    label: '5',
+    value: "4",
+    label: "5",
   },
 ];
 
 function RegisterPay({ main }) {
   const { contract, currentAddress } = main;
   // eslint-disable-next-line no-unused-vars
-  const [turn, setTurn] = useState('1');
+  const [turn, setTurn] = useState("1");
   // eslint-disable-next-line no-unused-vars
-  const [userAccount, setUserAccount] = useState('1');
+  const [userAccount, setUserAccount] = useState("1");
   // eslint-disable-next-line no-unused-vars
   const [pagotardio, setPagoTardio] = useState({
     checkedA: true,
@@ -63,28 +57,32 @@ function RegisterPay({ main }) {
       .registerUser(userTurn)
       .send({
         from: currentAddress,
-        value: getWeb3().utils.toWei('1', 'ether'),
+        value: getWeb3().utils.toWei("1", "ether"),
       })
-      .once('receipt', async (receipt) => receipt)
-      .on('error', async (error) => error);
+      .once("receipt", async (receipt) => receipt)
+      .on("error", async (error) => error);
   };
 
   const payTurn = async () => {
-    await contract.methods.payTurn().send({
-      from: currentAddress,
-      value: getWeb3().utils.toWei('1', 'ether'),
-    })
-      .once('receipt', async (receipt) => receipt)
-      .on('error', async (error) => error);
+    await contract.methods
+      .payTurn()
+      .send({
+        from: currentAddress,
+        value: getWeb3().utils.toWei("1", "ether"),
+      })
+      .once("receipt", async (receipt) => receipt)
+      .on("error", async (error) => error);
   };
 
   const payLateTurn = async () => {
-    await contract.methods.payLateTurn().send({
-      from: currentAddress,
-      value: getWeb3().utils.toWei('1', 'ether'),
-    })
-      .once('receipt', async (receipt) => receipt)
-      .on('error', async (error) => error);
+    await contract.methods
+      .payLateTurn()
+      .send({
+        from: currentAddress,
+        value: getWeb3().utils.toWei("1", "ether"),
+      })
+      .once("receipt", async (receipt) => receipt)
+      .on("error", async (error) => error);
   };
 
   // eslint-disable-next-line no-unused-vars
@@ -106,7 +104,7 @@ function RegisterPay({ main }) {
             </Title>
             <Title level={5}>Tanda del trabajo</Title>
             <Title level={5}>Lucy Herrera</Title>
-            {currentAddress && currentAddress.startsWith('0x') ? (
+            {currentAddress && currentAddress.startsWith("0x") ? (
               <h4 className="mr-2">{currentAddress}</h4>
             ) : (
               <h5 className="GeneralData-subtitle">
@@ -148,7 +146,7 @@ function RegisterPay({ main }) {
                 <FormattedMessage id="payments.round.labels.totalReceivable" />
               </Col>
               <Col span={12}>
-                {pagotardio.checkedA ? '$2,005.00MXN' : '$1,005.00MXN'}
+                {pagotardio.checkedA ? "$2,005.00MXN" : "$1,005.00MXN"}
               </Col>
             </Row>
           </Col>
@@ -209,7 +207,7 @@ function RegisterPay({ main }) {
                 <FormattedMessage id="payments.round.labels.totalReceivable" />
               </Col>
               <Col span={12}>
-                {pagotardio.checkedA ? '$2,005.00MXN' : '$1,005.00MXN'}
+                {pagotardio.checkedA ? "$2,005.00MXN" : "$1,005.00MXN"}
               </Col>
             </Row>
           </Col>

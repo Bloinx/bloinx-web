@@ -1,4 +1,4 @@
-const flattenMessages = ((nestedMessages, prefix = '') => {
+const flattenMessages = (nestedMessages, prefix = "") => {
   if (nestedMessages === null) {
     return {};
   }
@@ -6,7 +6,7 @@ const flattenMessages = ((nestedMessages, prefix = '') => {
     const value = nestedMessages[key];
     const prefixedKey = prefix ? `${prefix}.${key}` : key;
 
-    if (typeof value === 'string') {
+    if (typeof value === "string") {
       Object.assign(mssg, { [prefixedKey]: value });
     } else {
       Object.assign(mssg, flattenMessages(value, prefixedKey));
@@ -14,6 +14,6 @@ const flattenMessages = ((nestedMessages, prefix = '') => {
 
     return mssg;
   }, {});
-});
+};
 
 export default flattenMessages;

@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { Row, Col } from 'antd';
-import { FormattedMessage } from 'react-intl';
+import React, { useState } from "react";
+import { Row, Col } from "antd";
+import { FormattedMessage } from "react-intl";
 
-import Stepper from '../../components/Stepper';
+import Stepper from "../../components/Stepper";
 
-import GeneralData from './GeneralData';
-import Configuration from './Configuration';
-import Summary from './Summary';
-import Invitation from './Invitation';
+import GeneralData from "./GeneralData";
+import Configuration from "./Configuration";
+import Summary from "./Summary";
+import Invitation from "./Invitation";
 
 export default function CreateBatch() {
   const [currentStep, setStep] = useState(0);
@@ -15,10 +15,10 @@ export default function CreateBatch() {
     name: null,
     startDate: new Date(),
     isPrivate: false,
-    longevity: 'Semanal',
+    longevity: "Semanal",
     participant: 3,
     amount: 0,
-    adminposition: '',
+    adminposition: "",
   });
 
   const handleChange = ({ target: { value, name } }) => {
@@ -28,12 +28,7 @@ export default function CreateBatch() {
   const handleNextStep = () => setStep(currentStep + 1);
   const handleBackStep = () => setStep(currentStep - 1);
 
-  const screens = [
-    GeneralData,
-    Configuration,
-    Summary,
-    Invitation,
-  ];
+  const screens = [GeneralData, Configuration, Summary, Invitation];
   const CurrentScreen = screens[currentStep];
 
   return (
@@ -41,13 +36,17 @@ export default function CreateBatch() {
       <Col span={8}>
         <Stepper
           current={currentStep}
-          steps={[{
-            title: <FormattedMessage id="createBatch.stepper.step1" />,
-          }, {
-            title: <FormattedMessage id="createBatch.stepper.step2" />,
-          }, {
-            title: <FormattedMessage id="createBatch.stepper.step3" />,
-          }]}
+          steps={[
+            {
+              title: <FormattedMessage id="createBatch.stepper.step1" />,
+            },
+            {
+              title: <FormattedMessage id="createBatch.stepper.step2" />,
+            },
+            {
+              title: <FormattedMessage id="createBatch.stepper.step3" />,
+            },
+          ]}
         />
       </Col>
       <Col span={16}>

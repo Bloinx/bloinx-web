@@ -1,20 +1,20 @@
-.StepperContainer{
+.StepperContainer {
   margin-bottom: 25px;
   margin-top: 15px;
 }
 
-.StepperIndicators{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-right: 8px;
-  
-    span {
-      padding: 0px 1px 0px 1px;
-    }
+.StepperIndicators {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 8px;
+
+  span {
+    padding: 0px 1px 0px 1px;
   }
-  
-.StepperTitles{
+}
+
+.StepperTitles {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -25,7 +25,7 @@
   }
 }
 
-.Icon{
+.Icon {
   font-size: 20px;
 }
 .IconTransparent {

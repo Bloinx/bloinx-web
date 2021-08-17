@@ -1,13 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Typography, Input } from 'antd';
+import React from "react";
+import PropTypes from "prop-types";
+import { Typography, Input } from "antd";
 
-import styles from './styles.module.scss';
+import styles from "./styles.module.scss";
 
 const { Text } = Typography;
 
 export default function InputTextField({
-  placeholder, label, value, onChange, name,
+  placeholder,
+  label,
+  value,
+  onChange,
+  name,
 }) {
   return (
     <>
@@ -23,9 +27,9 @@ export default function InputTextField({
 }
 
 InputTextField.defaultProps = {
-  placeholder: '',
-  label: '',
-  value: '',
+  placeholder: "",
+  label: "",
+  value: "",
   onChange: () => {},
 };
 

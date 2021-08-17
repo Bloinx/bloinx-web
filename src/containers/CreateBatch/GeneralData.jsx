@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Typography, Button } from 'antd';
-import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import React from "react";
+import PropTypes from "prop-types";
+import { Typography, Button } from "antd";
+import { FormattedMessage } from "react-intl";
+import { connect } from "react-redux";
 
-import InputTextField from '../../components/InputTextField';
-import InputDatePicker from '../../components/InputDatePicker';
-import InputOptionSelect from '../../components/InputOptionSelect';
+import InputTextField from "../../components/InputTextField";
+import InputDatePicker from "../../components/InputDatePicker";
+import InputOptionSelect from "../../components/InputOptionSelect";
 
 const { Title, Paragraph } = Typography;
 
@@ -24,7 +24,9 @@ function GeneralData({ formData, onSuccess, onChangeValue }) {
       </Paragraph>
       <InputTextField
         label={<FormattedMessage id="createBatch.form.label.batchName" />}
-        placeholder={<FormattedMessage id="createBatch.form.placeholder.batchName" />}
+        placeholder={
+          <FormattedMessage id="createBatch.form.placeholder.batchName" />
+        }
         value={formData.name}
         onChange={onChangeValue}
         name="name"
@@ -39,20 +41,23 @@ function GeneralData({ formData, onSuccess, onChangeValue }) {
         label={<FormattedMessage id="createBatch.form.label.batchType" />}
         value={formData.isPrivate}
         onChange={onChangeValue}
-        options={[{
-          label: <FormattedMessage id="createBatch.form.label.batchTypeOptions.public" />,
-          value: false,
-        }, {
-          label: <FormattedMessage id="createBatch.form.label.batchTypeOptions.private" />,
-          value: true,
-        }]}
+        options={[
+          {
+            label: (
+              <FormattedMessage id="createBatch.form.label.batchTypeOptions.public" />
+            ),
+            value: false,
+          },
+          {
+            label: (
+              <FormattedMessage id="createBatch.form.label.batchTypeOptions.private" />
+            ),
+            value: true,
+          },
+        ]}
         name="isPrivate"
       />
-      <Button
-        type="primary"
-        disabled={!isComplete}
-        onClick={onSuccess}
-      >
+      <Button type="primary" disabled={!isComplete} onClick={onSuccess}>
         <FormattedMessage id="commons.buttons.next" />
       </Button>
     </>

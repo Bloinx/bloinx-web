@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import React, { memo, useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React, { memo, useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import {
   Typography,
@@ -13,21 +13,23 @@ import {
   notification,
   Table,
   PageHeader,
-} from 'antd';
-import { RightOutlined, EllipsisOutlined } from '@ant-design/icons';
+} from "antd";
+import { RightOutlined, EllipsisOutlined } from "@ant-design/icons";
 
-import APIGetContractDetail from '../../api/getContractDetail';
-import Instance from '../../utils/contractInstance';
-import ParticipantList from './ParticipantList';
-import ParticipantDates from './PaymentsDates';
+import APIGetContractDetail from "../../api/getContractDetail";
+import Instance from "../../utils/contractInstance";
+import ParticipantList from "./ParticipantList";
+import ParticipantDates from "./PaymentsDates";
 
-import styles from './index.module.scss';
+import styles from "./index.module.scss";
 
 const { Title } = Typography;
 
 function BatchDetails({ main }) {
   const history = useHistory();
-  const { contract: { methods } } = Instance();
+  const {
+    contract: { methods },
+  } = Instance();
 
   const [detail, setDetail] = useState({});
   const [openParticipantModal, setOpenParticipantModal] = useState(false);
@@ -40,32 +42,33 @@ function BatchDetails({ main }) {
   const { contract, currentAddress } = main;
   const isAdmin = adminAccount === currentAddress;
 
-  const getUsersList = (times) => new Promise((resolve) => {
-    // const tempUserList = [];
-    // for (let index = 1; index <= times; index += 1) {
-    //   tempUserList.push(contract.methods.addressOrderList(index - 1));
-    // }
-    // Promise.all(
-    //   tempUserList.map(async (userBatch) => {
-    //     let user;
-    //     try {
-    //       const userKey = await userBatch.call();
-    //       user = {
-    //         key: userKey,
-    //         status: true,
-    //       };
-    //     } catch (err) {
-    //       user = {
-    //         key: 'Disponible',
-    //         status: false,
-    //       };
-    //     }
-    //     return user;
-    //   }),
-    // ).then((users) => {
-    //   resolve(users);
-    // });
-  });
+  const getUsersList = (times) =>
+    new Promise((resolve) => {
+      // const tempUserList = [];
+      // for (let index = 1; index <= times; index += 1) {
+      //   tempUserList.push(contract.methods.addressOrderList(index - 1));
+      // }
+      // Promise.all(
+      //   tempUserList.map(async (userBatch) => {
+      //     let user;
+      //     try {
+      //       const userKey = await userBatch.call();
+      //       user = {
+      //         key: userKey,
+      //         status: true,
+      //       };
+      //     } catch (err) {
+      //       user = {
+      //         key: 'Disponible',
+      //         status: false,
+      //       };
+      //     }
+      //     return user;
+      //   }),
+      // ).then((users) => {
+      //   resolve(users);
+      // });
+    });
 
   useEffect(() => {
     // if (contract) {
@@ -139,8 +142,10 @@ function BatchDetails({ main }) {
     //   ),
     // },
   ];
-  const handleToggleParticipantsModal = () => setOpenParticipantModal(!openParticipantModal);
-  const handleTogglePaymentsModal = () => setOpenPaymentsDates(!openPaymentsDates);
+  const handleToggleParticipantsModal = () =>
+    setOpenParticipantModal(!openParticipantModal);
+  const handleTogglePaymentsModal = () =>
+    setOpenPaymentsDates(!openPaymentsDates);
 
   const getContractDetail = async () => {
     const contractDetail = await APIGetContractDetail(methods);
@@ -155,19 +160,15 @@ function BatchDetails({ main }) {
     <div className={styles.BranchDetails}>
       <PageHeader
         className={styles.BranchDetailsTitle}
-        onBack={() => history.push('/dashboard')}
+        onBack={() => history.push("/dashboard")}
         title="Tanda de la chamba"
         extra={[
-          <EllipsisOutlined style={{ color: '#FFF', fontSize: '30px' }} />,
+          <EllipsisOutlined style={{ color: "#FFF", fontSize: "30px" }} />,
         ]}
       />
       <div className={styles.BranchDetailsContent}>
         <div className={styles.BranchDetailsContentLine}>
-          <Title level={4}>
-            Round
-            {' '}
-            {detail.turn}
-          </Title>
+          <Title level={4}>Round {detail.turn}</Title>
           {/* <Button type="primary" onClick={handleStartRound}>Iniciar Tanda</Button> */}
         </div>
         <div className={styles.BranchDetailsContentLine}>
@@ -177,9 +178,9 @@ function BatchDetails({ main }) {
             <RightOutlined
               onClick={handleToggleParticipantsModal}
               style={{
-                color: '#FFF',
-                fontSize: '15px',
-                marginLeft: '10px',
+                color: "#FFF",
+                fontSize: "15px",
+                marginLeft: "10px",
               }}
             />
           </div>
@@ -191,9 +192,9 @@ function BatchDetails({ main }) {
             <RightOutlined
               onClick={handleTogglePaymentsModal}
               style={{
-                color: '#FFF',
-                fontSize: '15px',
-                marginLeft: '10px',
+                color: "#FFF",
+                fontSize: "15px",
+                marginLeft: "10px",
               }}
             />
           </div>

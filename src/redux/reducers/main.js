@@ -1,7 +1,4 @@
-import {
-  INITIAL_CONTRACT_INSTANCE,
-  CURRENT_ADDRESS_WALLET,
-} from '../types';
+import { INITIAL_CONTRACT_INSTANCE, CURRENT_ADDRESS_WALLET } from "../types";
 
 const initialState = {
   contract: null,

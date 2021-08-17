@@ -1,29 +1,29 @@
-@import '../../theme.scss';
+@import "../../theme.scss";
 
-.NavAside{
+.NavAside {
   background-color: $gray !important;
 }
 
-.MenuOptions{
+.MenuOptions {
   background-color: $gray !important;
   border-right: 0px !important;
 }
-.MenuItem{
-  color: rgba($color: #FFF, $alpha: 0.6) !important;
-  a{
-    color: rgba($color: #FFF, $alpha: 0.6) !important;
+.MenuItem {
+  color: rgba($color: #fff, $alpha: 0.6) !important;
+  a {
+    color: rgba($color: #fff, $alpha: 0.6) !important;
   }
 }
-.MenuItemSelected{
+.MenuItemSelected {
   background-color: $pink-strong !important;
 }
 .logo {
   height: 60px;
-  img{
+  img {
     height: 100%;
   }
 }
-.logoMobile img{
+.logoMobile img {
   height: 60px;
 }
 .icon {
@@ -33,7 +33,7 @@
   align-items: center;
   margin: 5px 0px;
 }
-.NavAsideDrawer{
+.NavAsideDrawer {
   border: 1px solid red !important;
   background-color: $gray !important;
 }

@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { MenuOutlined, CloseOutlined } from '@ant-design/icons';
+import React from "react";
+import PropTypes from "prop-types";
+import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 
-import styles from './styles.module.scss';
-import Wallets from '../Wallets/Wallets';
+import styles from "./styles.module.scss";
+import Wallets from "../Wallets/Wallets";
 
-import icon from '../../assets/icon.png';
+import icon from "../../assets/icon.png";
 
 export default function Navbar({ width, toggleDrawer, visible }) {
   const Icon = visible ? CloseOutlined : MenuOutlined;
@@ -15,10 +15,7 @@ export default function Navbar({ width, toggleDrawer, visible }) {
         {width <= 768 && (
           <>
             <img src={icon} alt="bloinx-icon" />
-            <Icon
-              className={styles.menuIcon}
-              onClick={toggleDrawer}
-            />
+            <Icon className={styles.menuIcon} onClick={toggleDrawer} />
           </>
         )}
       </div>

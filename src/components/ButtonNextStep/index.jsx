@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Button } from 'antd';
-import { FormattedMessage } from 'react-intl';
+import React from "react";
+import PropTypes from "prop-types";
+import { Button } from "antd";
+import { FormattedMessage } from "react-intl";
 
-import styles from './styles.module.scss';
+import styles from "./styles.module.scss";
 
 export function ButtonNextStep({ onBack, onClick, disabled }) {
   return (

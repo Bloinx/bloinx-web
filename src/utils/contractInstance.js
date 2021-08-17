@@ -1,6 +1,6 @@
-import Web3 from 'web3';
-import SavingGroups from '../abis/SavingGroups.json';
-import contracts from '../constants/contracts';
+import Web3 from "web3";
+import SavingGroups from "../abis/SavingGroups.json";
+import contracts from "../constants/contracts";
 
 const contractInstance = () => {
   let web3 = null;
@@ -13,7 +13,7 @@ const contractInstance = () => {
     contract = new web3Provider.eth.Contract(SavingGroups, currentSaving);
   }
 
-  return ({ contract, web3, currentSaving });
+  return { contract, web3, currentSaving };
 };
 
 export default contractInstance;

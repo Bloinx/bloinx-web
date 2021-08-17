@@ -1,6 +1,6 @@
-import SavingGroups from '../abis/SavingGroups.json';
-import { getSavingGroupsAddress } from './addressHelpers';
-import { getContract } from './web3';
+import SavingGroups from "../abis/SavingGroups.json";
+import { getSavingGroupsAddress } from "./addressHelpers";
+import { getContract } from "./web3";
 
 const getSavingGroupsMethods = async () => {
   const abiContract = SavingGroups;

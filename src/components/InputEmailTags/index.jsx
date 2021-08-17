@@ -1,15 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Typography, Input, Tag } from 'antd';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { Typography, Input, Tag } from "antd";
 
-import { validateEmail } from '../../utils/format';
-import styles from './styles.module.scss';
+import { validateEmail } from "../../utils/format";
+import styles from "./styles.module.scss";
 
 const { Text } = Typography;
 
 export default function InputEmailTags({
-  label, name, value = [], onChange, placeholder,
+  label,
+  name,
+  value = [],
+  onChange,
+  placeholder,
 }) {
   const [inputValue, setInputValue] = useState(null);
   const [tags, setTags] = useState(value);
@@ -35,7 +39,7 @@ export default function InputEmailTags({
     }
 
     if (charCode === 13 && !isValidEmail) {
-      setError('Ingresa un email valido.');
+      setError("Ingresa un email valido.");
     }
   };
 
@@ -52,7 +56,9 @@ export default function InputEmailTags({
       <Text className={styles.TextFieldLabel}>{label}</Text>
       <div className={styles.tagSection}>
         {tags.map((item, index) => (
-          <Tag closable key={item} onClose={() => handleOnClose(index)}>{item}</Tag>
+          <Tag closable key={item} onClose={() => handleOnClose(index)}>
+            {item}
+          </Tag>
         ))}
       </div>
       <Input
@@ -67,8 +73,8 @@ export default function InputEmailTags({
 }
 
 InputEmailTags.defaultProps = {
-  label: '',
-  placeholder: '',
+  label: "",
+  placeholder: "",
   value: [],
 };
 

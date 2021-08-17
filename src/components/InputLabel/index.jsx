@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import styles from './index.module.scss';
+import styles from "./index.module.scss";
 
 export default function InputLabel({ value, label }) {
   return (
@@ -14,13 +14,10 @@ export default function InputLabel({ value, label }) {
 
 InputLabel.defaultProps = {
   value: null,
-  label: '',
+  label: "",
 };
 
 InputLabel.propTypes = {
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   label: PropTypes.string,
 };

@@ -1,19 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import { Menu, Layout, Drawer } from 'antd';
-import { Link } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import { Menu, Layout, Drawer } from "antd";
+import { Link } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 import {
   // DesktopOutlined,
   HomeFilled,
   // FileOutlined,
-} from '@ant-design/icons';
+} from "@ant-design/icons";
 
-import styles from './styles.module.scss';
-import logo from '../../assets/logo.svg';
-import icon from '../../assets/icon.png';
+import styles from "./styles.module.scss";
+import logo from "../../assets/logo.svg";
+import icon from "../../assets/icon.png";
 
 const { Sider } = Layout;
 
@@ -36,7 +36,7 @@ export default function NavAside({ width, toggleDrawer, visible }) {
   const MenuOptions = () => (
     <Menu
       className={styles.MenuOptions}
-      defaultSelectedKeys={['1']}
+      defaultSelectedKeys={["1"]}
       mode="inline"
     >
       {!isMobile && (
@@ -47,7 +47,7 @@ export default function NavAside({ width, toggleDrawer, visible }) {
       <Menu.Item
         className={classnames(
           styles.MenuItem,
-          selected === 1 && styles.MenuItemSelected,
+          selected === 1 && styles.MenuItemSelected
         )}
         key={1}
         icon={<HomeFilled />}
@@ -121,11 +121,11 @@ export default function NavAside({ width, toggleDrawer, visible }) {
       )}
       {isMobile && (
         <Drawer
-          title={(
+          title={
             <div className={styles.logoMobile}>
               <img src={logo} alt="bloinx-logo" />
             </div>
-          )}
+          }
           placement="left"
           closable
           onClose={toggleDrawer}
@@ -134,13 +134,13 @@ export default function NavAside({ width, toggleDrawer, visible }) {
             padding: 0,
           }}
           drawerStyle={{
-            backgroundColor: '#2B2D33',
+            backgroundColor: "#2B2D33",
           }}
           headerStyle={{
-            backgroundColor: '#2B2D33',
-            borderBottom: '0px',
-            color: 'white',
-            padding: '0px',
+            backgroundColor: "#2B2D33",
+            borderBottom: "0px",
+            color: "white",
+            padding: "0px",
           }}
         >
           <MenuOptions />

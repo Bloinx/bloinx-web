@@ -1,13 +1,17 @@
-import React from 'react';
-import { InputNumber, Typography } from 'antd';
-import PropTypes from 'prop-types';
+import React from "react";
+import { InputNumber, Typography } from "antd";
+import PropTypes from "prop-types";
 
-import styles from './styles.module.scss';
+import styles from "./styles.module.scss";
 
 const { Text } = Typography;
 
 export default function InputAmount({
-  label, value, currency, onChange, name,
+  label,
+  value,
+  currency,
+  onChange,
+  name,
 }) {
   const handleOnChange = (arg) => onChange({ target: { value: arg, name } });
 
@@ -31,7 +35,7 @@ export default function InputAmount({
 }
 
 InputAmount.defaultProps = {
-  currency: '',
+  currency: "",
 };
 
 InputAmount.propTypes = {

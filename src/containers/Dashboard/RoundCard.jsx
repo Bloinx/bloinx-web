@@ -1,14 +1,10 @@
-/* eslint-disable no-unused-vars */
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Button, Steps, Popover } from 'antd';
-// import { Stepper, Step } from 'react-form-stepper';
-import { Link } from 'react-router-dom';
+import React from "react";
+import PropTypes from "prop-types";
+import { Button } from "antd";
+import { Link } from "react-router-dom";
 
-import styles from './RoundCard.module.scss';
-import Stepper from '../../components/Stepper';
-
-const { Step } = Steps;
+import styles from "./RoundCard.module.scss";
+import Stepper from "../../components/Stepper";
 
 export default function RoundCard({
   contractKey,
@@ -19,6 +15,8 @@ export default function RoundCard({
   disabled,
   buttonText,
   positionToWithdrawPay,
+  loading,
+  buttonDisabled,
 }) {
   const handleGetSteps = () => {
     const indents = [];
@@ -44,8 +42,14 @@ export default function RoundCard({
       </Link>
       <div className={styles.RoundCardFooter}>
         <div className={styles.RoundCardTitleFooter}>{`Ronda ${turn}`}</div>
-        <Button className={styles.RoundCardAction} type="primary" disabled={disabled} onClick={toPay}>
-          {buttonText}
+        <Button
+          loading={loading}
+          className={styles.RoundCardAction}
+          type="primary"
+          disabled={disabled || loading}
+          onClick={!buttonDisabled ? toPay : () => {}}
+        >
+          {!buttonDisabled ? buttonText : "Finalizado"}
         </Button>
       </div>
     </div>
@@ -53,11 +57,13 @@ export default function RoundCard({
 }
 
 RoundCard.defaultProps = {
-  linkTo: '',
-  buttonText: '',
+  linkTo: "",
+  buttonText: "",
   toPay: () => {},
   disabled: false,
   positionToWithdrawPay: 0,
+  loading: false,
+  buttonDisabled: false,
 };
 
 RoundCard.propTypes = {
@@ -69,4 +75,6 @@ RoundCard.propTypes = {
   disabled: PropTypes.bool,
   buttonText: PropTypes.string,
   positionToWithdrawPay: PropTypes.number,
+  loading: PropTypes.bool,
+  buttonDisabled: PropTypes.bool,
 };

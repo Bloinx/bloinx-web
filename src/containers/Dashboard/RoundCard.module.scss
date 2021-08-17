@@ -1,6 +1,6 @@
-@import '../../theme.scss';
+@import "../../theme.scss";
 
-.RoundCard{
+.RoundCard {
   background-color: #233447;
   border-radius: 10px;
   padding: 10px;
@@ -11,39 +11,39 @@
 }
 
 @media (min-width: 768px) {
-  .RoundCard{
+  .RoundCard {
     width: calc(50% - 20px);
   }
 }
 
-.RoundCardHeader{
+.RoundCardHeader {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
 }
-.RoundCardTitle{
+.RoundCardTitle {
   color: white;
   font-size: 20px;
 }
-.RoundCardKeys{
-  color: rgba($color: #FFFFFF, $alpha: 0.6);
+.RoundCardKeys {
+  color: rgba($color: #ffffff, $alpha: 0.6);
   font-size: 14px;
 }
-.RoundCardDescription{
+.RoundCardDescription {
   color: white;
   margin-bottom: 10px;
 }
-.RoundCardFooter{
+.RoundCardFooter {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.RoundCardTitleFooter{
+.RoundCardTitleFooter {
   font-size: 18px;
   color: white;
 }
-.RoundCardAction{
+.RoundCardAction {
   width: 150px;
 }

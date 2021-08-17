@@ -1,13 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styles from './index.module.scss';
+import React from "react";
+import PropTypes from "prop-types";
+import styles from "./index.module.scss";
 
 export default function DashboardLayout({ children }) {
-  return (
-    <div className={styles.DashboardLayout}>
-      {children}
-    </div>
-  );
+  return <div className={styles.DashboardLayout}>{children}</div>;
 }
 
 DashboardLayout.propTypes = {

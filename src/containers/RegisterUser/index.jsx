@@ -3,27 +3,28 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import {
-  Button, PageHeader, notification, Spin,
-} from 'antd';
-import { connect } from 'react-redux';
-import { LeftOutlined } from '@ant-design/icons';
-import { FormattedMessage } from 'react-intl';
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
+import { Button, PageHeader, notification, Spin } from "antd";
+import { connect } from "react-redux";
+import { LeftOutlined } from "@ant-design/icons";
+import { FormattedMessage } from "react-intl";
 
-import InputSelect from '../../components/InputSelect';
-import InputLabel from '../../components/InputLabel';
+import InputSelect from "../../components/InputSelect";
+import InputLabel from "../../components/InputLabel";
 
-import styles from './index.module.scss';
-import ContractInstance from '../../utils/contractInstance';
-import APIGetAvailablePlaces from '../../api/getAvailablePlaces';
-import APISetRegisterUser from '../../api/setRegisterUser';
+import styles from "./index.module.scss";
+import ContractInstance from "../../utils/contractInstance";
+import APIGetAvailablePlaces from "../../api/getAvailablePlaces";
+import APISetRegisterUser from "../../api/setRegisterUser";
 
 function RegisterUser({ currentAddress }) {
   const history = useHistory();
-  const { contract: { methods }, currentSaving } = ContractInstance();
+  const {
+    contract: { methods },
+    currentSaving,
+  } = ContractInstance();
 
   const [availablePlaces, setAvailablePlaces] = useState([]);
   const [turnSelected, setTurnSelected] = useState(null);
@@ -41,8 +42,8 @@ function RegisterUser({ currentAddress }) {
   const handleOptionsPlaces = () => {
     if (availablePlaces && availablePlaces.availablePlaces) {
       return availablePlaces.availablePlaces.map((place) => ({
-        value: (place.position),
-        label: (place.position),
+        value: place.position,
+        label: place.position,
       }));
     }
     return [];
@@ -55,16 +56,16 @@ function RegisterUser({ currentAddress }) {
       currentAddress,
     });
 
-    if (status === 'success') {
+    if (status === "success") {
       notification.success({
-        message: 'Registro correcto',
-        description: 'Ahora eres parte de la tanda',
+        message: "Registro correcto",
+        description: "Ahora eres parte de la tanda",
       });
       history.push(`/batch-details/${currentSaving}`);
-    } else if (status === 'error') {
+    } else if (status === "error") {
       notification.error({
-        message: 'Registro fallido',
-        description: 'Error al realizar el registro',
+        message: "Registro fallido",
+        description: "Error al realizar el registro",
       });
       setLoading(false);
     }
@@ -81,17 +82,13 @@ function RegisterUser({ currentAddress }) {
         onBack={history.goBack}
         backIcon={<LeftOutlined />}
         title="Registarme"
-        extra={[<span>{loading && (<Spin size="large" tip="Espere..." />)}</span>]}
+        extra={[
+          <span>{loading && <Spin size="large" tip="Espere..." />}</span>,
+        ]}
       />
       <div className={styles.RegisterUserContent}>
-        <InputLabel
-          label="Tanda"
-          value={availablePlaces.contract}
-        />
-        <InputLabel
-          label="Mi dirección"
-          value={currentAddress}
-        />
+        <InputLabel label="Tanda" value={availablePlaces.contract} />
+        <InputLabel label="Mi dirección" value={currentAddress} />
         <InputSelect
           label="Selecciona un turno disponible"
           placeholder="Seleccione un turno"

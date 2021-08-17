@@ -1,18 +1,18 @@
 // eslint-disable-next-line no-unused-vars
-import axios from 'axios';
-import React, { useState } from 'react';
-import { Typography, Button, notification } from 'antd';
-import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import axios from "axios";
+import React, { useState } from "react";
+import { Typography, Button, notification } from "antd";
+import { FormattedMessage } from "react-intl";
+import { connect } from "react-redux";
 
-import InputEmailTags from '../../components/InputEmailTags';
+import InputEmailTags from "../../components/InputEmailTags";
 
 const { Title, Paragraph } = Typography;
 
 // eslint-disable-next-line no-unused-vars
 function Invitation(props) {
   // eslint-disable-next-line no-unused-vars
-  const [mailList, setMailList] = useState('');
+  const [mailList, setMailList] = useState("");
   // eslint-disable-next-line no-unused-vars
   const [open, setOpen] = React.useState(false);
 
@@ -63,16 +63,15 @@ function Invitation(props) {
     // if (reason === 'clickaway') {
     //   return;
     // }
-
     // setOpen(false);
   };
 
   const openNotification = () => {
     notification.open({
-      message: 'Notification Title',
+      message: "Notification Title",
       description:
-        'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-      className: 'custom-class',
+        "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+      className: "custom-class",
       style: {
         width: 600,
       },

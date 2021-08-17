@@ -1,13 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Typography, Radio } from 'antd';
+import React from "react";
+import PropTypes from "prop-types";
+import { Typography, Radio } from "antd";
 
-import styles from './styles.module.scss';
+import styles from "./styles.module.scss";
 
 const { Text } = Typography;
 
 export default function InputOptionSelect({
-  label, value, options, onChange, name,
+  label,
+  value,
+  options,
+  onChange,
+  name,
 }) {
   return (
     <span className={styles.InputOptionSelect}>
@@ -24,8 +28,8 @@ export default function InputOptionSelect({
 }
 
 InputOptionSelect.defaultProps = {
-  label: '',
-  value: '',
+  label: "",
+  value: "",
 };
 
 InputOptionSelect.propTypes = {
