@@ -4,7 +4,6 @@ const setWithdrawTurn = (methods) =>
       .withdrawTurn()
       .call()
       .then((data) => {
-        console.log(data);
         resolve(data);
       });
   });

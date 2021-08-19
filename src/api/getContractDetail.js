@@ -7,7 +7,6 @@ import APIGetUsersList from "./getUsersList";
 
 const getContractDetail = (methods) =>
   new Promise((resolve) => {
-    console.log(methods);
     Promise.all([
       methods.groupSize().call(),
       methods.turn().call(),

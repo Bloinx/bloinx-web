@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Typography } from "antd";
@@ -45,11 +47,9 @@ function Dashboard({ currentAddress }) {
     setPayingLoader(true);
     if (currentAddress === contractDetail.whoWithdrawPay) {
       const data = await APISetWithdrawTurn(methods);
-      console.log(1, data);
       setPayingLoader(false);
     } else {
       const data = await APISetPayRound(methods, { currentAddress });
-      console.log(2, data);
       getContractStage();
       setPayingLoader(false);
     }
@@ -58,8 +58,6 @@ function Dashboard({ currentAddress }) {
   useEffect(() => {
     getContractStage();
   }, [currentAddress]);
-
-  console.log(contractDetail, currentAddress);
 
   return (
     <>
