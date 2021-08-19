@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Typography } from "antd";
+import { Typography, notification } from "antd";
 import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
@@ -25,6 +25,7 @@ function Dashboard({ currentAddress }) {
   const history = useHistory();
   const {
     contract: { methods },
+    currentSaving,
   } = ContractInstance();
 
   const [contractDetail, setContractDetail] = useState({});
@@ -46,10 +47,34 @@ function Dashboard({ currentAddress }) {
   const handleToPayAction = async () => {
     setPayingLoader(true);
     if (currentAddress === contractDetail.whoWithdrawPay) {
-      const data = await APISetWithdrawTurn(methods);
+      const { status } = await APISetWithdrawTurn(methods, { currentAddress });
+      if (status === "success") {
+        notification.success({
+          message: "Cobro correcto",
+          description: "Cobraste correctamente",
+        });
+        history.push(`/batch-details/${currentSaving}`);
+      } else if (status === "error") {
+        notification.error({
+          message: "Cobro fallido",
+          description: "Error al realizar el cobro",
+        });
+      }
       setPayingLoader(false);
     } else {
-      const data = await APISetPayRound(methods, { currentAddress });
+      const { status } = await APISetPayRound(methods, { currentAddress });
+      if (status === "success") {
+        notification.success({
+          message: "Pago correcto",
+          description: "Pago realizado correctamente",
+        });
+        history.push(`/batch-details/${currentSaving}`);
+      } else if (status === "error") {
+        notification.error({
+          message: "Pago fallido",
+          description: "Error al realizar el pago",
+        });
+      }
       getContractStage();
       setPayingLoader(false);
     }
