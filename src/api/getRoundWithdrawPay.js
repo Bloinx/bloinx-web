@@ -6,10 +6,14 @@ const getRoundWithdrawPay = (methods, payload) =>
       resolve(null);
     } else {
       Promise.all([APIGetUsersList(methods)]).then((responses) => {
-        const { position } = responses[0].users.find(
+        const userSelected = responses[0].users.find(
           (user) => user.address.toLowerCase() === payload
         );
-        resolve(position);
+        if (userSelected && userSelected.position) {
+          resolve(userSelected.position);
+        } else {
+          resolve("");
+        }
       });
     }
   });

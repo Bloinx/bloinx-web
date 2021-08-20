@@ -124,6 +124,8 @@ function Dashboard({ currentAddress }) {
     }
   }, [currentAddress]);
 
+  console.log(methods);
+
   return (
     <>
       <Title level={4} className={styles.dashboardTitle}>

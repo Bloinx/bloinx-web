@@ -11,9 +11,12 @@ const contractInstance = () => {
   try {
     if (window && !window.web3) {
       const web3Instance = getWeb3();
-      const web3Provider = new Web3(
-        window?.web3?.currentProvider || web3Instance
-      );
+      const web3Provider = new Web3(web3Instance);
+      web3 = web3Provider;
+      contract = new web3Provider.eth.Contract(SavingGroups, currentSaving);
+    }
+    if (window.web3) {
+      const web3Provider = new Web3(window?.web3?.currentProvider);
       web3 = web3Provider;
       contract = new web3Provider.eth.Contract(SavingGroups, currentSaving);
     }
