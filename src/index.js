@@ -30,6 +30,7 @@ ReactDOM.render(
     >
       <BrowserRouter>
         <Provider store={store}>
+          <div>asdas</div>
           <App />
         </Provider>
       </BrowserRouter>

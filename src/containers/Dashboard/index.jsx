@@ -21,6 +21,8 @@ import Placeholder from "../../components/Placeholder";
 
 const { Title } = Typography;
 
+let interval = null;
+
 function Dashboard({ currentAddress }) {
   const history = useHistory();
   const {
@@ -30,6 +32,7 @@ function Dashboard({ currentAddress }) {
 
   const [contractDetail, setContractDetail] = useState({});
   const [payingLoader, setPayingLoader] = useState(false);
+  const [drawValue, setDrawValue] = useState("Cobrar");
 
   const getContractStage = async () => {
     const data = await APIGetContractDetail(methods);
@@ -82,7 +85,47 @@ function Dashboard({ currentAddress }) {
 
   useEffect(() => {
     getContractStage();
+
+    if (
+      contractDetail.shouldWithDraw &&
+      currentAddress !== contractDetail.whoWithdrawPay
+    ) {
+      interval = (limit) =>
+        setInterval(() => {
+          const current = new Date();
+          if (limit > current) {
+            let diffTime = Math.abs(limit - current) / 1000;
+            const days = Math.floor(diffTime / 86400);
+            diffTime -= days * 86400;
+            const hours = Math.floor(diffTime / 3600) % 24;
+            const fHours = hours > 9 ? hours : `0${hours}`;
+            diffTime -= hours * 3600;
+            const minutes = Math.floor(diffTime / 60) % 60;
+            const fMinutes = minutes > 9 ? minutes : `0${minutes}`;
+            diffTime -= minutes * 60;
+            const seconds = Math.floor(diffTime) % 60;
+            const fSeconds = seconds > 9 ? seconds : `0${seconds}`;
+
+            setDrawValue(
+              `${
+                days > 0 ? `${days} dias ` : ""
+              }${fHours}:${fMinutes}:${fSeconds}`
+            );
+          } else {
+            interval = null;
+            setDrawValue("Cobrar");
+          }
+        }, 1000);
+
+      const limit = new Date(contractDetail.shouldWithDraw);
+      interval(limit);
+    } else {
+      interval = null;
+    }
   }, [currentAddress]);
+
+  console.log(methods);
+  console.log(contractDetail);
 
   return (
     <>
@@ -97,7 +140,7 @@ function Dashboard({ currentAddress }) {
           )}
           {contractDetail.roundStage !== "ON_REGISTER_STAGE" && (
             <RoundCard
-              disabled={!currentAddress}
+              disabled={!currentAddress || drawValue !== "Cobrar"}
               contractKey={contractDetail.address}
               groupSize={contractDetail.groupSize}
               positionToWithdrawPay={contractDetail.positionToWithdrawPay}
@@ -105,8 +148,8 @@ function Dashboard({ currentAddress }) {
               linkTo={`/batch-details/${contracts.savingGroups[43113]}`}
               toPay={handleToPayAction}
               buttonText={
-                currentAddress === contractDetail.whoWithdrawPay
-                  ? "Cobrar"
+                currentAddress !== contractDetail.whoWithdrawPay
+                  ? drawValue
                   : "Pagar"
               }
               buttonDisabled={contractDetail.roundStage === "ON_ROUND_FINISHED"}

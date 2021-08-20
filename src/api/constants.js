@@ -7,3 +7,12 @@ export const stages = {
   1: ON_ROUND_ACTIVE,
   2: ON_ROUND_FINISHED,
 };
+
+export const configurationOfDates = {
+  formatMatcher: "basic",
+};
+
+export const reverseDateToOperation = (localDateString) => {
+  const parts = localDateString.split(" ");
+  return [parts[0].split("/").reverse().join("/"), parts[1]].join(" ");
+};
