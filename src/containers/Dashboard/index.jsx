@@ -124,9 +124,6 @@ function Dashboard({ currentAddress }) {
     }
   }, [currentAddress]);
 
-  console.log(methods);
-  console.log(contractDetail);
-
   return (
     <>
       <Title level={4} className={styles.dashboardTitle}>

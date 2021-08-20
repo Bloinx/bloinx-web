@@ -19,14 +19,6 @@ const getContractDetail = (methods) =>
       APIGetRoundsPeriods(methods),
     ]).then((responses) => {
       const turn = Number(responses[1]);
-      console.log(
-        new Date(),
-
-        responses[6].find((time) => {
-          console.log(time.round, turn);
-          return time.round === turn;
-        }).startToDraw
-      );
       resolve({
         address: formatAddress(contracts.savingGroups[43113]),
         groupSize: Number(responses[0]),

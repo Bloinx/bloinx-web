@@ -12,7 +12,8 @@
     "test:coverage": "craco test --coverage --watchAll=false",
     "eject": "craco eject",
     "lint": "eslint .",
-    "deploy": "firebase deploy"
+    "deploy": "firebase deploy --only hosting",
+    "release": "npm run build && npm run deploy"
   },
   "jest": {
     "collectCoverageFrom": [
