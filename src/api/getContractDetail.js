@@ -28,7 +28,7 @@ const getContractDetail = (methods) =>
         roundStage: responses[4].roundStage,
         whoWithdrawPay:
           responses[5].users
-            .find((user) => user.position === turn)[0]
+            .find((user) => user.position === turn)
             ?.address.toLowerCase() || null,
         usersLatePayments: responses[5].users.map(
           ({ address, latePayments }) => ({
@@ -37,7 +37,7 @@ const getContractDetail = (methods) =>
           })
         ),
         shouldWithDraw: reverseDateToOperation(
-          responses[6].find((time) => time.round === turn).startToDraw
+          responses[6].find((time) => time.round === turn)?.startToDraw || ""
         ),
       });
     });

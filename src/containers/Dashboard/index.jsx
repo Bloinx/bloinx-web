@@ -18,6 +18,7 @@ import APIGetRoundWithdrawPay from "../../api/getRoundWithdrawPay";
 import APISetPayRound from "../../api/setPayRound";
 import APISetWithdrawTurn from "../../api/setWithdrawTurn";
 import Placeholder from "../../components/Placeholder";
+// import APISetStartRound from "../../api/startRound";
 
 const { Title } = Typography;
 
@@ -32,7 +33,7 @@ function Dashboard({ currentAddress }) {
 
   const [contractDetail, setContractDetail] = useState({});
   const [payingLoader, setPayingLoader] = useState(false);
-  const [drawValue, setDrawValue] = useState("Cobrar");
+  const [drawValue, setDrawValue] = useState(null);
 
   const getContractStage = async () => {
     const data = await APIGetContractDetail(methods);
@@ -49,7 +50,7 @@ function Dashboard({ currentAddress }) {
 
   const handleToPayAction = async () => {
     setPayingLoader(true);
-    if (currentAddress === contractDetail.whoWithdrawPay) {
+    if (currentAddress === contractDetail.whoWithdrawPay && !drawValue) {
       const { status } = await APISetWithdrawTurn(methods, { currentAddress });
       if (status === "success") {
         notification.success({
@@ -88,7 +89,7 @@ function Dashboard({ currentAddress }) {
 
     if (
       contractDetail.shouldWithDraw &&
-      currentAddress !== contractDetail.whoWithdrawPay
+      currentAddress === contractDetail.whoWithdrawPay
     ) {
       interval = (limit) =>
         setInterval(() => {
@@ -113,7 +114,7 @@ function Dashboard({ currentAddress }) {
             );
           } else {
             interval = null;
-            setDrawValue("Cobrar");
+            setDrawValue(null);
           }
         }, 1000);
 
@@ -123,8 +124,6 @@ function Dashboard({ currentAddress }) {
       interval = null;
     }
   }, [currentAddress]);
-
-  console.log(methods);
 
   return (
     <>
@@ -139,7 +138,7 @@ function Dashboard({ currentAddress }) {
           )}
           {contractDetail.roundStage !== "ON_REGISTER_STAGE" && (
             <RoundCard
-              disabled={!currentAddress || drawValue !== "Cobrar"}
+              disabled={!currentAddress || drawValue}
               contractKey={contractDetail.address}
               groupSize={contractDetail.groupSize}
               positionToWithdrawPay={contractDetail.positionToWithdrawPay}
@@ -147,8 +146,8 @@ function Dashboard({ currentAddress }) {
               linkTo={`/batch-details/${contracts.savingGroups[43113]}`}
               toPay={handleToPayAction}
               buttonText={
-                currentAddress !== contractDetail.whoWithdrawPay
-                  ? drawValue
+                currentAddress === contractDetail.whoWithdrawPay
+                  ? drawValue || "Cobrar"
                   : "Pagar"
               }
               buttonDisabled={contractDetail.roundStage === "ON_ROUND_FINISHED"}
@@ -157,6 +156,12 @@ function Dashboard({ currentAddress }) {
           )}
         </div>
       )}
+      {/* <button
+        type="button"
+        onClick={() => APISetStartRound(methods, { currentAddress })}
+      >
+        Start
+      </button> */}
     </>
   );
 }

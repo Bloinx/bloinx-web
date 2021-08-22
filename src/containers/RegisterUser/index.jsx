@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { LeftOutlined } from "@ant-design/icons";
 import { FormattedMessage } from "react-intl";
 
+import { formatAddress } from "../../utils/format";
 import InputSelect from "../../components/InputSelect";
 import InputLabel from "../../components/InputLabel";
 
@@ -87,8 +88,14 @@ function RegisterUser({ currentAddress }) {
         ]}
       />
       <div className={styles.RegisterUserContent}>
-        <InputLabel label="Tanda" value={availablePlaces.contract} />
-        <InputLabel label="Mi dirección" value={currentAddress} />
+        <InputLabel
+          label="Tanda"
+          value={formatAddress(availablePlaces.contract)}
+        />
+        <InputLabel
+          label="Mi dirección"
+          value={formatAddress(currentAddress)}
+        />
         <InputSelect
           label="Selecciona un turno disponible"
           placeholder="Seleccione un turno"
