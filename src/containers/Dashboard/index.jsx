@@ -23,6 +23,7 @@ import Placeholder from "../../components/Placeholder";
 const { Title } = Typography;
 
 let interval = null;
+let refresh = null;
 
 function Dashboard({ currentAddress }) {
   const history = useHistory();
@@ -87,11 +88,11 @@ function Dashboard({ currentAddress }) {
   useEffect(() => {
     getContractStage();
 
-    if (currentAddress) {
-      setTimeout(() => {
+    if (currentAddress && !refresh) {
+      refresh = setInterval(() => {
         console.log("Refresh auto");
         getContractStage();
-      }, 1000);
+      }, 60000);
     }
 
     if (
