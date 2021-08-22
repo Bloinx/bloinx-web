@@ -6,7 +6,7 @@ import styles from "./RoundCardNew.module.scss";
 
 const { Title, Paragraph } = Typography;
 
-export default function RoundCardNew({ onClick }) {
+export default function RoundCardNew({ stage, onClick }) {
   return (
     <div className={styles.RoundCardNew}>
       <Title level={4} className={styles.RoundCardNewTitle}>
@@ -18,6 +18,7 @@ export default function RoundCardNew({ onClick }) {
       <Paragraph className={styles.RoundCardNewText}>
         Start connecting your wallet.
       </Paragraph>
+      <Paragraph className={styles.RoundCardNewText}>{stage}</Paragraph>
       <div className={styles.RoundCardNewOptions}>
         <Button type="primary" onClick={onClick}>
           Unirme a la ronda
@@ -27,6 +28,11 @@ export default function RoundCardNew({ onClick }) {
   );
 }
 
+RoundCardNew.defaultProps = {
+  stage: "",
+};
+
 RoundCardNew.propTypes = {
+  stage: PropTypes.string,
   onClick: PropTypes.func.isRequired,
 };

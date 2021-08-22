@@ -142,7 +142,10 @@ function Dashboard({ currentAddress }) {
       {currentAddress && (
         <div className={styles.RoundCards}>
           {contractDetail.roundStage === "ON_REGISTER_STAGE" && (
-            <RoundCardNew onClick={handleRegisterMe} />
+            <RoundCardNew
+              stage={contractDetail.roundStage}
+              onClick={handleRegisterMe}
+            />
           )}
           {contractDetail.roundStage !== "ON_REGISTER_STAGE" && (
             <RoundCard
