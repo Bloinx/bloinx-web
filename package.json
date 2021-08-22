@@ -13,6 +13,10 @@
     "eject": "craco eject",
     "lint": "eslint .",
     "deploy": "firebase deploy --only hosting",
+    "deploy:beta1": "firebase hosting:channel:deploy Grupo1",
+    "deploy:beta2": "firebase hosting:channel:deploy Grupo2",
+    "deploy:beta3": "firebase hosting:channel:deploy Grupo3",
+    "deploy:beta4": "firebase hosting:channel:deploy Grupo4",
     "release": "npm run build && npm run deploy"
   },
   "jest": {

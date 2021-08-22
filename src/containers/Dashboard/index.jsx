@@ -87,6 +87,13 @@ function Dashboard({ currentAddress }) {
   useEffect(() => {
     getContractStage();
 
+    if (currentAddress) {
+      setTimeout(() => {
+        console.log("Refresh auto");
+        getContractStage();
+      }, 1000);
+    }
+
     if (
       contractDetail.shouldWithDraw &&
       currentAddress === contractDetail.whoWithdrawPay
@@ -147,7 +154,7 @@ function Dashboard({ currentAddress }) {
               toPay={handleToPayAction}
               buttonText={
                 currentAddress === contractDetail.whoWithdrawPay
-                  ? drawValue || "Cobrar"
+                  ? `Espere ${drawValue}` || "Cobrar"
                   : "Pagar"
               }
               buttonDisabled={contractDetail.roundStage === "ON_ROUND_FINISHED"}
