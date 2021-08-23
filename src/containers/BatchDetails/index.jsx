@@ -186,7 +186,7 @@ function BatchDetails({ main }) {
           </div>
         </div>
         <div className={styles.BranchDetailsContentLine}>
-          <div>Pagos atrasados</div>
+          <div>Calendario de pagos</div>
           <div>
             {detail.groupSize}
             <RightOutlined

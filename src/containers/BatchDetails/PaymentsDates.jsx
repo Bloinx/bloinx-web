@@ -22,8 +22,6 @@ export default function PaymentsDates({ isOpen, onAccept, onCancel }) {
     getRoundsPeriods();
   }, []);
 
-  console.log(periodsData);
-
   return (
     <Modal visible={isOpen} onOk={onAccept} onCancel={onCancel}>
       <div className={styles.PaymentsDates}>

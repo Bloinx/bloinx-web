@@ -10,7 +10,7 @@ export default function RoundCardNew({ stage, onClick }) {
   return (
     <div className={styles.RoundCardNew}>
       <Title level={4} className={styles.RoundCardNewTitle}>
-        Add new rosca
+        Register on round
       </Title>
       <Paragraph className={styles.RoundCardNewText}>
         Start your saving circle with your friends or family now.
@@ -18,7 +18,11 @@ export default function RoundCardNew({ stage, onClick }) {
       <Paragraph className={styles.RoundCardNewText}>
         Start connecting your wallet.
       </Paragraph>
-      <Paragraph className={styles.RoundCardNewText}>{stage}</Paragraph>
+      <Paragraph className={styles.RoundCardNewText}>
+        {stage === "ON_REGISTER_STAGE"
+          ? "Tanda en espera de ser inciada"
+          : null}
+      </Paragraph>
       <div className={styles.RoundCardNewOptions}>
         <Button type="primary" onClick={onClick}>
           Unirme a la ronda

@@ -158,7 +158,7 @@ function Dashboard({ currentAddress }) {
               toPay={handleToPayAction}
               buttonText={
                 currentAddress === contractDetail.whoWithdrawPay
-                  ? `Espere ${drawValue}` || "Cobrar"
+                  ? (drawValue && `Espere ${drawValue}`) || "Cobrar"
                   : "Pagar"
               }
               buttonDisabled={contractDetail.roundStage === "ON_ROUND_FINISHED"}

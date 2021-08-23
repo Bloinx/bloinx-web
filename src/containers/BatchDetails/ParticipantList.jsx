@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Modal } from "antd";
 
 import APIGetUsersList from "../../api/getUsersList";
+import { formatAddress } from "../../utils/format";
 import Instance from "../../utils/contractInstance";
 import styles from "./ParticipantList.module.scss";
 
@@ -31,7 +32,7 @@ export default function ParticipantList({ isOpen, onAccept, onCancel }) {
           usersData.users.map((item) => (
             <div className={styles.UsersModalItem}>
               <div className={styles.UsersModalItemNumber}>{item.position}</div>
-              <div>{item.address}</div>
+              <div>{formatAddress(item.address)}</div>
             </div>
           ))}
       </div>
