@@ -51,7 +51,11 @@ function Dashboard({ currentAddress }) {
 
   const handleToPayAction = async () => {
     setPayingLoader(true);
-    if (currentAddress === contractDetail.whoWithdrawPay && !drawValue) {
+    if (
+      currentAddress === contractDetail.whoWithdrawPay &&
+      new Date().getHours() >= 8 &&
+      new Date().getHours() <= 13
+    ) {
       const { status } = await APISetWithdrawTurn(methods, { currentAddress });
       if (status === "success") {
         notification.success({
@@ -66,6 +70,22 @@ function Dashboard({ currentAddress }) {
         });
       }
       setPayingLoader(false);
+    } else if (
+      currentAddress === contractDetail.whoWithdrawPay &&
+      new Date().getHours() < 8
+    ) {
+      notification.warning({
+        message: "Por favor espera",
+        description: "El tiempo de cobro aun no ha inciado.",
+      });
+    } else if (
+      currentAddress === contractDetail.whoWithdrawPay &&
+      new Date().getHours() >= 14
+    ) {
+      notification.warning({
+        message: "El tiempo de cobro a terminado",
+        description: "Por favor espera el cambio de ronda",
+      });
     } else {
       const { status } = await APISetPayRound(methods, { currentAddress });
       if (status === "success") {
@@ -88,7 +108,7 @@ function Dashboard({ currentAddress }) {
   useEffect(() => {
     getContractStage();
 
-    if (currentAddress && !refresh) {
+    if (!refresh) {
       refresh = setInterval(() => {
         console.log("Refresh auto");
         getContractStage();
@@ -133,6 +153,11 @@ function Dashboard({ currentAddress }) {
     }
   }, [currentAddress]);
 
+  const cobro =
+    new Date().getHours() >= 8 && new Date().getHours() <= 14
+      ? "Cobrar"
+      : "Espere";
+
   return (
     <>
       <Title level={4} className={styles.dashboardTitle}>
@@ -149,7 +174,7 @@ function Dashboard({ currentAddress }) {
           )}
           {contractDetail.roundStage !== "ON_REGISTER_STAGE" && (
             <RoundCard
-              disabled={!currentAddress || drawValue}
+              disabled={!currentAddress}
               contractKey={contractDetail.address}
               groupSize={contractDetail.groupSize}
               positionToWithdrawPay={contractDetail.positionToWithdrawPay}
@@ -158,7 +183,7 @@ function Dashboard({ currentAddress }) {
               toPay={handleToPayAction}
               buttonText={
                 currentAddress === contractDetail.whoWithdrawPay
-                  ? (drawValue && `Espere ${drawValue}`) || "Cobrar"
+                  ? cobro
                   : "Pagar"
               }
               buttonDisabled={contractDetail.roundStage === "ON_ROUND_FINISHED"}
