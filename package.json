@@ -1,6 +1,6 @@
 {
   "name": "bloinx-web",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "license": "UNLICENSED",
   "homepage": "https://bloinx-web.web.app/",
@@ -16,7 +16,7 @@
     "deploy": "firebase deploy --only hosting",
     "deploy:UAT": "firebase hosting:channel:deploy UAT",
     "commitlint": "commitlint --from=development",
-    "release": "standard-version"
+    "release": "standard-version && git push --follow-tags origin development"
   },
   "jest": {
     "collectCoverageFrom": [
