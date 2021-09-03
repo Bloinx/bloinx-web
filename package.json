@@ -1,10 +1,11 @@
 {
   "name": "bloinx-web",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "license": "UNLICENSED",
   "homepage": "https://bloinx-web.web.app/",
   "scripts": {
+    "flow": "flow",
     "start": "craco start",
     "build": "rm -r build && craco build",
     "test": "craco test --watchAll=false",
@@ -13,11 +14,9 @@
     "eject": "craco eject",
     "lint": "eslint .",
     "deploy": "firebase deploy --only hosting",
-    "deploy:beta1": "firebase hosting:channel:deploy Grupo1",
-    "deploy:beta2": "firebase hosting:channel:deploy Grupo2",
-    "deploy:beta3": "firebase hosting:channel:deploy Grupo3",
-    "deploy:beta4": "firebase hosting:channel:deploy Grupo4",
-    "release": "npm run build && npm run deploy"
+    "deploy:UAT": "firebase hosting:channel:deploy UAT",
+    "commitlint": "commitlint --from=development",
+    "release": "standard-version"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -79,6 +78,7 @@
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "prettier": "2.3.2"
+    "prettier": "2.3.2",
+    "standard-version": "^9.3.1"
   }
 }
