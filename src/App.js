@@ -1,58 +1,41 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { Layout } from "antd";
 import { connect } from "react-redux";
-import { FormattedMessage } from "react-intl";
+import { Switch, Route, Redirect } from "react-router-dom";
 
-import NavAside from "./components/NavAside";
-import Navbar from "./components/Navbar";
-import Routes from "./routes";
-import getSavingGroupsMethods from "./utils/getSGContract";
-import useWindowDimensions from "./utils/useWindowDimensions";
+import Login from "./containers/Login";
+import SignUp from "./containers/Signup";
+import Markup from "./containers/Markup";
+import Dashboard from "./containers/Dashboard";
+import CreateBatch from "./containers/CreateBatch";
+import RegisterPay from "./containers/RegisterPay";
+import RegisterUser from "./containers/RegisterUser";
+import BatchDetails from "./containers/BatchDetails";
 import { getInitialContractInstance } from "./redux/actions/main";
 
 import "./App.scss";
 
-const { Header, Content, Footer } = Layout;
-
 function App({ initialContractInstance }) {
-  const { width } = useWindowDimensions();
-
-  const [visible, setVisible] = useState(false);
-
-  const instanceContractsEnviroment = async () => {
-    const instance = await getSavingGroupsMethods();
-    initialContractInstance(instance);
-  };
-
-  const toggleDrawer = (status) => {
-    if (status) {
-      setVisible(!visible);
-    } else {
-      setVisible(status);
-    }
-  };
-
-  useEffect(() => {
-    instanceContractsEnviroment();
-  }, []);
-
   return (
-    <Layout className="appLayout">
-      <NavAside width={width} toggleDrawer={toggleDrawer} visible={visible} />
-      <Layout>
-        <Header className="appHeader">
-          <Navbar width={width} toggleDrawer={toggleDrawer} visible={visible} />
-        </Header>
-        <Content className="appSection">
-          <Routes />
-        </Content>
-        <Footer className="appFooter">
-          <FormattedMessage id="copyright" />
-        </Footer>
-      </Layout>
-    </Layout>
+    <Switch>
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/signup" component={SignUp} />
+      <Markup initialContractInstance={initialContractInstance}>
+        <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/createbatch" component={CreateBatch} />
+        <Route exact path="/registeruser" component={RegisterUser} />
+        <Route exact path="/registerpay" component={RegisterPay} />
+        <Route
+          exact
+          path="/batch-details/:savingGroup"
+          component={BatchDetails}
+        />
+        <Route exact path="/">
+          <Redirect to="/login" />
+        </Route>
+      </Markup>
+    </Switch>
   );
 }
 
