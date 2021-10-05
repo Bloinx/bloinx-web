@@ -21,6 +21,7 @@ export default function InputAmount({
       <div className={styles.amountContainer}>
         <Text>$</Text>
         <InputNumber
+          data-testid="InputAmount-test"
           value={value}
           // formatter={value => `$ ${value} ${currency}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           // parser={value => value.replace(/\$\sA-Za-z?|(,*)/g, '')}

@@ -5,7 +5,7 @@ import { FormattedMessage } from "react-intl";
 
 import styles from "./styles.module.scss";
 
-export function ButtonNextStep({ onBack, onClick, disabled }) {
+function ButtonNextStep({ onBack, onClick, disabled }) {
   return (
     <div className={styles.ButtonNextStep}>
       <Button onClick={onBack}>

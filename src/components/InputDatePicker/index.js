@@ -18,6 +18,7 @@ export default function InputDatePicker({ label, value, onChange, name }) {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <KeyboardDatePicker
+        data-testid="InputDatePicker-test"
         margin="normal"
         id="date"
         name={name}

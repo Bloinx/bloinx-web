@@ -2,7 +2,17 @@
 
 exports[`Stepper renders correctly 1`] = `
 <div
-  className="ant-steps ant-steps-vertical"
-  style={Object {}}
-/>
+  className="StepperContainer"
+>
+  <div
+    className="StepperIndicators"
+  />
+  <div
+    className="ant-steps ant-steps-horizontal ant-steps-small ant-steps-label-horizontal"
+    style={Object {}}
+  />
+  <div
+    className="StepperTitles"
+  />
+</div>
 `;
