@@ -30,7 +30,7 @@ const { Title } = Typography;
 // let refresh = null;
 
 function Dashboard(props) {
-  console.log(props);
+  // console.log(props);
   // const { currentAddress, userId } = props;
   const history = useHistory();
   // const {

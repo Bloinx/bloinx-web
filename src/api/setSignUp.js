@@ -1,14 +1,14 @@
 import firebase from "./config.firebase";
 
-const signUp = ({ user, password }) => {
+const signUp = ({ user, password, onSuccess, onFailure }) => {
   firebase
     .auth()
     .createUserWithEmailAndPassword(user, password)
     .then((userCredential) => {
-      console.log(userCredential);
+      onSuccess(userCredential);
     })
     .catch((error) => {
-      console.log(error);
+      onFailure(error);
     });
 };
 
