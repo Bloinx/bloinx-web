@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import Login from "./containers/Login";
+import Logout from "./containers/Logout";
 import SignUp from "./containers/Signup";
 import Markup from "./containers/Markup";
 import Dashboard from "./containers/Dashboard";
@@ -20,6 +21,7 @@ function App({ initialContractInstance }) {
   return (
     <Switch>
       <Route exact path="/login" component={Login} />
+      <Route exact path="/logout" component={Logout} />
       <Route exact path="/signup" component={SignUp} />
       <Markup initialContractInstance={initialContractInstance}>
         <Route exact path="/dashboard" component={Dashboard} />

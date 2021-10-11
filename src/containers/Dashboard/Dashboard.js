@@ -29,7 +29,9 @@ const { Title } = Typography;
 // let interval = null;
 // let refresh = null;
 
-function Dashboard({ currentAddress, userId }) {
+function Dashboard(props) {
+  console.log(props);
+  // const { currentAddress, userId } = props;
   const history = useHistory();
   // const {
   //   contract: { methods },
@@ -164,7 +166,6 @@ function Dashboard({ currentAddress, userId }) {
 
   const roundsRef = firebase.database().ref("rounds/");
   const [snapshots, loading, error] = useList(roundsRef);
-  console.log(snapshots);
 
   return (
     <>
@@ -230,14 +231,14 @@ function Dashboard({ currentAddress, userId }) {
   );
 }
 
-Dashboard.propTypes = {
-  currentAddress: PropTypes.string,
-  userId: PropTypes.string,
-};
+// Dashboard.propTypes = {
+//   currentAddress: PropTypes.string,
+//   userId: PropTypes.string,
+// };
 
-Dashboard.defaultProps = {
-  currentAddress: null,
-  userId: null,
-};
+// Dashboard.defaultProps = {
+//   currentAddress: null,
+//   userId: null,
+// };
 
 export default Dashboard;

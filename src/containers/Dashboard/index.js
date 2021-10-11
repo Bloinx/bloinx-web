@@ -1,15 +1,19 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-unused-vars */
+import React from "react";
 import { connect } from "react-redux";
-import firebase from "../../api/config.firebase";
+import withAuthProvider from "../../providers/withAuthProvider";
 
+import firebase from "../../api/config.firebase";
 import Dashboard from "./Dashboard";
 
-const mapStateToProps = (state) => {
-  const currentAddress = state?.main?.currentAddress;
-  const userId = state?.user?.user?.uid;
-  return { currentAddress, userId };
-};
+// const mapStateToProps = (state) => {
+//   const currentAddress = state?.main?.currentAddress;
+//   const userId = state?.user?.user?.uid;
+//   return { currentAddress, userId };
+// };
 
-const mapDispatchToProps = () => ({});
+// const mapDispatchToProps = () => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+// export default connect(mapStateToProps, mapDispatchToProps)(DashboardPage);
+export default withAuthProvider(Dashboard);
