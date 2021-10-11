@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import InputSlider from "../../components/InputSlider";
 import InputSelect from "../../components/InputSelect";
 import InputAmount from "../../components/InputAmount";
-import { ButtonNextStep } from "../../components/ButtonNextStep";
+import ButtonNextStep from "../../components/ButtonNextStep";
 
 const { Title, Paragraph } = Typography;
 

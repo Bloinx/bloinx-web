@@ -5,7 +5,7 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 
 import InputSelect from "../../components/InputSelect";
-import { ButtonNextStep } from "../../components/ButtonNextStep";
+import ButtonNextStep from "../../components/ButtonNextStep";
 
 const { Title, Paragraph } = Typography;
 

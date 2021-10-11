@@ -240,12 +240,4 @@ Dashboard.defaultProps = {
   userId: null,
 };
 
-const mapStateToProps = (state) => {
-  const currentAddress = state?.main?.currentAddress;
-  const userId = state?.user?.user?.uid;
-  return { currentAddress, userId };
-};
-
-const mapDispatchToProps = () => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default Dashboard;
