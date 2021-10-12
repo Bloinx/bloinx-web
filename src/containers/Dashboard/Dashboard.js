@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Typography, notification, Button } from "antd";
+import { PlusCircleOutlined } from "@ant-design/icons";
 import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
 import { useList } from "react-firebase-hooks/database";
@@ -11,6 +12,7 @@ import firebase from "../../api/config.firebase";
 
 import RoundCard from "./RoundCard";
 import RoundCardNew from "./RoundCardNew";
+import PageHeader from "../../components/PageHeader";
 import styles from "./index.module.scss";
 
 import contracts from "../../constants/contracts";
@@ -164,6 +166,10 @@ function Dashboard(props) {
   //     ? "Cobrar"
   //     : "Espere";
 
+  const goToCreate = () => {
+    history.push("/create-round");
+  };
+
   const roundsRef = firebase.database().ref("rounds/");
   const [snapshots, loading, error] = useList(roundsRef);
 
@@ -171,9 +177,15 @@ function Dashboard(props) {
     <>
       <div>
         <div>
-          <Title level={5} className={styles.dashboardTitle}>
-            <FormattedMessage id="dashboardPage.title" />
-          </Title>
+          <PageHeader
+            title={<FormattedMessage id="dashboardPage.title" />}
+            action={
+              <PlusCircleOutlined
+                onClick={goToCreate}
+                style={{ fontSize: "20px", color: "white" }}
+              />
+            }
+          />
         </div>
         <div>
           <Button onClick={() => APISetCreateRound({ name: "test" })}>

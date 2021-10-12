@@ -16,29 +16,11 @@
       "status": "Estatus"
     }
   },
-  "createBatch":{
-    "stepper": {
-      "step1": "Datos generales",
-      "step2": "Configuración",
-      "step3": "Resumen"
-    },
-    "titles": {
-      "generalData":{
-        "title": "Datos generales",
-        "description": "Son los datos que identificarán a tu tanda y le harán saber a los demás cuando empieza y si será con amigos o desconocidos."
-      },
-      "configuration":{
-        "title": "Configuración",
-        "description": "Personaliza tu tanda y piensa en las características que tu grupo de amigos tiene y el monto que quieren ahorrar por periodo."
-      },
-      "resume": {
-        "title": "Resumen",
-        "description": "Por último, confirma que toda la información es correcta y elige en qué ronda recibirás tu lote."
-      },
-      "invitation": {
-        "title": "Invitación",
-        "description": "Compartela con la gente con la que quieres inciar este círculo de ahorro enviandoles un correo electrónico."
-      }
+  "createRound":{
+    "title": "Crear ronda",
+    "labels": {
+      "payPerRound": "Monto pagado por ronda",
+      "rewards": "Tu recibiras"
     },
     "form":{
       "label":{
@@ -50,7 +32,12 @@
           "private": "Privada"
         },
         "participants": "Número de participantes",
-        "longevity": "Periodicidad",
+        "periodicity": "Duración de la ronda",
+        "periodicityOptions": {
+          "weekly": "Semanal",
+          "biweekly": "Quincenal",
+          "monthly": "Mensual"
+        },
         "amount": "Monto por periodo",
         "admin": "Admistrador",
         "position": "Elige tu posición",

@@ -33,8 +33,12 @@ InputOptionSelect.defaultProps = {
 };
 
 InputOptionSelect.propTypes = {
-  label: PropTypes.string,
-  value: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+  ]),
   options: PropTypes.instanceOf(Array).isRequired,
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
