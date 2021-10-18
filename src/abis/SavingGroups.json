@@ -25,15 +25,17 @@
 				"internalType": "uint256",
 				"name": "_payTime",
 				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_withdrawTime",
-				"type": "uint256"
 			}
 		],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "addPayment",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
 	},
 	{
 		"inputs": [
@@ -69,14 +71,179 @@
 	},
 	{
 		"inputs": [],
-		"name": "advanceTurn",
+		"name": "endRound",
 		"outputs": [],
-		"stateMutability": "payable",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"inputs": [],
-		"name": "cashOutUsers",
+		"name": "futurePayments",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getRealTurn",
+		"outputs": [
+			{
+				"internalType": "uint8",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "_userTurn",
+				"type": "uint8"
+			}
+		],
+		"name": "getUserAmountPaid",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "_userTurn",
+				"type": "uint8"
+			}
+		],
+		"name": "getUserAvailableCashIn",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "_userTurn",
+				"type": "uint8"
+			}
+		],
+		"name": "getUserAvailableSavings",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "_userTurn",
+				"type": "uint8"
+			}
+		],
+		"name": "getUserIsActive",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "_userTurn",
+				"type": "uint8"
+			}
+		],
+		"name": "getUserLatePayments",
+		"outputs": [
+			{
+				"internalType": "uint8",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "_userTurn",
+				"type": "uint8"
+			}
+		],
+		"name": "getUserOwedTotalCashIn",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "_userTurn",
+				"type": "uint8"
+			}
+		],
+		"name": "getUserTurn",
+		"outputs": [
+			{
+				"internalType": "uint8",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "_userTurn",
+				"type": "uint8"
+			}
+		],
+		"name": "getUserUnassignedPayments",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -103,12 +270,12 @@
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
+				"internalType": "address",
+				"name": "userAddress",
+				"type": "address"
 			}
 		],
-		"name": "latePaymentsList",
+		"name": "obligationAtTime",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -117,20 +284,6 @@
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "payCashIn",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "payLateTurn",
-		"outputs": [],
-		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -147,18 +300,11 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "payTurn",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "_usrTurn",
-				"type": "uint256"
+				"internalType": "uint8",
+				"name": "_userTurn",
+				"type": "uint8"
 			}
 		],
 		"name": "registerUser",
@@ -170,18 +316,11 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_usrTurn",
+				"name": "_userTurn",
 				"type": "uint256"
 			}
 		],
 		"name": "removeUser",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "restartRound",
 		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"
@@ -234,19 +373,6 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalSaveAmount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "turn",
 		"outputs": [
 			{
@@ -274,39 +400,44 @@
 				"type": "address"
 			},
 			{
-				"internalType": "bool",
-				"name": "saveAmountFlag",
-				"type": "bool"
+				"internalType": "uint8",
+				"name": "userTurn",
+				"type": "uint8"
 			},
 			{
-				"internalType": "bool",
-				"name": "currentRoundFlag",
-				"type": "bool"
+				"internalType": "uint256",
+				"name": "availableCashIn",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "availableSavings",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amountPaid",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "unassignedPayments",
+				"type": "uint256"
 			},
 			{
 				"internalType": "uint8",
 				"name": "latePayments",
 				"type": "uint8"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "withdrawCashIn",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "withdrawTime",
-		"outputs": [
+			},
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "owedTotalCashIn",
 				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isActive",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
