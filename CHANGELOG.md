@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5-next.0](https://github.com/Bloinx/bloinx-web/compare/v0.0.4...v0.0.5-next.0) (2021-10-25)
+
+
+### Features
+
+* **create round:** Add create round flow ([7174bab](https://github.com/Bloinx/bloinx-web/commit/7174bab5b2ff3ed3663380a67188e5c0c8dfb968))
+
+
+### Bug Fixes
+
+* **coverage:** add unit test for components ([238f044](https://github.com/Bloinx/bloinx-web/commit/238f04462668186365cd98c3a05fedc5642cbfa2))
+* **create-round:** add initial screen for create round ([430c23d](https://github.com/Bloinx/bloinx-web/commit/430c23d6373308f3771143b6711f42823c539884))
+* **providers:** Create provider for auth ([2d90204](https://github.com/Bloinx/bloinx-web/commit/2d90204e950d8110e843a5beaad814fee9864611))
+* **sesion:** Add redirection to logout for invalid session ([41740ea](https://github.com/Bloinx/bloinx-web/commit/41740ea5d1e34ab79d458c4ec2d3cb9c7d6fc647))
+* **sesion:** data recovery for session in redux ([6f13270](https://github.com/Bloinx/bloinx-web/commit/6f13270f44f932b962ce410e50cabb2320581ffd))
+* update Main abi ([1073ac6](https://github.com/Bloinx/bloinx-web/commit/1073ac61f41072f59038d52609a937ba6299e7f4))
+
 ### [0.0.4](https://github.com/Bloinx/bloinx-web/compare/v0.0.3...v0.0.4) (2021-09-03)
 
 ### [0.0.3](https://github.com/Bloinx/bloinx-web/compare/v0.0.2...v0.0.3) (2021-09-03)
