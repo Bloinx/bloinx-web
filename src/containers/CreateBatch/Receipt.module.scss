@@ -1,0 +1,35 @@
+@import "../../theme.scss";
+
+.ReceiptCardLoader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  p {
+    color: $gray-light;
+    margin-top: 20px;
+  }
+}
+
+.ReceiptCard {
+  background-color: $gray;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 15px 17px 25px 17px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ReceiptCardTerms {
+  color: white;
+  margin-bottom: 85px;
+}
+
+.ReceiptCardItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+}

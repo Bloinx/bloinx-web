@@ -170,8 +170,8 @@ function Dashboard(props) {
     history.push("/create-round");
   };
 
-  const roundsRef = firebase.database().ref("rounds/");
-  const [snapshots, loading, error] = useList(roundsRef);
+  // const roundsRef = firebase.database().ref("rounds/");
+  // const [snapshots, loading, error] = useList(roundsRef);
 
   return (
     <>
@@ -194,14 +194,14 @@ function Dashboard(props) {
         </div>
       </div>
       <div className={styles.RoundCards}>
-        {!loading &&
+        {/* {!loading &&
           snapshots &&
           snapshots.map((round, index) => {
             if (round.val().stage === 0) {
               return <RoundCardNew stage={null} onClick={() => {}} />;
             }
             return <div>sdfdsf</div>;
-          })}
+          })} */}
       </div>
       {/* 
       {!currentAddress && <Placeholder />}

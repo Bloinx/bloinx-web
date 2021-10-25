@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import firebase from "../api/config.firebase";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function WithAuthProvider(WrappedComponent) {
   const Auth = ({ saveUser, user, ...other }) => {
@@ -13,7 +13,8 @@ function WithAuthProvider(WrappedComponent) {
     useEffect(() => {
       if (!user.uid) {
         try {
-          firebase.auth().onAuthStateChanged((userUpdated) => {
+          const auth = getAuth();
+          onAuthStateChanged(auth, (userUpdated) => {
             if (userUpdated) {
               saveUser(userUpdated);
             } else {

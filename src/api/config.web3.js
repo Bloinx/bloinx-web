@@ -1,7 +1,8 @@
 import Web3 from "web3";
-// import SavingGroups from "../abis/SavingGroups.json";
 import Main from "../abis/Main.json";
-// import contracts from "../constants/contracts";
+
+export const MAIN_FACTORY_FIJI_TEST_NET =
+  "0x2F6497021e3Ef81587D94B805CaA90B5e3e8d72e";
 
 export default function config() {
   const httpProvider = new Web3.providers.HttpProvider(
@@ -11,13 +12,10 @@ export default function config() {
     }
   );
 
-  const currentMainFactory = "0x3D7D023400cAF0Ad5f77162A4F201AeF9d334dE6"; // Factory
-  // const currentSaving = contracts.savingGroups[43113];
   const web3Provider = new Web3(window?.web3?.currentProvider || httpProvider);
   const contract = new web3Provider.eth.Contract(
-    // SavingGroups,
     Main,
-    currentMainFactory
+    MAIN_FACTORY_FIJI_TEST_NET
   );
 
   return contract;

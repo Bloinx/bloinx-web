@@ -17,35 +17,38 @@
     }
   },
   "createRound":{
-    "title": "Crear ronda",
+    "title": "Crear nueva tanda",
+    "titleConfirm": "Personaliza tu tanda",
+    "titleReceipt": "Pagar depósito de seguridad",
     "labels": {
       "payPerRound": "Monto pagado por ronda",
-      "rewards": "Tu recibiras"
+      "rewards": "Tu recibiras",
+      "amount": "Cada participante pagará",
+      "receiptAmount": "A su vez recibirá",
+      "roundTime": "Tiempo de duración por ronda",
+      "terms": "Entiendo completamente como el depósito de seguridad funciona"
     },
     "form":{
       "label":{
-        "batchName":"Nombre de la tanda",
-        "startDate":"Fecha de inciio",
-        "batchType":"Tipo de tanda",
-        "batchTypeOptions": {
-          "public": "Publica",
-          "private": "Privada"
-        },
         "participants": "Número de participantes",
+        "amount": "Monto por periodo",
         "periodicity": "Duración de la ronda",
         "periodicityOptions": {
           "weekly": "Semanal",
           "biweekly": "Quincenal",
           "monthly": "Mensual"
         },
-        "amount": "Monto por periodo",
-        "admin": "Admistrador",
-        "position": "Elige tu posición",
-        "emails": "Ingrese los emails"
+        "name":"Nombre de la tanda",
+        "motivation":"Motivación personal",
+        "turn": "Turno para recibir la tanda"
       },
       "placeholder": {
         "batchName":"Nombre de la tanda"
       }
+    },
+    "actions":{
+      "createRound": "Crear tanda",
+      "payGuarantee": "Pagar garantia"
     }
   },
   "payments":{

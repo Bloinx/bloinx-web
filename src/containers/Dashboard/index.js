@@ -4,7 +4,7 @@ import React from "react";
 import { connect } from "react-redux";
 import withAuthProvider from "../../providers/withAuthProvider";
 
-import firebase from "../../api/config.firebase";
+// import firebase from "../../api/config.firebase";
 import Dashboard from "./Dashboard";
 
 // const mapStateToProps = (state) => {

@@ -20,7 +20,7 @@ export default function InputSelect({
 
   return (
     <div className={styles.InputSelect}>
-      <Text className={styles.Label}>{label}</Text>
+      <Text className={styles.InputSelectLabel}>{label}</Text>
       <Select
         disabled={disabled}
         placeholder={placeholder}

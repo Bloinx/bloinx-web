@@ -13,19 +13,27 @@ export default function InputSlider({
   min,
   max,
   name,
+  step,
 }) {
   const handleOnChange = (arg) => onChange({ target: { value: arg, name } });
 
   return (
     <div className={styles.InputSlider}>
       <Text className={styles.Label}>{label}</Text>
-      <Slider onChange={handleOnChange} value={value} min={min} max={max} />
+      <Slider
+        onChange={handleOnChange}
+        value={value}
+        min={min}
+        max={max}
+        step={step}
+      />
     </div>
   );
 }
 
 InputSlider.defaultProps = {
   label: "",
+  step: 1,
   onChange: () => {},
 };
 
@@ -36,4 +44,5 @@ InputSlider.propTypes = {
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
+  step: PropTypes.number,
 };

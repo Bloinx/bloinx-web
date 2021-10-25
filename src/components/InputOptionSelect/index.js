@@ -15,13 +15,14 @@ export default function InputOptionSelect({
 }) {
   return (
     <span className={styles.InputOptionSelect}>
-      <Text className={styles.Label}>{label}</Text>
+      <Text className={styles.InputOptionSelectLabel}>{label}</Text>
       <Radio.Group
         options={options}
         onChange={onChange}
         value={value}
         name={name}
         optionType="button"
+        buttonStyle="solid"
       />
     </span>
   );

@@ -3,32 +3,41 @@ import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Form from "./Form";
+import Confirm from "./Confirm";
+import Receipt from "./Receipt";
+import Status from "./Status";
 
-const CreateRound = () => {
-  const [form, setForm] = useState({
-    participants: 5,
-    amount: 100,
-    periodicity: "weekly",
-  });
+import { INITIAL_FORM_VALUES } from "./constants";
 
-  const onChangeValue = ({ target }) => {
-    setForm({ ...form, [target.name]: target.value });
-  };
+function CreateRound() {
+  const baseUrl = "/create-round";
+
+  const [form, setForm] = useState(INITIAL_FORM_VALUES);
 
   return (
     <Switch>
       <Route
         exact
-        path="/create-round"
-        component={() => <Form form={form} onChangeValue={onChangeValue} />}
+        path={baseUrl}
+        component={() => <Form form={form} setForm={setForm} />}
       />
       <Route
         exact
-        path="/create-round/confirm"
-        component={() => <Form form={form} onChangeValue={onChangeValue} />}
+        path={`${baseUrl}/confirm`}
+        component={() => <Confirm form={form} setForm={setForm} />}
+      />
+      <Route
+        exact
+        path={`${baseUrl}/receipt`}
+        component={() => <Receipt form={form} setForm={setForm} />}
+      />
+      <Route
+        exact
+        path={`${baseUrl}/status`}
+        component={() => <Status form={form} setForm={setForm} />}
       />
     </Switch>
   );
-};
+}
 
-export default CreateRound;
+export default React.memo(CreateRound);

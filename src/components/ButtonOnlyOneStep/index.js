@@ -5,11 +5,18 @@ import { FormattedMessage } from "react-intl";
 
 import styles from "./styles.module.scss";
 
-function ButtonOnlyOneStep({ onClick, disabled }) {
+function ButtonOnlyOneStep({ type, onClick, disabled, label, loading }) {
   return (
     <div className={styles.ButtonOnlyOneStep}>
-      <Button onClick={onClick} disabled={disabled}>
-        <FormattedMessage id="commons.buttons.continue" />
+      <Button
+        loading={loading}
+        htmlType={type}
+        type="primary"
+        size="large"
+        onClick={onClick}
+        disabled={disabled}
+      >
+        {label || <FormattedMessage id="commons.buttons.continue" />}
       </Button>
     </div>
   );
@@ -17,11 +24,18 @@ function ButtonOnlyOneStep({ onClick, disabled }) {
 
 ButtonOnlyOneStep.defaultProps = {
   disabled: false,
+  loading: false,
+  type: "button",
+  label: "",
+  onClick: () => {},
 };
 
 ButtonOnlyOneStep.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
+  type: PropTypes.string,
+  onClick: PropTypes.func,
   disabled: PropTypes.bool,
+  label: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
 };
 
 export default ButtonOnlyOneStep;

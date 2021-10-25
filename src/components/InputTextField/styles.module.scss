@@ -1,6 +1,28 @@
+@import "../../theme.scss";
+
+.TextField {
+  display: flex;
+  flex-direction: column;
+}
+
 .TextFieldLabel {
   font-size: 12px;
   color: rgba($color: #000000, $alpha: 0.54);
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   margin-bottom: 8px;
+}
+
+.TextFieldInput {
+  border: none;
+  border-bottom: 1px solid $gray-light;
+  background-color: transparent;
+  color: white !important;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.TextFieldError {
+  color: $pink;
+  font-size: 12px;
+  margin-top: 5px;
 }
