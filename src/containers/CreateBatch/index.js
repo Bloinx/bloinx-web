@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Form from "./Form";
-import Confirm from "./Confirm";
 import Receipt from "./Receipt";
 import Status from "./Status";
 
@@ -24,16 +23,11 @@ function CreateRound() {
       <Route
         exact
         path={`${baseUrl}/confirm`}
-        component={() => <Confirm form={form} setForm={setForm} />}
-      />
-      <Route
-        exact
-        path={`${baseUrl}/receipt`}
         component={() => <Receipt form={form} setForm={setForm} />}
       />
       <Route
         exact
-        path={`${baseUrl}/status`}
+        path={`${baseUrl}/receipt/:status(success|error)`}
         component={() => <Status form={form} setForm={setForm} />}
       />
     </Switch>

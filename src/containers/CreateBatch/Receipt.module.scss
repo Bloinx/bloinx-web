@@ -1,18 +1,5 @@
 @import "../../theme.scss";
 
-.ReceiptCardLoader {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-
-  p {
-    color: $gray-light;
-    margin-top: 20px;
-  }
-}
-
 .ReceiptCard {
   background-color: $gray;
   border-radius: 5px;

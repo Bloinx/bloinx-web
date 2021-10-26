@@ -3,15 +3,16 @@
 import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 
-import config, { MAIN_FACTORY_FIJI_TEST_NET } from "./config.web3";
+import config, { MAIN_FACTORY_FIJI_TEST_NET } from "./config.main.web3";
 
 const setCreateRound = ({
   name,
-  warranty = 1,
-  saving = 1,
-  groupSize = 3,
-  payTime = 518400,
-  isPublic = false,
+  warranty,
+  saving,
+  groupSize,
+  payTime,
+  isPublic,
+  walletAddress,
 }) =>
   new Promise((resolve, reject) => {
     const a = config();
@@ -21,7 +22,7 @@ const setCreateRound = ({
     a.methods
       .createRound(warranty, saving, groupSize, payTime)
       .send({
-        from: "0xCfbc744B87Aac00Ec2Faf5D08bBA52E70835B484",
+        from: walletAddress,
         to: MAIN_FACTORY_FIJI_TEST_NET,
       })
       .once("receipt", async (receipt) => {
@@ -30,10 +31,10 @@ const setCreateRound = ({
         const admin = receipt.from;
         const folio = receipt.transactionHash;
 
-        addDoc(collection(db, "round"), {
-          firebase_user: uid,
-          create_by: admin,
-          blockchain_address: contract,
+        const params = {
+          createByUser: uid,
+          createByWallet: admin,
+          contract,
           folio,
           name,
           warranty,
@@ -42,7 +43,11 @@ const setCreateRound = ({
           payTime,
           isPublic,
           stage: 0,
-        })
+          motivation: "other",
+          positions: [],
+        };
+        console.log(params);
+        addDoc(collection(db, "round"), params)
           .then((docRef) => {
             resolve(docRef);
           })

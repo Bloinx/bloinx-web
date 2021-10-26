@@ -26,7 +26,7 @@ function App({ initialContractInstance }) {
       <Markup initialContractInstance={initialContractInstance}>
         <Route exact path="/dashboard" component={Dashboard} />
         <Route path="/create-round" component={CreateBatch} />
-        <Route exact path="/registeruser" component={RegisterUser} />
+        <Route path="/register-user" component={RegisterUser} />
         <Route exact path="/registerpay" component={RegisterPay} />
         <Route
           exact

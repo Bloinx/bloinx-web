@@ -5,8 +5,11 @@ import { Link } from "react-router-dom";
 
 import styles from "./RoundCard.module.scss";
 import Stepper from "../../components/Stepper";
+import { formatAddress } from "../../utils/format";
 
 export default function RoundCard({
+  name,
+  description,
   contractKey,
   groupSize,
   turn,
@@ -30,15 +33,17 @@ export default function RoundCard({
     <div className={styles.RoundCard}>
       <Link to={linkTo}>
         <div className={styles.RoundCardHeader}>
-          <div className={styles.RoundCardTitle}>Mi tanda</div>
-          <div className={styles.RoundCardKeys}>{contractKey}</div>
+          <div className={styles.RoundCardTitle}>{name}</div>
+          <div className={styles.RoundCardKeys}>
+            {formatAddress(contractKey)}
+          </div>
         </div>
         <Stepper
           current={turn}
           steps={handleGetSteps()}
           turnWithDraw={positionToWithdrawPay}
         />
-        <div className={styles.RoundCardDescription} />
+        <div className={styles.RoundCardDescription}>{description}</div>
       </Link>
       <div className={styles.RoundCardFooter}>
         <div className={styles.RoundCardTitleFooter}>{`Ronda ${turn}`}</div>
@@ -57,6 +62,8 @@ export default function RoundCard({
 }
 
 RoundCard.defaultProps = {
+  name: undefined,
+  description: undefined,
   linkTo: "",
   buttonText: "",
   toPay: () => {},
@@ -67,6 +74,8 @@ RoundCard.defaultProps = {
 };
 
 RoundCard.propTypes = {
+  name: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  description: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   contractKey: PropTypes.string.isRequired,
   groupSize: PropTypes.number.isRequired,
   turn: PropTypes.number.isRequired,

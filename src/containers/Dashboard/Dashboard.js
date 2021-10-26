@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
@@ -6,6 +7,14 @@ import { Typography, notification, Button } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
+import {
+  collection,
+  query,
+  where,
+  onSnapshot,
+  getFirestore,
+} from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 import { useList } from "react-firebase-hooks/database";
 import { connect } from "react-redux";
 import firebase from "../../api/config.firebase";
@@ -13,7 +22,7 @@ import firebase from "../../api/config.firebase";
 import RoundCard from "./RoundCard";
 import RoundCardNew from "./RoundCardNew";
 import PageHeader from "../../components/PageHeader";
-import styles from "./index.module.scss";
+import styles from "./Dashboard.scss";
 
 import contracts from "../../constants/contracts";
 import ContractInstance from "../../utils/contractInstance";
@@ -32,9 +41,12 @@ const { Title } = Typography;
 // let refresh = null;
 
 function Dashboard(props) {
-  // console.log(props);
-  // const { currentAddress, userId } = props;
   const history = useHistory();
+  const db = getFirestore();
+  const user = getAuth().currentUser;
+  const [roundList, setRoundList] = useState({ rounds: [], pending: [] });
+  // console.log(props);
+  const { currentAddress } = props;
   // const {
   //   contract: { methods },
   //   currentSaving,
@@ -170,41 +182,85 @@ function Dashboard(props) {
     history.push("/create-round");
   };
 
-  // const roundsRef = firebase.database().ref("rounds/");
-  // const [snapshots, loading, error] = useList(roundsRef);
+  const goToJoin = (roundKey) => {
+    history.push(`/register-user/join?roundId=${roundKey}`);
+  };
+
+  useEffect(() => {
+    if (user && user.uid) {
+      onSnapshot(
+        query(collection(db, "round"), where("createByUser", "==", user.uid)),
+        (querySnapshot) => {
+          const rounds = [];
+          const pendingRounds = [];
+          querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const roundData = { ...data, roundKey: doc.id };
+            if (data.stage === 0) {
+              pendingRounds.push(roundData);
+            } else {
+              rounds.push(roundData);
+            }
+          });
+          setRoundList({ rounds, pending: pendingRounds });
+        }
+      );
+    }
+  }, [user]);
+
+  if (!currentAddress) {
+    return <Placeholder />;
+  }
 
   return (
     <>
-      <div>
-        <div>
-          <PageHeader
-            title={<FormattedMessage id="dashboardPage.title" />}
-            action={
-              <PlusCircleOutlined
-                onClick={goToCreate}
-                style={{ fontSize: "20px", color: "white" }}
-              />
-            }
+      {roundList.pending.length > 0 && (
+        <>
+          <PageHeader title={<FormattedMessage id="dashboardPage.title" />} />
+          <div className={styles.RoundCards}>
+            {currentAddress &&
+              roundList.pending.map((round) => (
+                <RoundCardNew
+                  name={round.name}
+                  onClick={() => goToJoin(round.roundKey)}
+                />
+              ))}
+          </div>
+        </>
+      )}
+
+      <PageHeader
+        title={<FormattedMessage id="dashboardPage.title" />}
+        action={
+          <PlusCircleOutlined
+            onClick={goToCreate}
+            style={{ fontSize: "20px", color: "white" }}
           />
-        </div>
-        <div>
-          <Button onClick={() => APISetCreateRound({ name: "test" })}>
-            Crear tanda
-          </Button>
-        </div>
-      </div>
+        }
+      />
       <div className={styles.RoundCards}>
-        {/* {!loading &&
-          snapshots &&
-          snapshots.map((round, index) => {
-            if (round.val().stage === 0) {
-              return <RoundCardNew stage={null} onClick={() => {}} />;
-            }
-            return <div>sdfdsf</div>;
-          })} */}
+        {currentAddress &&
+          roundList.rounds.map((round) => (
+            <RoundCard
+              name={round.name}
+              description={<FormattedMessage id="dashboardPage.title" />}
+              groupSize={round.groupSize}
+              // disabled={!currentAddress}
+              contractKey={round.contract}
+              // positionToWithdrawPay={round.positionToWithdrawPay}
+              turn={3}
+              linkTo={`/batch-details/${round.roundKey}`}
+              // toPay={handleToPayAction}
+              // buttonText={
+              //   currentAddress === contractDetail.whoWithdrawPay ? cobro : "Pagar"
+              // }
+              // buttonDisabled={contractDetail.roundStage === "ON_ROUND_FINISHED"}
+              // loading={payingLoader}
+            />
+          ))}
       </div>
       {/* 
-      {!currentAddress && <Placeholder />}
+      
       {currentAddress && (
         <div className={styles.RoundCards}>
           {contractDetail.roundStage === "ON_REGISTER_STAGE" && (

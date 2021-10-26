@@ -11,8 +11,6 @@ export const INITIAL_FORM_VALUES = {
   participants: 5,
   amount: 1,
   periodicity: "monthly",
-  turnSelected: 1,
-  motivation: "other",
   termsAndConditions: false,
   isComplete: false,
 };
@@ -69,16 +67,4 @@ export const participantsOptions = [
     label: "10",
     value: 10,
   },
-];
-
-export const motivationOptions = [
-  { label: "Prestamo", value: "loan" },
-  { label: "Vacaciones", value: "vacations" },
-  { label: "Entertainment", value: "entertainment" },
-  { label: "Health ", value: "health " },
-  { label: "Automovil", value: "car" },
-  { label: "Hogar", value: "house" },
-  { label: "Negocio", value: "business" },
-  { label: "Regalos", value: "gifts" },
-  { label: "Otro", value: "other" },
 ];

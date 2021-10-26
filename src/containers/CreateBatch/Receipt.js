@@ -3,15 +3,17 @@
 /* eslint-disable no-unused-vars */
 
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Formik } from "formik";
 import { useHistory } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
-import { CubeSpinner } from "react-spinners-kit";
+import { Modal } from "antd";
 
 import PageHeader from "../../components/PageHeader";
 import InputCheck from "../../components/InputCheck";
 import ButtonOnlyOneStep from "../../components/ButtonOnlyOneStep";
+import Loader from "../../components/Loader";
 
 import APISetCreateRound from "../../api/setCreateRound";
 
@@ -23,7 +25,7 @@ import {
   paymentTime,
 } from "./constants";
 
-const Receipt = ({ form, setForm }) => {
+const Receipt = ({ form, setForm, walletAddress }) => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
 
@@ -35,7 +37,18 @@ const Receipt = ({ form, setForm }) => {
     });
 
   useEffect(() => {
-    if (form.isComplete) {
+    if (form.isComplete && !walletAddress) {
+      console.log(1);
+      Modal.warning({
+        title: "Wallet no encontrada",
+        content: "Por favor conecta tu wallet antes de continuar.",
+      });
+      setForm({
+        ...form,
+        isComplete: false,
+      });
+    }
+    if (form.isComplete && walletAddress) {
       setLoading(true);
       APISetCreateRound({
         name: form.name,
@@ -44,11 +57,12 @@ const Receipt = ({ form, setForm }) => {
         groupSize: form.participants,
         payTime: paymentTime[form.periodicity],
         isPublic: false,
+        walletAddress,
       })
         .then(() => {
           setLoading(false);
           setForm(INITIAL_FORM_VALUES);
-          history.push("/create-round/status");
+          history.push("/create-round/receipt/success");
         })
         .catch((err) => {
           setForm({
@@ -56,7 +70,7 @@ const Receipt = ({ form, setForm }) => {
             isComplete: false,
           });
           setLoading(false);
-          history.push("/create-round/status");
+          history.push("/create-round/receipt/error");
         });
     }
   }, [form.isComplete]);
@@ -64,14 +78,7 @@ const Receipt = ({ form, setForm }) => {
   return (
     <>
       <PageHeader title={<FormattedMessage id="createRound.titleReceipt" />} />
-      {loading && (
-        <div className={styles.ReceiptCardLoader}>
-          <CubeSpinner frontColor="#F58F98" size={30} />
-          <p>
-            <FormattedMessage id="createRound.titleReceipt" />
-          </p>
-        </div>
-      )}
+      {loading && <Loader />}
       {!loading && (
         <>
           <div className={styles.ReceiptCard}>
@@ -166,4 +173,11 @@ Receipt.propTypes = {
   setForm: PropTypes.func.isRequired,
 };
 
-export default Receipt;
+const mapStateToProps = (state) => {
+  const walletAddress = state?.main?.currentAddress;
+  return { walletAddress };
+};
+
+const mapDispatchToProps = () => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Receipt);

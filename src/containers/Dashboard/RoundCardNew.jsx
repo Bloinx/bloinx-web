@@ -1,28 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, Typography } from "antd";
+import { Button } from "antd";
 
 import styles from "./RoundCardNew.module.scss";
 
-const { Title, Paragraph } = Typography;
-
-export default function RoundCardNew({ stage, onClick }) {
+export default function RoundCardNew({ name, stage, onClick }) {
   return (
     <div className={styles.RoundCardNew}>
-      <Title level={4} className={styles.RoundCardNewTitle}>
-        Register on round
-      </Title>
-      <Paragraph className={styles.RoundCardNewText}>
+      <div className={styles.RoundCardNewTitle}>{name}</div>
+      <p className={styles.RoundCardNewText}>
         Start your saving circle with your friends or family now.
-      </Paragraph>
-      <Paragraph className={styles.RoundCardNewText}>
-        Start connecting your wallet.
-      </Paragraph>
-      <Paragraph className={styles.RoundCardNewText}>
+      </p>
+      <p className={styles.RoundCardNewText}>Start connecting your wallet.</p>
+      <p className={styles.RoundCardNewText}>
         {stage === "ON_REGISTER_STAGE"
           ? "Tanda en espera de ser inciada"
           : null}
-      </Paragraph>
+      </p>
       <div className={styles.RoundCardNewOptions}>
         <Button type="primary" onClick={onClick}>
           Unirme a la ronda
@@ -33,10 +27,12 @@ export default function RoundCardNew({ stage, onClick }) {
 }
 
 RoundCardNew.defaultProps = {
-  stage: "",
+  name: undefined,
+  stage: undefined,
 };
 
 RoundCardNew.propTypes = {
+  name: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   stage: PropTypes.string,
   onClick: PropTypes.func.isRequired,
 };
