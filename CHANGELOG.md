@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5-next.1](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-next.0...v0.0.5-next.1) (2021-10-27)
+
+
+### Bug Fixes
+
+* **register user:** add register user flow ([ba51307](https://github.com/Bloinx/bloinx-web/commit/ba51307a8c5bb39d5d02bcf69368947768e78a28))
+
 ### [0.0.5-next.0](https://github.com/Bloinx/bloinx-web/compare/v0.0.4...v0.0.5-next.0) (2021-10-25)
 
 
