@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5-next.2](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-next.1...v0.0.5-next.2) (2021-10-27)
+
+
+### Features
+
+* **logout:** add logout function ([19fa489](https://github.com/Bloinx/bloinx-web/commit/19fa489ca14064a2f8fe2fb17a774b6252d8e95d))
+
 ### [0.0.5-next.1](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-next.0...v0.0.5-next.1) (2021-10-27)
 
 
