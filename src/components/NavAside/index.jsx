@@ -9,7 +9,10 @@ import {
   // DesktopOutlined,
   HomeFilled,
   // FileOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
+
+import LogOut from "../../api/setLogout";
 
 import styles from "./styles.module.scss";
 import logo from "../../assets/logo.svg";
@@ -58,6 +61,20 @@ export default function NavAside({ width, toggleDrawer, visible }) {
             <FormattedMessage id="navAside.dashboard" />
           </span>
         </Link>
+      </Menu.Item>
+
+      <Menu.Item
+        className={classnames(
+          styles.MenuItem,
+          selected === 2 && styles.MenuItemSelected
+        )}
+        key={2}
+        icon={<LogoutOutlined />}
+        onClick={LogOut}
+      >
+        <span>
+          <FormattedMessage id="navAside.logout" />
+        </span>
       </Menu.Item>
       {/* <Menu.Item
         className={classnames(

@@ -3,7 +3,8 @@
     "dashboard": "Mis Tandas",
     "createbatch": "Crear Tanda",
     "registerpay": "Pagos",
-    "batchDetails": "Detalle"
+    "batchDetails": "Detalle",
+    "logout": "Cerrar sesión"
   },
   "dashboardPage": {
     "title": "Mis Tandas",
