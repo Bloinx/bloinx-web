@@ -1,9 +1,10 @@
+/* eslint-disable import/extensions */
 import web3 from "web3";
 
 import contracts from "../constants/contracts";
 import { formatAddress } from "../utils/format";
-import APIGetContractStage from "./getContractStage";
-import APIGetUsersList from "./getUsersList";
+import APIGetContractStage from "./methods/getStage";
+import APIGetUsersList from "./methods/getAddressOrderList";
 import APIGetRoundsPeriods from "./getRoundsPeriods";
 import { reverseDateToOperation } from "./constants";
 

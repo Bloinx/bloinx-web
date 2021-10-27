@@ -37,16 +37,12 @@ const setCreateRound = ({
           contract,
           folio,
           name,
-          warranty,
           saving,
-          groupSize,
-          payTime,
           isPublic,
-          stage: 0,
           motivation: "other",
           positions: [],
+          invitations: [],
         };
-        console.log(params);
         addDoc(collection(db, "round"), params)
           .then((docRef) => {
             resolve(docRef);

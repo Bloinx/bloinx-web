@@ -7,13 +7,6 @@ import { Typography, notification, Button } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
-import {
-  collection,
-  query,
-  where,
-  onSnapshot,
-  getFirestore,
-} from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { useList } from "react-firebase-hooks/database";
 import { connect } from "react-redux";
@@ -26,6 +19,8 @@ import styles from "./Dashboard.scss";
 
 import contracts from "../../constants/contracts";
 import ContractInstance from "../../utils/contractInstance";
+import APIGetRounds from "../../api/getRounds";
+import APISetStartRound from "../../api/setStartRound";
 import APIGetContractDetail from "../../api/getContractDetail";
 import APIGetRoundWithdrawPay from "../../api/getRoundWithdrawPay";
 import APISetPayRound from "../../api/setPayRound";
@@ -33,7 +28,6 @@ import APISetWithdrawTurn from "../../api/setWithdrawTurn";
 import Placeholder from "../../components/Placeholder";
 // import APISetStartRound from "../../api/startRound";
 import APISetCreateRound from "../../api/setCreateRound";
-import APIGetRounds from "../../api/getRounds";
 
 const { Title } = Typography;
 
@@ -42,9 +36,8 @@ const { Title } = Typography;
 
 function Dashboard(props) {
   const history = useHistory();
-  const db = getFirestore();
   const user = getAuth().currentUser;
-  const [roundList, setRoundList] = useState({ rounds: [], pending: [] });
+  const [roundList, setRoundList] = useState([]);
   // console.log(props);
   const { currentAddress } = props;
   // const {
@@ -69,61 +62,91 @@ function Dashboard(props) {
   //   history.push("/registeruser");
   // };
 
-  // const handleToPayAction = async () => {
-  //   setPayingLoader(true);
-  //   if (
-  //     currentAddress === contractDetail.whoWithdrawPay &&
-  //     new Date().getHours() >= 8 &&
-  //     new Date().getHours() <= 13
-  //   ) {
-  //     const { status } = await APISetWithdrawTurn(methods, { currentAddress });
-  //     if (status === "success") {
-  //       notification.success({
-  //         message: "Cobro correcto",
-  //         description: "Cobraste correctamente",
-  //       });
-  //       history.push(`/batch-details/${currentSaving}`);
-  //     } else if (status === "error") {
-  //       notification.error({
-  //         message: "Cobro fallido",
-  //         description: "Error al realizar el cobro",
-  //       });
-  //     }
-  //     setPayingLoader(false);
-  //   } else if (
-  //     currentAddress === contractDetail.whoWithdrawPay &&
-  //     new Date().getHours() < 8
-  //   ) {
-  //     notification.warning({
-  //       message: "Por favor espera",
-  //       description: "El tiempo de cobro aun no ha inciado.",
-  //     });
-  //   } else if (
-  //     currentAddress === contractDetail.whoWithdrawPay &&
-  //     new Date().getHours() >= 14
-  //   ) {
-  //     notification.warning({
-  //       message: "El tiempo de cobro a terminado",
-  //       description: "Por favor espera el cambio de ronda",
-  //     });
-  //   } else {
-  //     const { status } = await APISetPayRound(methods, { currentAddress });
-  //     if (status === "success") {
-  //       notification.success({
-  //         message: "Pago correcto",
-  //         description: "Pago realizado correctamente",
-  //       });
-  //       history.push(`/batch-details/${currentSaving}`);
-  //     } else if (status === "error") {
-  //       notification.error({
-  //         message: "Pago fallido",
-  //         description: "Error al realizar el pago",
-  //       });
-  //     }
-  //     getContractStage();
-  //     setPayingLoader(false);
-  //   }
-  // };
+  const handleToPayAction = async () => {
+    //   setPayingLoader(true);
+    //   if (
+    //     currentAddress === contractDetail.whoWithdrawPay &&
+    //     new Date().getHours() >= 8 &&
+    //     new Date().getHours() <= 13
+    //   ) {
+    //     const { status } = await APISetWithdrawTurn(methods, { currentAddress });
+    //     if (status === "success") {
+    //       notification.success({
+    //         message: "Cobro correcto",
+    //         description: "Cobraste correctamente",
+    //       });
+    //       history.push(`/batch-details/${currentSaving}`);
+    //     } else if (status === "error") {
+    //       notification.error({
+    //         message: "Cobro fallido",
+    //         description: "Error al realizar el cobro",
+    //       });
+    //     }
+    //     setPayingLoader(false);
+    //   } else if (
+    //     currentAddress === contractDetail.whoWithdrawPay &&
+    //     new Date().getHours() < 8
+    //   ) {
+    //     notification.warning({
+    //       message: "Por favor espera",
+    //       description: "El tiempo de cobro aun no ha inciado.",
+    //     });
+    //   } else if (
+    //     currentAddress === contractDetail.whoWithdrawPay &&
+    //     new Date().getHours() >= 14
+    //   ) {
+    //     notification.warning({
+    //       message: "El tiempo de cobro a terminado",
+    //       description: "Por favor espera el cambio de ronda",
+    //     });
+    //   } else {
+    //     const { status } = await APISetPayRound(methods, { currentAddress });
+    //     if (status === "success") {
+    //       notification.success({
+    //         message: "Pago correcto",
+    //         description: "Pago realizado correctamente",
+    //       });
+    //       history.push(`/batch-details/${currentSaving}`);
+    //     } else if (status === "error") {
+    //       notification.error({
+    //         message: "Pago fallido",
+    //         description: "Error al realizar el pago",
+    //       });
+    //     }
+    //     getContractStage();
+    //     setPayingLoader(false);
+    //   }
+  };
+
+  const handleStartRound = (roundId) => {
+    APISetStartRound(roundId)
+      .then((receip) => {
+        console.log(receip);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleButton = (roundData) => {
+    console.log(roundData);
+    const { stage, isAdmin } = roundData;
+    if (stage === "ON_REGISTER_STAGE" && isAdmin) {
+      return {
+        text: "Iniciar",
+        disable: false,
+        action: () => handleStartRound(roundData.roundKey),
+      };
+    }
+    if (stage === "ON_REGISTER_STAGE" && !isAdmin) {
+      return {
+        text: "Pendiente",
+        disable: true,
+        action: () => {},
+      };
+    }
+    return null;
+  };
 
   // useEffect(() => {
   //   getContractStage();
@@ -188,47 +211,23 @@ function Dashboard(props) {
 
   useEffect(() => {
     if (user && user.uid) {
-      onSnapshot(
-        query(collection(db, "round"), where("createByUser", "==", user.uid)),
-        (querySnapshot) => {
-          const rounds = [];
-          const pendingRounds = [];
-          querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            const roundData = { ...data, roundKey: doc.id };
-            if (data.stage === 0) {
-              pendingRounds.push(roundData);
-            } else {
-              rounds.push(roundData);
-            }
-          });
-          setRoundList({ rounds, pending: pendingRounds });
-        }
-      );
+      APIGetRounds({
+        userId: user.uid,
+        walletAddress: currentAddress,
+      }).then((rounds) => {
+        setRoundList(rounds);
+      });
     }
-  }, [user]);
+  }, [user, currentAddress]);
 
   if (!currentAddress) {
     return <Placeholder />;
   }
 
+  console.log(roundList);
+
   return (
     <>
-      {roundList.pending.length > 0 && (
-        <>
-          <PageHeader title={<FormattedMessage id="dashboardPage.title" />} />
-          <div className={styles.RoundCards}>
-            {currentAddress &&
-              roundList.pending.map((round) => (
-                <RoundCardNew
-                  name={round.name}
-                  onClick={() => goToJoin(round.roundKey)}
-                />
-              ))}
-          </div>
-        </>
-      )}
-
       <PageHeader
         title={<FormattedMessage id="dashboardPage.title" />}
         action={
@@ -240,24 +239,27 @@ function Dashboard(props) {
       />
       <div className={styles.RoundCards}>
         {currentAddress &&
-          roundList.rounds.map((round) => (
-            <RoundCard
-              name={round.name}
-              description={<FormattedMessage id="dashboardPage.title" />}
-              groupSize={round.groupSize}
-              // disabled={!currentAddress}
-              contractKey={round.contract}
-              // positionToWithdrawPay={round.positionToWithdrawPay}
-              turn={3}
-              linkTo={`/batch-details/${round.roundKey}`}
-              // toPay={handleToPayAction}
-              // buttonText={
-              //   currentAddress === contractDetail.whoWithdrawPay ? cobro : "Pagar"
-              // }
-              // buttonDisabled={contractDetail.roundStage === "ON_ROUND_FINISHED"}
-              // loading={payingLoader}
-            />
-          ))}
+          roundList.map((round) => {
+            if (round.stage === "ON_REGISTER_STAGE" && round.toRegister) {
+              return <RoundCardNew onClick={() => goToJoin(round.roundKey)} />;
+            }
+            const { text, disable, action } = handleButton(round);
+            return (
+              <RoundCard
+                name={round.name}
+                description={<FormattedMessage id="dashboardPage.title" />}
+                groupSize={round.groupSize}
+                // contractKey={round.contract}
+                // // positionToWithdrawPay={round.positionToWithdrawPay}
+                turn={round.turn}
+                // linkTo={`/batch-details/${round.roundKey}`}
+                onClick={action}
+                buttonText={text}
+                buttonDisabled={disable}
+                // loading={payingLoader}
+              />
+            );
+          })}
       </div>
       {/* 
       

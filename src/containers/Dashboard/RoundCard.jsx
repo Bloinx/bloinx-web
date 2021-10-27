@@ -14,8 +14,7 @@ export default function RoundCard({
   groupSize,
   turn,
   linkTo,
-  toPay,
-  disabled,
+  onClick,
   buttonText,
   positionToWithdrawPay,
   loading,
@@ -51,10 +50,10 @@ export default function RoundCard({
           loading={loading}
           className={styles.RoundCardAction}
           type="primary"
-          disabled={disabled || loading}
-          onClick={!buttonDisabled ? toPay : () => {}}
+          disabled={loading || buttonDisabled}
+          onClick={onClick}
         >
-          {!buttonDisabled ? buttonText : "Finalizado"}
+          {buttonText}
         </Button>
       </div>
     </div>
@@ -65,9 +64,8 @@ RoundCard.defaultProps = {
   name: undefined,
   description: undefined,
   linkTo: "",
-  buttonText: "",
-  toPay: () => {},
-  disabled: false,
+  buttonText: undefined,
+  onClick: undefined,
   positionToWithdrawPay: 0,
   loading: false,
   buttonDisabled: false,
@@ -80,8 +78,7 @@ RoundCard.propTypes = {
   groupSize: PropTypes.number.isRequired,
   turn: PropTypes.number.isRequired,
   linkTo: PropTypes.string,
-  toPay: PropTypes.func,
-  disabled: PropTypes.bool,
+  onClick: PropTypes.func,
   buttonText: PropTypes.string,
   positionToWithdrawPay: PropTypes.number,
   loading: PropTypes.bool,

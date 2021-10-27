@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Modal } from "antd";
 
-import APIGetUsersList from "../../api/getUsersList";
+import APIGetUsersList from "../../api/methods/getAddressOrderList";
 import { formatAddress } from "../../utils/format";
 import Instance from "../../utils/contractInstance";
 import styles from "./ParticipantList.module.scss";

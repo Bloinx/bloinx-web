@@ -1,4 +1,4 @@
-import APIGetUsersList from "./getUsersList";
+import APIGetUsersList from "./methods/getAddressOrderList";
 
 const getRoundWithdrawPay = (methods, payload) =>
   new Promise((resolve) => {

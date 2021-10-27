@@ -1,5 +1,3 @@
-import contracts from "../constants/contracts";
-
 const getAvailablePlaces = (methods) =>
   new Promise((resolve) => {
     methods
@@ -19,14 +17,14 @@ const getAvailablePlaces = (methods) =>
               const address = await userBatch.call();
               if (address !== "0x0000000000000000000000000000000000000000") {
                 user = {
-                  userIndex,
+                  key: userIndex,
                   position: userIndex + 1,
                   status: "NoAvailable",
                   address,
                 };
               } else {
                 user = {
-                  userIndex,
+                  key: userIndex,
                   position: userIndex + 1,
                   status: "Available",
                   address,
@@ -34,7 +32,7 @@ const getAvailablePlaces = (methods) =>
               }
             } catch (err) {
               user = {
-                userIndex,
+                key: userIndex,
                 position: userIndex + 1,
                 status: "Error",
                 address: null,
@@ -47,11 +45,7 @@ const getAvailablePlaces = (methods) =>
             (userItem) =>
               userItem.status !== "NoAvailable" && userItem.status !== "Error"
           );
-          resolve({
-            roundCapacity: times,
-            availablePlaces,
-            contract: contracts.savingGroups[43113],
-          });
+          resolve(availablePlaces);
         });
       });
   });

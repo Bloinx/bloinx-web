@@ -17,7 +17,7 @@ import InputLabel from "../../components/InputLabel";
 
 import styles from "./index.module.scss";
 import ContractInstance from "../../utils/contractInstance";
-import APIGetAvailablePlaces from "../../api/getAvailablePlaces";
+import APIGetAvailablePlaces from "../../api/methods/getAvailablePlaces";
 import APISetRegisterUser from "../../api/setRegisterUser";
 
 function RegisterUser({ currentAddress }) {

@@ -31,10 +31,6 @@ function Form({ form, setForm, roundData, walletAddress }) {
   const [loading, setLoading] = useState(false);
 
   const handlerOnSubmit = (values) => {
-    // setForm({
-    //   ...form,
-    //   ...values,
-    // });
     if (!walletAddress) {
       Modal.warning({
         title: "Wallet no encontrada",
@@ -49,19 +45,21 @@ function Form({ form, setForm, roundData, walletAddress }) {
         name: values.name,
         motivation: values.motivation,
         position: values.turnSelected,
-        cashInAmount: roundData.saving,
       })
         .then((receipt) => {
           console.log(receipt);
           history.push("/register-user/success");
         })
         .catch((err) => {
-          console.log(err);
+          setLoading(false);
+          Modal.error({
+            title: "Error al registrar",
+            content:
+              "No se pudimos registrarte en la tanda. Por favor intenta nuevamente.",
+          });
         });
     }
   };
-
-  console.log(loading);
 
   return (
     <>

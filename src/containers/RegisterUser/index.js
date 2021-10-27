@@ -21,7 +21,6 @@ function RegisterUser({ walletAddress }) {
 
   useEffect(() => {
     APIgetRoundDetail(roundId).then((dataRound) => {
-      console.log(dataRound);
       setRoundData(dataRound);
     });
   }, []);
