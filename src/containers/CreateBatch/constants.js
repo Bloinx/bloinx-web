@@ -16,9 +16,9 @@ export const INITIAL_FORM_VALUES = {
 };
 
 export const paymentTime = {
-  [WEEKLY]: 1000 * 60 * 60 * 24 * 7,
-  [BIWEEKLY]: 1000 * 60 * 60 * 24 * 14,
-  [MONTHLY]: 1000 * 60 * 60 * 24 * 30,
+  [WEEKLY]: 7,
+  [BIWEEKLY]: 14,
+  [MONTHLY]: 30,
 };
 
 export const periodicityOptions = [
