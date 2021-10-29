@@ -1,505 +1,575 @@
 [
 	{
-	 "inputs": [
-		{
-		 "internalType": "uint256",
-		 "name": "_cashIn",
-		 "type": "uint256"
-		},
-		{
-		 "internalType": "uint256",
-		 "name": "_saveAmount",
-		 "type": "uint256"
-		},
-		{
-		 "internalType": "uint256",
-		 "name": "_groupSize",
-		 "type": "uint256"
-		},
-		{
-		 "internalType": "address payable",
-		 "name": "_admin",
-		 "type": "address"
-		},
-		{
-		 "internalType": "uint256",
-		 "name": "_payTime",
-		 "type": "uint256"
-		}
-	 ],
-	 "stateMutability": "nonpayable",
-	 "type": "constructor"
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_cashIn",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_saveAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_groupSize",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address payable",
+				"name": "_admin",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_payTime",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
 	},
 	{
-	 "inputs": [],
-	 "name": "addPayment",
-	 "outputs": [],
-	 "stateMutability": "payable",
-	 "type": "function"
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "turn",
+				"type": "uint256"
+			}
+		],
+		"name": "PayLateTurn",
+		"type": "event"
 	},
 	{
-	 "inputs": [
-		{
-		 "internalType": "uint256",
-		 "name": "",
-		 "type": "uint256"
-		}
-	 ],
-	 "name": "addressOrderList",
-	 "outputs": [
-		{
-		 "internalType": "address",
-		 "name": "",
-		 "type": "address"
-		}
-	 ],
-	 "stateMutability": "view",
-	 "type": "function"
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "PayTurn",
+		"type": "event"
 	},
 	{
-	 "inputs": [],
-	 "name": "admin",
-	 "outputs": [
-		{
-		 "internalType": "address payable",
-		 "name": "",
-		 "type": "address"
-		}
-	 ],
-	 "stateMutability": "view",
-	 "type": "function"
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "turn",
+				"type": "uint256"
+			}
+		],
+		"name": "RegisterUser",
+		"type": "event"
 	},
 	{
-	 "inputs": [],
-	 "name": "cashIn",
-	 "outputs": [
-		{
-		 "internalType": "uint256",
-		 "name": "",
-		 "type": "uint256"
-		}
-	 ],
-	 "stateMutability": "view",
-	 "type": "function"
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "turn",
+				"type": "uint256"
+			}
+		],
+		"name": "RemoveUser",
+		"type": "event"
 	},
 	{
-	 "inputs": [],
-	 "name": "devAddress",
-	 "outputs": [
-		{
-		 "internalType": "address payable",
-		 "name": "",
-		 "type": "address"
-		}
-	 ],
-	 "stateMutability": "view",
-	 "type": "function"
+		"inputs": [],
+		"name": "addPayment",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
 	},
 	{
-	 "inputs": [],
-	 "name": "endRound",
-	 "outputs": [],
-	 "stateMutability": "nonpayable",
-	 "type": "function"
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "addressOrderList",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-	 "inputs": [],
-	 "name": "feeCost",
-	 "outputs": [
-		{
-		 "internalType": "uint256",
-		 "name": "",
-		 "type": "uint256"
-		}
-	 ],
-	 "stateMutability": "view",
-	 "type": "function"
+		"inputs": [],
+		"name": "admin",
+		"outputs": [
+			{
+				"internalType": "address payable",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-	 "inputs": [],
-	 "name": "futurePayments",
-	 "outputs": [
-		{
-		 "internalType": "uint256",
-		 "name": "",
-		 "type": "uint256"
-		}
-	 ],
-	 "stateMutability": "view",
-	 "type": "function"
+		"inputs": [],
+		"name": "cashIn",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-	 "inputs": [],
-	 "name": "getRealTurn",
-	 "outputs": [
-		{
-		 "internalType": "uint8",
-		 "name": "",
-		 "type": "uint8"
-		}
-	 ],
-	 "stateMutability": "view",
-	 "type": "function"
+		"inputs": [],
+		"name": "devAddress",
+		"outputs": [
+			{
+				"internalType": "address payable",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-	 "inputs": [
-		{
-		 "internalType": "uint8",
-		 "name": "_userTurn",
-		 "type": "uint8"
-		}
-	 ],
-	 "name": "getUserAmountPaid",
-	 "outputs": [
-		{
-		 "internalType": "uint256",
-		 "name": "",
-		 "type": "uint256"
-		}
-	 ],
-	 "stateMutability": "view",
-	 "type": "function"
+		"inputs": [],
+		"name": "endRound",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
-	 "inputs": [
-		{
-		 "internalType": "uint8",
-		 "name": "_userTurn",
-		 "type": "uint8"
-		}
-	 ],
-	 "name": "getUserAvailableCashIn",
-	 "outputs": [
-		{
-		 "internalType": "uint256",
-		 "name": "",
-		 "type": "uint256"
-		}
-	 ],
-	 "stateMutability": "view",
-	 "type": "function"
+		"inputs": [],
+		"name": "feeCost",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-	 "inputs": [
-		{
-		 "internalType": "uint8",
-		 "name": "_userTurn",
-		 "type": "uint8"
-		}
-	 ],
-	 "name": "getUserAvailableSavings",
-	 "outputs": [
-		{
-		 "internalType": "uint256",
-		 "name": "",
-		 "type": "uint256"
-		}
-	 ],
-	 "stateMutability": "view",
-	 "type": "function"
+		"inputs": [],
+		"name": "futurePayments",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-	 "inputs": [
-		{
-		 "internalType": "uint8",
-		 "name": "_userTurn",
-		 "type": "uint8"
-		}
-	 ],
-	 "name": "getUserIsActive",
-	 "outputs": [
-		{
-		 "internalType": "bool",
-		 "name": "",
-		 "type": "bool"
-		}
-	 ],
-	 "stateMutability": "view",
-	 "type": "function"
+		"inputs": [],
+		"name": "getRealTurn",
+		"outputs": [
+			{
+				"internalType": "uint8",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-	 "inputs": [
-		{
-		 "internalType": "uint8",
-		 "name": "_userTurn",
-		 "type": "uint8"
-		}
-	 ],
-	 "name": "getUserLatePayments",
-	 "outputs": [
-		{
-		 "internalType": "uint8",
-		 "name": "",
-		 "type": "uint8"
-		}
-	 ],
-	 "stateMutability": "view",
-	 "type": "function"
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "_userTurn",
+				"type": "uint8"
+			}
+		],
+		"name": "getUserAmountPaid",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-	 "inputs": [
-		{
-		 "internalType": "uint8",
-		 "name": "_userTurn",
-		 "type": "uint8"
-		}
-	 ],
-	 "name": "getUserOwedTotalCashIn",
-	 "outputs": [
-		{
-		 "internalType": "uint256",
-		 "name": "",
-		 "type": "uint256"
-		}
-	 ],
-	 "stateMutability": "view",
-	 "type": "function"
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "_userTurn",
+				"type": "uint8"
+			}
+		],
+		"name": "getUserAvailableCashIn",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-	 "inputs": [
-		{
-		 "internalType": "uint8",
-		 "name": "_userTurn",
-		 "type": "uint8"
-		}
-	 ],
-	 "name": "getUserTurn",
-  "outputs": [
-   {
-    "internalType": "uint8",
-    "name": "",
-    "type": "uint8"
-   }
-  ],
-  "stateMutability": "view",
-  "type": "function"
- },
- {
-  "inputs": [
-   {
-    "internalType": "uint8",
-    "name": "_userTurn",
-    "type": "uint8"
-   }
-  ],
-  "name": "getUserUnassignedPayments",
-  "outputs": [
-   {
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-   }
-  ],
-  "stateMutability": "view",
-  "type": "function"
- },
- {
-  "inputs": [],
-  "name": "groupSize",
-  "outputs": [
-   {
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-   }
-  ],
-  "stateMutability": "view",
-  "type": "function"
- },
- {
-  "inputs": [
-   {
-    "internalType": "address",
-    "name": "userAddress",
-    "type": "address"
-   }
-  ],
-  "name": "obligationAtTime",
-  "outputs": [
-   {
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-   }
-  ],
-  "stateMutability": "view",
-  "type": "function"
- },
- {
-  "inputs": [],
-  "name": "payTime",
-  "outputs": [
-   {
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-   }
-  ],
-  "stateMutability": "view",
-  "type": "function"
- },
- {
-  "inputs": [
-   {
-    "internalType": "uint8",
-    "name": "_userTurn",
-    "type": "uint8"
-   }
-  ],
-  "name": "registerUser",
-  "outputs": [],
-  "stateMutability": "payable",
-  "type": "function"
- },
- {
-  "inputs": [
-   {
-    "internalType": "uint256",
-    "name": "_userTurn",
-    "type": "uint256"
-   }
-  ],
-  "name": "removeUser",
-  "outputs": [],
-  "stateMutability": "payable",
-  "type": "function"
- },
- {
-  "inputs": [],
-  "name": "saveAmount",
-  "outputs": [
-   {
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-   }
-  ],
-  "stateMutability": "view",
-  "type": "function"
- },
- {
-  "inputs": [],
-  "name": "stage",
-  "outputs": [
-   {
-    "internalType": "enum SavingGroups.Stages",
-    "name": "",
-    "type": "uint8"
-   }
-  ],
-  "stateMutability": "view",
-  "type": "function"
- },
- {
-  "inputs": [],
-  "name": "startRound",
-  "outputs": [],
-  "stateMutability": "nonpayable",
-  "type": "function"
- },
- {
-  "inputs": [],
-  "name": "startTime",
-  "outputs": [
-   {
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-   }
-  ],
-  "stateMutability": "view",
-  "type": "function"
- },
- {
-  "inputs": [],
-  "name": "totalCashIn",
-  "outputs": [
-   {
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-   }
-  ],
-  "stateMutability": "view",
-  "type": "function"
- },
- {
-  "inputs": [],
-  "name": "turn",
-  "outputs": [
-   {
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-   }
-  ],
-  "stateMutability": "view",
-  "type": "function"
- },
- {
-  "inputs": [
-   {
-    "internalType": "address",
-    "name": "",
-    "type": "address"
-   }
-  ],
-  "name": "users",
-  "outputs": [
-   {
-    "internalType": "address payable",
-    "name": "userAddr",
-    "type": "address"
-   },
-   {
-    "internalType": "uint8",
-    "name": "userTurn",
-    "type": "uint8"
-   },
-   {
-    "internalType": "uint256",
-    "name": "availableCashIn",
-    "type": "uint256"
-   },
-   {
-    "internalType": "uint256",
-    "name": "availableSavings",
-    "type": "uint256"
-   },
-   {
-    "internalType": "uint256",
-    "name": "amountPaid",
-    "type": "uint256"
-   },
-   {
-    "internalType": "uint256",
-    "name": "unassignedPayments",
-    "type": "uint256"
-   },
-   {
-    "internalType": "uint8",
-    "name": "latePayments",
-    "type": "uint8"
-   },
-   {
-    "internalType": "uint256",
-    "name": "owedTotalCashIn",
-    "type": "uint256"
-   },
-   {
-    "internalType": "bool",
-    "name": "isActive",
-    "type": "bool"
-   }
-  ],
-  "stateMutability": "view",
-  "type": "function"
- },
- {
-  "inputs": [],
-  "name": "withdrawTurn",
-  "outputs": [],
-  "stateMutability": "payable",
-  "type": "function"
- }
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "_userTurn",
+				"type": "uint8"
+			}
+		],
+		"name": "getUserAvailableSavings",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "_userTurn",
+				"type": "uint8"
+			}
+		],
+		"name": "getUserIsActive",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "_userTurn",
+				"type": "uint8"
+			}
+		],
+		"name": "getUserLatePayments",
+		"outputs": [
+			{
+				"internalType": "uint8",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "_userTurn",
+				"type": "uint8"
+			}
+		],
+		"name": "getUserOwedTotalCashIn",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "_userTurn",
+				"type": "uint8"
+			}
+		],
+		"name": "getUserTurn",
+		"outputs": [
+			{
+				"internalType": "uint8",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "_userTurn",
+				"type": "uint8"
+			}
+		],
+		"name": "getUserUnassignedPayments",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "groupSize",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "userAddress",
+				"type": "address"
+			}
+		],
+		"name": "obligationAtTime",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "payTime",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "_userTurn",
+				"type": "uint8"
+			}
+		],
+		"name": "registerUser",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_userTurn",
+				"type": "uint256"
+			}
+		],
+		"name": "removeUser",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "saveAmount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "stage",
+		"outputs": [
+			{
+				"internalType": "enum SavingGroups.Stages",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "startRound",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "startTime",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "totalCashIn",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "turn",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "users",
+		"outputs": [
+			{
+				"internalType": "address payable",
+				"name": "userAddr",
+				"type": "address"
+			},
+			{
+				"internalType": "uint8",
+				"name": "userTurn",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint256",
+				"name": "availableCashIn",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "availableSavings",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amountPaid",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "unassignedPayments",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "latePayments",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint256",
+				"name": "owedTotalCashIn",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isActive",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "withdrawTurn",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	}
 ]
