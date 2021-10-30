@@ -2,7 +2,7 @@ import Web3 from "web3";
 import Main from "../abis/Main.json";
 
 export const MAIN_FACTORY_FIJI_TEST_NET =
-  "0x2F6497021e3Ef81587D94B805CaA90B5e3e8d72e";
+  "0x02A94E4fC94A58a55477b27423482aB53CEf12e2";
 
 export default function config() {
   const httpProvider = new Web3.providers.HttpProvider(

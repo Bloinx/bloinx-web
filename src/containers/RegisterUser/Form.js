@@ -68,8 +68,8 @@ function Form({ form, setForm, roundData, walletAddress }) {
       {!loading && (
         <Formik
           initialValues={{
-            name: form.name || roundData.name,
-            motivation: form.motivation || roundData.motivation,
+            name: form.name,
+            motivation: form.motivation,
             turnSelected:
               form.turnSelected ||
               (roundData.positionsAvailable && roundData.positionsAvailable[0]

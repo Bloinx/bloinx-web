@@ -1,10 +1,10 @@
 const getCashIn = (methods) =>
   new Promise((resolve) => {
     methods
-      .cashIn()
+      .admin()
       .call()
-      .then((cashIn) => {
-        resolve(cashIn);
+      .then((admin) => {
+        resolve(admin);
       });
   });
 

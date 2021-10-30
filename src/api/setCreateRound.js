@@ -15,11 +15,11 @@ const setCreateRound = ({
   walletAddress,
 }) =>
   new Promise((resolve, reject) => {
-    const a = config();
+    const m = config();
     const db = getFirestore();
     const { uid } = getAuth().currentUser;
 
-    a.methods
+    m.methods
       .createRound(warranty, saving, groupSize, payTime)
       .send({
         from: walletAddress,
@@ -36,10 +36,7 @@ const setCreateRound = ({
           createByWallet: admin,
           contract,
           folio,
-          name,
-          saving,
           isPublic,
-          motivation: "other",
           positions: [],
           invitations: [],
         };

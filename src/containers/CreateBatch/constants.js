@@ -8,7 +8,7 @@ const MONTHLY = "monthly";
 
 export const INITIAL_FORM_VALUES = {
   name: null,
-  participants: 5,
+  participants: 3,
   amount: 1,
   periodicity: "monthly",
   termsAndConditions: false,
@@ -43,6 +43,14 @@ export const periodicityOptions = [
 ];
 
 export const participantsOptions = [
+  {
+    label: "3",
+    value: 3,
+  },
+  {
+    label: "4",
+    value: 4,
+  },
   {
     label: "5",
     value: 5,

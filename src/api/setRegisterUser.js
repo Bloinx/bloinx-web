@@ -16,36 +16,36 @@ const setRegisterUser = async (props) => {
   const data = await docSnap.data();
 
   const sg = config(data.contract);
-  console.log(sg);
-
   const cashIn = await MethodGetCashIn(sg.methods);
-  console.log(cashIn);
-
-  // const feeCost = await MethodGetFeeCost(sg.methods);
-  // console.log(feeCost);
+  const feeCost = await MethodGetFeeCost(sg.methods);
 
   return new Promise((resolve, reject) => {
-    //   sg.methods
-    //     .registerUser(position)
-    //     .send({
-    //       from: walletAddress,
-    //       value: getWeb3().utils.toWei(data.saving.toString(), "ether"),
-    //     })
-    //     .once("receipt", async (receipt) => {
-    //       const positions = [
-    //         ...data.positions,
-    //         { userId, position: Number(position), walletAddress },
-    //       ].sort();
-    //       await updateDoc(docRef, {
-    //         name,
-    //         motivation,
-    //         positions,
-    //       });
-    //       resolve(receipt);
-    //     })
-    //     .on("error", async (error) => {
-    //       reject(error);
-    //     });
+    const amount = Number(cashIn) + Number(feeCost);
+    sg.methods
+      .registerUser(position)
+      .send({
+        from: walletAddress,
+        value: amount.toString(),
+      })
+      .once("receipt", async (receipt) => {
+        const positions = [
+          ...data.positions,
+          {
+            userId,
+            position: Number(position),
+            walletAddress,
+            motivation,
+            name,
+          },
+        ].sort();
+        await updateDoc(docRef, {
+          positions,
+        });
+        resolve(receipt);
+      })
+      .on("error", async (error) => {
+        reject(error);
+      });
   });
 };
 
