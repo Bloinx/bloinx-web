@@ -35,6 +35,7 @@ export default {
     43113: "0x16B439D7E1baC0e4F9B77803CA329dEEE1c07E66", // Grupo4
     43114: "",
   },
+  mimContract: { 43113: "0x2E669D4aef4Ea6f1A220c7F436205C824f9d584d" },
   // savingGroups2: {
   //   // cryptoArtist
   //   43113: '0x8176A45c19F6AadbB6534e3507Fe73e58bcE7720',
