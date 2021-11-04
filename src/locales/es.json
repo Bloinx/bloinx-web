@@ -35,6 +35,7 @@
         "amount": "Monto por periodo",
         "periodicity": "Duración de la ronda",
         "periodicityOptions": {
+          "day": "Diario",
           "weekly": "Semanal",
           "biweekly": "Quincenal",
           "monthly": "Mensual"

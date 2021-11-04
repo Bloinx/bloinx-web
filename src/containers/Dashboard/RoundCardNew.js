@@ -4,10 +4,9 @@ import { Button } from "antd";
 
 import styles from "./RoundCardNew.module.scss";
 
-export default function RoundCardNew({ name, stage, onClick }) {
+export default function RoundCardNew({ stage, onClick }) {
   return (
     <div className={styles.RoundCardNew}>
-      <div className={styles.RoundCardNewTitle}>{name}</div>
       <p className={styles.RoundCardNewText}>
         Start your saving circle with your friends or family now.
       </p>
@@ -27,12 +26,10 @@ export default function RoundCardNew({ name, stage, onClick }) {
 }
 
 RoundCardNew.defaultProps = {
-  name: undefined,
   stage: undefined,
 };
 
 RoundCardNew.propTypes = {
-  name: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   stage: PropTypes.string,
   onClick: PropTypes.func.isRequired,
 };

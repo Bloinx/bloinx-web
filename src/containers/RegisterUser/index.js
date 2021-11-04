@@ -7,7 +7,7 @@ import { Route, Switch, useHistory } from "react-router-dom";
 import Form from "./Form";
 import Receipt from "./Receipt";
 import { getUrlParams } from "../../utils/browser";
-import APIgetRoundDetail from "../../api/getRoundDetail";
+import APIgetRoundRegisterDetail from "../../api/getRoundRegisterDetail";
 
 import { INITIAL_FORM_VALUES } from "./constants";
 
@@ -20,7 +20,7 @@ function RegisterUser({ walletAddress }) {
   const [roundData, setRoundData] = useState({});
 
   useEffect(() => {
-    APIgetRoundDetail(roundId).then((dataRound) => {
+    APIgetRoundRegisterDetail(roundId).then((dataRound) => {
       setRoundData(dataRound);
     });
   }, []);

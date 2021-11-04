@@ -1,13 +1,15 @@
 @import "../../theme.scss";
 
 .RoundCard {
-  background-color: #233447;
+  background-color: $blue-strong;
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 10px;
+  margin-right: 10px;
   color: white;
   width: 100%;
-  min-width: 260px;
+  min-width: 300px;
+  max-width: 300px;
 }
 
 @media (min-width: 768px) {
@@ -19,32 +21,57 @@
 .RoundCardHeader {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
 }
+
+.RoundCardHeaderImage {
+  margin-right: 10px;
+  img {
+    min-width: 50px;
+  }
+}
+
 .RoundCardTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   color: white;
   font-size: 14px;
 }
-.RoundCardKeys {
-  color: rgba($color: #ffffff, $alpha: 0.6);
-  font-size: 14px;
-}
-.RoundCardDescription {
-  color: white;
+
+.RoundCardSubject {
   font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.RoundCardSeparation {
+  border-bottom: 1px solid $gray-light;
   margin-bottom: 10px;
 }
+
 .RoundCardFooter {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  div {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 }
-.RoundCardTitleFooter {
-  font-size: 12px;
-  color: white;
-}
+
 .RoundCardAction {
   width: 150px;
+  margin-bottom: 5px;
+}
+
+.RoundCardLoader {
+  margin: 20px 20px;
+  display: flex;
+  flex-direction: row !important;
+  span {
+    margin-left: 15px;
+  }
 }

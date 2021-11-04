@@ -9,11 +9,7 @@ const api = async (roundId) => {
   const docSnap = await getDoc(docRef);
   const data = await docSnap.data();
 
-  console.log(data);
-
   const sg = config(data.contract);
-  console.log(sg);
-
   return new Promise((resolve, reject) => {
     sg.methods
       .startRound()
@@ -22,17 +18,10 @@ const api = async (roundId) => {
         to: data.contract,
       })
       .once("receipt", async (receipt) => {
-        console.log(receipt);
-        // const positions = [
-        //   ...data.positions,
-        //   { userId, position: Number(position), walletAddress },
-        // ].sort();
-        // await updateDoc(docRef, {
-        //   name,
-        //   motivation,
-        //   positions,
-        // });
-        // resolve(receipt);
+        await updateDoc(docRef, {
+          invitations: [],
+        });
+        resolve(receipt);
       })
       .on("error", async (error) => {
         reject(error);

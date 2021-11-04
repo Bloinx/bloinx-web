@@ -16,7 +16,6 @@ import {
 } from "antd";
 import { RightOutlined, EllipsisOutlined } from "@ant-design/icons";
 
-import APIGetContractDetail from "../../api/getContractDetail";
 import Instance from "../../utils/contractInstance";
 import ParticipantList from "./ParticipantList";
 import ParticipantDates from "./PaymentsDates";
@@ -25,22 +24,22 @@ import styles from "./index.module.scss";
 
 const { Title } = Typography;
 
-function BatchDetails({ main }) {
-  const history = useHistory();
-  const {
-    contract: { methods },
-  } = Instance();
+function BatchDetails({ roundData }) {
+  //   const history = useHistory();
+  //   const {
+  //     contract: { methods },
+  //   } = Instance();
 
   const [detail, setDetail] = useState({});
-  const [openParticipantModal, setOpenParticipantModal] = useState(false);
-  const [openPaymentsDates, setOpenPaymentsDates] = useState(false);
+  //   const [openParticipantModal, setOpenParticipantModal] = useState(false);
+  //   const [openPaymentsDates, setOpenPaymentsDates] = useState(false);
 
-  const [api, contextHolder] = notification.useNotification();
-  const [registeredUsers, setRegisteredUsers] = useState([]);
-  const [adminAccount, setAdminAccount] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const { contract, currentAddress } = main;
-  const isAdmin = adminAccount === currentAddress;
+  //   const [api, contextHolder] = notification.useNotification();
+  //   const [registeredUsers, setRegisteredUsers] = useState([]);
+  //   const [adminAccount, setAdminAccount] = useState(null);
+  //   const [loading, setLoading] = useState(false);
+  //   const { contract, currentAddress } = main;
+  //   const isAdmin = adminAccount === currentAddress;
 
   const getUsersList = (times) =>
     new Promise((resolve) => {
@@ -83,7 +82,7 @@ function BatchDetails({ main }) {
     //     });
     //   })();
     // }
-  }, [main]);
+  }, []);
 
   const handleStartRound = async () => {
     // if (!isAdmin) {
@@ -142,55 +141,46 @@ function BatchDetails({ main }) {
     //   ),
     // },
   ];
-  const handleToggleParticipantsModal = () =>
-    setOpenParticipantModal(!openParticipantModal);
-  const handleTogglePaymentsModal = () =>
-    setOpenPaymentsDates(!openPaymentsDates);
-
-  const getContractDetail = async () => {
-    const contractDetail = await APIGetContractDetail(methods);
-    setDetail(contractDetail);
-  };
-
-  useEffect(() => {
-    getContractDetail();
-  }, []);
+  //   const handleToggleParticipantsModal = () =>
+  //     setOpenParticipantModal(!openParticipantModal);
+  //   const handleTogglePaymentsModal = () =>
+  //     setOpenPaymentsDates(!openPaymentsDates);
 
   return (
     <div className={styles.BranchDetails}>
       <PageHeader
         className={styles.BranchDetailsTitle}
-        onBack={() => history.push("/dashboard")}
-        title="Tanda de la chamba"
+        // onBack={() => history.push("/dashboard")}
+        title={roundData.name}
         extra={[
           <EllipsisOutlined style={{ color: "#FFF", fontSize: "30px" }} />,
         ]}
       />
       <div className={styles.BranchDetailsContent}>
         <div className={styles.BranchDetailsContentLine}>
-          <Title level={4}>Round {detail.turn}</Title>
+          {/* <Title level={4}>Round {detail.turn}</Title> */}
           {/* <Button type="primary" onClick={handleStartRound}>Iniciar Tanda</Button> */}
         </div>
         <div className={styles.BranchDetailsContentLine}>
           <div>Pagado</div>
           <div>
-            {`${detail.totalSaveAmount} de ${detail.groupSize} participantes`}
+            {/* {`${detail.totalSaveAmount} de ${detail.groupSize} participantes`}
             <RightOutlined
               onClick={handleToggleParticipantsModal}
               style={{
                 color: "#FFF",
                 fontSize: "15px",
                 marginLeft: "10px",
-              }}
-            />
+              }} */}
+            {/* /> */}
           </div>
         </div>
         <div className={styles.BranchDetailsContentLine}>
           <div>Calendario de pagos</div>
           <div>
-            {detail.groupSize}
+            {/* {detail.groupSize} */}
             <RightOutlined
-              onClick={handleTogglePaymentsModal}
+              //   onClick={handleTogglePaymentsModal}
               style={{
                 color: "#FFF",
                 fontSize: "15px",
@@ -200,15 +190,15 @@ function BatchDetails({ main }) {
           </div>
         </div>
       </div>
-      <ParticipantList
-        isOpen={openParticipantModal}
-        onCancel={handleToggleParticipantsModal}
+      {/* <ParticipantList
+      // isOpen={openParticipantModal}
+      // onCancel={handleToggleParticipantsModal}
       />
       <ParticipantDates
-        isOpen={openPaymentsDates}
-        onCancel={handleTogglePaymentsModal}
-      />
-      {contextHolder}
+      // isOpen={openPaymentsDates}
+      // onCancel={handleTogglePaymentsModal}
+      /> */}
+      {/* {contextHolder} */}
 
       {/* {registeredUsers.length > 0 && (
         <Button onClick={handleStartRound}>Iniciar Tanda</Button>
@@ -224,12 +214,8 @@ function BatchDetails({ main }) {
   );
 }
 
-const mapStateToProps = (state) => state;
-
 BatchDetails.propTypes = {
-  main: PropTypes.objectOf({
-    currentAddress: PropTypes.string,
-  }).isRequired,
+  roundData: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default connect(mapStateToProps)(memo(BatchDetails));
+export default BatchDetails;

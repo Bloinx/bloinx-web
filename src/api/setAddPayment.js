@@ -1,29 +1,34 @@
 import { doc, getDoc, getFirestore } from "firebase/firestore";
+
 import config from "./config.sg.web3";
+import MethodGetCashIn from "./methods/getCashIn";
 
 const db = getFirestore();
 
-const setWithdrawTurn = async (roundId, walletAddress) => {
+const setAddPayment = async (props) => {
+  const { walletAddress, roundId } = props;
+
   const docRef = doc(db, "round", roundId);
   const docSnap = await getDoc(docRef);
   const data = await docSnap.data();
 
   const sg = config(data.contract);
+  const cashIn = await MethodGetCashIn(sg.methods);
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     sg.methods
-      .withdrawTurn()
+      .addPayment()
       .send({
-        from: data.contract,
-        to: walletAddress,
+        from: walletAddress,
+        value: cashIn,
       })
       .once("receipt", async (receipt) => {
         resolve(receipt);
       })
       .on("error", async (error) => {
-        reject(error);
+        resolve(error);
       });
   });
 };
 
-export default setWithdrawTurn;
+export default setAddPayment;
