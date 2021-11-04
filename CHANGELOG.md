@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5-next.3](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-next.2...v0.0.5-next.3) (2021-11-04)
+
+
+### Features
+
+* add fee cost value ([9852e01](https://github.com/Bloinx/bloinx-web/commit/9852e015352ca743eb1cb324c3c31c7e5faa9c98))
+* add stablecoin abi ([3617c39](https://github.com/Bloinx/bloinx-web/commit/3617c397138a321963fd698fc94a08bfb9b8ea14))
+
+
+### Bug Fixes
+
+* **addPayment:** Carga de pagos agregado ([0806e06](https://github.com/Bloinx/bloinx-web/commit/0806e0659a41d64285e224aa68a4471877cb1f69))
+* **methods:** Add cashIn and feeCost methodts ([fb91aa9](https://github.com/Bloinx/bloinx-web/commit/fb91aa9af7b25f65b36605a95f57cf7aaf817888))
+* **register user:** Individual user configuration for round added ([9a9da14](https://github.com/Bloinx/bloinx-web/commit/9a9da14f599448e85d164cd371d3e9f880c1d094))
+* SavingGroupsABI ([2aa2405](https://github.com/Bloinx/bloinx-web/commit/2aa24058f16e1a64c824fcf11a094ee1386fbca1))
+* **stable coin:** add stable coin configuration ([1ae170d](https://github.com/Bloinx/bloinx-web/commit/1ae170d3fb491217b87dea4ef845c68cf48a68b8))
+
 ### [0.0.5-next.2](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-next.1...v0.0.5-next.2) (2021-10-27)
 
 
