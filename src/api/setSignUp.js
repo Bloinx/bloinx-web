@@ -1,9 +1,11 @@
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import firebase from "./config.firebase";
 
+firebase();
+const auth = getAuth();
+
 const signUp = ({ user, password, onSuccess, onFailure }) => {
-  firebase
-    .auth()
-    .createUserWithEmailAndPassword(user, password)
+  createUserWithEmailAndPassword(auth, user, password)
     .then((userCredential) => {
       onSuccess(userCredential);
     })
