@@ -43,7 +43,7 @@ export default function RoundCard({
           <img src={logoIcon} alt="logo" />
         </div>
         <div>
-          <Link href={linkTo} className={styles.RoundCardTitle}>
+          <Link to={linkTo} className={styles.RoundCardTitle}>
             <div className={styles.RoundCardTitleTitle}>{name}</div>
             <div className={styles.RoundCardTitleIcon}>
               <RightOutlined />

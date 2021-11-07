@@ -12,7 +12,7 @@ export default function InputEmailTags({
   label,
   name,
   value = [],
-  onChange,
+  onChangeValue,
   placeholder,
 }) {
   const [inputValue, setInputValue] = useState(null);
@@ -20,7 +20,7 @@ export default function InputEmailTags({
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    onChange({ target: { value: tags, name } });
+    onChangeValue({ target: { value: tags, name } });
   }, [tags]);
 
   useEffect(() => {
@@ -29,12 +29,16 @@ export default function InputEmailTags({
     }
   }, [inputValue]);
 
+  useEffect(() => {
+    setTags(value);
+  }, [value]);
+
   const handleAddTag = (event) => {
     const { charCode, target } = event;
     const isValidEmail = validateEmail(target.value);
 
     if (charCode === 13 && isValidEmail) {
-      setTags([...tags, value.trim()]);
+      setTags([...tags, target.value.trim()]);
       setInputValue(null);
     }
 
@@ -82,6 +86,6 @@ InputEmailTags.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
+  onChangeValue: PropTypes.func.isRequired,
   value: PropTypes.instanceOf(Array),
 };

@@ -13,6 +13,7 @@ import CreateBatch from "./containers/CreateBatch";
 import RegisterPay from "./containers/RegisterPay";
 import RegisterUser from "./containers/RegisterUser";
 import RoundDetails from "./containers/RoundDetails";
+import Invitations from "./containers/Invitations";
 import { getInitialContractInstance } from "./redux/actions/main";
 
 import "./App.scss";
@@ -27,6 +28,7 @@ function App({ initialContractInstance }) {
         <Route exact path="/dashboard" component={Dashboard} />
         <Route path="/create-round" component={CreateBatch} />
         <Route path="/register-user" component={RegisterUser} />
+        <Route path="/invitations" component={Invitations} />
         <Route exact path="/registerpay" component={RegisterPay} />
         <Route path="/round-details" component={RoundDetails} />
         <Route exact path="/">

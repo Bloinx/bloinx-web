@@ -26,7 +26,11 @@ function RoundDetails({ walletAddress }) {
       <Route
         path={baseUrl}
         component={() => (
-          <Details roundData={roundData} walletAddress={walletAddress} />
+          <Details
+            roundData={roundData}
+            roundId={roundId}
+            walletAddress={walletAddress}
+          />
         )}
       />
     </Switch>

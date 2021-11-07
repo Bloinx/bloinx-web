@@ -6,10 +6,10 @@ import styles from "./styles.module.scss";
 
 const { Title } = Typography;
 
-const PageHeader = ({ title, action }) => {
+const PageSubHeader = ({ title, action }) => {
   return (
-    <div className={styles.PageHeader}>
-      <Title level={4} className={styles.dashboardTitle}>
+    <div className={styles.PageSubHeader}>
+      <Title level={5} className={styles.dashboardTitle}>
         {title}
       </Title>
       {action}
@@ -17,7 +17,7 @@ const PageHeader = ({ title, action }) => {
   );
 };
 
-PageHeader.propTypes = {
+PageSubHeader.propTypes = {
   title: PropTypes.string.isRequired,
   action: PropTypes.oneOfType([
     PropTypes.string,
@@ -26,8 +26,8 @@ PageHeader.propTypes = {
   ]),
 };
 
-PageHeader.defaultProps = {
+PageSubHeader.defaultProps = {
   action: "",
 };
 
-export default PageHeader;
+export default PageSubHeader;

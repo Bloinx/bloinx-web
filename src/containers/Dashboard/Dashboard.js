@@ -85,7 +85,7 @@ function Dashboard({ currentAddress }) {
 
   const handleWithdrawRound = (roundId) => {
     setLoading(true);
-    APISetWithdrawTurn(roundId)
+    APISetWithdrawTurn(roundId, currentAddress)
       .then(() => {
         Modal.success({
           title: "Cobro correcto",
@@ -129,7 +129,7 @@ function Dashboard({ currentAddress }) {
         text: "Pagar",
         action: () => handlePayRound(roundData.roundKey),
         withdrawText: "Cobrar",
-        withdrawAction: handleWithdrawRound(roundData.roundKey),
+        withdrawAction: () => handleWithdrawRound(roundData.roundKey),
       };
     }
     console.log(">>>>>", roundData);

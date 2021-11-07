@@ -1,221 +1,64 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import React, { memo, useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
-import PropTypes from "prop-types";
 
-import {
-  Typography,
-  Row,
-  Col,
-  Button,
-  notification,
-  Table,
-  PageHeader,
-} from "antd";
-import { RightOutlined, EllipsisOutlined } from "@ant-design/icons";
+import React from "react";
+import { Link } from "react-router-dom";
+import { MailOutlined } from "@ant-design/icons";
 
-import Instance from "../../utils/contractInstance";
-import ParticipantList from "./ParticipantList";
-import ParticipantDates from "./PaymentsDates";
+import PageHeader from "../../components/PageHeader";
+import PageSubHeader from "../../components/PageSubHeader";
+import InputLabel from "../../components/InputLabel";
 
-import styles from "./index.module.scss";
+import { formatAddress } from "../../utils/format";
+import styles from "./Details.module.scss";
 
-const { Title } = Typography;
-
-function BatchDetails({ roundData }) {
-  //   const history = useHistory();
-  //   const {
-  //     contract: { methods },
-  //   } = Instance();
-
-  const [detail, setDetail] = useState({});
-  //   const [openParticipantModal, setOpenParticipantModal] = useState(false);
-  //   const [openPaymentsDates, setOpenPaymentsDates] = useState(false);
-
-  //   const [api, contextHolder] = notification.useNotification();
-  //   const [registeredUsers, setRegisteredUsers] = useState([]);
-  //   const [adminAccount, setAdminAccount] = useState(null);
-  //   const [loading, setLoading] = useState(false);
-  //   const { contract, currentAddress } = main;
-  //   const isAdmin = adminAccount === currentAddress;
-
-  const getUsersList = (times) =>
-    new Promise((resolve) => {
-      // const tempUserList = [];
-      // for (let index = 1; index <= times; index += 1) {
-      //   tempUserList.push(contract.methods.addressOrderList(index - 1));
-      // }
-      // Promise.all(
-      //   tempUserList.map(async (userBatch) => {
-      //     let user;
-      //     try {
-      //       const userKey = await userBatch.call();
-      //       user = {
-      //         key: userKey,
-      //         status: true,
-      //       };
-      //     } catch (err) {
-      //       user = {
-      //         key: 'Disponible',
-      //         status: false,
-      //       };
-      //     }
-      //     return user;
-      //   }),
-      // ).then((users) => {
-      //   resolve(users);
-      // });
-    });
-
-  useEffect(() => {
-    // if (contract) {
-    //   (async () => {
-    //     setLoading(true);
-    //     const admon = await contract.methods.admin().call();
-    //     const groupSize = await contract.methods.groupSize().call();
-    //     getUsersList(groupSize).then((userList) => {
-    //       setAdminAccount(admon);
-    //       setRegisteredUsers(userList);
-    //       setLoading(false);
-    //     });
-    //   })();
-    // }
-  }, []);
-
-  const handleStartRound = async () => {
-    // if (!isAdmin) {
-    //   await contract.methods.startRound().send({ from: currentAddress, to: contract._address })
-    //     .once('receipt', async (receipt) => {
-    //       console.log('seccess... ', receipt);
-    //       api.success({
-    //         message: 'Tanda incializada',
-    //         description: 'La tanda a sido inicializada',
-    //         placement: 'topLeft',
-    //       });
-    //     })
-    //     .on('error', async () => {
-    //       api.error({
-    //         message: 'Error al inicalizar',
-    //         description: 'No es posible realizar esta accion',
-    //         placement: 'topLeft',
-    //       });
-    //     });
-    // }
-  };
-
-  const removeUser = async () => {
-    // if (!isAdmin) {
-    //   await contract.methods.removeUser(1).send({ from: currentAddress, to: contract._address })
-    //     .once('receipt', async (receipt) => {
-    //       console.log('seccess... ', receipt);
-    //       api.success({
-    //         message: 'Error al eliminar',
-    //         description: 'No es posible realizar esta accion',
-    //         placement: 'topRight',
-    //       });
-    //     })
-    //     .on('error', async () => {
-    //       api.error({
-    //         message: 'Error al eliminar',
-    //         description: 'No es posible realizar esta accion',
-    //         placement: 'topRight',
-    //       });
-    //     });
-    // }
-  };
-
-  const columns = [
-    // {
-    //   title: 'Contrato',
-    //   dataIndex: 'key',
-    //   key: 'key',
-    // },
-    // {
-    //   title: 'Opciones',
-    //   dataIndex: 'status',
-    //   key: 'status',
-    //   render: (key, status) => isAdmin && status && (
-    //     <Button onClick={() => removeUser(key)}>Eliminar</Button>
-    //   ),
-    // },
-  ];
-  //   const handleToggleParticipantsModal = () =>
-  //     setOpenParticipantModal(!openParticipantModal);
-  //   const handleTogglePaymentsModal = () =>
-  //     setOpenPaymentsDates(!openPaymentsDates);
-
+function Details({ roundData, roundId }) {
   return (
-    <div className={styles.BranchDetails}>
-      <PageHeader
-        className={styles.BranchDetailsTitle}
-        // onBack={() => history.push("/dashboard")}
-        title={roundData.name}
-        extra={[
-          <EllipsisOutlined style={{ color: "#FFF", fontSize: "30px" }} />,
-        ]}
+    <>
+      <PageHeader title={roundData.positionData?.name} />
+      <InputLabel
+        label="ContratoID"
+        value={formatAddress(roundData.contract)}
       />
-      <div className={styles.BranchDetailsContent}>
-        <div className={styles.BranchDetailsContentLine}>
-          {/* <Title level={4}>Round {detail.turn}</Title> */}
-          {/* <Button type="primary" onClick={handleStartRound}>Iniciar Tanda</Button> */}
-        </div>
-        <div className={styles.BranchDetailsContentLine}>
-          <div>Pagado</div>
-          <div>
-            {/* {`${detail.totalSaveAmount} de ${detail.groupSize} participantes`}
-            <RightOutlined
-              onClick={handleToggleParticipantsModal}
-              style={{
-                color: "#FFF",
-                fontSize: "15px",
-                marginLeft: "10px",
-              }} */}
-            {/* /> */}
+      <InputLabel label="Estatus de la ronda" value={roundData.stage} />
+      <InputLabel
+        label="Participantes"
+        value={
+          <div className={styles.DetailParticipantsItem}>
+            {roundData.participantsData &&
+              roundData.participantsData.map((participant) => (
+                <ul>
+                  <li>{participant.position}</li>
+                  <li>{formatAddress(participant.address)}</li>
+                  <li>{participant.admin && "Admin"}</li>
+                </ul>
+              ))}
           </div>
-        </div>
-        <div className={styles.BranchDetailsContentLine}>
-          <div>Calendario de pagos</div>
-          <div>
-            {/* {detail.groupSize} */}
-            <RightOutlined
-              //   onClick={handleTogglePaymentsModal}
-              style={{
-                color: "#FFF",
-                fontSize: "15px",
-                marginLeft: "10px",
-              }}
-            />
-          </div>
-        </div>
-      </div>
-      {/* <ParticipantList
-      // isOpen={openParticipantModal}
-      // onCancel={handleToggleParticipantsModal}
+        }
       />
-      <ParticipantDates
-      // isOpen={openPaymentsDates}
-      // onCancel={handleTogglePaymentsModal}
-      /> */}
-      {/* {contextHolder} */}
-
-      {/* {registeredUsers.length > 0 && (
-        <Button onClick={handleStartRound}>Iniciar Tanda</Button>
-      )} */}
-      {/* <Table
-        dataSource={registeredUsers}
-        columns={columns}
-        size="small"
-        loading={loading}
-        pagination={null}
-      /> */}
-    </div>
+      <PageSubHeader title="Invitaciones" />
+      <Link
+        to={`/invitations?roundId=${roundId}`}
+        className={styles.RoundCardTitle}
+      >
+        <MailOutlined style={{ color: "white", fontSize: "20px" }} />
+      </Link>
+      <InputLabel
+        label="Invitaciones enviadas"
+        value={
+          <div className={styles.DetailParticipantsItem}>
+            {roundData.invitations &&
+              roundData.invitations.map((email) => (
+                <ul>
+                  <li>{email}</li>
+                </ul>
+              ))}
+          </div>
+        }
+      />
+    </>
   );
 }
 
-BatchDetails.propTypes = {
-  roundData: PropTypes.instanceOf(Object).isRequired,
-};
-
-export default BatchDetails;
+export default Details;

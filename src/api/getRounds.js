@@ -15,6 +15,7 @@ import MethodGetRealTurn from "./methods/getRealTurn";
 import MethodGetUserAvailableSavings from "./methods/getUserAvailableSavings";
 import MethodGetUserAmountPaid from "./methods/getUserAmountPaid";
 import MethodGetObligationAtTime from "./methods/getObligationAtTime";
+import MethodGetAdmin from "./methods/getAdmin";
 
 const db = getFirestore();
 
@@ -34,6 +35,7 @@ const getRounds = async ({ userId, walletAddress }) => {
       const positionData =
         data.positions.find((pos) => pos.walletAddress === walletAddress) || {};
 
+      const admin = await MethodGetAdmin(sg.methods);
       const orderList = await MethodGetAddressOrderList(sg.methods);
       const groupSize = await MethodGetGroupSize(sg.methods);
       const stage = await MethodGetStage(sg.methods);
@@ -83,15 +85,17 @@ const getRounds = async ({ userId, walletAddress }) => {
         missingPositions: available.length,
         stage,
         turn,
-        isAdmin: walletAddress === data.createByWallet,
+        isAdmin:
+          walletAddress === data.createByWallet && walletAddress === admin,
         positionToWithdrawPay: positionData.position,
+        realTurn,
         withdraw:
           Number(realTurn) > positionData.position && Number(savings) > 0,
       };
       rounds.push(roundData);
 
       if (i === querySnapshot.size - 1) {
-        console.log(rounds);
+        console.log("Rondas::", rounds);
         resolve(rounds.sort());
       } else {
         i += 1;
