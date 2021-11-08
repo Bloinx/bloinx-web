@@ -3,7 +3,7 @@ import Main from "../abis/Main.json";
 import Mim from "../abis/MIM.json";
 
 export const MAIN_FACTORY_FUJI_TEST_NET =
-  "0x14D460908Cf7Da6FB77014Bb1A57D4c69c2ADb50;
+  "0x14D460908Cf7Da6FB77014Bb1A57D4c69c2ADb50";
 const MIM_TOKEN_FUJI_TEST_NET = "0x2E669D4aef4Ea6f1A220c7F436205C824f9d584d";
 
 export function configMin() {
