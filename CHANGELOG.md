@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5-next.7](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-next.6...v0.0.5-next.7) (2021-11-09)
+
+
+### Bug Fixes
+
+* **users:** Add identifier for user data ([53ab320](https://github.com/Bloinx/bloinx-web/commit/53ab320d79a57f8de082bb1a0f9ae2e67e136773))
+
 ### [0.0.5-next.6](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-next.5...v0.0.5-next.6) (2021-11-09)
 
 
