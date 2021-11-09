@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5-next.6](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-next.5...v0.0.5-next.6) (2021-11-09)
+
+
+### Features
+
+* **invitations:** Add card with invitation to round ([ac51c06](https://github.com/Bloinx/bloinx-web/commit/ac51c06bb8eb586498746cbfd123f9968ce278bf))
+
 ### [0.0.5-next.5](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-next.4...v0.0.5-next.5) (2021-11-07)
 
 ### [0.0.5-next.4](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-next.3...v0.0.5-next.4) (2021-11-04)
