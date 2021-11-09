@@ -23,6 +23,7 @@ const getRounds = async ({ userId, walletAddress }) => {
   const querySnapshot = await getDocs(
     query(collection(db, "round"), where("createByUser", "==", userId))
   );
+
   return new Promise((resolve) => {
     const rounds = [];
     let i = 0;
@@ -30,7 +31,6 @@ const getRounds = async ({ userId, walletAddress }) => {
     querySnapshot.forEach(async (doc) => {
       const data = doc.data();
       const sg = config(data.contract);
-      console.log(sg);
 
       const positionData =
         data.positions.find((pos) => pos.walletAddress === walletAddress) || {};
@@ -91,6 +91,7 @@ const getRounds = async ({ userId, walletAddress }) => {
         realTurn,
         withdraw:
           Number(realTurn) > positionData.position && Number(savings) > 0,
+        fromInvitation: false,
       };
       rounds.push(roundData);
 

@@ -51,6 +51,7 @@ function Form({ form, setForm, roundData, walletAddress }) {
           history.push("/register-user/success");
         })
         .catch((err) => {
+          console.log(err);
           setLoading(false);
           Modal.error({
             title: "Error al registrar",
@@ -128,7 +129,7 @@ function Form({ form, setForm, roundData, walletAddress }) {
                 </div>
                 <ButtonOnlyOneStep
                   label={
-                    <FormattedMessage id="createRound.actions.createRound" />
+                    <FormattedMessage id="createRound.actions.registerMe" />
                   }
                   disabled={!values.name || !isValid}
                   type="submit"

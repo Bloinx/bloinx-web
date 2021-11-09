@@ -49,7 +49,7 @@
       }
     },
     "actions":{
-      "createRound": "Crear tanda",
+      "registerMe": "Registrarme",
       "payGuarantee": "Pagar garantia"
     }
   },

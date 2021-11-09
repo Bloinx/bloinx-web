@@ -13,6 +13,7 @@ import PageHeader from "../../components/PageHeader";
 import styles from "./Dashboard.module.scss";
 
 import APIGetRounds from "../../api/getRounds";
+import APIGetRoundsByInvitation from "../../api/getRoundsByInvitation";
 import APISetStartRound from "../../api/setStartRound";
 import APISetAddPayment from "../../api/setAddPayment";
 import APISetWithdrawTurn from "../../api/setWithdrawTurn";
@@ -23,6 +24,7 @@ function Dashboard({ currentAddress }) {
   const history = useHistory();
   const user = getAuth().currentUser;
   const [roundList, setRoundList] = useState([]);
+  const [invitationsList, setInvitationsList] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const goToCreate = () => {
@@ -40,6 +42,12 @@ function Dashboard({ currentAddress }) {
         walletAddress: currentAddress,
       }).then((rounds) => {
         setRoundList(rounds);
+      });
+      APIGetRoundsByInvitation({
+        email: user.email,
+        walletAddress: currentAddress,
+      }).then((invitations) => {
+        setInvitationsList(invitations);
       });
     }
   };
@@ -142,6 +150,10 @@ function Dashboard({ currentAddress }) {
     return <Placeholder />;
   }
 
+  console.log(roundList);
+  console.log(invitationsList);
+  const completeRoundList = roundList.concat(invitationsList);
+
   return (
     <>
       <PageHeader
@@ -154,11 +166,18 @@ function Dashboard({ currentAddress }) {
         }
       />
       <div className={styles.RoundCards}>
-        {currentAddress && roundList.length === 0 && <NotFoundPlaceholder />}
+        {currentAddress && completeRoundList.length === 0 && (
+          <NotFoundPlaceholder />
+        )}
         {currentAddress &&
-          roundList.map((round) => {
+          completeRoundList.map((round) => {
             if (round.stage === "ON_REGISTER_STAGE" && round.toRegister) {
-              return <RoundCardNew onClick={() => goToJoin(round.roundKey)} />;
+              return (
+                <RoundCardNew
+                  fromInvitation={round.fromInvitation}
+                  onClick={() => goToJoin(round.roundKey)}
+                />
+              );
             }
             const { disable, text, action, withdrawText, withdrawAction } =
               handleButton(round);

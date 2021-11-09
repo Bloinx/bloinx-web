@@ -7,6 +7,7 @@ const auth = getAuth();
 const login = ({ user, password, onSuccess, onFailure }) =>
   signInWithEmailAndPassword(auth, user, password)
     .then((userCredential) => {
+      console.log(userCredential);
       onSuccess(userCredential);
     })
     .catch((error) => {
