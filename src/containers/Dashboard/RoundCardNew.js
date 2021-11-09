@@ -4,7 +4,12 @@ import { Button } from "antd";
 
 import styles from "./RoundCardNew.module.scss";
 
-export default function RoundCardNew({ stage, onClick, fromInvitation }) {
+export default function RoundCardNew({
+  stage,
+  onClick,
+  fromInvitation,
+  fromEmail,
+}) {
   return (
     <div className={styles.RoundCardNew}>
       <p className={styles.RoundCardNewText}>
@@ -14,12 +19,12 @@ export default function RoundCardNew({ stage, onClick, fromInvitation }) {
       </p>
       <p className={styles.RoundCardNewText}>
         {fromInvitation
-          ? "Alguien te ha invitado a su ronda."
+          ? `Te han invitado a la ronda de ${fromEmail}`
           : "Start connecting your wallet."}
       </p>
       <p className={styles.RoundCardNewText}>
         {stage === "ON_REGISTER_STAGE"
-          ? "Tanda en espera de ser inciada"
+          ? "Tanda en espera de ser iniciada"
           : null}
       </p>
       <div className={styles.RoundCardNewOptions}>
@@ -34,10 +39,12 @@ export default function RoundCardNew({ stage, onClick, fromInvitation }) {
 RoundCardNew.defaultProps = {
   stage: undefined,
   fromInvitation: undefined,
+  fromEmail: undefined,
 };
 
 RoundCardNew.propTypes = {
   stage: PropTypes.string,
   fromInvitation: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  fromEmail: PropTypes.string,
   onClick: PropTypes.func.isRequired,
 };

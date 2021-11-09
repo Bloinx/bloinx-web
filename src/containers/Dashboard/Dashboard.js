@@ -175,6 +175,7 @@ function Dashboard({ currentAddress }) {
               return (
                 <RoundCardNew
                   fromInvitation={round.fromInvitation}
+                  fromEmail={round.fromEmail}
                   onClick={() => goToJoin(round.roundKey)}
                 />
               );
