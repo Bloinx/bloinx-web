@@ -86,7 +86,8 @@ const getRounds = async ({ userId, walletAddress }) => {
         stage,
         turn,
         isAdmin:
-          walletAddress === data.createByWallet && walletAddress === admin,
+          walletAddress === data.createByWallet &&
+          walletAddress === admin.toLowerCase(),
         positionToWithdrawPay: positionData.position,
         realTurn,
         withdraw:
