@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { doc, getDoc, updateDoc, getFirestore } from "firebase/firestore";
 import { getWeb3 } from "../utils/web3";
+import { MIM_TOKEN_FUJI_TEST_NET, configMin } from "./config.main.web3";
 
 import config from "./config.sg.web3";
 import MethodGetCashIn from "./methods/getCashIn";
@@ -21,32 +22,69 @@ const setRegisterUser = async (props) => {
   const feeCost = await MethodGetFeeCost(sg.methods);
 
   return new Promise((resolve, reject) => {
-    const amount = Number(cashIn) + Number(feeCost);
-    sg.methods
-      .registerUser(position)
-      .send({
-        from: walletAddress,
-        value: amount.toString(),
-      })
+    const mim = configMin();
+    console.log(mim);
+    mim.methods
+      .approve(
+        data.contract,
+        "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+      )
+      .send({ from: walletAddress, to: MIM_TOKEN_FUJI_TEST_NET })
       .once("receipt", async (receipt) => {
-        const positions = [
-          ...data.positions,
-          {
-            userId,
-            position: Number(position),
-            walletAddress,
-            motivation,
-            name,
-          },
-        ].sort();
-        await updateDoc(docRef, {
-          positions,
-        });
-        resolve(receipt);
+        sg.methods
+          .registerUser(position)
+          .send({
+            from: walletAddress,
+            to: data.contract,
+          })
+          .once("receipt", async (recpt) => {
+            const positions = [
+              ...data.positions,
+              {
+                userId,
+                position: Number(position),
+                walletAddress,
+                motivation,
+                name,
+              },
+            ].sort();
+            await updateDoc(docRef, {
+              positions,
+            });
+            resolve(recpt);
+          })
+          .on("error", async (error) => {
+            reject(error);
+          });
       })
-      .on("error", async (error) => {
-        reject(error);
+      .on("error", async (err) => {
+        console.log("error ", err);
       });
+    // sg.methods
+    //   .registerUser(position)
+    //   .send({
+    //     from: walletAddress,
+    //     to: data.contract,
+    //   })
+    //   .once("receipt", async (receipt) => {
+    //     const positions = [
+    //       ...data.positions,
+    //       {
+    //         userId,
+    //         position: Number(position),
+    //         walletAddress,
+    //         motivation,
+    //         name,
+    //       },
+    //     ].sort();
+    //     await updateDoc(docRef, {
+    //       positions,
+    //     });
+    //     resolve(receipt);
+    //   })
+    //   .on("error", async (error) => {
+    //     reject(error);
+    //   });
   });
 };
 

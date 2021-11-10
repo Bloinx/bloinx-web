@@ -4,7 +4,8 @@ import cUSD from "../abis/cUSD.json";
 
 export const MAIN_FACTORY_FUJI_TEST_NET =
   "0x5C197cbC2E5C23a82a30a5181fA94369219e0301";
-const MIM_TOKEN_FUJI_TEST_NET = "0x874069fa1eb16d44d622f2e0ca25eea172369bc1"; // cUSD
+export const MIM_TOKEN_FUJI_TEST_NET =
+  "0x874069fa1eb16d44d622f2e0ca25eea172369bc1"; // cUSD
 
 export function configMin() {
   const httpProvider = new Web3.providers.HttpProvider(

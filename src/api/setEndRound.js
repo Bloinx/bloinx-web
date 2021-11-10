@@ -3,8 +3,9 @@
 const api = (methods, payload) =>
   new Promise((resolve) => {
     methods
-      .removeUser(payload.turnSelected)
+      .endRound()
       .send({
+        // cualquiera puede ejecutar endRound
         from: payload.currentAddress,
         to: methods._address,
       })
