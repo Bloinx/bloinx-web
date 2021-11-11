@@ -3,7 +3,7 @@ import Main from "../abis/Main.json";
 import cUSD from "../abis/cUSD.json";
 
 export const MAIN_FACTORY_FUJI_TEST_NET =
-  "0x5C197cbC2E5C23a82a30a5181fA94369219e0301";
+  "0xac08AD3396556436f8b8514d8C92c0c07B3f2A4b";
 export const MIM_TOKEN_FUJI_TEST_NET =
   "0x874069fa1eb16d44d622f2e0ca25eea172369bc1"; // cUSD
 

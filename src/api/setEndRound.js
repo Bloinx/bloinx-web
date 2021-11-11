@@ -1,6 +1,4 @@
-// import { getWeb3 } from "../utils/web3";
-
-const api = (methods, payload) =>
+const setEndRound = (methods, payload) =>
   new Promise((resolve) => {
     methods
       .endRound()
@@ -17,4 +15,4 @@ const api = (methods, payload) =>
       });
   });
 
-export default api;
+export default setEndRound;

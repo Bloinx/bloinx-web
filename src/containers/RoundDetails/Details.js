@@ -37,26 +37,30 @@ function Details({ roundData, roundId }) {
           </div>
         }
       />
-      <PageSubHeader title="Invitaciones" />
-      <Link
-        to={`/invitations?roundId=${roundId}`}
-        className={styles.RoundCardTitle}
-      >
-        <MailOutlined style={{ color: "white", fontSize: "20px" }} />
-      </Link>
-      <InputLabel
-        label="Invitaciones enviadas"
-        value={
-          <div className={styles.DetailParticipantsItem}>
-            {roundData.invitations &&
-              roundData.invitations.map((email) => (
-                <ul>
-                  <li>{email}</li>
-                </ul>
-              ))}
-          </div>
-        }
-      />
+      {roundData.stage === "ON_REGISTER_STAGE" && (
+        <>
+          <PageSubHeader title="Invitaciones" />
+          <Link
+            to={`/invitations?roundId=${roundId}`}
+            className={styles.RoundCardTitle}
+          >
+            <MailOutlined style={{ color: "white", fontSize: "20px" }} />
+          </Link>
+          <InputLabel
+            label="Invitaciones enviadas"
+            value={
+              <div className={styles.DetailParticipantsItem}>
+                {roundData.invitations &&
+                  roundData.invitations.map((email) => (
+                    <ul>
+                      <li>{email}</li>
+                    </ul>
+                  ))}
+              </div>
+            }
+          />
+        </>
+      )}
     </>
   );
 }

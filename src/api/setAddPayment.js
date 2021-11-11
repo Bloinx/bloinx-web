@@ -1,6 +1,7 @@
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 import config from "./config.sg.web3";
+import MethodGetSaveAmount from "./methods/saveAmount";
 // import MethodGetCashIn from "./methods/getCashIn";
 
 const db = getFirestore();
@@ -13,11 +14,12 @@ const setAddPayment = async (props) => {
   const data = await docSnap.data();
 
   const sg = config(data.contract);
+  const saveAmount = await MethodGetSaveAmount(sg.methods);
   // const cashIn = await MethodGetCashIn(sg.methods);
 
   return new Promise((resolve) => {
     sg.methods
-      .addPayment()
+      .addPayment(saveAmount)
       .send({
         from: walletAddress,
         to: data.contract,

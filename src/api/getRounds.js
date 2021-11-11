@@ -15,6 +15,10 @@ import MethodGetRealTurn from "./methods/getRealTurn";
 import MethodGetUserAvailableSavings from "./methods/getUserAvailableSavings";
 import MethodGetUserAmountPaid from "./methods/getUserAmountPaid";
 import MethodGetObligationAtTime from "./methods/getObligationAtTime";
+import MethodGetUserUnassignedPayments from "./methods/getUserUnassignedPayments";
+import MethodGetUserAvailableCashIn from "./methods/getUserAvailableCashIn";
+import MethodGetSaveAmount from "./methods/saveAmount";
+import MethodGetCashIn from "./methods/getCashIn";
 import MethodGetAdmin from "./methods/getAdmin";
 
 const db = getFirestore();
@@ -31,6 +35,7 @@ const getRounds = async ({ userId, walletAddress }) => {
     querySnapshot.forEach(async (doc) => {
       const data = doc.data();
       const sg = config(data.contract);
+      console.log(sg);
 
       const positionData =
         data.positions.find((pos) => pos.walletAddress === walletAddress) || {};
@@ -40,6 +45,8 @@ const getRounds = async ({ userId, walletAddress }) => {
       const groupSize = await MethodGetGroupSize(sg.methods);
       const stage = await MethodGetStage(sg.methods);
       const turn = await MethodGetTurn(sg.methods);
+      const cashIn = await MethodGetCashIn(sg.methods);
+      const saveAmount = await MethodGetSaveAmount(sg.methods);
       const savings = await MethodGetUserAvailableSavings(
         sg.methods,
         positionData.position || 1
@@ -60,7 +67,10 @@ const getRounds = async ({ userId, walletAddress }) => {
         realTurn = await MethodGetRealTurn(sg.methods);
       }
 
+      let paymentStatus;
+      let monto;
       if (positionData.position) {
+        // Todos los pagos que ya se han asignado, por un pago real o por la toma del cash in.
         const amountPaid = await MethodGetUserAmountPaid(
           sg.methods,
           positionData.position
@@ -69,15 +79,40 @@ const getRounds = async ({ userId, walletAddress }) => {
           sg.methods,
           walletAddress
         );
-        console.log({
-          aposition: positionData.position,
-          amountPaid,
-          obligationAtTime,
-          zdiv: Number(obligationAtTime) - Number(amountPaid),
-        });
+        const unassignedPayments = await MethodGetUserUnassignedPayments(
+          sg.methods,
+          positionData.position
+        );
+        const availableCashIn = await MethodGetUserAvailableCashIn(
+          sg.methods,
+          positionData.position
+        );
+        const pagos =
+          (Number(amountPaid) +
+            Number(unassignedPayments) -
+            (Number(cashIn) - Number(availableCashIn))) /
+          Number(saveAmount);
+
+        const ads = () => {
+          if (pagos === Number(obligationAtTime) / Number(saveAmount)) {
+            return "on_time";
+          }
+          if (pagos > Number(obligationAtTime) / Number(saveAmount)) {
+            return "over_time";
+          }
+          if (pagos < Number(obligationAtTime) / Number(saveAmount)) {
+            return "minor_time";
+          }
+          return null;
+        };
+
+        monto = pagos - Number(obligationAtTime);
+        paymentStatus = ads();
       }
 
       const roundData = {
+        paymentStatus,
+        monto,
         name: positionData.name,
         roundKey: doc.id,
         toRegister: Boolean(!exist),
