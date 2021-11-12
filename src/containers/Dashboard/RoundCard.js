@@ -74,7 +74,7 @@ export default function RoundCard({
         <div className={styles.RoundCardTitleFooter}>
           {arePending
             ? `${groupSize - missingPositions} de ${groupSize} unidos`
-            : `Ronda ${turn}`}
+            : `Turno ${turn}`}
         </div>
         <div>
           {loading && (

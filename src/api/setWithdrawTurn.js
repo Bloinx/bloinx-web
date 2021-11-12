@@ -9,19 +9,19 @@ const setWithdrawTurn = async (roundId, walletAddress) => {
   const docRef = doc(db, "round", roundId);
   const docSnap = await getDoc(docRef);
   const data = await docSnap.data();
-  const roundData =
-    data.positions.find(
-      (position) => position.walletAddress === walletAddress
-    ) || {};
+  // const roundData =
+  //   data.positions.find(
+  //     (position) => position.walletAddress === walletAddress
+  //   ) || {};
 
   const sg = config(data.contract);
 
   return new Promise((resolve, reject) => {
     sg.methods
-      .withdrawTurn(String(roundData.position))
+      .withdrawTurn()
       .send({
-        from: data.contract,
-        to: walletAddress,
+        from: walletAddress,
+        to: data.contract,
       })
       .once("receipt", async (receipt) => {
         resolve(receipt);

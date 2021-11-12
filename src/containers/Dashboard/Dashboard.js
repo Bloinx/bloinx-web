@@ -111,6 +111,12 @@ function Dashboard({ currentAddress }) {
       });
   };
 
+  const paymentStatusText = {
+    payments_on_time: "Adelantar pago",
+    payments_advanced: "Adelantar otro pago",
+    payments_late: "Pagar",
+  };
+
   const handleButton = (roundData) => {
     const { stage, isAdmin, missingPositions, withdraw, turn } = roundData;
     if (stage === "ON_REGISTER_STAGE" && isAdmin) {
@@ -134,7 +140,7 @@ function Dashboard({ currentAddress }) {
     if (stage === "ON_ROUND_ACTIVE") {
       return {
         disable: roundData.positionToWithdrawPay === Number(roundData.turn),
-        text: "Pagar",
+        text: paymentStatusText[roundData.paymentStatus],
         action: () => handlePayRound(roundData.roundKey),
         withdrawText: "Cobrar",
         withdrawAction: () => handleWithdrawRound(roundData.roundKey),

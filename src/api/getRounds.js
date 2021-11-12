@@ -68,7 +68,7 @@ const getRounds = async ({ userId, walletAddress }) => {
       }
 
       let paymentStatus;
-      let monto;
+      let amount;
       if (positionData.position) {
         // Todos los pagos que ya se han asignado, por un pago real o por la toma del cash in.
         const amountPaid = await MethodGetUserAmountPaid(
@@ -95,24 +95,24 @@ const getRounds = async ({ userId, walletAddress }) => {
 
         const ads = () => {
           if (pagos === Number(obligationAtTime) / Number(saveAmount)) {
-            return "on_time";
+            return "payments_on_time";
           }
           if (pagos > Number(obligationAtTime) / Number(saveAmount)) {
-            return "over_time";
+            return "payments_advanced";
           }
           if (pagos < Number(obligationAtTime) / Number(saveAmount)) {
-            return "minor_time";
+            return "payments_late";
           }
           return null;
         };
 
-        monto = pagos - Number(obligationAtTime);
+        amount = pagos - Number(obligationAtTime);
         paymentStatus = ads();
       }
 
       const roundData = {
         paymentStatus,
-        monto,
+        amount,
         name: positionData.name,
         roundKey: doc.id,
         toRegister: Boolean(!exist),

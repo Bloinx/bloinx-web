@@ -17,7 +17,7 @@ const setAddPayment = async (props) => {
   const saveAmount = await MethodGetSaveAmount(sg.methods);
   // const cashIn = await MethodGetCashIn(sg.methods);
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     sg.methods
       .addPayment(saveAmount)
       .send({
@@ -28,7 +28,7 @@ const setAddPayment = async (props) => {
         resolve(receipt);
       })
       .on("error", async (error) => {
-        resolve(error);
+        reject(error);
       });
   });
 };
