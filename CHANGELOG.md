@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5-beta.0](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-next.7...v0.0.5-beta.0) (2021-11-13)
+
+
+### Features
+
+* add celo config ([b78df22](https://github.com/Bloinx/bloinx-web/commit/b78df221c90be7360a2aebd55b2318cf87dd0689))
+
+
+### Bug Fixes
+
+* **addPayment:** add laber to show status payment ([3628406](https://github.com/Bloinx/bloinx-web/commit/36284062011d9a0fb3d830156ce9b4ee82d4d278))
+* **admin:** add lower case condition to admin address ([3161a3e](https://github.com/Bloinx/bloinx-web/commit/3161a3eb1c6526b5f82443ec6bceaa2283ee5fab))
+* **endRound:** add end round to execution ([6f4f37b](https://github.com/Bloinx/bloinx-web/commit/6f4f37b81e8e1cfb133126aca8229289e041d791))
+* quotes typo ([26b60c8](https://github.com/Bloinx/bloinx-web/commit/26b60c87a96d20c6b4d8567d55d9b1b73a3eb736))
+* **round:** Add payment time to debt ([846a40a](https://github.com/Bloinx/bloinx-web/commit/846a40a3692ac00eac100fd517e4e796a1d7b714))
+
 ### [0.0.5-next.7](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-next.6...v0.0.5-next.7) (2021-11-09)
 
 
