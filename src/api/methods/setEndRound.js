@@ -3,15 +3,14 @@ const setEndRound = (methods, payload) =>
     methods
       .endRound()
       .send({
-        // cualquiera puede ejecutar endRound
         from: payload.currentAddress,
         to: methods._address,
       })
       .once("receipt", async (receipt) => {
-        resolve({ status: "success", receipt });
+        resolve(receipt);
       })
       .on("error", async (error) => {
-        resolve({ status: "error", error });
+        resolve(error);
       });
   });
 

@@ -1,7 +1,11 @@
 /* eslint-disable no-unused-vars */
 
 import { doc, getDoc, getFirestore } from "firebase/firestore";
+
 import config from "./config.sg.web3";
+import MethodGetRealTurn from "./methods/getRealTurn";
+import MethodGetGroupSize from "./methods/getGroupSize";
+import MethodSetEndRound from "./methods/setEndRound";
 
 const db = getFirestore();
 
@@ -15,6 +19,8 @@ const setWithdrawTurn = async (roundId, walletAddress) => {
   //   ) || {};
 
   const sg = config(data.contract);
+  const groupSize = await MethodGetGroupSize(sg.methods);
+  const realTurn = await MethodGetRealTurn(sg.methods);
 
   return new Promise((resolve, reject) => {
     sg.methods
@@ -24,7 +30,18 @@ const setWithdrawTurn = async (roundId, walletAddress) => {
         to: data.contract,
       })
       .once("receipt", async (receipt) => {
-        resolve(receipt);
+        if (Number(realTurn) >= Number(groupSize)) {
+          MethodSetEndRound()
+            .then((endReceipt) => {
+              resolve([receipt, endReceipt]);
+            })
+            .catch((endErr) => {
+              const er = [receipt, endErr];
+              reject(er);
+            });
+        } else {
+          resolve(receipt);
+        }
       })
       .on("error", async (error) => {
         reject(error);

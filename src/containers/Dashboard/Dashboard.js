@@ -138,11 +138,16 @@ function Dashboard({ currentAddress }) {
       };
     }
     if (stage === "ON_ROUND_ACTIVE") {
+      const payDisable =
+        roundData.positionToWithdrawPay === Number(roundData.turn);
       return {
-        disable: roundData.positionToWithdrawPay === Number(roundData.turn),
+        disable: payDisable,
         text: paymentStatusText[roundData.paymentStatus],
         action: () => handlePayRound(roundData.roundKey),
-        withdrawText: "Cobrar",
+        withdrawText:
+          roundData.groupSize >= roundData.realTurn && payDisable
+            ? "Terminar y Cobrar"
+            : "Cobrar",
         withdrawAction: () => handleWithdrawRound(roundData.roundKey),
       };
     }
@@ -156,8 +161,6 @@ function Dashboard({ currentAddress }) {
     return <Placeholder />;
   }
 
-  console.log(roundList);
-  console.log(invitationsList);
   const completeRoundList = roundList.concat(invitationsList);
 
   return (
