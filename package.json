@@ -18,7 +18,7 @@
     "commitlint": "commitlint --from=development",
     "release": "standard-version && git push --follow-tags origin development && yarn build && yarn deploy",
     "prerelease": "standard-version --prerelease next && git push --follow-tags origin development && yarn build && yarn deploy:UAT",
-    "prerelease:IST": "standard-version --prerelease beta && git push --follow-tags origin development && yarn build && yarn deploy:IST"
+    "release:ist": "standard-version --prerelease beta && git push --follow-tags origin feat/addCeloNetwork && yarn build && yarn deploy:IST"
   },
   "jest": {
     "collectCoverageFrom": [
