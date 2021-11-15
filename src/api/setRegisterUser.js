@@ -1,11 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { doc, getDoc, updateDoc, getFirestore } from "firebase/firestore";
-import { getWeb3 } from "../utils/web3";
 import { MIM_TOKEN_FUJI_TEST_NET, configMin } from "./config.main.web3";
 
 import config from "./config.sg.web3";
-import MethodGetCashIn from "./methods/getCashIn";
-import MethodGetFeeCost from "./methods/getFeeCost";
 
 const db = getFirestore();
 
@@ -17,13 +14,14 @@ const setRegisterUser = async (props) => {
   const docSnap = await getDoc(docRef);
   const data = await docSnap.data();
 
+  const userRef = doc(db, "users", userId);
+  const userSnap = await getDoc(userRef);
+  const userData = await userSnap.data();
+
   const sg = config(data.contract);
-  const cashIn = await MethodGetCashIn(sg.methods);
-  const feeCost = await MethodGetFeeCost(sg.methods);
 
   return new Promise((resolve, reject) => {
     const mim = configMin();
-    console.log(mim);
     mim.methods
       .approve(
         data.contract,
@@ -48,8 +46,12 @@ const setRegisterUser = async (props) => {
                 name,
               },
             ].sort();
+            const invitations = data.invitations.filter(
+              (email) => email !== userData.email
+            );
             await updateDoc(docRef, {
               positions,
+              invitations,
             });
             resolve(recpt);
           })
@@ -60,31 +62,6 @@ const setRegisterUser = async (props) => {
       .on("error", async (err) => {
         console.log("error ", err);
       });
-    // sg.methods
-    //   .registerUser(position)
-    //   .send({
-    //     from: walletAddress,
-    //     to: data.contract,
-    //   })
-    //   .once("receipt", async (receipt) => {
-    //     const positions = [
-    //       ...data.positions,
-    //       {
-    //         userId,
-    //         position: Number(position),
-    //         walletAddress,
-    //         motivation,
-    //         name,
-    //       },
-    //     ].sort();
-    //     await updateDoc(docRef, {
-    //       positions,
-    //     });
-    //     resolve(receipt);
-    //   })
-    //   .on("error", async (error) => {
-    //     reject(error);
-    //   });
   });
 };
 

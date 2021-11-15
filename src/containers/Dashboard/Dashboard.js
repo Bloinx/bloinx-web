@@ -10,9 +10,11 @@ import { getAuth } from "firebase/auth";
 import RoundCard from "./RoundCard";
 import RoundCardNew from "./RoundCardNew";
 import PageHeader from "../../components/PageHeader";
+import PageSubHeader from "../../components/PageSubHeader";
 import styles from "./Dashboard.module.scss";
 
 import APIGetRounds from "../../api/getRounds";
+import APIGetOtherRounds from "../../api/getRoundsOthers";
 import APIGetRoundsByInvitation from "../../api/getRoundsByInvitation";
 import APISetStartRound from "../../api/setStartRound";
 import APISetAddPayment from "../../api/setAddPayment";
@@ -25,6 +27,7 @@ function Dashboard({ currentAddress }) {
   const user = getAuth().currentUser;
   const [roundList, setRoundList] = useState([]);
   const [invitationsList, setInvitationsList] = useState([]);
+  const [otherList, setOtherList] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const goToCreate = () => {
@@ -48,6 +51,11 @@ function Dashboard({ currentAddress }) {
         walletAddress: currentAddress,
       }).then((invitations) => {
         setInvitationsList(invitations);
+      });
+      APIGetOtherRounds({
+        walletAddress: currentAddress,
+      }).then((other) => {
+        setOtherList(other);
       });
     }
   };
@@ -151,7 +159,6 @@ function Dashboard({ currentAddress }) {
         withdrawAction: () => handleWithdrawRound(roundData.roundKey),
       };
     }
-    console.log(">>>>>", roundData);
     return {};
   };
 
@@ -211,6 +218,44 @@ function Dashboard({ currentAddress }) {
             );
           })}
       </div>
+      {otherList.length && (
+        <PageSubHeader
+          title={<FormattedMessage id="dashboardPage.subtitle" />}
+        />
+      )}
+      {currentAddress &&
+        otherList &&
+        otherList.map((round) => {
+          // if (round.stage === "ON_REGISTER_STAGE" && round.toRegister) {
+          //   return (
+          //     <RoundCardNew
+          //       fromInvitation={round.fromInvitation}
+          //       fromEmail={round.fromEmail}
+          //       onClick={() => goToJoin(round.roundKey)}
+          //     />
+          //   );
+          // }
+          const { disable, text, action, withdrawText, withdrawAction } =
+            handleButton(round);
+          return (
+            <RoundCard
+              name={round.name}
+              groupSize={round.groupSize}
+              missingPositions={round.missingPositions}
+              contractKey={round.contract}
+              positionToWithdrawPay={round.positionToWithdrawPay}
+              turn={round.turn}
+              linkTo={`/round-details?roundId=${round.roundKey}`}
+              onClick={action}
+              buttonText={text}
+              withdrawButtonText={withdrawText}
+              buttonDisabled={disable}
+              loading={loading}
+              withdraw={round.withdraw}
+              onWithdraw={withdrawAction}
+            />
+          );
+        })}
     </>
   );
 }
