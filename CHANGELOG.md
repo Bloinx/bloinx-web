@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5-beta.1](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-beta.0...v0.0.5-beta.1) (2021-11-15)
+
+
+### Bug Fixes
+
+* **otherRounds:** Add lista for other rounds ([1d3aef8](https://github.com/Bloinx/bloinx-web/commit/1d3aef8e8a818ebaa04e99b44cc5bec4c76ae31a))
+
 ### [0.0.5-beta.0](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-next.7...v0.0.5-beta.0) (2021-11-13)
 
 
