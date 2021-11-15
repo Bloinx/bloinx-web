@@ -17,16 +17,25 @@ import MethodGetAdmin from "./methods/getAdmin";
 
 const db = getFirestore();
 
-const getRounds = async ({ walletAddress }) => {
+const getRounds = async ({ userId, walletAddress }) => {
   const querySnapshot = await getDocs(query(collection(db, "round")));
   const otherDocs = querySnapshot.docs.filter((a) => {
     return a
       .data()
       .positions.find((position) => position.walletAddress === walletAddress);
   });
-  const otherList = otherDocs.filter(
-    (otherItem) => otherItem.data().createByWallet !== walletAddress
-  );
+  const otherList = otherDocs.filter((otherItem) => {
+    console.log(
+      otherItem.data().createByWallet,
+      walletAddress,
+      otherItem.data().createByUser,
+      userId
+    );
+    return (
+      otherItem.data().createByWallet !== walletAddress &&
+      otherItem.data().createByUser !== userId
+    );
+  });
 
   return new Promise((resolve) => {
     const rounds = [];

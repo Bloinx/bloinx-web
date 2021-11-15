@@ -53,6 +53,7 @@ function Dashboard({ currentAddress }) {
         setInvitationsList(invitations);
       });
       APIGetOtherRounds({
+        userId: user.uid,
         walletAddress: currentAddress,
       }).then((other) => {
         setOtherList(other);

@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { Menu, Layout, Drawer } from "antd";
@@ -20,7 +21,7 @@ import icon from "../../assets/icon.png";
 
 const { Sider } = Layout;
 
-export default function NavAside({ width, toggleDrawer, visible }) {
+export function NavAside({ user, width, toggleDrawer, visible }) {
   const [sliderStatus, setSliderStatus] = useState(false);
   const isTablet = width <= 800;
   const isMobile = width <= 768;
@@ -47,6 +48,9 @@ export default function NavAside({ width, toggleDrawer, visible }) {
           <img src={sliderStatus ? icon : logo} alt="bloinx-logo" />
         </div>
       )}
+      <Menu.Item className={styles.MenuItem} onClick={toggleDrawer}>
+        <span>{user.email}</span>
+      </Menu.Item>
       <Menu.Item
         className={classnames(
           styles.MenuItem,
@@ -168,11 +172,21 @@ export default function NavAside({ width, toggleDrawer, visible }) {
 }
 
 NavAside.propTypes = {
+  user: PropTypes.instanceOf(Object),
   visible: PropTypes.bool,
   width: PropTypes.number.isRequired,
   toggleDrawer: PropTypes.func.isRequired,
 };
 
 NavAside.defaultProps = {
+  user: undefined,
   visible: false,
 };
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(NavAside);

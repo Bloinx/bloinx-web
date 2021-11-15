@@ -14,6 +14,7 @@
     "eject": "craco eject",
     "lint": "eslint .",
     "deploy": "firebase deploy --only hosting",
+    "deploy:IST": "firebase hosting:channel:deploy IST",
     "deploy:UAT": "firebase hosting:channel:deploy UAT",
     "commitlint": "commitlint --from=development",
     "release": "standard-version && git push --follow-tags origin development && yarn build && yarn deploy",
