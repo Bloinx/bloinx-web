@@ -21,7 +21,7 @@ import icon from "../../assets/icon.png";
 
 const { Sider } = Layout;
 
-export function NavAside({ user, width, toggleDrawer, visible }) {
+function NavAside({ user, width, toggleDrawer, visible }) {
   const [sliderStatus, setSliderStatus] = useState(false);
   const isTablet = width <= 800;
   const isMobile = width <= 768;
