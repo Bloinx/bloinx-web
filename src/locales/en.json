@@ -2,7 +2,9 @@
   "navAside": {
     "dashboard": "My Batches",
     "createbatch": "Create Batch",
-    "registerpay": "Payments"
+    "registerpay": "Payments",
+    "batchDetails": "Details",
+    "logout": "Logout"
   },
   "dashboardPage": {
     "title": "My Batches",
@@ -15,49 +17,40 @@
       "status": "Status"
     }
   },
-  "createBatch":{
-    "stepper": {
-      "step1": "General Data",
-      "step2": "Configuration",
-      "step3": "Resume"
-    },
-    "titles": {
-      "generalData":{
-        "title": "General data",
-        "description": "They are the data that will identify your batch and will let others know when it starts and if it will be with friends or strangers."
-      },
-      "configuration":{
-        "title": "Configuration",
-        "description": "Customize your batch and think about the characteristics that your group of friends has and the amount they want to save per period."
-      },
-      "resume": {
-        "title": "Resumen",
-        "description": "Finally, confirm that all the information is correct and choose in which round you will receive your batch."
-      },
-      "invitation": {
-        "title": "Invitation",
-        "description": "Share it with the people you want to start this savings circle with by sending them an email."
-      }
+  "createRound":{
+    "title": "Create new round",
+    "titleConfirm": "Customize your round",
+    "titleReceipt": "Pay security deposit",
+    "labels": {
+      "payPerRound": "Amount to pay per round",
+      "rewards": "You will receive",
+      "amount": "Each participant will pay",
+      "receiptAmount": "You will receive",
+      "roundTime": "Duration time per round",
+      "terms": "I fully understand how the security deposit works"
     },
     "form":{
       "label":{
-        "batchName":"Batch name",
-        "startDate":"Start date",
-        "batchType":"Batch type",
-        "batchTypeOptions": {
-          "public": "Public",
-          "private": "Private"
+        "participants": "Number of participants",
+        "amount": "Amount per period",
+        "periodicity": "Duration of the round",
+        "periodicityOptions": {
+          "day": "Daily",
+          "weekly": "Weekly",
+          "biweekly": "Biweekly",
+          "monthly": "Monthly"
         },
-        "participants": "Participants number",
-        "longevity": "Periodicity",
-        "amount": "Period amount",
-        "admin": "Administrator",
-        "position": "Choose your position",
-        "emails": "Enter the emails."
+        "name":"Name of the Round",
+        "motivation":"Personal motivation",
+        "turn": "Turn to receive the round"
       },
       "placeholder": {
-        "batchName":"Batch name"
+        "batchName":"Name of round"
       }
+    },
+    "actions":{
+      "registerMe": "Select your turn",
+      "payGuarantee": "Pay guarantee"
     }
   },
   "payments":{
@@ -76,12 +69,23 @@
       }
     }
   },
+  "invitations": {
+    "title": "Invitations",
+    "description": "Please enter the emails of all your guests for this round.",
+    "form": {
+      "label": {
+        "emails": "Add the emails"
+      }
+    }
+  },
   "commons": {
     "buttons": {
       "next": "Next",
       "back": "Back",
       "continue": "Continue",
-      "send": "Send"
+      "send": "Send",
+      "end": "End",
+      "sendAndEnd": "Send and End"
     }
   },
   "copyright": "Bloinx 2021 (c) All rights reserved."
