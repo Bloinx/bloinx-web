@@ -1,13 +1,14 @@
 {
   "navAside": {
-    "dashboard": "My Batches",
-    "createbatch": "Create Batch",
+    "dashboard": "My Rounds",
+    "createbatch": "Create Round",
     "registerpay": "Payments",
     "batchDetails": "Details",
     "logout": "Logout"
   },
   "dashboardPage": {
-    "title": "My Batches",
+    "title": "My Rounds",
+    "subtitle": "Invitations to Rounds",
     "table": {
       "name": "Name",
       "address": "Contract Address",
@@ -50,7 +51,8 @@
     },
     "actions":{
       "registerMe": "Select your turn",
-      "payGuarantee": "Pay guarantee"
+      "payGuarantee": "Create round",
+      "chooseTurn": "Choose your turn in the round"
     }
   },
   "payments":{
@@ -87,6 +89,12 @@
       "end": "End",
       "sendAndEnd": "Send and End"
     }
+  },
+  "infoLabels": {
+    "withoutWallet": "No Wallet found",
+    "connectWalletMessage": "Please connect your wallet to continue",
+    "withoutInfo": "Without info to show",
+    "createRoundMessage": "Please create a round"
   },
   "copyright": "Bloinx 2021 (c) All rights reserved."
 }

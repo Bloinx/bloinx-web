@@ -1,4 +1,5 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
 import { ApiOutlined } from "@ant-design/icons";
 
@@ -10,8 +11,10 @@ export default function Placeholder() {
       <ApiOutlined
         style={{ fontSize: "60px", color: "white", marginBottom: "10px" }}
       />
-      Sin wallet encontrada
-      <span>Por favor conecta tu wallet para continuar</span>
+      <FormattedMessage id="infoLabels.withoutWallet" />
+      <span>
+        <FormattedMessage id="infoLabels.connectWalletMessage" />
+      </span>
     </div>
   );
 }

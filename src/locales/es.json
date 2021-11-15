@@ -1,13 +1,14 @@
 {
   "navAside": {
-    "dashboard": "Mis Tandas",
-    "createbatch": "Crear Tanda",
+    "dashboard": "Mis Rondas",
+    "createbatch": "Crear Ronda",
     "registerpay": "Pagos",
     "batchDetails": "Detalle",
     "logout": "Cerrar sesión"
   },
   "dashboardPage": {
-    "title": "Mis Tandas",
+    "title": "Mis Rondas",
+    "subtitle": "Invitaciones a las rondas",
     "table": {
       "name": "Nombre",
       "address": "Dirección de contrato",
@@ -18,8 +19,8 @@
     }
   },
   "createRound":{
-    "title": "Crear nueva tanda",
-    "titleConfirm": "Personaliza tu tanda",
+    "title": "Crear nueva ronda",
+    "titleConfirm": "Personaliza tu ronda",
     "titleReceipt": "Pagar depósito de seguridad",
     "labels": {
       "payPerRound": "Monto pagado por ronda",
@@ -40,17 +41,18 @@
           "biweekly": "Quincenal",
           "monthly": "Mensual"
         },
-        "name":"Nombre de la tanda",
+        "name":"Nombre de la ronda",
         "motivation":"Motivación personal",
-        "turn": "Turno para recibir la tanda"
+        "turn": "Turno para recibir la ronda"
       },
       "placeholder": {
-        "batchName":"Nombre de la tanda"
+        "batchName":"Nombre de la ronda"
       }
     },
     "actions":{
       "registerMe": "Registrarme",
-      "payGuarantee": "Pagar garantia"
+      "payGuarantee": "Crear ronda",
+      "chooseTurn": "Elige tu lugar en la ronda"
     }
   },
   "payments":{
@@ -87,6 +89,12 @@
       "end": "Terminar",
       "sendAndEnd": "Enviar y terminar"
     }
+  },
+  "infoLabels": {
+    "withoutWallet": "Sin Wallet encontrada",
+    "connectWalletMessage": "Por favor conecta tu wallet para continuar",
+    "withoutInfo": "Sin información para mostrar",
+    "createRoundMessage": "Por favor crea una ronda"
   },
   "copyright": "Bloinx 2021 (c) Todos los derechos reservados."
 }
