@@ -8,7 +8,6 @@ const db = getFirestore();
 
 const setRegisterUser = async (props) => {
   const { userId, walletAddress, roundId, name, motivation, position } = props;
-  console.log(props);
 
   const docRef = doc(db, "round", roundId);
   const docSnap = await getDoc(docRef);

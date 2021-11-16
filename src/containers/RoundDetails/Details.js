@@ -1,3 +1,5 @@
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
@@ -25,16 +27,23 @@ function Details({ roundData, roundId }) {
       <InputLabel
         label="Participantes"
         value={
-          <div className={styles.DetailParticipantsItem}>
+          <table className={styles.DetailParticipantsItem}>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th>Cobro</th>
+            </tr>
             {roundData.participantsData &&
               roundData.participantsData.map((participant) => (
-                <ul>
-                  <li>{participant.position}</li>
-                  <li>{formatAddress(participant.address)}</li>
-                  <li>{participant.admin && "Admin"}</li>
-                </ul>
+                <tr>
+                  <th>{participant.position}</th>
+                  <th>{formatAddress(participant.address)}</th>
+                  <th>{participant.admin && "Admin"}</th>
+                  <th>{participant.dateToWithdraw}</th>
+                </tr>
               ))}
-          </div>
+          </table>
         }
       />
       {roundData.stage === "ON_REGISTER_STAGE" && (

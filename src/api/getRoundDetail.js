@@ -1,9 +1,12 @@
 /* eslint-disable no-unused-vars */
 import { doc, getDoc, getFirestore } from "firebase/firestore";
+import moment from "moment";
 
 import MethodGetAddressOrderList from "./methods/getAddressOrderList";
 import MethodGetAdmin from "./methods/getAdmin";
 import MethodGetStage from "./methods/getStage";
+import MethodGetPayTime from "./methods/getPayTime";
+import MethodGetStartTime from "./methods/getStartTime";
 import config from "./config.sg.web3";
 
 const getRoundDetail = async (roundId) => {
@@ -21,12 +24,15 @@ const getRoundDetail = async (roundId) => {
     const admin = await MethodGetAdmin(sg.methods);
     const orderList = await MethodGetAddressOrderList(sg.methods);
     const stage = await MethodGetStage(sg.methods);
+    const startTime = await MethodGetStartTime(sg.methods);
+    const payTime = await MethodGetPayTime(sg.methods);
 
     const participantsData = orderList.map((user) => {
       const roundData =
         positions.find(
           (position) => position.walletAddress === user.address.toLowerCase()
         ) || [];
+
       return {
         ...user,
         address:
@@ -36,6 +42,9 @@ const getRoundDetail = async (roundId) => {
         userId: roundData.userId,
         walletAddress: roundData.walletAddress,
         admin: admin === user.address,
+        dateToWithdraw: moment(
+          new Date((Number(startTime) + user.position * payTime) * 1000)
+        ).format("DD - MMM - YYYY HH:mm"),
       };
     });
     const a = {
