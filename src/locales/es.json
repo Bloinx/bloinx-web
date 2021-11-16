@@ -9,6 +9,7 @@
   "dashboardPage": {
     "title": "Mis Rondas",
     "subtitle": "Invitaciones a las rondas",
+    "roundCaption": "Comienza ahora creando tu círculo de ahorro con tu familia y amigos",
     "table": {
       "name": "Nombre",
       "address": "Dirección de contrato",

@@ -14,9 +14,11 @@ export default function RoundCardNew({
   return (
     <div className={styles.RoundCardNew}>
       <p className={styles.RoundCardNewText}>
-        {fromInvitation
-          ? "Ronda por invitación"
-          : "Start your saving circle with your friends or family now."}
+        {fromInvitation ? (
+          "Ronda por invitación"
+        ) : (
+          <FormattedMessage id="dashboardPage.roundCaption" />
+        )}
       </p>
       <p className={styles.RoundCardNewText}>
         {fromInvitation

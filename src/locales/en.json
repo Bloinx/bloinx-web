@@ -9,6 +9,7 @@
   "dashboardPage": {
     "title": "My Rounds",
     "subtitle": "Invitations to Rounds",
+    "roundCaption": "Start your saving circle with your friends or family now.",
     "table": {
       "name": "Name",
       "address": "Contract Address",

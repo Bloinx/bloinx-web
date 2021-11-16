@@ -77,7 +77,7 @@ const Receipt = ({ form, setForm, walletAddress }) => {
 
   return (
     <>
-      <PageHeader title={<FormattedMessage id="createRound.titleReceipt" />} />
+      <PageHeader title={<FormattedMessage id="createRound.title" />} />
       {loading && <Loader />}
       {!loading && (
         <>
