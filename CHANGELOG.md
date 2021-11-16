@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5-beta.4](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-beta.3...v0.0.5-beta.4) (2021-11-16)
+
+
+### Bug Fixes
+
+* excel coments ([9cb1012](https://github.com/Bloinx/bloinx-web/commit/9cb1012bac2c48d8f1ade56455c7fe1c3da0d409))
+* excel comments ([67408c3](https://github.com/Bloinx/bloinx-web/commit/67408c3ff1125ae2b6befb24859ceb8b2ff6a52c))
+* **nav aside:** add export ([637fb3c](https://github.com/Bloinx/bloinx-web/commit/637fb3c01c9820cfa02956f380a7b2a99f26536b))
+
 ### [0.0.5-beta.3](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-beta.2...v0.0.5-beta.3) (2021-11-15)
 
 ### [0.0.5-beta.2](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-beta.1...v0.0.5-beta.2) (2021-11-15)
