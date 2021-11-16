@@ -150,7 +150,7 @@ function Dashboard({ currentAddress }) {
       const payDisable =
         roundData.positionToWithdrawPay === Number(roundData.turn);
       return {
-        disable: payDisable,
+        disable: false,
         text: paymentStatusText[roundData.paymentStatus],
         action: () => handlePayRound(roundData.roundKey),
         withdrawText:
