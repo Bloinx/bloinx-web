@@ -72,9 +72,9 @@ export default function RoundCard({
       )}
       <div className={styles.RoundCardFooter}>
         <div className={styles.RoundCardTitleFooter}>
-          {arePending
-            ? `${groupSize - missingPositions} de ${groupSize} unidos`
-            : `Turno ${turn}`}
+          {arePending &&
+            `${groupSize - missingPositions} de ${groupSize} unidos`}
+          {!arePending && missingPositions === 0 && "Esperando iniciar..."}
         </div>
         <div>
           {loading && (
