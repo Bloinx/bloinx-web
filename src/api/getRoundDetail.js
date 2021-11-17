@@ -42,9 +42,12 @@ const getRoundDetail = async (roundId) => {
         userId: roundData.userId,
         walletAddress: roundData.walletAddress,
         admin: admin === user.address,
-        dateToWithdraw: moment(
-          new Date((Number(startTime) + user.position * payTime) * 1000)
-        ).format("DD - MMM - YYYY HH:mm"),
+        dateToWithdraw:
+          startTime === "0"
+            ? moment(new Date()).format("DD - MMM - YYYY HH:mm")
+            : moment(
+                new Date((Number(startTime) + user.position * payTime) * 1000)
+              ).format("DD - MMM - YYYY HH:mm"),
       };
     });
     const a = {
