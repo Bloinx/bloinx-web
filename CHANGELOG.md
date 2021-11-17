@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5-beta.7](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-beta.6...v0.0.5-beta.7) (2021-11-17)
+
+
+### Bug Fixes
+
+* add stage for invitation rounds ([14e9ef3](https://github.com/Bloinx/bloinx-web/commit/14e9ef3de5208a0058022095e37e8a6e6713a6a1))
+* await message for start round ([9f9b48a](https://github.com/Bloinx/bloinx-web/commit/9f9b48a10aea4217c23998aa6070099464a0062e))
+* initial date to withdraw ([6c405b3](https://github.com/Bloinx/bloinx-web/commit/6c405b3078970f122e4b6f44ad0752ad66694027))
+* withdraw ([db80035](https://github.com/Bloinx/bloinx-web/commit/db80035250b572a17f3a4d91c3593a725d4c00d5))
+
 ### [0.0.5-beta.6](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-beta.5...v0.0.5-beta.6) (2021-11-16)
 
 ### [0.0.5-beta.5](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-beta.4...v0.0.5-beta.5) (2021-11-16)
