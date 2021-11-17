@@ -39,23 +39,27 @@ function Dashboard({ currentAddress }) {
   };
 
   const handleGetRounds = () => {
+    console.log("ACTUALIZANDO");
     if (user && user.uid) {
       APIGetRounds({
         userId: user.uid,
         walletAddress: currentAddress,
       }).then((rounds) => {
+        console.log("ACTUALIZADO MIS RONDAS");
         setRoundList(rounds);
       });
       APIGetRoundsByInvitation({
         email: user.email,
         walletAddress: currentAddress,
       }).then((invitations) => {
+        console.log("ACTUALIZADO MIS INVITES");
         setInvitationsList(invitations);
       });
       APIGetOtherRounds({
         userId: user.uid,
         walletAddress: currentAddress,
       }).then((other) => {
+        console.log("ACTUALIZADO OTRAS RONDAS");
         setOtherList(other);
       });
     }
@@ -90,6 +94,7 @@ function Dashboard({ currentAddress }) {
           content: "...",
         });
         setLoading(false);
+        handleGetRounds();
       })
       .catch((err) => {
         Modal.error({
@@ -97,6 +102,7 @@ function Dashboard({ currentAddress }) {
           content: "...",
         });
         setLoading(false);
+        handleGetRounds();
       });
   };
 
@@ -109,6 +115,7 @@ function Dashboard({ currentAddress }) {
           content: "El cobro de la ronda a sido efectuado correctamente",
         });
         setLoading(false);
+        handleGetRounds();
       })
       .catch(() => {
         Modal.error({
@@ -117,6 +124,7 @@ function Dashboard({ currentAddress }) {
             "No pudimos realizar el cobro de tu ronda. Por favor verifica mas tarde o intenta nuevamente.",
         });
         setLoading(false);
+        handleGetRounds();
       });
   };
 
@@ -158,6 +166,15 @@ function Dashboard({ currentAddress }) {
             ? "Terminar y Cobrar"
             : "Cobrar",
         withdrawAction: () => handleWithdrawRound(roundData.roundKey),
+      };
+    }
+    if (stage === "ON_ROUND_FINISHED") {
+      return {
+        disable: true,
+        text: "Finalizado",
+        action: () => {},
+        withdrawText: "Finalizado",
+        withdrawAction: () => {},
       };
     }
     return {};

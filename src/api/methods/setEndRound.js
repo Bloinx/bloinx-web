@@ -1,16 +1,16 @@
-const setEndRound = (methods, payload) =>
-  new Promise((resolve) => {
+const setEndRound = (methods, { walletAddress, contract }) =>
+  new Promise((resolve, reject) => {
     methods
       .endRound()
       .send({
-        from: payload.currentAddress,
-        to: methods._address,
+        from: walletAddress,
+        to: contract,
       })
       .once("receipt", async (receipt) => {
         resolve(receipt);
       })
       .on("error", async (error) => {
-        resolve(error);
+        reject(error);
       });
   });
 

@@ -30,12 +30,18 @@ const setWithdrawTurn = async (roundId, walletAddress) => {
         to: data.contract,
       })
       .once("receipt", async (receipt) => {
-        if (Number(realTurn) >= Number(groupSize)) {
-          MethodSetEndRound()
+        console.log(">>>>>>", realTurn, groupSize);
+        if (Number(realTurn) > Number(groupSize)) {
+          MethodSetEndRound(sg.methods, {
+            walletAddress,
+            contract: data.contract,
+          })
             .then((endReceipt) => {
+              console.log("OK END", endReceipt);
               resolve([receipt, endReceipt]);
             })
             .catch((endErr) => {
+              console.log("ERR END", endErr);
               const er = [receipt, endErr];
               reject(er);
             });
