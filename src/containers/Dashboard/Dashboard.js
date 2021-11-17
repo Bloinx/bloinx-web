@@ -215,6 +215,7 @@ function Dashboard({ currentAddress }) {
                 loading={loading}
                 withdraw={round.withdraw}
                 onWithdraw={withdrawAction}
+                stage={round.stage}
               />
             );
           })}

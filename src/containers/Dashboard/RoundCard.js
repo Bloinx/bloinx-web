@@ -25,6 +25,7 @@ export default function RoundCard({
   buttonDisabled,
   withdraw,
   onWithdraw,
+  stage,
 }) {
   const handleGetSteps = () => {
     const indents = [];
@@ -74,7 +75,14 @@ export default function RoundCard({
         <div className={styles.RoundCardTitleFooter}>
           {arePending &&
             `${groupSize - missingPositions} de ${groupSize} unidos`}
-          {!arePending && missingPositions === 0 && "Esperando iniciar..."}
+          {!arePending &&
+            missingPositions === 0 &&
+            stage !== "ON_ROUND_ACTIVE" &&
+            "Esperando iniciar..."}
+          {!arePending &&
+            missingPositions === 0 &&
+            stage === "ON_ROUND_ACTIVE" &&
+            `Turno ${turn}`}
         </div>
         <div>
           {loading && (
@@ -122,6 +130,7 @@ RoundCard.defaultProps = {
   missingPositions: undefined,
   withdraw: undefined,
   onWithdraw: undefined,
+  stage: "",
 };
 
 RoundCard.propTypes = {
@@ -138,4 +147,5 @@ RoundCard.propTypes = {
   missingPositions: PropTypes.number,
   withdraw: PropTypes.bool,
   onWithdraw: PropTypes.func,
+  stage: PropTypes.string,
 };
