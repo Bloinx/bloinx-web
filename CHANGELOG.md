@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5-beta.8](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-beta.7...v0.0.5-beta.8) (2021-11-20)
+
+
+### Bug Fixes
+
+* separate ucds ([8c5c060](https://github.com/Bloinx/bloinx-web/commit/8c5c060208214e1d6ab6d38375f6abfccc5a25e4))
+
 ### [0.0.5-beta.7](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-beta.6...v0.0.5-beta.7) (2021-11-17)
 
 
