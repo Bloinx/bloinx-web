@@ -2,6 +2,7 @@ export const INITIAL_FORM_VALUES = {
   name: null,
   motivation: "other",
   turnSelected: null,
+  termsAndConditions: false,
 };
 
 export const motivationOptions = [

@@ -1,8 +1,7 @@
 const getUserAmountPaid = (methods, position) =>
   new Promise((resolve) => {
-    console.log("->>>>", position);
     methods
-      .getUserAmountPaid("1")
+      .getUserAmountPaid(position)
       .call()
       .then((userAmountPaid) => {
         resolve(userAmountPaid);

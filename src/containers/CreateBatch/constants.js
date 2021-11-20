@@ -12,7 +12,6 @@ export const INITIAL_FORM_VALUES = {
   participants: 3,
   amount: 1,
   periodicity: "monthly",
-  termsAndConditions: false,
   isComplete: false,
 };
 

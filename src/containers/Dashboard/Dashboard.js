@@ -35,7 +35,7 @@ function Dashboard({ currentAddress }) {
   };
 
   const goToJoin = (roundKey) => {
-    history.push(`/register-user/join?roundId=${roundKey}`);
+    history.push(`/register-user?roundId=${roundKey}`);
   };
 
   const handleGetRounds = () => {
