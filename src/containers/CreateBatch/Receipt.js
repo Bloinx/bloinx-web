@@ -89,13 +89,13 @@ const Receipt = ({ form, setForm, walletAddress }) => {
               <div>
                 <FormattedMessage id="createRound.labels.amount" />
               </div>
-              <div>{form.amount}</div>
+              <div>{`${form.amount} cUSD`}</div>
             </div>
             <div className={styles.ReceiptCardItem}>
               <div>
                 <FormattedMessage id="createRound.labels.receiptAmount" />
               </div>
-              <div>{form.amount * (form.participants - 1)}</div>
+              <div>{`${form.amount * (form.participants - 1)} cUSD`}</div>
             </div>
             <div className={styles.ReceiptCardItem}>
               <div>

@@ -45,18 +45,10 @@ function Terms({ form, baseUrl, walletAddress, roundData }) {
           <form onSubmit={handleSubmit}>
             <div className={styles.ReceiptCard}>
               <div className={styles.ReceiptCardTerms}>
-                <FormattedMessage id="createRound.labels.roundTime" />
+                <FormattedMessage id="infoLabels.guaranteeInfo" />
               </div>
-              <div className={styles.ReceiptCardTerms}>
-                <FormattedMessage id="createRound.labels.roundTime" />
-              </div>
-              <div className={styles.ReceiptCardTerms}>
-                <FormattedMessage id="createRound.labels.roundTime" />
-              </div>
-              <div className={styles.ReceiptCardTerms}>
-                <FormattedMessage id="createRound.labels.roundTime" />
-              </div>
-              <div>
+
+              <div style={{ margin: "10px 0" }}>
                 <InputCheck
                   label={<FormattedMessage id="createRound.labels.terms" />}
                   name="termsAndConditions"
@@ -69,7 +61,7 @@ function Terms({ form, baseUrl, walletAddress, roundData }) {
 
             <ButtonOnlyOneStep
               loading={loading}
-              label={<FormattedMessage id="createRound.actions.payGuarantee" />}
+              label={<FormattedMessage id="createRound.actions.continue" />}
               disabled={!values.termsAndConditions || !isValid}
               type="submit"
             />

@@ -127,6 +127,28 @@ function Form({ form, setForm, roundData, walletAddress }) {
                     error={errors.turnSelected}
                   />
                 </div>
+                <div className={styles.ConfirmCard}>
+                  <PageHeader
+                    title={<FormattedMessage id="payments.details.title" />}
+                  />
+                  <div className={styles.TextPaymentDetails}>
+                    <FormattedMessage id="payments.details.subtitle" />
+                  </div>
+                  <div className={styles.PaymentDetails}>
+                    <div>
+                      <div className={styles.TextPaymentDetails}>
+                        <FormattedMessage id="payments.details.securityDeposit" />
+                      </div>
+                      <div className={styles.TextPaymentDetails}>...cUSD</div>
+                    </div>
+                    <div>
+                      <div className={styles.TextPaymentDetails}>
+                        <FormattedMessage id="payments.details.serviceFee" />
+                      </div>
+                      <div className={styles.TextPaymentDetails}>...cUSD</div>
+                    </div>
+                  </div>
+                </div>
                 <ButtonOnlyOneStep
                   label={
                     <FormattedMessage id="createRound.actions.registerMe" />

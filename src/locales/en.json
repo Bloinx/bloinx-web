@@ -19,7 +19,7 @@
       "status": "Status"
     }
   },
-  "createRound":{
+  "createRound": {
     "title": "Create new round",
     "titleConfirm": "Customize your round",
     "titleReceipt": "Pay security deposit",
@@ -31,8 +31,8 @@
       "roundTime": "Duration time per round",
       "terms": "I fully understand how the security deposit works"
     },
-    "form":{
-      "label":{
+    "form": {
+      "label": {
         "participants": "Number of participants",
         "amount": "Amount per period",
         "periodicity": "Duration of the round",
@@ -42,22 +42,23 @@
           "biweekly": "Biweekly",
           "monthly": "Monthly"
         },
-        "name":"Name of the Round",
-        "motivation":"Personal motivation",
+        "name": "Name of the Round",
+        "motivation": "Personal motivation",
         "turn": "Turn to receive the round"
       },
       "placeholder": {
-        "batchName":"Name of round"
+        "batchName": "Name of round"
       }
     },
-    "actions":{
+    "actions": {
       "registerMe": "Select your turn",
       "payGuarantee": "Create round",
-      "chooseTurn": "Choose your turn in the round"
+      "chooseTurn": "Choose your turn in the round",
+      "continue": "Continue"
     }
   },
-  "payments":{
-    "wallet":{
+  "payments": {
+    "wallet": {
       "title": "Digital wallet",
       "description": "Please enter your wallet from the navigation bar"
     },
@@ -70,6 +71,12 @@
         "networkCommission": "Network commission",
         "totalReceivable": "Total receivable"
       }
+    },
+    "details": {
+      "title": "Payment Details",
+      "subtitle": "You are about to deposit:",
+      "securityDeposit": "Security Deposit (refundable)",
+      "serviceFee": "Service Fee"
     }
   },
   "invitations": {
@@ -95,7 +102,8 @@
     "withoutWallet": "No Wallet found",
     "connectWalletMessage": "Please connect your wallet to continue",
     "withoutInfo": "Without info to show",
-    "createRoundMessage": "Please create a round"
+    "createRoundMessage": "Please create a round",
+    "guaranteeInfo": "What is a security deposit? This payment will be returned at the end of the rund and it will be used in case you miss one of your commited payments. If you miss more than one payment, you can affect the return of the security deposit of other participants in your group."
   },
   "copyright": "Bloinx 2021 (c) All rights reserved."
 }

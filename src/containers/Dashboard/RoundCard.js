@@ -83,6 +83,12 @@ export default function RoundCard({
             missingPositions === 0 &&
             stage === "ON_ROUND_ACTIVE" &&
             `Turno ${turn}`}
+          <div style={{ display: "block" }}>
+            {!arePending &&
+              missingPositions === 0 &&
+              stage === "ON_ROUND_ACTIVE" &&
+              "$ cUSD a pagar"}
+          </div>
         </div>
         <div>
           {loading && (

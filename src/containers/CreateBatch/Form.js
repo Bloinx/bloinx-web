@@ -78,7 +78,7 @@ const Form = ({ form, setForm }) => {
                     <FormattedMessage id="createRound.labels.payPerRound" />
                   </div>
                   <div className={styles.CreateRoundAmount}>
-                    {values.amount}
+                    {`${values.amount} cUSD`}
                   </div>
                 </div>
                 <div>
@@ -86,7 +86,7 @@ const Form = ({ form, setForm }) => {
                     <FormattedMessage id="createRound.labels.rewards" />
                   </div>
                   <div className={styles.CreateRoundAmount}>
-                    {values.amount * (values.participants - 1)}
+                    {`${values.amount * (values.participants - 1)} cUSD`}
                   </div>
                 </div>
               </div>
