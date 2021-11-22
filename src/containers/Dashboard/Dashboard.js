@@ -232,6 +232,7 @@ function Dashboard({ currentAddress }) {
                 withdraw={round.withdraw}
                 onWithdraw={withdrawAction}
                 stage={round.stage}
+                saveAmount={round.saveAmount}
               />
             );
           })}
@@ -272,6 +273,7 @@ function Dashboard({ currentAddress }) {
               withdraw={round.withdraw}
               onWithdraw={withdrawAction}
               stage={round.stage}
+              saveAmount={round.saveAmount}
             />
           );
         })}

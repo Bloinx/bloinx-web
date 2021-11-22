@@ -128,6 +128,7 @@ const getRounds = async ({ userId, walletAddress }) => {
         withdraw:
           Number(realTurn) > positionData.position && Number(savings) > 0,
         fromInvitation: false,
+        saveAmount: (Number(cashIn) * 10 ** -18).toFixed(2),
       };
       rounds.push(roundData);
 

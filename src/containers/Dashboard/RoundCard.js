@@ -26,6 +26,7 @@ export default function RoundCard({
   withdraw,
   onWithdraw,
   stage,
+  saveAmount,
 }) {
   const handleGetSteps = () => {
     const indents = [];
@@ -87,7 +88,7 @@ export default function RoundCard({
             {!arePending &&
               missingPositions === 0 &&
               stage === "ON_ROUND_ACTIVE" &&
-              "$ cUSD a pagar"}
+              `$ ${saveAmount} cUSD a pagar`}
           </div>
         </div>
         <div>
@@ -137,6 +138,7 @@ RoundCard.defaultProps = {
   withdraw: undefined,
   onWithdraw: undefined,
   stage: "",
+  saveAmount: "",
 };
 
 RoundCard.propTypes = {
@@ -154,4 +156,5 @@ RoundCard.propTypes = {
   withdraw: PropTypes.bool,
   onWithdraw: PropTypes.func,
   stage: PropTypes.string,
+  saveAmount: PropTypes.string,
 };

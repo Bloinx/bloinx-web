@@ -21,9 +21,8 @@ function Terms({ form, baseUrl, walletAddress, roundData }) {
       walletAddress,
       roundId: roundData.roundId,
     })
-      .then((respo) => {
-        console.log(respo);
-        history.push(`${baseUrl}/join`);
+      .then(() => {
+        history.push(`${baseUrl}/join?roundId=${roundData.roundId}`);
       })
       .catch((err) => {
         console.log(err);
