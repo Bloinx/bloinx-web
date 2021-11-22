@@ -17,7 +17,7 @@
 				"type": "uint256"
 			},
 			{
-				"internalType": "address payable",
+				"internalType": "address",
 				"name": "_admin",
 				"type": "address"
 			},
@@ -142,7 +142,7 @@
 		"name": "admin",
 		"outputs": [
 			{
-				"internalType": "address payable",
+				"internalType": "address",
 				"name": "",
 				"type": "address"
 			}
@@ -181,7 +181,7 @@
 		"name": "devAddress",
 		"outputs": [
 			{
-				"internalType": "address payable",
+				"internalType": "address",
 				"name": "",
 				"type": "address"
 			}
@@ -522,7 +522,7 @@
 		"name": "users",
 		"outputs": [
 			{
-				"internalType": "address payable",
+				"internalType": "address",
 				"name": "userAddr",
 				"type": "address"
 			},
