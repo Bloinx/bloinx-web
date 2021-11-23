@@ -4,7 +4,8 @@
     "createbatch": "Crear Ronda",
     "registerpay": "Pagos",
     "batchDetails": "Detalle",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "docs": "Tutoriales"
   },
   "dashboardPage": {
     "title": "Mis Rondas",

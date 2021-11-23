@@ -7,7 +7,7 @@ import { Menu, Layout, Drawer } from "antd";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import {
-  // DesktopOutlined,
+  DesktopOutlined,
   HomeFilled,
   // FileOutlined,
   LogoutOutlined,
@@ -80,21 +80,21 @@ function NavAside({ user, width, toggleDrawer, visible }) {
           <FormattedMessage id="navAside.logout" />
         </span>
       </Menu.Item>
-      {/* <Menu.Item
+      <Menu.Item
         className={classnames(
           styles.MenuItem,
-          selected === 2 && styles.MenuItemSelected,
+          selected === 2 && styles.MenuItemSelected
         )}
         key={2}
         icon={<DesktopOutlined />}
         onClick={toggleDrawer}
       >
-        <Link to="/CreateBatch">
+        <a target="_blank" href="https://docs.bloinx.io/" rel="noreferrer">
           <span>
-            <FormattedMessage id="navAside.createbatch" />
+            <FormattedMessage id="navAside.docs" />
           </span>
-        </Link>
-      </Menu.Item> */}
+        </a>
+      </Menu.Item>
       {/* <Menu.Item
         className={classnames(
           styles.MenuItem,

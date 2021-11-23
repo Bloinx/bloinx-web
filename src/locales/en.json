@@ -4,7 +4,8 @@
     "createbatch": "Create Round",
     "registerpay": "Payments",
     "batchDetails": "Details",
-    "logout": "Logout"
+    "logout": "Logout",
+    "docs": "Tutorials"
   },
   "dashboardPage": {
     "title": "My Rounds",
