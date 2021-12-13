@@ -7,65 +7,65 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Formik } from "formik";
 import { FormattedMessage } from "react-intl";
-import { useHistory } from "react-router-dom";
-import { getAuth } from "firebase/auth";
-import { Modal } from "antd";
+// import { useHistory } from "react-router-dom";
+// import { getAuth } from "firebase/auth";
+// import { Modal } from "antd";
 
 import PageHeader from "../../components/PageHeader";
-import InputTextField from "../../components/InputTextField";
-import InputSelect from "../../components/InputSelect";
-import InputTurnSelect from "../../components/InputTurnSelect";
-import ButtonOnlyOneStep from "../../components/ButtonOnlyOneStep";
-import Loader from "../../components/Loader";
+// import InputTextField from "../../components/InputTextField";
+// import InputSelect from "../../components/InputSelect";
+// import InputTurnSelect from "../../components/InputTurnSelect";
+// import ButtonOnlyOneStep from "../../components/ButtonOnlyOneStep";
+// import Loader from "../../components/Loader";
 
-import APISetRegisterUser from "../../api/setRegisterUser";
+// import APISetRegisterUser from "../../api/setRegisterUser";
 
-import styles from "./Confirm.module.scss";
-import { confirmValidation } from "./validations";
-import { motivationOptions } from "./constants";
-import { getOptions } from "./utils";
+// import styles from "./Confirm.module.scss";
+// import { confirmValidation } from "./validations";
+// import { motivationOptions } from "./constants";
+// import { getOptions } from "./utils";
 
-function Form({ form, setForm, roundData, walletAddress }) {
-  const user = getAuth().currentUser;
-  const history = useHistory();
-  const [loading, setLoading] = useState(false);
+export function Form({ form, setForm, roundData, walletAddress }) {
+  // const user = getAuth().currentUser;
+  // const history = useHistory();
+  // const [loading, setLoading] = useState(false);
 
-  const handlerOnSubmit = (values) => {
-    if (!walletAddress) {
-      Modal.warning({
-        title: "Wallet no encontrada",
-        content: "Por favor conecta tu wallet antes de continuar.",
-      });
-    } else {
-      setLoading(true);
-      APISetRegisterUser({
-        userId: user.uid,
-        walletAddress,
-        roundId: roundData.roundId,
-        name: values.name,
-        motivation: values.motivation,
-        position: values.turnSelected,
-      })
-        .then((receipt) => {
-          console.log(receipt);
-          history.push("/register-user/success");
-        })
-        .catch((err) => {
-          console.log(err);
-          setLoading(false);
-          Modal.error({
-            title: "Error al registrar",
-            content:
-              "No se pudimos registrarte en la tanda. Por favor intenta nuevamente.",
-          });
-        });
-    }
-  };
+  // const handlerOnSubmit = (values) => {
+  //   if (!walletAddress) {
+  //     Modal.warning({
+  //       title: "Wallet no encontrada",
+  //       content: "Por favor conecta tu wallet antes de continuar.",
+  //     });
+  //   } else {
+  //     setLoading(true);
+  //     APISetRegisterUser({
+  //       userId: user.uid,
+  //       walletAddress,
+  //       roundId: roundData.roundId,
+  //       name: values.name,
+  //       motivation: values.motivation,
+  //       position: values.turnSelected,
+  //     })
+  //       .then((receipt) => {
+  //         console.log(receipt);
+  //         history.push("/register-user/success");
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //         setLoading(false);
+  //         Modal.error({
+  //           title: "Error al registrar",
+  //           content:
+  //             "No se pudimos registrarte en la tanda. Por favor intenta nuevamente.",
+  //         });
+  //       });
+  //   }
+  // };
 
   return (
     <>
       <PageHeader title={<FormattedMessage id="createRound.titleConfirm" />} />
-      {loading && <Loader />}
+      {/* {loading && <Loader />}
       {!loading && (
         <Formik
           initialValues={{
@@ -164,7 +164,7 @@ function Form({ form, setForm, roundData, walletAddress }) {
             );
           }}
         </Formik>
-      )}
+      )} */}
     </>
   );
 }

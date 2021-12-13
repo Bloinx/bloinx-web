@@ -11,7 +11,7 @@ import Stepper from "../../components/Stepper";
 import { formatAddress } from "../../utils/format";
 import logoIcon from "../../assets/icon.png";
 
-export default function RoundCard({
+export function RoundCard({
   name,
   contractKey,
   groupSize,
@@ -158,3 +158,5 @@ RoundCard.propTypes = {
   stage: PropTypes.string,
   saveAmount: PropTypes.string,
 };
+
+export default React.memo(RoundCard);

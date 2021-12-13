@@ -28,15 +28,13 @@ const getContractDetail = (methods) =>
         totalCashIn: `${web3.utils.fromWei(responses[3], "ether")} AVAX`,
         roundStage: responses[4].roundStage,
         whoWithdrawPay:
-          responses[5].users
+          responses[5]
             .find((user) => user.position === turn)
             ?.address.toLowerCase() || null,
-        usersLatePayments: responses[5].users.map(
-          ({ address, latePayments }) => ({
-            address,
-            latePayments: Number(latePayments),
-          })
-        ),
+        usersLatePayments: responses[5].map(({ address, latePayments }) => ({
+          address,
+          latePayments: Number(latePayments),
+        })),
         shouldWithDraw: reverseDateToOperation(
           responses[6].find((time) => time.round === turn)?.startToDraw || ""
         ),

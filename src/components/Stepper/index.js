@@ -11,7 +11,7 @@ export default function Stepper({ steps, current, turnWithDraw }) {
         const actualStep = Number(current) === index + 1;
         const withDraw = turnWithDraw === index + 1;
         return (
-          <div className={styles.StepperItem}>
+          <div key={step.label} className={styles.StepperItem}>
             <div className={styles.StepperPosition}>
               {withDraw && <span className={styles.StepperPositionImage} />}
             </div>

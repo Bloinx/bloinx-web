@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`InputTextField renders correctly 1`] = `
-Array [
+<div
+  className="TextField"
+>
   <span
     className="ant-typography TextFieldLabel"
     style={
@@ -11,17 +13,14 @@ Array [
     }
   >
     some-label
-  </span>,
+  </span>
   <input
-    className="ant-input"
+    className="TextFieldInput"
+    id="some-name"
     name="some-name"
-    onBlur={[Function]}
-    onChange={[Function]}
-    onFocus={[Function]}
-    onKeyDown={[Function]}
+    onChange={[MockFunction]}
     placeholder="some-placeholder"
-    type="text"
     value="some-value"
-  />,
-]
+  />
+</div>
 `;

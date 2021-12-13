@@ -5,7 +5,7 @@ exports[`InputOptionSelect renders correctly 1`] = `
   className="InputSelect"
 >
   <span
-    className="ant-typography Label"
+    className="ant-typography InputSelectLabel"
     style={
       Object {
         "WebkitLineClamp": undefined,
