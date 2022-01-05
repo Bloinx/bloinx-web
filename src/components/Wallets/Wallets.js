@@ -91,15 +91,15 @@ function Wallets({ currentAddressWallet }) {
       method: "wallet_addEthereumChain",
       params: [
         {
-          chainId: "0xa869",
-          chainName: "Fuji Testnet",
+          chainId: "0xAEF3",
+          chainName: "Alfajores",
           nativeCurrency: {
-            name: "AVAX",
-            symbol: "AVAX",
+            name: "CELO",
+            symbol: "CELO",
             decimals: 18,
           },
-          rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
-          blockExplorerUrls: ["https://cchain.explorer.avax-test.network/"],
+          rpcUrls: ["https://alfajores-forno.celo-testnet.org"],
+          blockExplorerUrls: ["https://alfajores-blockscout.celo-testnet.org"],
         },
       ],
     });

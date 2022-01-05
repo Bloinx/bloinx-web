@@ -5,20 +5,17 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Formik } from "formik";
 import { useHistory } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { Modal } from "antd";
 
 import PageHeader from "../../components/PageHeader";
-import InputCheck from "../../components/InputCheck";
 import ButtonOnlyOneStep from "../../components/ButtonOnlyOneStep";
 import Loader from "../../components/Loader";
 
 import APISetCreateRound from "../../api/setCreateRound";
 
 import styles from "./Receipt.module.scss";
-import { receiptValidation } from "./validations";
 import {
   INITIAL_FORM_VALUES,
   periodicityOptions,
@@ -77,7 +74,7 @@ const Receipt = ({ form, setForm, walletAddress }) => {
 
   return (
     <>
-      <PageHeader title={<FormattedMessage id="createRound.titleReceipt" />} />
+      <PageHeader title={<FormattedMessage id="createRound.title" />} />
       {loading && <Loader />}
       {!loading && (
         <>
@@ -92,13 +89,13 @@ const Receipt = ({ form, setForm, walletAddress }) => {
               <div>
                 <FormattedMessage id="createRound.labels.amount" />
               </div>
-              <div>{form.amount}</div>
+              <div>{`${form.amount} cUSD`}</div>
             </div>
             <div className={styles.ReceiptCardItem}>
               <div>
                 <FormattedMessage id="createRound.labels.receiptAmount" />
               </div>
-              <div>{form.amount * (form.participants - 1)}</div>
+              <div>{`${form.amount * (form.participants - 1)} cUSD`}</div>
             </div>
             <div className={styles.ReceiptCardItem}>
               <div>
@@ -114,54 +111,13 @@ const Receipt = ({ form, setForm, walletAddress }) => {
             </div>
           </div>
 
-          <Formik
-            initialValues={{
-              termsAndConditions: form.termsAndConditions,
-            }}
-            validate={receiptValidation}
-            onSubmit={handlerOnSubmit}
-          >
-            {(props) => {
-              const {
-                values,
-                errors,
-                touched,
-                handleChange,
-                handleSubmit,
-                isValid,
-                isSubmitting,
-              } = props;
-              return (
-                <form onSubmit={handleSubmit}>
-                  <div className={styles.ReceiptCard}>
-                    <div className={styles.ReceiptCardTerms}>
-                      <FormattedMessage id="createRound.labels.roundTime" />
-                    </div>
-                    <div>
-                      <InputCheck
-                        label={
-                          <FormattedMessage id="createRound.labels.terms" />
-                        }
-                        name="termsAndConditions"
-                        onChange={handleChange}
-                        error={errors.name}
-                        checked={values.termsAndConditions}
-                      />
-                    </div>
-                  </div>
-
-                  <ButtonOnlyOneStep
-                    loading={loading}
-                    label={
-                      <FormattedMessage id="createRound.actions.payGuarantee" />
-                    }
-                    disabled={!values.termsAndConditions || !isValid}
-                    type="submit"
-                  />
-                </form>
-              );
-            }}
-          </Formik>
+          <ButtonOnlyOneStep
+            loading={loading}
+            label={<FormattedMessage id="createRound.actions.payGuarantee" />}
+            // disabled={!values.termsAndConditions || !isValid}
+            type="submit"
+            onClick={handlerOnSubmit}
+          />
         </>
       )}
     </>

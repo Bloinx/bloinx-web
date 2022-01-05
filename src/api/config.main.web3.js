@@ -1,10 +1,11 @@
 import Web3 from "web3";
 import Main from "../abis/Main.json";
-import Mim from "../abis/MIM.json";
+import cUSD from "../abis/cUSD.json";
 
 export const MAIN_FACTORY_FUJI_TEST_NET =
-  "0x02A94E4fC94A58a55477b27423482aB53CEf12e2";
-const MIM_TOKEN_FUJI_TEST_NET = "0x2E669D4aef4Ea6f1A220c7F436205C824f9d584d";
+  "0x93D4bfF05EEBa0De8Ad486B7837DD11A10810d6C";
+export const MIM_TOKEN_FUJI_TEST_NET =
+  "0x874069fa1eb16d44d622f2e0ca25eea172369bc1"; // cUSD
 
 export function configMin() {
   const httpProvider = new Web3.providers.HttpProvider(
@@ -15,7 +16,7 @@ export function configMin() {
   );
 
   const web3Provider = new Web3(window?.web3?.currentProvider || httpProvider);
-  const contract = new web3Provider.eth.Contract(Mim, MIM_TOKEN_FUJI_TEST_NET);
+  const contract = new web3Provider.eth.Contract(cUSD, MIM_TOKEN_FUJI_TEST_NET);
 
   return contract;
 }

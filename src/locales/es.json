@@ -1,13 +1,16 @@
 {
   "navAside": {
-    "dashboard": "Mis Tandas",
-    "createbatch": "Crear Tanda",
+    "dashboard": "Mis Rondas",
+    "createbatch": "Crear Ronda",
     "registerpay": "Pagos",
     "batchDetails": "Detalle",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "docs": "Tutoriales"
   },
   "dashboardPage": {
-    "title": "Mis Tandas",
+    "title": "Mis Rondas",
+    "subtitle": "Invitaciones a las rondas",
+    "roundCaption": "Comienza ahora creando tu círculo de ahorro con tu familia y amigos",
     "table": {
       "name": "Nombre",
       "address": "Dirección de contrato",
@@ -18,8 +21,8 @@
     }
   },
   "createRound":{
-    "title": "Crear nueva tanda",
-    "titleConfirm": "Personaliza tu tanda",
+    "title": "Crear nueva ronda",
+    "titleConfirm": "Personaliza tu ronda",
     "titleReceipt": "Pagar depósito de seguridad",
     "labels": {
       "payPerRound": "Monto pagado por ronda",
@@ -40,17 +43,19 @@
           "biweekly": "Quincenal",
           "monthly": "Mensual"
         },
-        "name":"Nombre de la tanda",
+        "name":"Nombre de la ronda",
         "motivation":"Motivación personal",
-        "turn": "Turno para recibir la tanda"
+        "turn": "Turno para recibir la ronda"
       },
       "placeholder": {
-        "batchName":"Nombre de la tanda"
+        "batchName":"Nombre de la ronda"
       }
     },
     "actions":{
       "registerMe": "Registrarme",
-      "payGuarantee": "Pagar garantia"
+      "payGuarantee": "Crear ronda",
+      "chooseTurn": "Elige tu lugar en la ronda",
+      "continue": "Continuar"
     }
   },
   "payments":{
@@ -67,6 +72,12 @@
         "networkCommission": "Comision de red",
         "totalReceivable": "Total a cobrar"
       }
+    },
+    "details": {
+      "title": "Detalles del Pago",
+      "subtitle": "Vas a depositar:",
+      "securityDeposit": "Depósito de Seguridad (reintegrable)",
+      "serviceFee": "Tarifa de Servicio"
     }
   },
   "invitations": {
@@ -87,6 +98,13 @@
       "end": "Terminar",
       "sendAndEnd": "Enviar y terminar"
     }
+  },
+  "infoLabels": {
+    "withoutWallet": "Sin Wallet encontrada",
+    "connectWalletMessage": "Por favor conecta tu wallet para continuar",
+    "withoutInfo": "Sin información para mostrar",
+    "createRoundMessage": "Por favor crea una ronda",
+    "guaranteeInfo": "¿Qué es la garantía? \n Es un pago que se regresará al final de la ronda. Si alguno de ustedes no paga a tiempo, será aplicado automáticamente al turno que corresponda y no lo podrá recuperar. \n ¡Ojo! si alguno de ustedes olvida hacer más de un pago, el monto a regresar de la garantía de todos los participantes será afectado."
   },
   "copyright": "Bloinx 2021 (c) Todos los derechos reservados."
 }

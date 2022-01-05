@@ -10,9 +10,11 @@ import { getAuth } from "firebase/auth";
 import RoundCard from "./RoundCard";
 import RoundCardNew from "./RoundCardNew";
 import PageHeader from "../../components/PageHeader";
+import PageSubHeader from "../../components/PageSubHeader";
 import styles from "./Dashboard.module.scss";
 
 import APIGetRounds from "../../api/getRounds";
+import APIGetOtherRounds from "../../api/getRoundsOthers";
 import APIGetRoundsByInvitation from "../../api/getRoundsByInvitation";
 import APISetStartRound from "../../api/setStartRound";
 import APISetAddPayment from "../../api/setAddPayment";
@@ -25,6 +27,7 @@ function Dashboard({ currentAddress }) {
   const user = getAuth().currentUser;
   const [roundList, setRoundList] = useState([]);
   const [invitationsList, setInvitationsList] = useState([]);
+  const [otherList, setOtherList] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const goToCreate = () => {
@@ -32,22 +35,32 @@ function Dashboard({ currentAddress }) {
   };
 
   const goToJoin = (roundKey) => {
-    history.push(`/register-user/join?roundId=${roundKey}`);
+    history.push(`/register-user?roundId=${roundKey}`);
   };
 
   const handleGetRounds = () => {
+    console.log("ACTUALIZANDO");
     if (user && user.uid) {
       APIGetRounds({
         userId: user.uid,
         walletAddress: currentAddress,
       }).then((rounds) => {
+        console.log("ACTUALIZADO MIS RONDAS");
         setRoundList(rounds);
       });
       APIGetRoundsByInvitation({
         email: user.email,
         walletAddress: currentAddress,
       }).then((invitations) => {
+        console.log("ACTUALIZADO MIS INVITES");
         setInvitationsList(invitations);
+      });
+      APIGetOtherRounds({
+        userId: user.uid,
+        walletAddress: currentAddress,
+      }).then((other) => {
+        console.log("ACTUALIZADO OTRAS RONDAS");
+        setOtherList(other);
       });
     }
   };
@@ -81,6 +94,7 @@ function Dashboard({ currentAddress }) {
           content: "...",
         });
         setLoading(false);
+        handleGetRounds();
       })
       .catch((err) => {
         Modal.error({
@@ -88,6 +102,7 @@ function Dashboard({ currentAddress }) {
           content: "...",
         });
         setLoading(false);
+        handleGetRounds();
       });
   };
 
@@ -100,6 +115,7 @@ function Dashboard({ currentAddress }) {
           content: "El cobro de la ronda a sido efectuado correctamente",
         });
         setLoading(false);
+        handleGetRounds();
       })
       .catch(() => {
         Modal.error({
@@ -108,7 +124,14 @@ function Dashboard({ currentAddress }) {
             "No pudimos realizar el cobro de tu ronda. Por favor verifica mas tarde o intenta nuevamente.",
         });
         setLoading(false);
+        handleGetRounds();
       });
+  };
+
+  const paymentStatusText = {
+    payments_on_time: "Adelantar pago",
+    payments_advanced: "Adelantar otro pago",
+    payments_late: "Pagar",
   };
 
   const handleButton = (roundData) => {
@@ -132,15 +155,27 @@ function Dashboard({ currentAddress }) {
       };
     }
     if (stage === "ON_ROUND_ACTIVE") {
+      const payDisable = roundData.positionToWithdrawPay === Number(turn);
       return {
-        disable: roundData.positionToWithdrawPay === Number(roundData.turn),
-        text: "Pagar",
+        disable: false,
+        text: paymentStatusText[roundData.paymentStatus],
         action: () => handlePayRound(roundData.roundKey),
-        withdrawText: "Cobrar",
+        withdrawText:
+          roundData.realTurn >= roundData.groupSize && payDisable
+            ? "Terminar y Cobrar"
+            : "Cobrar",
         withdrawAction: () => handleWithdrawRound(roundData.roundKey),
       };
     }
-    console.log(">>>>>", roundData);
+    if (stage === "ON_ROUND_FINISHED") {
+      return {
+        disable: true,
+        text: "Finalizado",
+        action: () => {},
+        withdrawText: "Finalizado",
+        withdrawAction: () => {},
+      };
+    }
     return {};
   };
 
@@ -150,8 +185,6 @@ function Dashboard({ currentAddress }) {
     return <Placeholder />;
   }
 
-  console.log(roundList);
-  console.log(invitationsList);
   const completeRoundList = roundList.concat(invitationsList);
 
   return (
@@ -198,10 +231,52 @@ function Dashboard({ currentAddress }) {
                 loading={loading}
                 withdraw={round.withdraw}
                 onWithdraw={withdrawAction}
+                stage={round.stage}
+                saveAmount={round.saveAmount}
               />
             );
           })}
       </div>
+      {otherList.length && (
+        <PageSubHeader
+          title={<FormattedMessage id="dashboardPage.subtitle" />}
+        />
+      )}
+      {currentAddress &&
+        otherList &&
+        otherList.map((round) => {
+          // if (round.stage === "ON_REGISTER_STAGE" && round.toRegister) {
+          //   return (
+          //     <RoundCardNew
+          //       fromInvitation={round.fromInvitation}
+          //       fromEmail={round.fromEmail}
+          //       onClick={() => goToJoin(round.roundKey)}
+          //     />
+          //   );
+          // }
+          const { disable, text, action, withdrawText, withdrawAction } =
+            handleButton(round);
+          return (
+            <RoundCard
+              name={round.name}
+              groupSize={round.groupSize}
+              missingPositions={round.missingPositions}
+              contractKey={round.contract}
+              positionToWithdrawPay={round.positionToWithdrawPay}
+              turn={round.turn}
+              linkTo={`/round-details?roundId=${round.roundKey}`}
+              onClick={action}
+              buttonText={text}
+              withdrawButtonText={withdrawText}
+              buttonDisabled={disable}
+              loading={loading}
+              withdraw={round.withdraw}
+              onWithdraw={withdrawAction}
+              stage={round.stage}
+              saveAmount={round.saveAmount}
+            />
+          );
+        })}
     </>
   );
 }

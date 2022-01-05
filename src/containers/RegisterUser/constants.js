@@ -2,13 +2,14 @@ export const INITIAL_FORM_VALUES = {
   name: null,
   motivation: "other",
   turnSelected: null,
+  termsAndConditions: false,
 };
 
 export const motivationOptions = [
   { label: "Prestamo", value: "loan" },
   { label: "Vacaciones", value: "vacations" },
-  { label: "Entertainment", value: "entertainment" },
-  { label: "Health ", value: "health " },
+  { label: "Entretenimiento", value: "entertainment" },
+  { label: "Salud ", value: "health " },
   { label: "Automovil", value: "car" },
   { label: "Hogar", value: "house" },
   { label: "Negocio", value: "business" },

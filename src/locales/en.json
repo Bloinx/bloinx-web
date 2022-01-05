@@ -1,11 +1,16 @@
 {
   "navAside": {
-    "dashboard": "My Batches",
-    "createbatch": "Create Batch",
-    "registerpay": "Payments"
+    "dashboard": "My Rounds",
+    "createbatch": "Create Round",
+    "registerpay": "Payments",
+    "batchDetails": "Details",
+    "logout": "Logout",
+    "docs": "Tutorials"
   },
   "dashboardPage": {
-    "title": "My Batches",
+    "title": "My Rounds",
+    "subtitle": "Invitations to Rounds",
+    "roundCaption": "Start your saving circle with your friends or family now.",
     "table": {
       "name": "Name",
       "address": "Contract Address",
@@ -15,53 +20,46 @@
       "status": "Status"
     }
   },
-  "createBatch":{
-    "stepper": {
-      "step1": "General Data",
-      "step2": "Configuration",
-      "step3": "Resume"
+  "createRound": {
+    "title": "Create new round",
+    "titleConfirm": "Customize your round",
+    "titleReceipt": "Pay security deposit",
+    "labels": {
+      "payPerRound": "Amount to pay per round",
+      "rewards": "You will receive",
+      "amount": "Each participant will pay",
+      "receiptAmount": "You will receive",
+      "roundTime": "Duration time per round",
+      "terms": "I fully understand how the security deposit works"
     },
-    "titles": {
-      "generalData":{
-        "title": "General data",
-        "description": "They are the data that will identify your batch and will let others know when it starts and if it will be with friends or strangers."
-      },
-      "configuration":{
-        "title": "Configuration",
-        "description": "Customize your batch and think about the characteristics that your group of friends has and the amount they want to save per period."
-      },
-      "resume": {
-        "title": "Resumen",
-        "description": "Finally, confirm that all the information is correct and choose in which round you will receive your batch."
-      },
-      "invitation": {
-        "title": "Invitation",
-        "description": "Share it with the people you want to start this savings circle with by sending them an email."
-      }
-    },
-    "form":{
-      "label":{
-        "batchName":"Batch name",
-        "startDate":"Start date",
-        "batchType":"Batch type",
-        "batchTypeOptions": {
-          "public": "Public",
-          "private": "Private"
+    "form": {
+      "label": {
+        "participants": "Number of participants",
+        "amount": "Amount per period",
+        "periodicity": "Duration of the round",
+        "periodicityOptions": {
+          "day": "Daily",
+          "weekly": "Weekly",
+          "biweekly": "Biweekly",
+          "monthly": "Monthly"
         },
-        "participants": "Participants number",
-        "longevity": "Periodicity",
-        "amount": "Period amount",
-        "admin": "Administrator",
-        "position": "Choose your position",
-        "emails": "Enter the emails."
+        "name": "Name of the Round",
+        "motivation": "Personal motivation",
+        "turn": "Turn to receive the round"
       },
       "placeholder": {
-        "batchName":"Batch name"
+        "batchName": "Name of round"
       }
+    },
+    "actions": {
+      "registerMe": "Select your turn",
+      "payGuarantee": "Create round",
+      "chooseTurn": "Choose your turn in the round",
+      "continue": "Continue"
     }
   },
-  "payments":{
-    "wallet":{
+  "payments": {
+    "wallet": {
       "title": "Digital wallet",
       "description": "Please enter your wallet from the navigation bar"
     },
@@ -74,6 +72,21 @@
         "networkCommission": "Network commission",
         "totalReceivable": "Total receivable"
       }
+    },
+    "details": {
+      "title": "Payment Details",
+      "subtitle": "You are about to deposit:",
+      "securityDeposit": "Security Deposit (refundable)",
+      "serviceFee": "Service Fee"
+    }
+  },
+  "invitations": {
+    "title": "Invitations",
+    "description": "Please enter the emails of all your guests for this round.",
+    "form": {
+      "label": {
+        "emails": "Add the emails"
+      }
     }
   },
   "commons": {
@@ -81,8 +94,17 @@
       "next": "Next",
       "back": "Back",
       "continue": "Continue",
-      "send": "Send"
+      "send": "Send",
+      "end": "End",
+      "sendAndEnd": "Send and End"
     }
+  },
+  "infoLabels": {
+    "withoutWallet": "No Wallet found",
+    "connectWalletMessage": "Please connect your wallet to continue",
+    "withoutInfo": "Without info to show",
+    "createRoundMessage": "Please create a round",
+    "guaranteeInfo": "What is a security deposit? This payment will be returned at the end of the rund and it will be used in case you miss one of your commited payments. If you miss more than one payment, you can affect the return of the security deposit of other participants in your group."
   },
   "copyright": "Bloinx 2021 (c) All rights reserved."
 }

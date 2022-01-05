@@ -3,10 +3,7 @@
 import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 
-import config, {
-  MAIN_FACTORY_FUJI_TEST_NET,
-  configMin,
-} from "./config.main.web3";
+import config, { MAIN_FACTORY_FUJI_TEST_NET } from "./config.main.web3";
 
 const setCreateRound = ({
   name,
@@ -23,7 +20,13 @@ const setCreateRound = ({
     const { uid } = getAuth().currentUser;
 
     m.methods
-      .createRound(warranty, saving, groupSize, payTime)
+      .createRound(
+        warranty,
+        saving,
+        groupSize,
+        payTime,
+        "0x874069fa1eb16d44d622f2e0ca25eea172369bc1"
+      )
       .send({
         from: walletAddress,
         to: MAIN_FACTORY_FUJI_TEST_NET,
@@ -43,19 +46,6 @@ const setCreateRound = ({
           positions: [],
           invitations: [],
         };
-        // const mim = configMin();
-        // console.log(mim);
-        // mim.methods
-        //   .approve(
-        //     contract,
-        //     115792089237316195423570985008687907853269984665640564039457584007913129639935
-        //   )
-        //   .once("receipt", async (mimReceipt) => {
-        //     console.log(mimReceipt);
-        //   })
-        //   .on("errro", async (mimError) => {
-        //     console.log(mimError);
-        //   });
         addDoc(collection(db, "round"), params)
           .then((docRef) => {
             resolve(docRef);

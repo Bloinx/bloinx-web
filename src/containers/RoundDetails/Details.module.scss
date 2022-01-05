@@ -2,14 +2,16 @@
   display: flex;
   flex-direction: column;
 
-  ul {
+  tr {
     display: flex;
     flex-direction: row;
     padding-left: 0px;
 
-    li {
+    th {
       margin-right: 10px;
       list-style: none;
+      flex: 1;
+      border-bottom: 1px solid grey;
     }
   }
 }

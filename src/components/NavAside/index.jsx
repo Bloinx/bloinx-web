@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { Menu, Layout, Drawer } from "antd";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import {
-  // DesktopOutlined,
+  DesktopOutlined,
   HomeFilled,
   // FileOutlined,
   LogoutOutlined,
@@ -20,7 +21,7 @@ import icon from "../../assets/icon.png";
 
 const { Sider } = Layout;
 
-export default function NavAside({ width, toggleDrawer, visible }) {
+function NavAside({ user, width, toggleDrawer, visible }) {
   const [sliderStatus, setSliderStatus] = useState(false);
   const isTablet = width <= 800;
   const isMobile = width <= 768;
@@ -47,6 +48,9 @@ export default function NavAside({ width, toggleDrawer, visible }) {
           <img src={sliderStatus ? icon : logo} alt="bloinx-logo" />
         </div>
       )}
+      <Menu.Item className={styles.MenuItem} onClick={toggleDrawer}>
+        <span>{user.email}</span>
+      </Menu.Item>
       <Menu.Item
         className={classnames(
           styles.MenuItem,
@@ -76,21 +80,21 @@ export default function NavAside({ width, toggleDrawer, visible }) {
           <FormattedMessage id="navAside.logout" />
         </span>
       </Menu.Item>
-      {/* <Menu.Item
+      <Menu.Item
         className={classnames(
           styles.MenuItem,
-          selected === 2 && styles.MenuItemSelected,
+          selected === 2 && styles.MenuItemSelected
         )}
         key={2}
         icon={<DesktopOutlined />}
         onClick={toggleDrawer}
       >
-        <Link to="/CreateBatch">
+        <a target="_blank" href="https://docs.bloinx.io/" rel="noreferrer">
           <span>
-            <FormattedMessage id="navAside.createbatch" />
+            <FormattedMessage id="navAside.docs" />
           </span>
-        </Link>
-      </Menu.Item> */}
+        </a>
+      </Menu.Item>
       {/* <Menu.Item
         className={classnames(
           styles.MenuItem,
@@ -168,11 +172,21 @@ export default function NavAside({ width, toggleDrawer, visible }) {
 }
 
 NavAside.propTypes = {
+  user: PropTypes.instanceOf(Object),
   visible: PropTypes.bool,
   width: PropTypes.number.isRequired,
   toggleDrawer: PropTypes.func.isRequired,
 };
 
 NavAside.defaultProps = {
+  user: undefined,
   visible: false,
 };
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(NavAside);

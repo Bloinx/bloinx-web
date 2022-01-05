@@ -2,6 +2,68 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5-beta.8](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-beta.7...v0.0.5-beta.8) (2021-11-20)
+
+
+### Bug Fixes
+
+* separate ucds ([8c5c060](https://github.com/Bloinx/bloinx-web/commit/8c5c060208214e1d6ab6d38375f6abfccc5a25e4))
+
+### [0.0.5-beta.7](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-beta.6...v0.0.5-beta.7) (2021-11-17)
+
+
+### Bug Fixes
+
+* add stage for invitation rounds ([14e9ef3](https://github.com/Bloinx/bloinx-web/commit/14e9ef3de5208a0058022095e37e8a6e6713a6a1))
+* await message for start round ([9f9b48a](https://github.com/Bloinx/bloinx-web/commit/9f9b48a10aea4217c23998aa6070099464a0062e))
+* initial date to withdraw ([6c405b3](https://github.com/Bloinx/bloinx-web/commit/6c405b3078970f122e4b6f44ad0752ad66694027))
+* withdraw ([db80035](https://github.com/Bloinx/bloinx-web/commit/db80035250b572a17f3a4d91c3593a725d4c00d5))
+
+### [0.0.5-beta.6](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-beta.5...v0.0.5-beta.6) (2021-11-16)
+
+### [0.0.5-beta.5](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-beta.4...v0.0.5-beta.5) (2021-11-16)
+
+### [0.0.5-beta.4](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-beta.3...v0.0.5-beta.4) (2021-11-16)
+
+
+### Bug Fixes
+
+* excel coments ([9cb1012](https://github.com/Bloinx/bloinx-web/commit/9cb1012bac2c48d8f1ade56455c7fe1c3da0d409))
+* excel comments ([67408c3](https://github.com/Bloinx/bloinx-web/commit/67408c3ff1125ae2b6befb24859ceb8b2ff6a52c))
+* **nav aside:** add export ([637fb3c](https://github.com/Bloinx/bloinx-web/commit/637fb3c01c9820cfa02956f380a7b2a99f26536b))
+
+### [0.0.5-beta.3](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-beta.2...v0.0.5-beta.3) (2021-11-15)
+
+### [0.0.5-beta.2](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-beta.1...v0.0.5-beta.2) (2021-11-15)
+
+
+### Bug Fixes
+
+* **invitations:** Dont show my own rounds with other wallet ([693b86f](https://github.com/Bloinx/bloinx-web/commit/693b86f70625a299833341d93841290a329995e9))
+
+### [0.0.5-beta.1](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-beta.0...v0.0.5-beta.1) (2021-11-15)
+
+
+### Bug Fixes
+
+* **otherRounds:** Add lista for other rounds ([1d3aef8](https://github.com/Bloinx/bloinx-web/commit/1d3aef8e8a818ebaa04e99b44cc5bec4c76ae31a))
+
+### [0.0.5-beta.0](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-next.7...v0.0.5-beta.0) (2021-11-13)
+
+
+### Features
+
+* add celo config ([b78df22](https://github.com/Bloinx/bloinx-web/commit/b78df221c90be7360a2aebd55b2318cf87dd0689))
+
+
+### Bug Fixes
+
+* **addPayment:** add laber to show status payment ([3628406](https://github.com/Bloinx/bloinx-web/commit/36284062011d9a0fb3d830156ce9b4ee82d4d278))
+* **admin:** add lower case condition to admin address ([3161a3e](https://github.com/Bloinx/bloinx-web/commit/3161a3eb1c6526b5f82443ec6bceaa2283ee5fab))
+* **endRound:** add end round to execution ([6f4f37b](https://github.com/Bloinx/bloinx-web/commit/6f4f37b81e8e1cfb133126aca8229289e041d791))
+* quotes typo ([26b60c8](https://github.com/Bloinx/bloinx-web/commit/26b60c87a96d20c6b4d8567d55d9b1b73a3eb736))
+* **round:** Add payment time to debt ([846a40a](https://github.com/Bloinx/bloinx-web/commit/846a40a3692ac00eac100fd517e4e796a1d7b714))
+
 ### [0.0.5-next.7](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-next.6...v0.0.5-next.7) (2021-11-09)
 
 

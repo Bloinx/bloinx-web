@@ -1,34 +1,31 @@
 /* eslint-disable no-unused-vars */
 import { doc, getDoc, updateDoc, getFirestore } from "firebase/firestore";
-import { getWeb3 } from "../utils/web3";
 
 import config from "./config.sg.web3";
-import MethodGetCashIn from "./methods/getCashIn";
-import MethodGetFeeCost from "./methods/getFeeCost";
 
 const db = getFirestore();
 
 const setRegisterUser = async (props) => {
   const { userId, walletAddress, roundId, name, motivation, position } = props;
-  console.log(props);
 
   const docRef = doc(db, "round", roundId);
   const docSnap = await getDoc(docRef);
   const data = await docSnap.data();
 
-  const sg = config(data.contract);
-  const cashIn = await MethodGetCashIn(sg.methods);
-  const feeCost = await MethodGetFeeCost(sg.methods);
+  const userRef = doc(db, "users", userId);
+  const userSnap = await getDoc(userRef);
+  const userData = await userSnap.data();
 
-  return new Promise((resolve, reject) => {
-    const amount = Number(cashIn) + Number(feeCost);
+  const sg = config(data.contract);
+
+  return new Promise((resolve, reject) =>
     sg.methods
       .registerUser(position)
       .send({
         from: walletAddress,
-        value: amount.toString(),
+        to: data.contract,
       })
-      .once("receipt", async (receipt) => {
+      .once("receipt", async (recpt) => {
         const positions = [
           ...data.positions,
           {
@@ -39,15 +36,19 @@ const setRegisterUser = async (props) => {
             name,
           },
         ].sort();
+        const invitations = data.invitations.filter(
+          (email) => email !== userData.email
+        );
         await updateDoc(docRef, {
           positions,
+          invitations,
         });
-        resolve(receipt);
+        resolve(recpt);
       })
       .on("error", async (error) => {
         reject(error);
-      });
-  });
+      })
+  );
 };
 
 export default setRegisterUser;

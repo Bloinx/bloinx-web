@@ -1,10 +1,4 @@
-import {
-  collection,
-  query,
-  where,
-  getFirestore,
-  getDocs,
-} from "firebase/firestore";
+import { collection, query, getFirestore, getDocs } from "firebase/firestore";
 import config from "./config.sg.web3";
 
 import MethodGetAddressOrderList from "./methods/getAddressOrderList";
@@ -24,18 +18,32 @@ import MethodGetAdmin from "./methods/getAdmin";
 const db = getFirestore();
 
 const getRounds = async ({ userId, walletAddress }) => {
-  const querySnapshot = await getDocs(
-    query(collection(db, "round"), where("createByUser", "==", userId))
-  );
+  const querySnapshot = await getDocs(query(collection(db, "round")));
+  const otherDocs = querySnapshot.docs.filter((a) => {
+    return a
+      .data()
+      .positions.find((position) => position.walletAddress === walletAddress);
+  });
+  const otherList = otherDocs.filter((otherItem) => {
+    console.log(
+      otherItem.data().createByWallet,
+      walletAddress,
+      otherItem.data().createByUser,
+      userId
+    );
+    return (
+      otherItem.data().createByWallet !== walletAddress &&
+      otherItem.data().createByUser !== userId
+    );
+  });
 
   return new Promise((resolve) => {
     const rounds = [];
     let i = 0;
 
-    querySnapshot.forEach(async (doc) => {
+    otherList.forEach(async (doc) => {
       const data = doc.data();
       const sg = config(data.contract);
-      console.log(sg);
 
       const positionData =
         data.positions.find((pos) => pos.walletAddress === walletAddress) || {};
@@ -68,9 +76,9 @@ const getRounds = async ({ userId, walletAddress }) => {
       }
 
       let paymentStatus;
-      // let amount;
+      let amount;
+
       if (positionData.position) {
-        // Todos los pagos que ya se han asignado, por un pago real o por la toma del cash in.
         const amountPaid = await MethodGetUserAmountPaid(
           sg.methods,
           positionData.position
@@ -87,32 +95,33 @@ const getRounds = async ({ userId, walletAddress }) => {
           sg.methods,
           positionData.position
         );
-        const turnosPagadas =
+
+        const pagos =
           (Number(amountPaid) +
             Number(unassignedPayments) -
             (Number(cashIn) - Number(availableCashIn))) /
           Number(saveAmount);
 
         const ads = () => {
-          if (turnosPagadas === Number(obligationAtTime) / Number(saveAmount)) {
+          if (pagos === Number(obligationAtTime) / Number(saveAmount)) {
             return "payments_on_time";
           }
-          if (turnosPagadas > Number(obligationAtTime) / Number(saveAmount)) {
+          if (pagos > Number(obligationAtTime) / Number(saveAmount)) {
             return "payments_advanced";
           }
-          if (turnosPagadas < Number(obligationAtTime) / Number(saveAmount)) {
+          if (pagos < Number(obligationAtTime) / Number(saveAmount)) {
             return "payments_late";
           }
           return null;
         };
 
-        // amount = turnosPagadas - Number(obligationAtTime);
+        amount = pagos - Number(obligationAtTime);
         paymentStatus = ads();
       }
 
       const roundData = {
         paymentStatus,
-        // amount,
+        amount,
         name: positionData.name,
         roundKey: doc.id,
         toRegister: Boolean(!exist),
@@ -128,12 +137,10 @@ const getRounds = async ({ userId, walletAddress }) => {
         withdraw:
           Number(realTurn) > positionData.position && Number(savings) > 0,
         fromInvitation: false,
-        saveAmount: (Number(cashIn) * 10 ** -18).toFixed(2),
       };
       rounds.push(roundData);
 
-      if (i === querySnapshot.size - 1) {
-        console.log("Rondas::", rounds);
+      if (i === otherList.length - 1) {
         resolve(rounds.sort());
       } else {
         i += 1;

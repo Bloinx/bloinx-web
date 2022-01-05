@@ -1,6 +1,6 @@
 {
   "name": "bloinx-web",
-  "version": "0.0.5-next.7",
+  "version": "0.0.5-beta.8",
   "private": true,
   "license": "UNLICENSED",
   "homepage": "https://bloinx-web.web.app/",
@@ -14,10 +14,12 @@
     "eject": "craco eject",
     "lint": "eslint .",
     "deploy": "firebase deploy --only hosting",
+    "deploy:IST": "firebase hosting:channel:deploy IST",
     "deploy:UAT": "firebase hosting:channel:deploy UAT",
     "commitlint": "commitlint --from=development",
     "release": "standard-version && git push --follow-tags origin development && yarn build && yarn deploy",
-    "prerelease": "standard-version --prerelease next && git push --follow-tags origin development && yarn build && yarn deploy:UAT"
+    "prerelease": "standard-version --prerelease next && git push --follow-tags origin development && yarn build && yarn deploy:UAT",
+    "release:ist": "standard-version --prerelease beta && git push --follow-tags origin feat/addCeloNetwork && yarn build && yarn deploy:IST"
   },
   "jest": {
     "collectCoverageFrom": [

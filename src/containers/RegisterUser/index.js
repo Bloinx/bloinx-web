@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Route, Switch, useHistory } from "react-router-dom";
 
+import Terms from "./Terms";
 import Form from "./Form";
 import Receipt from "./Receipt";
 import { getUrlParams } from "../../utils/browser";
@@ -27,6 +28,19 @@ function RegisterUser({ walletAddress }) {
 
   return (
     <Switch>
+      <Route
+        exact
+        path={baseUrl}
+        component={() => (
+          <Terms
+            form={form}
+            setForm={setForm}
+            roundData={roundData}
+            walletAddress={walletAddress}
+            baseUrl={baseUrl}
+          />
+        )}
+      />
       <Route
         path={`${baseUrl}/join`}
         component={() => (

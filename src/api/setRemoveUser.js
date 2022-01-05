@@ -1,4 +1,4 @@
-import { getWeb3 } from "../utils/web3";
+// import { getWeb3 } from "../utils/web3";
 
 const api = (methods, payload) =>
   new Promise((resolve) => {
@@ -6,7 +6,7 @@ const api = (methods, payload) =>
       .removeUser(payload.turnSelected)
       .send({
         from: payload.currentAddress,
-        value: getWeb3().utils.toWei("1", "ether"),
+        to: methods._address,
       })
       .once("receipt", async (receipt) => {
         resolve({ status: "success", receipt });

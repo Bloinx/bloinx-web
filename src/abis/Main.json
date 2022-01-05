@@ -33,6 +33,11 @@
 				"internalType": "uint256",
 				"name": "_payTime",
 				"type": "uint256"
+			},
+			{
+				"internalType": "contract IERC20",
+				"name": "_token",
+				"type": "address"
 			}
 		],
 		"name": "createRound",
@@ -43,7 +48,7 @@
 				"type": "address"
 			}
 		],
-		"stateMutability": "payable",
+		"stateMutability": "payable", 
 		"type": "function"
 	}
 ]

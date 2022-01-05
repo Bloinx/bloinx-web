@@ -1,4 +1,5 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import PropTypes from "prop-types";
 import { Button } from "antd";
 
@@ -13,23 +14,25 @@ export default function RoundCardNew({
   return (
     <div className={styles.RoundCardNew}>
       <p className={styles.RoundCardNewText}>
-        {fromInvitation
-          ? "Ronda por invitación"
-          : "Start your saving circle with your friends or family now."}
+        {fromInvitation ? (
+          "Ronda por invitación"
+        ) : (
+          <FormattedMessage id="dashboardPage.roundCaption" />
+        )}
       </p>
       <p className={styles.RoundCardNewText}>
         {fromInvitation
           ? `Te han invitado a la ronda de ${fromEmail}`
-          : "Start connecting your wallet."}
+          : "Personaliza tu ronda."}
       </p>
       <p className={styles.RoundCardNewText}>
         {stage === "ON_REGISTER_STAGE"
-          ? "Tanda en espera de ser iniciada"
+          ? "Ronda en espera de ser iniciada"
           : null}
       </p>
       <div className={styles.RoundCardNewOptions}>
         <Button type="primary" onClick={onClick}>
-          Unirme a la ronda
+          <FormattedMessage id="createRound.actions.chooseTurn" />
         </Button>
       </div>
     </div>
