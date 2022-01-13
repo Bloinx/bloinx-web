@@ -18,7 +18,8 @@ const PageHeader = ({ title, action }) => {
 };
 
 PageHeader.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.func])
+    .isRequired,
   action: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func,

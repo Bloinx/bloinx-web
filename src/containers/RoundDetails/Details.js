@@ -36,7 +36,7 @@ function Details({ roundData, roundId }) {
             </tr>
             {roundData.participantsData &&
               roundData.participantsData.map((participant) => (
-                <tr>
+                <tr key={participant.address}>
                   <th>{participant.position}</th>
                   <th>{formatAddress(participant.address)}</th>
                   <th>{participant.admin && "Admin"}</th>
@@ -61,7 +61,7 @@ function Details({ roundData, roundId }) {
               <div className={styles.DetailParticipantsItem}>
                 {roundData.invitations &&
                   roundData.invitations.map((email) => (
-                    <ul>
+                    <ul key={email}>
                       <li>{email}</li>
                     </ul>
                   ))}

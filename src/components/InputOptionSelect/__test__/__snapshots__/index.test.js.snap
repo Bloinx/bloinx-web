@@ -5,7 +5,7 @@ exports[`InputOptionSelect renders correctly 1`] = `
   className="InputOptionSelect"
 >
   <span
-    className="ant-typography Label"
+    className="ant-typography InputOptionSelectLabel"
     style={
       Object {
         "WebkitLineClamp": undefined,
@@ -15,7 +15,7 @@ exports[`InputOptionSelect renders correctly 1`] = `
     some-label
   </span>
   <div
-    className="ant-radio-group ant-radio-group-outline"
+    className="ant-radio-group ant-radio-group-solid"
   />
 </span>
 `;
