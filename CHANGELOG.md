@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.0](https://github.com/Bloinx/bloinx-web/compare/v0.0.7-next.0...v0.1.0) (2022-01-13)
+
+
+### Bug Fixes
+
+* remove release commands ([1a7b356](https://github.com/Bloinx/bloinx-web/commit/1a7b356ef99526b913e21fcbe3b203c18148266d))
+
 ### [0.0.7-next.0](https://github.com/Bloinx/bloinx-web/compare/v0.0.6...v0.0.7-next.0) (2022-01-13)
 
 
