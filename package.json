@@ -17,9 +17,7 @@
     "deploy:IST": "firebase hosting:channel:deploy IST",
     "deploy:UAT": "firebase hosting:channel:deploy UAT",
     "commitlint": "commitlint --from=development",
-    "release": "standard-version",
-    "prerelease": "standard-version --prerelease next && git push --follow-tags origin development && yarn build && yarn deploy:UAT",
-    "release:ist": "standard-version --prerelease beta && git push --follow-tags origin development && yarn build && yarn deploy:IST"
+    "release": "standard-version"
   },
   "jest": {
     "collectCoverageFrom": [
