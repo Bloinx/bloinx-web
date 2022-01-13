@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5-next.1](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-beta.8...v0.0.5-next.1) (2022-01-13)
+
+
+### Features
+
+* Add Tutorials redirect ([0197263](https://github.com/Bloinx/bloinx-web/commit/019726305f359e8bf335336f03702f7fbbf0c12b))
+
+
+### Bug Fixes
+
+* add cUSD symbol and payment details section ([9f39323](https://github.com/Bloinx/bloinx-web/commit/9f393235963c19394d063fd5728ce0b6884d9663))
+* Add unit test ([93e3d1d](https://github.com/Bloinx/bloinx-web/commit/93e3d1d47d86c47dca3857b7f5bb307d5fd8cd7c))
+* revert comments on register format ([513e232](https://github.com/Bloinx/bloinx-web/commit/513e232df70ab54d3a2de7c549959de71690a401))
+* update package release for ist ([4873df2](https://github.com/Bloinx/bloinx-web/commit/4873df20359b37c78eb91d5a7c741b8d94c020c0))
+
 ### [0.0.5-next.0](https://github.com/Bloinx/bloinx-web/compare/v0.0.5-beta.8...v0.0.5-next.0) (2022-01-13)
 
 
