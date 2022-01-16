@@ -3,12 +3,14 @@ import ReactDOM from "react-dom";
 import { IntlProvider } from "react-intl";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+import { ThemeProvider } from "@mui/material/styles";
 
 import reportWebVitals from "./reportWebVitals";
 import flattenMessages from "./utils/locales";
 import store from "./redux/store";
 import es from "./locales/es.json";
 import en from "./locales/en.json";
+import theme from "./theme";
 import App from "./App";
 
 import "antd/dist/antd.css";
@@ -29,9 +31,11 @@ ReactDOM.render(
       defaultLocale={defaultLocale}
     >
       <BrowserRouter>
-        <Provider store={store}>
-          <App />
-        </Provider>
+        <ThemeProvider theme={theme}>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </ThemeProvider>
       </BrowserRouter>
     </IntlProvider>
   </React.StrictMode>,

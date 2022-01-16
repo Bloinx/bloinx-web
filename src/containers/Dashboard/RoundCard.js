@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
 import PropTypes from "prop-types";
 import { Button } from "antd";
@@ -11,7 +10,7 @@ import Stepper from "../../components/Stepper";
 import { formatAddress } from "../../utils/format";
 import logoIcon from "../../assets/icon.png";
 
-export function RoundCard({
+function RoundCard({
   name,
   contractKey,
   groupSize,
