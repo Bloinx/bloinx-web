@@ -7,12 +7,13 @@ import MethodGetRealTurn from "./methods/getRealTurn";
 import MethodGetGroupSize from "./methods/getGroupSize";
 import MethodSetEndRound from "./methods/setEndRound";
 
-const db = getFirestore();
+// const db = getFirestore();
 
 const setWithdrawTurn = async (roundId, walletAddress) => {
-  const docRef = doc(db, "round", roundId);
-  const docSnap = await getDoc(docRef);
-  const data = await docSnap.data();
+  // const docRef = doc(db, "round", roundId);
+  // const docSnap = await getDoc(docRef);
+  // const data = await docSnap.data();
+  const data = {};
   // const roundData =
   //   data.positions.find(
   //     (position) => position.walletAddress === walletAddress

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import PropTypes from "prop-types";
@@ -24,7 +25,7 @@ function App({ initialContractInstance }) {
       <Route exact path="/login" component={Login} />
       <Route exact path="/logout" component={Logout} />
       <Route exact path="/signup" component={SignUp} />
-      <Markup initialContractInstance={initialContractInstance}>
+      {/* <Markup initialContractInstance={initialContractInstance}>
         <Route exact path="/dashboard" component={Dashboard} />
         <Route path="/create-round" component={CreateBatch} />
         <Route path="/register-user" component={RegisterUser} />
@@ -34,7 +35,7 @@ function App({ initialContractInstance }) {
         <Route exact path="/">
           <Redirect to="/login" />
         </Route>
-      </Markup>
+      </Markup> */}
     </Switch>
   );
 }

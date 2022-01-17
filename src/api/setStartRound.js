@@ -2,12 +2,14 @@
 import { doc, getDoc, updateDoc, getFirestore } from "firebase/firestore";
 import config from "./config.sg.web3";
 
-const db = getFirestore();
+// const db = getFirestore();
 
 const api = async (roundId) => {
-  const docRef = doc(db, "round", roundId);
-  const docSnap = await getDoc(docRef);
-  const data = await docSnap.data();
+  // const docRef = doc(db, "round", roundId);
+  // const docSnap = await getDoc(docRef);
+  // const data = await docSnap.data();
+  const data = {};
+  const docRef = "";
 
   const sg = config(data.contract);
   return new Promise((resolve, reject) => {
@@ -18,9 +20,9 @@ const api = async (roundId) => {
         to: data.contract,
       })
       .once("receipt", async (receipt) => {
-        await updateDoc(docRef, {
-          invitations: [],
-        });
+        // await updateDoc(docRef, {
+        //   invitations: [],
+        // });
         resolve(receipt);
       })
       .on("error", async (error) => {

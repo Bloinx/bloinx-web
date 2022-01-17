@@ -2,14 +2,15 @@
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { MIM_TOKEN_FUJI_TEST_NET, configMin } from "./config.main.web3";
 
-const db = getFirestore();
+// const db = getFirestore();
 
 const setRegisterUser = async (props) => {
   const { walletAddress, roundId } = props;
 
-  const docRef = doc(db, "round", roundId);
-  const docSnap = await getDoc(docRef);
-  const data = await docSnap.data();
+  // const docRef = doc(db, "round", roundId);
+  // const docSnap = await getDoc(docRef);
+  // const data = await docSnap.data();
+  const data = {};
 
   return new Promise((resolve, reject) => {
     const mim = configMin();

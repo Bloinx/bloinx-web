@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { collection, query, getFirestore, getDocs } from "firebase/firestore";
 import config from "./config.sg.web3";
 
@@ -15,10 +16,11 @@ import MethodGetSaveAmount from "./methods/saveAmount";
 import MethodGetCashIn from "./methods/getCashIn";
 import MethodGetAdmin from "./methods/getAdmin";
 
-const db = getFirestore();
+// const db = getFirestore();
 
 const getRounds = async ({ userId, walletAddress }) => {
-  const querySnapshot = await getDocs(query(collection(db, "round")));
+  // const querySnapshot = await getDocs(query(collection(db, "round")));
+  const querySnapshot = { docs: [] };
   const otherDocs = querySnapshot.docs.filter((a) => {
     return a
       .data()

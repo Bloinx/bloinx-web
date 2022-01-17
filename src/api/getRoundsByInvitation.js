@@ -12,15 +12,16 @@ import config from "./config.sg.web3";
 
 import MethodGetStage from "./methods/getStage";
 
-const db = getFirestore();
+// const db = getFirestore();
 
 const getRounds = async ({ email }) => {
-  const queryByEmailSnapshot = await getDocs(
-    query(
-      collection(db, "round"),
-      where("invitations", "array-contains", email)
-    )
-  );
+  const queryByEmailSnapshot = [];
+  // const queryByEmailSnapshot = await getDocs(
+  //   query(
+  //     collection(db, "round"),
+  //     where("invitations", "array-contains", email)
+  //   )
+  // );
 
   return new Promise((resolve) => {
     const rounds = [];
@@ -29,9 +30,10 @@ const getRounds = async ({ email }) => {
     queryByEmailSnapshot.forEach(async (document) => {
       const data = document.data();
 
-      const docRef = doc(db, "users", data.createByUser);
-      const docSnap = await getDoc(docRef);
-      const userData = docSnap.data();
+      // const docRef = doc(db, "users", data.createByUser);
+      // const docSnap = await getDoc(docRef);
+      // const userData = docSnap.data();
+      const userData = {};
 
       const sg = config(data.contract);
 

@@ -1,17 +1,19 @@
+/* eslint-disable no-unused-vars */
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 import config from "./config.sg.web3";
 import MethodGetSaveAmount from "./methods/saveAmount";
 // import MethodGetCashIn from "./methods/getCashIn";
 
-const db = getFirestore();
+// const db = getFirestore();
 
 const setAddPayment = async (props) => {
   const { walletAddress, roundId } = props;
 
-  const docRef = doc(db, "round", roundId);
-  const docSnap = await getDoc(docRef);
-  const data = await docSnap.data();
+  // const docRef = doc(db, "round", roundId);
+  // const docSnap = await getDoc(docRef);
+  // const data = await docSnap.data();
+  const data = {};
 
   const sg = config(data.contract);
   const saveAmount = await MethodGetSaveAmount(sg.methods);

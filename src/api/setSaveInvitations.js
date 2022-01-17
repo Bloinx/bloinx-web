@@ -3,16 +3,17 @@ import axios from "axios";
 
 import { doc, updateDoc, getDoc, getFirestore } from "firebase/firestore";
 
-const db = getFirestore();
+// const db = getFirestore();
 
 const setSaveInvitations = async (mailList, roundId) => {
-  const docRef = doc(db, "round", roundId);
-  const docSnap = await getDoc(docRef);
-  const data = await docSnap.data();
+  // const docRef = doc(db, "round", roundId);
+  // const docSnap = await getDoc(docRef);
+  // const data = await docSnap.data();
+  const data = {};
 
   const dataArr = new Set([...data.invitations, ...mailList]);
   const invitations = [...dataArr];
-  await updateDoc(docRef, { invitations });
+  // await updateDoc(docRef, { invitations });
 
   try {
     await mailList.forEach((mail) => {

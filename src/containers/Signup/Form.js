@@ -16,12 +16,20 @@ function Form() {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  const handleSignUp = async ({ email, password }) => {
+  const handleSignUp = async ({ email, password, firstName, lastName }) => {
     setLoading(true);
-    const data = await supabase.auth.signUp({
-      email,
-      password,
-    });
+    const data = await supabase.auth.signUp(
+      {
+        email,
+        password,
+      },
+      {
+        data: {
+          firstName,
+          lastName,
+        },
+      }
+    );
     if (data.user) {
       history.push("/dashboard");
       setLoading(false);
@@ -49,6 +57,32 @@ function Form() {
         isSubmitting,
       }) => (
         <form onSubmit={handleSubmit}>
+          <TextField
+            type="name"
+            name="name"
+            label="Nombre"
+            variant="outlined"
+            value={values.name}
+            error={errors.name && touched.name}
+            onChange={handleChange}
+            helperText={touched.name && errors.name}
+            disabled={isSubmitting}
+            margin="normal"
+            className={styles.SignUpInput}
+          />
+          <TextField
+            type="lastName"
+            name="lastName"
+            label="Apellidos"
+            variant="outlined"
+            value={values.lastName}
+            error={errors.lastName && touched.lastName}
+            onChange={handleChange}
+            helperText={touched.lastName && errors.lastName}
+            disabled={isSubmitting}
+            margin="normal"
+            className={styles.SignUpInput}
+          />
           <TextField
             type="email"
             name="email"

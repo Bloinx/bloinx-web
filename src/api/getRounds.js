@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   collection,
   query,
@@ -21,12 +22,13 @@ import MethodGetSaveAmount from "./methods/saveAmount";
 import MethodGetCashIn from "./methods/getCashIn";
 import MethodGetAdmin from "./methods/getAdmin";
 
-const db = getFirestore();
+// const db = getFirestore();
 
 const getRounds = async ({ userId, walletAddress }) => {
-  const querySnapshot = await getDocs(
-    query(collection(db, "round"), where("createByUser", "==", userId))
-  );
+  // const querySnapshot = await getDocs(
+  //   query(collection(db, "round"), where("createByUser", "==", userId))
+  // );
+  const querySnapshot = [];
 
   return new Promise((resolve) => {
     const rounds = [];
