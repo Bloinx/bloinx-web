@@ -25,17 +25,19 @@ function App({ initialContractInstance }) {
       <Route exact path="/login" component={Login} />
       <Route exact path="/logout" component={Logout} />
       <Route exact path="/signup" component={SignUp} />
+      <Route exact path="/dashboard" component={Dashboard} />
+      <Route path="/create-round" component={CreateBatch} />
       {/* <Markup initialContractInstance={initialContractInstance}>
-        <Route exact path="/dashboard" component={Dashboard} />
         <Route path="/create-round" component={CreateBatch} />
         <Route path="/register-user" component={RegisterUser} />
         <Route path="/invitations" component={Invitations} />
         <Route exact path="/registerpay" component={RegisterPay} />
         <Route path="/round-details" component={RoundDetails} />
-        <Route exact path="/">
-          <Redirect to="/login" />
-        </Route>
+        
       </Markup> */}
+      <Route exact path="/">
+        <Redirect to="/login" />
+      </Route>
     </Switch>
   );
 }

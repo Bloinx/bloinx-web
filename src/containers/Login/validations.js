@@ -7,15 +7,14 @@ function validations(values) {
   }
   if (!values.password) {
     errors.password = "Ingrese una contraseña.";
+  } else if (
+    !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/i.test(
+      values.password
+    )
+  ) {
+    errors.password =
+      "La contraseña debe tener una minuscula, una mayuscula y un caracter especial.";
   }
-  // else if (
-  //   !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/i.test(
-  //     values.password
-  //   )
-  // ) {
-  //   errors.password =
-  //     "La contraseña debe tener una minuscula, una mayuscula y un caracter especial.";
-  // }
   return errors;
 }
 

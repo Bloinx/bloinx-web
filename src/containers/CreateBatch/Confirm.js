@@ -13,7 +13,7 @@ import PageHeader from "../../components/PageHeader";
 import ButtonOnlyOneStep from "../../components/ButtonOnlyOneStep";
 import Loader from "../../components/Loader";
 
-import APISetCreateRound from "../../api/setCreateRound";
+import setCreateRound from "./utils";
 
 import styles from "./Receipt.module.scss";
 import {
@@ -35,7 +35,6 @@ const Receipt = ({ form, setForm, walletAddress }) => {
 
   useEffect(() => {
     if (form.isComplete && !walletAddress) {
-      console.log(1);
       Modal.warning({
         title: "Wallet no encontrada",
         content: "Por favor conecta tu wallet antes de continuar.",
@@ -47,8 +46,7 @@ const Receipt = ({ form, setForm, walletAddress }) => {
     }
     if (form.isComplete && walletAddress) {
       setLoading(true);
-      APISetCreateRound({
-        name: form.name,
+      setCreateRound({
         warranty: form.amount,
         saving: form.amount,
         groupSize: form.participants,
@@ -58,14 +56,14 @@ const Receipt = ({ form, setForm, walletAddress }) => {
       })
         .then(() => {
           setLoading(false);
-          setForm(INITIAL_FORM_VALUES);
+          // setForm(INITIAL_FORM_VALUES);
           history.push("/create-round/receipt/success");
         })
         .catch((err) => {
-          setForm({
-            ...form,
-            isComplete: false,
-          });
+          // setForm({
+          //   ...form,
+          //   isComplete: false,
+          // });
           setLoading(false);
           history.push("/create-round/receipt/error");
         });

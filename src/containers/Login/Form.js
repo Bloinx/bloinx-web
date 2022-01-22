@@ -23,7 +23,7 @@ function Form() {
 
   const handleLogin = async ({ email, password }) => {
     setLoading(true);
-    const { user, session, error } = await supabase.auth.signIn({
+    const { user, error } = await supabase.auth.signIn({
       email,
       password,
     });

@@ -39,15 +39,7 @@ const Form = ({ form, setForm }) => {
         onSubmit={handlerOnSubmit}
       >
         {(props) => {
-          const {
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleSubmit,
-            isValid,
-            isSubmitting,
-          } = props;
+          const { values, errors, handleChange, handleSubmit, isValid } = props;
           return (
             <form onSubmit={handleSubmit}>
               <InputOptionSelect
