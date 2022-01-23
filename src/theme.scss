@@ -1,0 +1,14 @@
+@import "include-media/dist/_include-media.scss";
+
+$breakpoints: (
+  phone: 640px,
+  tablet: 768px,
+  desktop: 1024px,
+) !default;
+
+$pink: #f58f98;
+$pink-strong: #90525a;
+$black: #121212;
+$gray: #2b2d33;
+$gray-light: #c4c4c4;
+$blue-strong: #233447;

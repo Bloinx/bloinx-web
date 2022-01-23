@@ -1,0 +1,13 @@
+@import "../../theme.scss";
+
+.Notification {
+  height: 85px;
+  background-color: $blue-strong;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+}

@@ -1,0 +1,64 @@
+import React, { Suspense } from "react";
+import { BrowserRouter as Router, useRoutes } from "react-router-dom";
+
+const Login = React.lazy(() => import("./Login"));
+const SignUp = React.lazy(() => import("./Signup"));
+const Logout = React.lazy(() => import("./Logout"));
+const Dashboard = React.lazy(() => import("./Dashboard"));
+
+const publicRoutes = [
+  {
+    path: "/login",
+    element: (
+      <Suspense fallback={<div>Loading</div>}>
+        <Login />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/signup",
+    element: (
+      <Suspense fallback={<div>Loading</div>}>
+        <SignUp />
+      </Suspense>
+    ),
+  },
+  {
+    path: "*",
+    element: (
+      <Suspense fallback={<div>Loading</div>}>
+        <div>404</div>
+      </Suspense>
+    ),
+  },
+];
+
+const privateRoutes = [
+  {
+    path: "/dashboard",
+    element: (
+      <Suspense fallback={<div>Loading</div>}>
+        <Dashboard />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/logout",
+    element: (
+      <Suspense fallback={<div>Loading</div>}>
+        <Logout />
+      </Suspense>
+    ),
+  },
+];
+
+const AppWrapper = () => {
+  const App = () => useRoutes([...publicRoutes, ...privateRoutes]);
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+};
+
+export default AppWrapper;
