@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
-import supabase from "../../suprabase";
-import config, { MAIN_FACTORY_FUJI_TEST_NET } from "../../api/config.main.web3";
+import supabase from "../../supabase";
+import config, { MAIN_FACTORY_FUJI_TEST_NET } from "../../config.main.web3";
 
 const setCreateRound = ({
   warranty,

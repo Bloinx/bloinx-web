@@ -8,7 +8,7 @@ import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
 import { CubeSpinner } from "react-spinners-kit";
 
-import Web3 from "../../config.main.web3";
+// import Web3 from "../../config.main.web3";
 // import { getWeb3 } from "../../utils/web3";
 
 import styles from "./styles.module.scss";
@@ -114,21 +114,21 @@ function Wallets({ currentAddressWallet }) {
     setLoading(true);
     const provider = await detectEthereumProvider();
     if (provider) {
-      try {
-        await provider.enable();
-        const web3Loadie = Web3().web3Provider;
-        if (web3Loadie) {
-          //           loadPubKeyData(provider);
-          //           setLoading(false);
-          //           handleToggleDrawer();
-        } else {
-          //           setLoading(false);
-          //           setError(502);
-        }
-      } catch (err) {
-        setLoading(false);
-        // setError(503);
-      }
+      // try {
+      //   await provider.enable();
+      //   const web3Loadie = Web3().web3Provider;
+      //   if (web3Loadie) {
+      //     //           loadPubKeyData(provider);
+      //     //           setLoading(false);
+      //     //           handleToggleDrawer();
+      //   } else {
+      //     //           setLoading(false);
+      //     //           setError(502);
+      //   }
+      // } catch (err) {
+      //   setLoading(false);
+      //   // setError(503);
+      // }
     } else {
       setLoading(false);
       // setError(500);

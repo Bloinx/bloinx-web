@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button } from "antd";
-import { FormattedMessage } from "react-intl";
+import Button from "@mui/material/Button";
+import { useTranslation } from "react-i18next";
 
 import styles from "./styles.module.scss";
 
 function ButtonOnlyOneStep({ type, onClick, disabled, label, loading }) {
+  const { t } = useTranslation();
   return (
     <div className={styles.ButtonOnlyOneStep}>
       <Button
@@ -16,7 +17,7 @@ function ButtonOnlyOneStep({ type, onClick, disabled, label, loading }) {
         onClick={onClick}
         disabled={disabled}
       >
-        {label || <FormattedMessage id="commons.buttons.continue" />}
+        {label || t("commons.buttons.continue")}
       </Button>
     </div>
   );

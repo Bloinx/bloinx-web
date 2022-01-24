@@ -1,0 +1,33 @@
+@import "../../theme.scss";
+
+.RoundsList {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.RoundsListHead {
+  border-bottom: 2px solid white;
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 5px;
+}
+.RoundsListHeader {
+  display: flex;
+  flex: 1;
+  padding: 0px 5px;
+  color: white;
+}
+
+.RoundsListRow {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid $gray-light;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+.RoundsListItem {
+  display: flex;
+  flex: 1;
+  padding: 0px 5px;
+  color: white;
+}
