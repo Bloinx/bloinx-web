@@ -2,7 +2,6 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
 
-const DAY = "day";
 const WEEKLY = "weekly";
 const BIWEEKLY = "biweekly";
 const MONTHLY = "monthly";
@@ -16,19 +15,12 @@ export const INITIAL_FORM_VALUES = {
 };
 
 export const paymentTime = {
-  [DAY]: 1,
   [WEEKLY]: 7,
   [BIWEEKLY]: 14,
   [MONTHLY]: 30,
 };
 
 export const periodicityOptions = [
-  {
-    label: (
-      <FormattedMessage id="createRound.form.label.periodicityOptions.day" />
-    ),
-    value: DAY,
-  },
   {
     label: (
       <FormattedMessage id="createRound.form.label.periodicityOptions.weekly" />
@@ -81,5 +73,13 @@ export const participantsOptions = [
   {
     label: "10",
     value: 10,
+  },
+  {
+    label: "11",
+    value: 11,
+  },
+  {
+    label: "12",
+    value: 12,
   },
 ];

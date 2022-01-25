@@ -11,7 +11,7 @@ import Stepper from "../../components/Stepper";
 import { formatAddress } from "../../utils/format";
 import logoIcon from "../../assets/icon.png";
 
-export function RoundCard({
+function RoundCard({
   name,
   contractKey,
   groupSize,

@@ -17,6 +17,7 @@ export default function InputOptionSelect({
     <span className={styles.InputOptionSelect}>
       <Text className={styles.InputOptionSelectLabel}>{label}</Text>
       <Radio.Group
+        className={styles.spaceAround}
         options={options}
         onChange={onChange}
         value={value}

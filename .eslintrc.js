@@ -11,6 +11,13 @@ module.exports = {
     jest: true,
   },
   rules: {
+    'prettier/prettier': [
+      'error',
+      {
+        'endOfLine': 'auto',
+      }
+    ],
+    'linebreak-style': ['error', 'windows'],
     "react/jsx-filename-extension": [0],
     "no-underscore-dangle": [
       "error",
@@ -21,6 +28,7 @@ module.exports = {
           "_address",
         ],
       },
+      
     ],
     quotes: [2, "double", { avoidEscape: true, allowTemplateLiterals: false }],
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",

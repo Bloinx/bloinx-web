@@ -20,7 +20,7 @@ export default function InputSelect({
 
   return (
     <div className={styles.InputSelect}>
-      <Text className={styles.InputSelectLabel}>{label}</Text>
+      <Text className={styles.InputSelectLabel}>{label}a vers</Text>
       <Select
         disabled={disabled}
         placeholder={placeholder}
@@ -28,7 +28,11 @@ export default function InputSelect({
         onChange={handleOnChange}
       >
         {options.map((item) => (
-          <Option key={item.value} value={item.value}>
+          <Option
+            className={styles.participantNumber}
+            key={item.value}
+            value={item.value}
+          >
             {item.label}
           </Option>
         ))}
