@@ -38,7 +38,6 @@ function Markup({ children }) {
 
 Markup.propTypes = {
   children: PropTypes.node.isRequired,
-  initialContractInstance: PropTypes.func.isRequired,
 };
 
 export default Markup;

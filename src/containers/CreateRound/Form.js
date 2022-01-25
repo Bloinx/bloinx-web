@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import React from "react";
 import PropTypes from "prop-types";
 import { Formik } from "formik";
@@ -11,13 +9,7 @@ import InputOptionSelect from "../../components/InputOptionSelect";
 import ButtonOnlyOneStep from "../../components/ButtonOnlyOneStep";
 
 import styles from "./index.module.scss";
-import {
-  participantsOptions,
-  DAY,
-  WEEKLY,
-  BIWEEKLY,
-  MONTHLY,
-} from "./constants";
+import { DAY, WEEKLY, BIWEEKLY, MONTHLY } from "./constants";
 import { confirmForm } from "./validations";
 
 const Form = ({ form, setForm }) => {
@@ -51,7 +43,40 @@ const Form = ({ form, setForm }) => {
               name="participants"
               value={values.participants}
               onChange={handleChange}
-              options={participantsOptions}
+              options={[
+                {
+                  label: "3",
+                  value: 3,
+                },
+                {
+                  label: "4",
+                  value: 4,
+                },
+                {
+                  label: "5",
+                  value: 5,
+                },
+                {
+                  label: "6",
+                  value: 6,
+                },
+                {
+                  label: "7",
+                  value: 7,
+                },
+                {
+                  label: "8",
+                  value: 8,
+                },
+                {
+                  label: "9",
+                  value: 9,
+                },
+                {
+                  label: "10",
+                  value: 10,
+                },
+              ]}
               error={errors.participants}
             />
 

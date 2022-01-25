@@ -10,7 +10,7 @@ const setCreateRound = ({
   walletAddress,
 }) =>
   new Promise((resolve, reject) => {
-    const m = config();
+    const m = config().contract;
 
     m.methods
       .createRound(

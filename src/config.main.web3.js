@@ -14,10 +14,8 @@ export function configMin() {
       timeout: 10000,
     }
   );
-
   const web3Provider = new Web3(window?.web3?.currentProvider || httpProvider);
   const contract = new web3Provider.eth.Contract(cUSD, MIM_TOKEN_FUJI_TEST_NET);
-
   return contract;
 }
 
@@ -35,7 +33,5 @@ export default function config() {
     MAIN_FACTORY_FUJI_TEST_NET
   );
 
-  const a = { contract, web3Provider };
-  console.log("->>>>>>>", a);
-  return a;
+  return { contract, web3Provider };
 }

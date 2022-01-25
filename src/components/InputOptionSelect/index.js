@@ -34,6 +34,7 @@ export default function InputOptionSelect({
         {options.map((option) => {
           return (
             <button
+              key={option.label}
               type="button"
               onClick={() => handleOnClick(option.value)}
               className={classnames(

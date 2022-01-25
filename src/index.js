@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Buffer } from "buffer";
 import { ThemeProvider } from "@mui/material/styles";
 
 import "./index.css";
@@ -8,6 +9,8 @@ import "./i18n";
 import App from "./containers/App";
 import reportWebVitals from "./reportWebVitals";
 import theme from "./theme";
+
+window.Buffer = Buffer;
 
 ReactDOM.render(
   <React.StrictMode>

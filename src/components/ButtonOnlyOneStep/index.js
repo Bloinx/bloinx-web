@@ -10,8 +10,7 @@ function ButtonOnlyOneStep({ type, onClick, disabled, label, loading }) {
   return (
     <div className={styles.ButtonOnlyOneStep}>
       <Button
-        loading={loading}
-        htmlType={type}
+        htmltype={type}
         type="primary"
         size="large"
         onClick={onClick}

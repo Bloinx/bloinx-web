@@ -1,24 +1,18 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import {
-  Routes,
-  Route,
-  Switch,
-  useLocation,
-  useRoutes,
-  BrowserRouter as Router,
-} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
-import Navbar from "../../components/Navbar";
 import Markup from "../../containers/Markup";
 import Form from "./Form";
 import Confirm from "./Confirm";
-// import Status from "./Status";
-
-import { INITIAL_FORM_VALUES } from "./constants";
+import Status from "./Status";
 
 function CreateRound(props) {
-  const [form, setForm] = useState(INITIAL_FORM_VALUES);
+  const [form, setForm] = useState({
+    participants: 3,
+    amount: 1,
+    periodicity: "monthly",
+  });
 
   return (
     <Markup>
@@ -26,8 +20,9 @@ function CreateRound(props) {
         <Route path="/" element={<Form form={form} setForm={setForm} />} />
         <Route
           path="/confirm"
-          element={<Confirm form={form} setForm={setForm} />}
+          element={<Confirm formData={form} setForm={setForm} />}
         />
+        <Route path="/status/:status" element={<Status />} />
       </Routes>
     </Markup>
   );

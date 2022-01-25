@@ -1,38 +1,24 @@
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { FormattedMessage } from "react-intl";
-import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
+// import { useTranslation } from "react-i18next";
+import { useNavigate, useParams } from "react-router-dom";
 
 import styles from "./Status.module.scss";
 
 const Status = () => {
-  const history = useHistory();
+  // const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { status } = useParams();
 
   useEffect(() => {
     setTimeout(() => {
-      history.push("/dashboard");
-    }, 3000);
+      navigate("/dashboard");
+    }, 5000);
   }, []);
-
-  console.log(history);
 
   return (
     <div className={styles.Status}>
-      <SmileOutlined
-        style={{
-          color: "#F58F98",
-          fontSize: 60,
-        }}
-      />
-      <FrownOutlined
-        style={{
-          color: "#F58F98",
-          fontSize: 60,
-        }}
-      />
-      <p>
-        <FormattedMessage id="createRound.titleReceipt" />
-      </p>
+      {status === "success" && <p>Todo OK</p>}
+      {status === "error" && <p>Error al generar la ronda</p>}
     </div>
   );
 };

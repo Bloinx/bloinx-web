@@ -11,7 +11,7 @@ function WithAuthProvider(WrappedComponent) {
       if (!session || !session.access_token) {
         navigate("/logout");
       }
-    }, []);
+    }, [navigate]);
 
     return <WrappedComponent />;
   };

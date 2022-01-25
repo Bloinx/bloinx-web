@@ -1,18 +1,5 @@
 @import "../../theme.scss";
 
 .Status {
-  background-color: $gray;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  padding: 15px 17px 25px 17px;
-  display: flex;
-  flex-direction: column;
-
-  p {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: $gray-light;
-    margin-top: 20px;
-  }
+  color: white !important;
 }

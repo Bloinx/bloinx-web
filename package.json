@@ -73,7 +73,7 @@
     "terser-webpack-plugin": "^5.2.5",
     "web-vitals": "^2.1.4",
     "web3": "^1.7.0",
-    "webpack": "^5.64.4",
+    "webpack": "^5.67.0",
     "webpack-dev-server": "^4.6.0",
     "webpack-manifest-plugin": "^4.0.2",
     "workbox-webpack-plugin": "^6.4.1"
@@ -169,8 +169,5 @@
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "url": "^0.11.0"
-  },
-  "browser": {
-    "crypto": false
   }
 }
