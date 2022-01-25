@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 
-import supabase from "../../supabase";
+import { getRoundsList } from "./utils";
 import styles from "./RoundsList.module.scss";
 
 function RoundsList() {
+  const [roundsList, setRoundsList] = useState([]);
+
   const getRounds = async () => {
-    const user = supabase.auth.user();
-    console.log(user);
-    const { data, error } = await supabase.from("round").select();
-    console.log(data, error);
+    const data = await getRoundsList();
+    setRoundsList(data);
   };
 
   useEffect(() => {
@@ -23,14 +23,12 @@ function RoundsList() {
           <div className={styles.RoundsListHeader}>asdsad</div>
           <div className={styles.RoundsListHeader}>asdsad</div>
         </div>
-        <div className={styles.RoundsListRow}>
-          <div className={styles.RoundsListItem}>asdasd</div>
-          <div className={styles.RoundsListItem}>asdasd</div>
-        </div>
-        <div className={styles.RoundsListRow}>
-          <div className={styles.RoundsListItem}>asdasd</div>
-          <div className={styles.RoundsListItem}>asdasd</div>
-        </div>
+        {roundsList.map((round) => (
+          <div className={styles.RoundsListRow}>
+            <div className={styles.RoundsListItem}>{round.contract}</div>
+            <div className={styles.RoundsListItem}>{round.createTime}</div>
+          </div>
+        ))}
       </div>
     </Card>
   );

@@ -35,5 +35,7 @@ export default function config() {
     MAIN_FACTORY_FUJI_TEST_NET
   );
 
-  return { contract, web3Provider };
+  const a = { contract, web3Provider };
+  console.log("->>>>>>>", a);
+  return a;
 }
