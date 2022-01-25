@@ -1,16 +1,41 @@
-import { connect } from "react-redux";
+import React from "react";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
+
 import withAuthProvider from "../../providers/withAuthProvider";
+import Notification from "./Notification";
+import Markup from "../Markup";
+import RoundsList from "./RoundsList";
 
-import Dashboard from "./Dashboard";
+import styles from "./index.module.scss";
 
-const mapStateToProps = (state) => {
-  const currentAddress = state?.main?.currentAddress;
-  return { currentAddress };
-};
+function Dashboard() {
+  const navigate = useNavigate();
 
-const mapDispatchToProps = () => ({});
+  return (
+    <Markup>
+      <div className={styles.Dashboard}>
+        <Notification />
+        <Typography variant="h5" component="p">
+          h1. Heading
+        </Typography>
+        <Typography variant="h5" component="p">
+          h1. Heading
+        </Typography>
+        <Typography variant="body1" component="p">
+          texto
+        </Typography>
+        <Button variant="contained" onClick={() => navigate("/create-round")}>
+          Contained
+        </Button>
+        <Typography variant="h5" component="p">
+          h1. Heading
+        </Typography>
+        <RoundsList />
+      </div>
+    </Markup>
+  );
+}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withAuthProvider(Dashboard));
+export default React.memo(withAuthProvider(Dashboard));

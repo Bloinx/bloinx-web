@@ -1,58 +1,70 @@
+# Getting Started with Create React App
 
-# Bloinx Defi
-## https://bloinx-dapp.netlify.app/
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-`Proyecto de finanzas descentralizadas`
+## Available Scripts
 
-## Heramientas Usadas.
+In the project directory, you can run:
 
-* Desarrollo de Smart-Contracts en Solidity
-* Ganache para simular blockchain local
-* Test en Mocha
-* Cliente en React
-* Box usada: [React](https://www.trufflesuite.com/boxes/react)
-* Truffle
+### `npm start`
 
-* [NodeJS](https://nodejs.org/en/)
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-* [MetaMask](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en)
-MetaMask es una wallet de Ethereum, actualmente la mayoria de los navegadores no se conectan a la red blockchain y esta wallet nos permite hacer esto.
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-* [Remix](https://remix.ethereum.org/#optimize=false&evmVersion=null&version=soljson-v0.6.6+commit.6c089d02.js)
-  * Un editor de Smart Contracts en Linea.
+### `npm test`
 
-### `Truffle Suite`
-* [Ganache](https://www.trufflesuite.com/ganache)
-Nos ayuda a crear una red Blockchain de Ethereum Local, para poder probar nuestros Smart Contracts en Desarrollo.
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-* [Truffle](https://www.trufflesuite.com/docs/truffle/overview)
-Es un framework que nos da la estructura para compilar, testear e interactuar con nuestros contratos.
+### `npm run build`
 
-* [Truffle Boxes - React](https://www.trufflesuite.com/boxes/react)
-  * Nos da la configuracion necesaria para iniciar a desarrollar nuestros smart contracts con el lado del cliente desarrollado en React.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-## Documentación.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-* [Ethereum](https://www.ethereum.org/developers/#getting-started)
-* [Solidity](https://solidity.readthedocs.io/en/v0.5.12/)
+### `npm run eject`
 
-## Tutorial Rapido.
-1. Clona este Repo `git clone https://github.com/ArturVargas/bloinx.git`.
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-2. Instala las dependencias `npm install -S`.
-  * Asegurate de estar en el directorio del proyecto
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-3. Instala Ganache.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-4. Instala Metamask.
-    * Avalanche FUJI Testnet Settings:
-    * Network Name: Avalanche FUJI C-Chain
-    * New RPC URL: https://api.avax-test.network/ext/bc/C/rpc
-    * ChainID: 0xa869
-    * Symbol: AVAX
-    * Explorer: https://cchain.explorer.avax-test.network
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-5. Instala Truffle `npm install -g truffle`.
+## Learn More
 
-6. Si usas el Truffle box de React [Instrucciones](https://www.trufflesuite.com/boxes/react).
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

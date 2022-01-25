@@ -1,51 +1,22 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import supabase from "../supabase";
 
 function WithAuthProvider(WrappedComponent) {
-  const Auth = ({ saveUser, user, ...other }) => {
-    const history = useHistory();
+  const Auth = () => {
+    const navigate = useNavigate();
 
     useEffect(() => {
-      if (!user.uid) {
-        try {
-          const auth = getAuth();
-          onAuthStateChanged(auth, (userUpdated) => {
-            if (userUpdated) {
-              saveUser(userUpdated);
-            } else {
-              history.push("/logout");
-            }
-          });
-        } catch (e) {
-          history.push("/logout");
-        }
+      const session = supabase.auth.session();
+      if (!session || !session.access_token) {
+        navigate("/logout");
       }
-    }, []);
+    }, [navigate]);
 
-    return <WrappedComponent {...other} />;
+    return <WrappedComponent />;
   };
 
-  const mapStateToProps = (state) => state;
-
-  const mapDispatchToProps = (dispatch) => ({
-    saveUser: (userData) =>
-      dispatch({
-        type: "SAVE_USER_DATA",
-        payload: userData,
-      }),
-  });
-
-  Auth.propTypes = {
-    saveUser: PropTypes.func.isRequired,
-    user: PropTypes.instanceOf(Object).isRequired,
-  };
-
-  return connect(mapStateToProps, mapDispatchToProps)(Auth);
+  return Auth;
 }
 
 export default WithAuthProvider;

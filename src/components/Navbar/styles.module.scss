@@ -1,22 +1,27 @@
-.navbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
+// .navbar {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
+//   align-items: center;
+//   height: 100%;
+//   border: 1px solid red;
 
-  div {
-    display: flex;
-    align-items: center;
-  }
+//   div {
+//     display: flex;
+//     align-items: center;
+//   }
 
-  div > img {
-    margin-right: 10px;
-  }
-}
+//   div > img {
+//     margin-right: 10px;
+//   }
+// }
 
-.menuIcon {
-  color: white !important;
-  font-size: 30px;
-  padding: 0px;
+// .menuIcon {
+//   color: white !important;
+//   font-size: 30px;
+//   padding: 0px;
+// }
+
+.NavbarLogo {
+  margin-left: 45px;
 }

@@ -1,26 +1,34 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import PropTypes from "prop-types";
-import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
 
 import styles from "./styles.module.scss";
-import Wallets from "../Wallets/Wallets";
+import Wallets from "../Wallets";
 
 import icon from "../../assets/icon.png";
 
 export default function Navbar({ width, toggleDrawer, visible }) {
-  const Icon = visible ? CloseOutlined : MenuOutlined;
+  // const Icon = visible ? CloseOutlined : MenuOutlined;
   return (
-    <div className={styles.navbar}>
-      <div>
-        {width <= 768 && (
-          <>
-            <img src={icon} alt="bloinx-icon" />
-            <Icon className={styles.menuIcon} onClick={toggleDrawer} />
-          </>
-        )}
-      </div>
-      <Wallets />
-    </div>
+    <AppBar position="static">
+      <Toolbar>
+        <img src={icon} alt="bloinx-icon" className={styles.NavbarLogo} />
+        <Wallets />
+      </Toolbar>
+    </AppBar>
+    // <div className={styles.navbar}>
+    //   <div>
+    //     {width <= 768 && (
+    //       <>
+    //         <img src={icon} alt="bloinx-icon" />
+    //         <Icon className={styles.menuIcon} onClick={toggleDrawer} />
+    //       </>
+    //     )}
+    //   </div>
+    //
+    // </div>
   );
 }
 

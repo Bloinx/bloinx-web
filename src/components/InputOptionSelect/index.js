@@ -1,10 +1,9 @@
 import React from "react";
+import classnames from "classnames";
 import PropTypes from "prop-types";
-import { Typography, Radio } from "antd";
+import Typography from "@mui/material/Typography";
 
 import styles from "./styles.module.scss";
-
-const { Text } = Typography;
 
 export default function InputOptionSelect({
   label,
@@ -13,18 +12,42 @@ export default function InputOptionSelect({
   onChange,
   name,
 }) {
+  const handleOnClick = (value) => {
+    onChange({
+      target: {
+        value,
+        name,
+      },
+    });
+  };
+
   return (
-    <span className={styles.InputOptionSelect}>
-      <Text className={styles.InputOptionSelectLabel}>{label}</Text>
-      <Radio.Group
-        options={options}
-        onChange={onChange}
-        value={value}
-        name={name}
-        optionType="button"
-        buttonStyle="solid"
-      />
-    </span>
+    <div className={styles.InputOptionSelect}>
+      <Typography
+        variant="body1"
+        component="div"
+        className={styles.InputOptionSelectLabel}
+      >
+        {label}
+      </Typography>
+      <div className={styles.InputOptionSelectOptions}>
+        {options.map((option) => {
+          return (
+            <button
+              key={option.label}
+              type="button"
+              onClick={() => handleOnClick(option.value)}
+              className={classnames(
+                styles.InputOptionSelectOptionsButton,
+                option.value === value && styles.InputOptionSelectOptionsActive
+              )}
+            >
+              {option.label}
+            </button>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 

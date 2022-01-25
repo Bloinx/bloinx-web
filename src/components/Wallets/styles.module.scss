@@ -1,6 +1,11 @@
 .Loading {
+  padding: 20px;
+  box-sizing: border-box;
+  max-width: 500px;
+  min-width: 270px;
+  width: 100%;
   display: flex;
-  text-align: center;
+  align-items: center;
   flex-direction: column;
   justify-content: center;
 }

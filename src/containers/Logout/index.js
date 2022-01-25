@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./index.module.scss";
 
 const Logout = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTimeout(() => {
-      history.push("/login");
+      navigate("/login");
     }, 3000);
   });
 
