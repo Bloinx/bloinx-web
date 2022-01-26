@@ -4,7 +4,7 @@ const getCashIn = (methods) =>
       .admin()
       .call()
       .then((admin) => {
-        resolve(admin);
+        resolve(admin.toUpperCase());
       });
   });
 

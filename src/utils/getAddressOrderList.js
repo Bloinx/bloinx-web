@@ -16,13 +16,11 @@ const getAddressOrderList = (methods) =>
             try {
               const address = await userBatch.call();
               user = {
-                key: userIndex,
                 position: userIndex + 1,
                 address,
               };
             } catch (err) {
               user = {
-                key: userIndex,
                 position: userIndex + 1,
                 address: null,
               };
