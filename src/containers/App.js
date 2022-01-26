@@ -6,6 +6,7 @@ const SignUp = React.lazy(() => import("./Signup"));
 const Logout = React.lazy(() => import("./Logout"));
 const Dashboard = React.lazy(() => import("./Dashboard"));
 const CreateRound = React.lazy(() => import("./CreateRound"));
+const RoundDetail = React.lazy(() => import("./RoundDetail"));
 
 const publicRoutes = [
   {
@@ -48,6 +49,14 @@ const privateRoutes = [
     element: (
       <Suspense fallback={<div>Loading</div>}>
         <CreateRound />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/round-detail/*",
+    element: (
+      <Suspense fallback={<div>Loading</div>}>
+        <RoundDetail />
       </Suspense>
     ),
   },

@@ -1,5 +1,5 @@
 import Web3 from "web3";
-import SavingGroups from "../abis/SavingGroups.json";
+import SavingGroups from "./abis/SavingGroups.json";
 
 export default function config(savingGroupAddress) {
   const httpProvider = new Web3.providers.HttpProvider(

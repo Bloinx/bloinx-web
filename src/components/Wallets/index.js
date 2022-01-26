@@ -36,8 +36,8 @@ function Wallets() {
         originalAddress.length
       )}`;
       const publicAddress = `${firstPart}...${secondPart}`;
-      localStorage.setItem("currentWallet", originalAddress);
-      localStorage.setItem("currentWalletShort", publicAddress);
+      localStorage.setItem("currentWallet", originalAddress.toUpperCase());
+      localStorage.setItem("currentWalletShort", publicAddress.toUpperCase());
       setAccountData({ publicAddress, originalAddress });
     }
   }
@@ -95,7 +95,7 @@ function Wallets() {
   return (
     <>
       {accountData.publicAddress &&
-        accountData.publicAddress.startsWith("0x") &&
+        accountData.publicAddress.startsWith("0X") &&
         !loading && (
           <Button variant="contained" onClick={handleReset}>
             {accountData.publicAddress}
