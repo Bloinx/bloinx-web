@@ -95,7 +95,7 @@ function Wallets() {
   return (
     <>
       {accountData.publicAddress &&
-        accountData.publicAddress.startsWith("0x") &&
+        accountData.publicAddress.startsWith("0X") &&
         !loading && (
           <Button variant="contained" onClick={handleReset}>
             {accountData.publicAddress}
