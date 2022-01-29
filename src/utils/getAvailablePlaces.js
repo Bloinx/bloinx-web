@@ -17,24 +17,21 @@ const getAvailablePlaces = (methods) =>
               const address = await userBatch.call();
               if (address !== "0x0000000000000000000000000000000000000000") {
                 user = {
-                  key: userIndex,
                   position: userIndex + 1,
-                  status: "NoAvailable",
+                  available: false,
                   address,
                 };
               } else {
                 user = {
-                  key: userIndex,
                   position: userIndex + 1,
-                  status: "Available",
+                  available: true,
                   address,
                 };
               }
             } catch (err) {
               user = {
-                key: userIndex,
                 position: userIndex + 1,
-                status: "Error",
+                available: false,
                 address: null,
               };
             }
@@ -42,8 +39,7 @@ const getAvailablePlaces = (methods) =>
           })
         ).then((users) => {
           const availablePlaces = users.filter(
-            (userItem) =>
-              userItem.status !== "NoAvailable" && userItem.status !== "Error"
+            (userItem) => userItem.available
           );
           resolve(availablePlaces);
         });
