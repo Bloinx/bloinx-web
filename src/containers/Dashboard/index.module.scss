@@ -2,3 +2,9 @@
 
 .Dashboard {
 }
+
+@include media("<desktop") {
+  .Dashboard {
+    border-color: green;
+  }
+}

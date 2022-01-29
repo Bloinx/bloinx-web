@@ -41,7 +41,7 @@ function RoundsList() {
             </div>
             <div className={styles.RoundsListItem}>
               {round.isAdmin && !round.isRegistered && "Personaliza"}
-              <IconButton onClick={() => navigate(`/round-detail/${round.id}`)}>
+              <IconButton onClick={() => navigate(`/register/${round.id}`)}>
                 <ChevronRightIcon />
               </IconButton>
             </div>

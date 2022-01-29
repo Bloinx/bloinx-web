@@ -1,0 +1,22 @@
+@import "../../theme.scss";
+
+.PayCard {
+  background-color: $gray;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin-bottom: 20px;
+
+  & > div {
+    display: flex;
+    flex-direction: row;
+
+    p {
+      flex: 1;
+    }
+
+    p:last-child {
+      text-align: right;
+    }
+  }
+}

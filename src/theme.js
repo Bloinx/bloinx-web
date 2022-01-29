@@ -16,6 +16,10 @@ export default createTheme({
         contained: {
           color: "#FFF",
         },
+        outlined: {
+          backgroundColor: "#2b2d33",
+          color: "white",
+        },
       },
     },
     MuiInputLabel: {
@@ -34,8 +38,12 @@ export default createTheme({
     },
     MuiOutlinedInput: {
       styleOverrides: {
+        root: {
+          width: "100%",
+          color: "white",
+        },
         notchedOutline: {
-          borderColor: "#AAA",
+          borderColor: "transparent",
         },
       },
     },
@@ -79,6 +87,27 @@ export default createTheme({
       styleOverrides: {
         root: {
           paddingLeft: 25,
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        select: {
+          backgroundColor: "#2b2d33",
+        },
+        outlined: {
+          color: "#FFFFFF",
+        },
+        nativeInput: {
+          border: "1px solid red",
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#2b2d33",
+          borderRadius: 5,
         },
       },
     },
