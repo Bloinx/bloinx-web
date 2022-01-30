@@ -67,9 +67,7 @@ export const setRegisterUser = async (props) => {
         from: currentWallet,
         to: roundData.contract,
       })
-      .once("receipt", async (recpt) => {
-        console.log(recpt);
-
+      .once("receipt", async (receipt) => {
         const user = supabase.auth.user();
         const { data, error } = await supabase.from("positions").insert([
           {
@@ -82,7 +80,7 @@ export const setRegisterUser = async (props) => {
           },
         ]);
 
-        resolve(recpt);
+        resolve(receipt);
       })
       .on("error", async (error) => {
         reject(error);

@@ -3,9 +3,11 @@ import Main from "./abis/Main.json";
 import cUSD from "./abis/cUSD.json";
 
 export const MAIN_FACTORY_FUJI_TEST_NET =
-  "0x93D4bfF05EEBa0De8Ad486B7837DD11A10810d6C";
+  "0xa10d0A7D36c3d529C90eb75148019f758DC43449";
+// "0x93D4bfF05EEBa0De8Ad486B7837DD11A10810d6C";
 export const MIM_TOKEN_FUJI_TEST_NET =
-  "0x874069fa1eb16d44d622f2e0ca25eea172369bc1"; // cUSD
+  "0x765de816845861e75a25fca122bb6898b8b1282a";
+// "0x874069fa1eb16d44d622f2e0ca25eea172369bc1"; // cUSD
 
 export function configMin() {
   const httpProvider = new Web3.providers.HttpProvider(

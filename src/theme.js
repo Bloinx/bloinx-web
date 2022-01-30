@@ -111,5 +111,17 @@ export default createTheme({
         },
       },
     },
+    MuiLinearProgress: {
+      styleOverrides: {
+        determinate: {
+          height: 30,
+          borderRadius: 15,
+          backgroundColor: "rgba(245, 143, 152, 0.3)",
+        },
+        bar1Determinate: {
+          borderRadius: 15,
+        },
+      },
+    },
   },
 });

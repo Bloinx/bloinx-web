@@ -1,7 +1,10 @@
 import supabase from "../../supabase";
-import config, { MAIN_FACTORY_FUJI_TEST_NET } from "../../config.main.web3";
+import config, {
+  MAIN_FACTORY_FUJI_TEST_NET,
+  MIM_TOKEN_FUJI_TEST_NET,
+} from "../../config.main.web3";
 
-const setCreateRound = ({
+const setCreateRound = async ({
   warranty,
   saving,
   groupSize,
@@ -18,7 +21,7 @@ const setCreateRound = ({
         saving,
         groupSize,
         payTime,
-        "0x874069fa1eb16d44d622f2e0ca25eea172369bc1"
+        MIM_TOKEN_FUJI_TEST_NET
       )
       .send({
         from: walletAddress,
@@ -31,15 +34,17 @@ const setCreateRound = ({
         const folio = receipt.transactionHash;
 
         const session = supabase.auth.session();
-        const { data, error } = await supabase.from("round").insert([
+        const { data, error } = await supabase.from("rounds").insert([
           {
             createByUser: session.user.id,
             createByWallet: admin,
             contract,
             folio,
             isPublic,
+            createTime: new Date().getTime(),
           },
         ]);
+
         if (error) {
           reject(error);
         } else {
