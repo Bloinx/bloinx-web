@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import { useTranslation } from "react-i18next";
 
@@ -9,14 +10,15 @@ import { setRegisterUser } from "./utils";
 
 function Pay({ dataForm }) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const handleOnSubmit = async () => {
     setRegisterUser(dataForm)
-      .then((data) => {
-        console.log(data);
+      .then(() => {
+        navigate(`/register/${dataForm.roundData.id}/status/success`);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        navigate(`/register/${dataForm.roundData.id}/status/error`);
       });
   };
 

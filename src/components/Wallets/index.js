@@ -54,15 +54,15 @@ function Wallets() {
       method: "wallet_addEthereumChain",
       params: [
         {
-          chainId: "0xAEF3",
-          chainName: "Alfajores",
+          chainId: "0xa4ec", //"0xAEF3",
+          chainName: "Celo Mainnet", // "Alfajores",
           nativeCurrency: {
             name: "CELO",
             symbol: "CELO",
             decimals: 18,
           },
-          rpcUrls: ["https://alfajores-forno.celo-testnet.org"],
-          blockExplorerUrls: ["https://alfajores-blockscout.celo-testnet.org"],
+          rpcUrls: ["https://forno.celo.org"], //["https://alfajores-forno.celo-testnet.org"],
+          blockExplorerUrls: ["https://explorer.celo.org"], //["https://alfajores-blockscout.celo-testnet.org"],
         },
       ],
     });

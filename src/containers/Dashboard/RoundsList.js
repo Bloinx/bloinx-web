@@ -15,7 +15,7 @@ function RoundsList() {
   const getRounds = () => {
     getRoundsList()
       .then((data) => {
-        console.log(">>>", data);
+        console.log(data);
         setRoundsList(data);
       })
       .catch((err) => {
@@ -38,10 +38,18 @@ function RoundsList() {
           <div key={round.contract} className={styles.RoundsListRow}>
             <div className={styles.RoundsListItem}>
               {round.isAdmin && !round.isRegistered && "Nueva ronda vacia"}
+              {round.isAdmin && round.isRegistered && round.positions[0]?.name}
             </div>
             <div className={styles.RoundsListItem}>
               {round.isAdmin && !round.isRegistered && "Personaliza"}
-              <IconButton onClick={() => navigate(`/register/${round.id}`)}>
+              {round.isAdmin && round.isRegistered && "En espera de iniciar"}
+              <IconButton
+                onClick={
+                  !round.isRegistered
+                    ? () => navigate(`/register/${round.id}`)
+                    : () => navigate(`/round-detail/${round.id}`)
+                }
+              >
                 <ChevronRightIcon />
               </IconButton>
             </div>

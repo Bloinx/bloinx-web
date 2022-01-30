@@ -9,8 +9,11 @@ export const getRoundsList = async () => {
 
   const { data, error } = await supabase
     .from("rounds")
-    .select()
-    .eq("createByUser", user.id);
+    .select("*, positions(name, registrationDate)")
+    .eq("createByUser", user.id)
+    .order("createTime", { ascending: true });
+
+  console.log({ data, error });
 
   return new Promise((resolve, reject) => {
     let dataProcessed = [];
@@ -23,13 +26,15 @@ export const getRoundsList = async () => {
     data.forEach(async (round) => {
       const { methods } = config(round.contract);
 
-      const orderList = await getAddressOrderList(methods);
       const admin = await getAdmin(methods);
+      const orderList = await getAddressOrderList(methods);
 
-      const isRegistered = !!orderList.find(
-        ({ address }) => address === localStorage.getItem("currentWallet")
-      );
       const isAdmin = admin === localStorage.getItem("currentWallet");
+      const isRegistered = !!orderList.find(
+        ({ address }) =>
+          address.toLowerCase() ===
+          localStorage.getItem("currentWallet").toLowerCase()
+      );
 
       dataProcessed = [...dataProcessed, { ...round, isRegistered, isAdmin }];
 
