@@ -9,8 +9,9 @@ import InputOptionSelect from "../../components/InputOptionSelect";
 import ButtonOnlyOneStep from "../../components/ButtonOnlyOneStep";
 
 import styles from "./index.module.scss";
-import { DAY, WEEKLY, BIWEEKLY, MONTHLY } from "./constants";
+import { WEEKLY, BIWEEKLY, MONTHLY } from "./constants";
 import { confirmForm } from "./validations";
+import InputParticipantSelect from "../../components/InputParticipantSelect/InputParticipantSelect";
 
 const Form = ({ form, setForm }) => {
   const { t } = useTranslation();
@@ -38,7 +39,7 @@ const Form = ({ form, setForm }) => {
         const { values, errors, handleChange, handleSubmit, isValid } = props;
         return (
           <form onSubmit={handleSubmit}>
-            <InputOptionSelect
+            <InputParticipantSelect
               label={t("createRound.form.label.participants")}
               name="participants"
               value={values.participants}
@@ -76,10 +77,17 @@ const Form = ({ form, setForm }) => {
                   label: "10",
                   value: 10,
                 },
+                {
+                  label: "11",
+                  value: 11,
+                },
+                {
+                  label: "12",
+                  value: 12,
+                },
               ]}
               error={errors.participants}
             />
-
             <InputSlider
               label={t("createRound.form.label.amount")}
               name="amount"
@@ -116,10 +124,6 @@ const Form = ({ form, setForm }) => {
               value={values.periodicity}
               onChange={handleChange}
               options={[
-                {
-                  label: t("createRound.form.label.periodicityOptions.day"),
-                  value: DAY,
-                },
                 {
                   label: t("createRound.form.label.periodicityOptions.weekly"),
                   value: WEEKLY,

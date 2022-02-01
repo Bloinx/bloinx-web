@@ -112,4 +112,16 @@ export default createTheme({
       },
     },
   },
+  MuiPaginationUl: {
+    marginRight: "5px",
+    padding: "0px 15px",
+    height: "40px",
+    minWidth: "35px",
+    backgroundColor: "$gray",
+    border: "none",
+    borderRadius: "3px",
+    color: "white",
+    fontSize: "16px",
+    cursor: "pointer",
+  },
 });

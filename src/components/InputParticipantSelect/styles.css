@@ -1,0 +1,9 @@
+.rec-carousel-item:focus {
+  outline: none;
+  box-shadow: inset 0 0 1px 0px #f58f98;
+}
+button.rec-dot:hover,
+button.rec-dot:active,
+button.rec-dot:focus {
+  box-shadow: 0 0 1px 3px rgba(235, 16, 16, 0.5);
+}

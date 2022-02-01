@@ -8,7 +8,7 @@ import ButtonOnlyOneStep from "../../components/ButtonOnlyOneStep";
 import Loader from "../../components/Loader";
 
 import styles from "./Receipt.module.scss";
-import { DAY, WEEKLY, BIWEEKLY, MONTHLY } from "./constants";
+import { WEEKLY, BIWEEKLY, MONTHLY } from "./constants";
 import setCreateRound from "./utils";
 
 const Confirm = ({ formData }) => {
@@ -17,14 +17,12 @@ const Confirm = ({ formData }) => {
   const [loading, setLoading] = useState(false);
 
   const periodicityOptions = {
-    [DAY]: "createRound.form.label.periodicityOptions.day",
     [WEEKLY]: "createRound.form.label.periodicityOptions.weekly",
     [BIWEEKLY]: "createRound.form.label.periodicityOptions.biweekly",
     [MONTHLY]: "createRound.form.label.periodicityOptions.monthly",
   };
 
   const paymentTime = {
-    [DAY]: 1,
     [WEEKLY]: 7,
     [BIWEEKLY]: 14,
     [MONTHLY]: 30,
