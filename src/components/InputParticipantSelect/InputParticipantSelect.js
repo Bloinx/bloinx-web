@@ -7,10 +7,10 @@ import styles from "./styles.module.scss";
 import "./styles.css";
 
 const breakPoints = [
-  { width: 1, itemsToShow: 3 },
-  { width: 550, itemsToShow: 4, itemsToScroll: 2 },
-  { width: 768, itemsToShow: 6 },
-  { width: 1200, itemsToShow: 9 },
+  { width: 1, itemsToShow: 4 },
+  { width: 550, itemsToShow: 6, itemsToScroll: 2 },
+  { width: 768, itemsToShow: 10 },
+  { width: 1200, itemsToShow: 10 },
 ];
 
 export default function InputParticipantSelect({

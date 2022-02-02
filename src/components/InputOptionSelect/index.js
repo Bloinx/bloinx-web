@@ -4,9 +4,6 @@ import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
 
 import styles from "./styles.module.scss";
-import { Button, IconButton } from "@mui/material";
-import ArrowCircleLeft from "@mui/icons-material/ArrowCircleLeft";
-import ArrowCircleRight from "@mui/icons-material/ArrowCircleRight";
 
 export default function InputOptionSelect({
   label,

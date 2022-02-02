@@ -21,22 +21,22 @@
     }
   },
   "createRound":{
-    "title": "Crear nueva ronda",
+    "title": "Confirma nueva ronda",
     "titleConfirm": "Personaliza tu ronda",
-    "titleReceipt": "Pagar depósito de seguridad",
+    "titleReceipt": "Tu ronda se esta creando",
     "labels": {
       "payPerRound": "Monto pagado por ronda",
       "rewards": "Tu recibiras",
-      "amount": "Cada participante pagará",
-      "receiptAmount": "A su vez recibirá",
+      "amount": "A pagar por turno",
+      "receiptAmount": "A recibir en turno",
       "roundTime": "Tiempo de duración por ronda",
       "terms": "Entiendo completamente como el depósito de seguridad funciona"
     },
     "form":{
       "label":{
-        "participants": "Número de participantes",
+        "participants": "No. de participantes",
         "amount": "Monto por periodo",
-        "periodicity": "Duración de la ronda",
+        "periodicity": "Duración de turno",
         "periodicityOptions": {
           "weekly": "Semanal",
           "biweekly": "Quincenal",

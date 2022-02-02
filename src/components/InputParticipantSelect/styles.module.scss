@@ -3,14 +3,16 @@
 .InputOptionSelect {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
-
 .InputOptionSelectLabel {
-  margin-bottom: 8px;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 .InputOptionSelectOptions {
+  margin-top: 5%;
   display: flex;
 }
 

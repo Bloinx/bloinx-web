@@ -10,11 +10,11 @@ export default createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          width: "100%",
           textTransform: "initial",
         },
         contained: {
-          color: "#FFF",
+          color: "white",
+          backgroundColor: "#f58f98",
         },
         outlined: {
           backgroundColor: "#2b2d33",

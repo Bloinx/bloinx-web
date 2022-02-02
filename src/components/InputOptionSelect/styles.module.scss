@@ -4,14 +4,19 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 .InputOptionSelectLabel {
-  margin-bottom: 8px;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 .InputOptionSelectOptions {
   display: flex;
+  margin-top: 2%;
+  justify-content: center;
 }
 
 .InputOptionSelectOptionsButton {

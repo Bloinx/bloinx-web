@@ -4,6 +4,7 @@
   background-color: $gray;
   border-radius: 5px;
   margin-bottom: 20px;
+  margin-top: 20px;
   padding: 15px 17px 25px 17px;
   display: flex;
   flex-direction: column;
@@ -15,8 +16,11 @@
 }
 
 .ReceiptCardItem {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   color: white;
+  font-weight: 400;
+}
+
+.ReceiptCardItemRight {
+  font-weight: 600 !important;
+  text-align: right;
 }

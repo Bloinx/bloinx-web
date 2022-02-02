@@ -140,8 +140,9 @@ const Form = ({ form, setForm }) => {
                 },
               ]}
             />
-
-            <ButtonOnlyOneStep disabled={!isValid} type="submit" />
+            <div className={styles.ContinuarButton}>
+              <ButtonOnlyOneStep disabled={!isValid} type="submit" />
+            </div>
           </form>
         );
       }}
