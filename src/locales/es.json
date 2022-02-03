@@ -25,8 +25,8 @@
     "titleConfirm": "Personaliza tu ronda",
     "titleReceipt": "Tu ronda se esta creando",
     "labels": {
-      "payPerRound": "Monto pagado por ronda",
-      "rewards": "Tu recibiras",
+      "payPerRound": "A pagar por turno",
+      "rewards": "A recibir en turno",
       "amount": "A pagar por turno",
       "receiptAmount": "A recibir en turno",
       "roundTime": "Tiempo de duración por ronda",
@@ -34,9 +34,9 @@
     },
     "form":{
       "label":{
-        "participants": "No. de participantes",
-        "amount": "Monto por periodo",
-        "periodicity": "Duración de turno",
+    "participants": "Número de participantes",
+        "amount": "Monto por ronda",
+        "periodicity": "Duración de ronda",
         "periodicityOptions": {
           "weekly": "Semanal",
           "biweekly": "Quincenal",
