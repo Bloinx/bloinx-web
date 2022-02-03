@@ -10,6 +10,7 @@ import styles from "./index.module.scss";
 function Markup({ children }) {
   const { width } = useWindowDimensions();
   const [visible, setVisible] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const toggleDrawer = (status) => {
     if (status) {
@@ -23,6 +24,9 @@ function Markup({ children }) {
     if (visible) {
       setVisible(false);
     }
+  };
+  const handleDrawerOpenToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
 
   return (

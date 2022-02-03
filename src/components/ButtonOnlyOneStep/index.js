@@ -8,17 +8,17 @@ import styles from "./styles.module.scss";
 function ButtonOnlyOneStep({ type, onClick, disabled, label, loading }) {
   const { t } = useTranslation();
   return (
-    <div className={styles.ButtonOnlyOneStep}>
-      <Button
-        htmltype={type}
-        type="primary"
-        size="large"
-        onClick={onClick}
-        disabled={disabled}
-      >
-        {label || t("commons.buttons.continue")}
-      </Button>
-    </div>
+    <Button
+      htmltype={type}
+      size="medium"
+      type="primary"
+      onClick={onClick}
+      disabled={disabled}
+      variant="contained"
+      sx={{ color: "white" }}
+    >
+      {label || t("commons.buttons.continue")}
+    </Button>
   );
 }
 

@@ -10,11 +10,11 @@ export default createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          width: "100%",
           textTransform: "initial",
         },
         contained: {
-          color: "#FFF",
+          color: "white",
+          backgroundColor: "#f58f98",
         },
         outlined: {
           backgroundColor: "#2b2d33",
@@ -123,5 +123,17 @@ export default createTheme({
         },
       },
     },
+  },
+  MuiPaginationUl: {
+    marginRight: "5px",
+    padding: "0px 15px",
+    height: "40px",
+    minWidth: "35px",
+    backgroundColor: "$gray",
+    border: "none",
+    borderRadius: "3px",
+    color: "white",
+    fontSize: "16px",
+    cursor: "pointer",
   },
 });

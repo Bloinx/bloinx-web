@@ -8,16 +8,23 @@ import styles from "./styles.module.scss";
 import Wallets from "../Wallets";
 
 import icon from "../../assets/icon.png";
+import { Grid } from "@mui/material";
 
 export default function Navbar({ width, toggleDrawer, visible }) {
   // const Icon = visible ? CloseOutlined : MenuOutlined;
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <img src={icon} alt="bloinx-icon" className={styles.NavbarLogo} />
-        <Wallets />
-      </Toolbar>
-    </AppBar>
+    <Grid container justifyContent={"space-between"}>
+      <AppBar position="static">
+        <Toolbar>
+          <Grid item item xs={6} md={6}>
+            <img src={icon} alt="bloinx-icon" className={styles.NavbarLogo} />
+          </Grid>
+          <Grid item item xs={6} md={6} textAlign={"right"}>
+            <Wallets />
+          </Grid>
+        </Toolbar>
+      </AppBar>
+    </Grid>
     // <div className={styles.navbar}>
     //   <div>
     //     {width <= 768 && (

@@ -2,10 +2,18 @@ import React from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
-
+import Carousel from "react-elastic-carousel";
 import styles from "./styles.module.scss";
+import "./styles.css";
 
-export default function InputOptionSelect({
+const breakPoints = [
+  { width: 1, itemsToShow: 4 },
+  { width: 550, itemsToShow: 6, itemsToScroll: 2 },
+  { width: 768, itemsToShow: 10 },
+  { width: 1200, itemsToShow: 10 },
+];
+
+export default function InputParticipantSelect({
   label,
   value,
   options,
@@ -32,8 +40,8 @@ export default function InputOptionSelect({
       </Typography>
 
       <div className={styles.InputOptionSelectOptions}>
-        {options.map((option) => {
-          return (
+        <Carousel breakPoints={breakPoints}>
+          {options.map((option) => (
             <button
               key={option.label}
               type="button"
@@ -45,19 +53,19 @@ export default function InputOptionSelect({
             >
               {option.label}
             </button>
-          );
-        })}
+          ))}
+        </Carousel>
       </div>
     </div>
   );
 }
 
-InputOptionSelect.defaultProps = {
+InputParticipantSelect.defaultProps = {
   label: "",
   value: "",
 };
 
-InputOptionSelect.propTypes = {
+InputParticipantSelect.propTypes = {
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   value: PropTypes.oneOfType([
     PropTypes.string,

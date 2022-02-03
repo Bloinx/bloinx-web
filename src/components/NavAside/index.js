@@ -176,6 +176,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import HomeIcon from "@mui/icons-material/Home";
+import { Logout, PersonalVideo } from "@mui/icons-material";
 
 import styles from "./index.module.scss";
 
@@ -246,27 +248,21 @@ function NavAside({ visible, toggleDrawer }) {
       <List>
         <ListItem button>
           <ListItemIcon>
-            <InboxIcon />
+            <HomeIcon />
           </ListItemIcon>
-          <ListItemText primary="Dashboard" />
+          <ListItemText primary="Mis Rondas" />
         </ListItem>
         <ListItem button>
           <ListItemIcon>
-            <MailIcon />
+            <Logout />
           </ListItemIcon>
-          <ListItemText primary="Profile" />
+          <ListItemText primary="Cerrar Sesión" />
         </ListItem>
         <ListItem button>
           <ListItemIcon>
-            <MailIcon />
+            <PersonalVideo />
           </ListItemIcon>
-          <ListItemText primary="Profile" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <MailIcon />
-          </ListItemIcon>
-          <ListItemText primary="Profile" />
+          <ListItemText primary="Tutoriales" />
         </ListItem>
       </List>
     </Drawer>
