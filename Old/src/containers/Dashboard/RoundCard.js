@@ -8,7 +8,7 @@ import { CubeSpinner } from "react-spinners-kit";
 import styles from "./RoundCard.module.scss";
 import Stepper from "../../components/Stepper";
 import { formatAddress } from "../../utils/format";
-import logoIcon from "../../assets/icon.png";
+import logoIcon from "../../assets/bloinxIcon.png";
 
 function RoundCard({
   name,
