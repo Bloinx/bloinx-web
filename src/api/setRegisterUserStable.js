@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { doc, getDoc, getFirestore } from "firebase/firestore";
-import { MIM_TOKEN_FUJI_TEST_NET, configMin } from "./config.main.web3";
+import { CUSD_TOKEN_ALFAJORES, configCUSD } from "./config.main.web3";
 
 const db = getFirestore();
 
@@ -12,13 +12,10 @@ const setRegisterUser = async (props) => {
   const data = await docSnap.data();
 
   return new Promise((resolve, reject) => {
-    const mim = configMin();
-    mim.methods
-      .approve(
-        data.contract,
-        "115792089237316195423570985008687907853269984665640564039457584007913129639935"
-      )
-      .send({ from: walletAddress, to: MIM_TOKEN_FUJI_TEST_NET })
+    const cUSD = configCUSD();
+    cUSD.methods
+      .approve(data.contract, "30000000000000000000")
+      .send({ from: walletAddress, to: CUSD_TOKEN_ALFAJORES })
       .once("receipt", async (receipt) => {
         resolve(receipt);
       })
