@@ -3,7 +3,10 @@
 import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 
-import config, { MAIN_FACTORY_FUJI_TEST_NET } from "./config.main.web3";
+import config, {
+  MAIN_FACTORY_ALFAJORES,
+  CUSD_TOKEN_ALFAJORES,
+} from "./config.main.web3";
 
 const setCreateRound = ({
   name,
@@ -15,21 +18,17 @@ const setCreateRound = ({
   walletAddress,
 }) =>
   new Promise((resolve, reject) => {
-    const m = config();
+    const factory = config();
     const db = getFirestore();
     const { uid } = getAuth().currentUser;
+    console.log("walletAddress ", walletAddress);
+    console.log("Factory ", factory);
 
-    m.methods
-      .createRound(
-        warranty,
-        saving,
-        groupSize,
-        payTime,
-        "0x874069fa1eb16d44d622f2e0ca25eea172369bc1"
-      )
+    factory.methods
+      .createRound(warranty, saving, groupSize, payTime, CUSD_TOKEN_ALFAJORES)
       .send({
         from: walletAddress,
-        to: MAIN_FACTORY_FUJI_TEST_NET,
+        to: MAIN_FACTORY_ALFAJORES,
       })
       .once("receipt", async (receipt) => {
         const contract =
