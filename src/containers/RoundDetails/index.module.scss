@@ -1,0 +1,30 @@
+@import '../../theme.scss';
+
+.BranchDetails{
+  background-color: $blue-strong;
+  height: 100%;
+  width: 100%;
+}
+.BranchDetailsMoreOptions{
+  color: white !important;
+}
+.BranchDetailsTitle{
+  span {
+    color: white !important;
+  }
+}
+.BranchDetailsContent{
+  padding: 0px 20px 20px 55px;
+}
+.BranchDetailsContentLine{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 10px;
+  color: white;
+
+  h4{
+    margin-bottom: 0 !important;
+  }
+}

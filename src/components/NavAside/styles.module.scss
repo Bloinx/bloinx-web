@@ -1,0 +1,39 @@
+@import "../../theme.scss";
+
+.NavAside {
+  background-color: $gray !important;
+}
+
+.MenuOptions {
+  background-color: $gray !important;
+  border-right: 0px !important;
+}
+.MenuItem {
+  color: rgba($color: #fff, $alpha: 0.6) !important;
+  a {
+    color: rgba($color: #fff, $alpha: 0.6) !important;
+  }
+}
+.MenuItemSelected {
+  background-color: $pink-strong !important;
+}
+.logo {
+  height: 60px;
+  img {
+    height: 100%;
+  }
+}
+.logoMobile img {
+  height: 60px;
+}
+.icon {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0px;
+}
+.NavAsideDrawer {
+  border: 1px solid red !important;
+  background-color: $gray !important;
+}

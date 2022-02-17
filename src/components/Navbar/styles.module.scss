@@ -1,0 +1,22 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+
+  div {
+    display: flex;
+    align-items: center;
+  }
+
+  div > img {
+    margin-right: 10px;
+  }
+}
+
+.menuIcon {
+  color: white !important;
+  font-size: 30px;
+  padding: 0px;
+}

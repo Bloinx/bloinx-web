@@ -1,0 +1,77 @@
+@import "../../theme.scss";
+
+.RoundCard {
+  background-color: $blue-strong;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  color: white;
+  width: 100%;
+  min-width: 300px;
+  max-width: 300px;
+}
+
+@media (min-width: 768px) {
+  .RoundCard {
+    width: calc(50% - 20px);
+  }
+}
+
+.RoundCardHeader {
+  display: flex;
+  flex-direction: row;
+}
+
+.RoundCardHeaderImage {
+  margin-right: 10px;
+  img {
+    min-width: 50px;
+  }
+}
+
+.RoundCardTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+  font-size: 14px;
+}
+
+.RoundCardSubject {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.RoundCardSeparation {
+  border-bottom: 1px solid $gray-light;
+  margin-bottom: 10px;
+}
+
+.RoundCardFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  div {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+.RoundCardAction {
+  width: 150px;
+  margin-bottom: 5px;
+}
+
+.RoundCardLoader {
+  margin: 20px 20px;
+  display: flex;
+  flex-direction: row !important;
+  span {
+    margin-left: 15px;
+  }
+}
