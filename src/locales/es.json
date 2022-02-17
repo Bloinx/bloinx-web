@@ -83,6 +83,7 @@
   "invitations": {
     "title": "Invitaciones",
     "description": "Por favor ingresa los correos de todos tu invitados a esta ronda.",
+    "caption": "** Da (Enter) para agregar cada correo **",
     "form": {
       "label": {
         "emails": "Ingresa los emails"
