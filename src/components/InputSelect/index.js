@@ -1,7 +1,6 @@
 import React from "react";
 import { Typography, Select } from "antd";
 import PropTypes from "prop-types";
-
 import styles from "./styles.module.scss";
 
 const { Option } = Select;

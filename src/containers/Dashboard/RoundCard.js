@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Button } from "antd";
+import { Modal, Button } from "antd";
 import { Link } from "react-router-dom";
 import { RightOutlined } from "@ant-design/icons";
 import { CubeSpinner } from "react-spinners-kit";
@@ -34,6 +34,12 @@ export function RoundCard({
       indents.push({ label: i });
     }
     return indents;
+  };
+
+  const handleModal = () => {
+    Modal.success({
+      content: "¡Felicidades! Has completado todos tus pagos",
+    });
   };
 
   const arePending = missingPositions > 0;
@@ -102,6 +108,7 @@ export function RoundCard({
             <>
               <Button
                 className={styles.RoundCardAction}
+                ghost={buttonText !== "Pagar"}
                 type="primary"
                 disabled={buttonDisabled}
                 onClick={onClick}
@@ -122,6 +129,9 @@ export function RoundCard({
           )}
         </div>
       </div>
+      <Button onClick={handleModal} type="primary">
+        Open Modal
+      </Button>
     </div>
   );
 }
