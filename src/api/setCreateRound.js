@@ -4,8 +4,8 @@ import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 
 import config, {
-  MAIN_FACTORY_ALFAJORES,
-  CUSD_TOKEN_ALFAJORES,
+  MAIN_FACTORY_CELO_MAINNET,
+  CUSD_TOKEN_CELO_MAINNET,
 } from "./config.main.web3";
 
 const setCreateRound = ({
@@ -25,10 +25,16 @@ const setCreateRound = ({
     console.log("Factory ", factory);
 
     factory.methods
-      .createRound(warranty, saving, groupSize, payTime, CUSD_TOKEN_ALFAJORES)
+      .createRound(
+        warranty,
+        saving,
+        groupSize,
+        payTime,
+        CUSD_TOKEN_CELO_MAINNET
+      )
       .send({
         from: walletAddress,
-        to: MAIN_FACTORY_ALFAJORES,
+        to: MAIN_FACTORY_CELO_MAINNET,
       })
       .once("receipt", async (receipt) => {
         const contract =

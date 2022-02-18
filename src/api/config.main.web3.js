@@ -14,26 +14,29 @@ export const CUSD_TOKEN_CELO_MAINNET =
 
 export function configCUSD() {
   const httpProvider = new Web3.providers.HttpProvider(
-    "https://alfajores-forno.celo-testnet.org",
+    "https://forno.celo.org",
     {
       timeout: 10000,
     }
   );
   const web3Provider = new Web3(window?.web3?.currentProvider || httpProvider);
-  const contract = new web3Provider.eth.Contract(cUSD, CUSD_TOKEN_ALFAJORES);
+  const contract = new web3Provider.eth.Contract(cUSD, CUSD_TOKEN_CELO_MAINNET);
   return contract;
 }
 
 export default function config() {
   const httpProvider = new Web3.providers.HttpProvider(
-    "https://alfajores-forno.celo-testnet.org",
+    "https://forno.celo.org",
     {
       timeout: 10000,
     }
   );
 
   const web3Provider = new Web3(window?.web3?.currentProvider || httpProvider);
-  const contract = new web3Provider.eth.Contract(Main, MAIN_FACTORY_ALFAJORES);
+  const contract = new web3Provider.eth.Contract(
+    Main,
+    MAIN_FACTORY_CELO_MAINNET
+  );
 
   return contract;
 }
