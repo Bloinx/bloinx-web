@@ -88,22 +88,40 @@ function Dashboard({ currentAddress }) {
 
   const handlePayRound = (roundId) => {
     setLoading(true);
-    APISetAddPayment({ roundId, walletAddress: currentAddress })
-      .then((success) => {
-        Modal.success({
-          title: "Pago correcto",
-          content: "...",
-        });
-        setLoading(false);
-        handleGetRounds();
+    const remainingAmount = APIGetFuturePayments(roundId, currentAddress);
+    remainingAmount
+      .then((amount) => {
+        if (amount > 0) {
+          APISetAddPayment({ roundId, walletAddress: currentAddress })
+            .then((success) => {
+              Modal.success({
+                title: "Pago correcto",
+                content: "...",
+              });
+              setLoading(false);
+              handleGetRounds();
+            })
+            .catch((err) => {
+              Modal.error({
+                title: "Error al realizar el pago",
+                content: "...",
+              });
+              setLoading(false);
+              handleGetRounds();
+            });
+        } else {
+          Modal.success({
+            content: "¡Felicidades! Has completado todos tus pagos",
+          });
+          setLoading(false);
+        }
       })
       .catch((err) => {
         Modal.error({
-          title: "Error al realizar el pago",
-          content: "...",
+          title: "Error",
+          content: "Error al obtener información de tus pagos",
         });
         setLoading(false);
-        handleGetRounds();
       });
   };
 
@@ -126,22 +144,6 @@ function Dashboard({ currentAddress }) {
         });
         setLoading(false);
         handleGetRounds();
-      });
-  };
-
-  const getFuturePayment = (roundI) => {
-    APIGetFuturePayments(roundI, currentAddress)
-      .then(() => {
-        Modal.success({
-          title: "Terminaste de pagar!!",
-          content: "Completaste todos tus pagos exitosamente",
-        });
-      })
-      .catch(() => {
-        Modal.error({
-          title: "Error al obtener tus pagos",
-          content: "Error",
-        });
       });
   };
 

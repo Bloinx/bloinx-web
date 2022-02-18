@@ -2,7 +2,6 @@ import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 import config from "./config.sg.web3";
 import MethodGetSaveAmount from "./methods/saveAmount";
-// import MethodGetCashIn from "./methods/getCashIn";
 
 const db = getFirestore();
 
