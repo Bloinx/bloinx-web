@@ -1,8 +1,8 @@
-const getFuturePayments = (methods) =>
+const getFuturePayments = (methods, address) =>
   new Promise((resolve) => {
     methods
       .futurePayments()
-      .call()
+      .call({ from: address })
       .then((remainingAmount) => {
         resolve(remainingAmount);
       });

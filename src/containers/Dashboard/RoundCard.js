@@ -36,12 +36,6 @@ export function RoundCard({
     return indents;
   };
 
-  const handleModal = () => {
-    Modal.success({
-      content: "¡Felicidades! Has completado todos tus pagos",
-    });
-  };
-
   const arePending = missingPositions > 0;
 
   return (
@@ -129,9 +123,6 @@ export function RoundCard({
           )}
         </div>
       </div>
-      <Button onClick={handleModal} type="primary">
-        Open Modal
-      </Button>
     </div>
   );
 }
