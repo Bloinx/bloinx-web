@@ -19,6 +19,7 @@ import APIGetRoundsByInvitation from "../../api/getRoundsByInvitation";
 import APISetStartRound from "../../api/setStartRound";
 import APISetAddPayment from "../../api/setAddPayment";
 import APISetWithdrawTurn from "../../api/setWithdrawTurn";
+import APIGetFuturePayments from "../../api/getFuturePayments";
 import Placeholder from "../../components/Placeholder";
 import NotFoundPlaceholder from "../../components/NotFoundPlaceholder";
 
@@ -125,6 +126,22 @@ function Dashboard({ currentAddress }) {
         });
         setLoading(false);
         handleGetRounds();
+      });
+  };
+
+  const getFuturePayment = (roundI) => {
+    APIGetFuturePayments(roundI, currentAddress)
+      .then(() => {
+        Modal.success({
+          title: "Terminaste de pagar!!",
+          content: "Completaste todos tus pagos exitosamente",
+        });
+      })
+      .catch(() => {
+        Modal.error({
+          title: "Error al obtener tus pagos",
+          content: "Error",
+        });
       });
   };
 
