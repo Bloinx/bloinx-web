@@ -5,13 +5,12 @@ import { FormattedMessage } from "react-intl";
 const DAY = "day";
 const WEEKLY = "weekly";
 const BIWEEKLY = "biweekly";
-const MONTHLY = "monthly";
 
 export const INITIAL_FORM_VALUES = {
   name: null,
   participants: 3,
   amount: 1,
-  periodicity: "monthly",
+  periodicity: "biweekly",
   isComplete: false,
 };
 
@@ -19,7 +18,6 @@ export const paymentTime = {
   [DAY]: 1,
   [WEEKLY]: 7,
   [BIWEEKLY]: 14,
-  [MONTHLY]: 30,
 };
 
 export const periodicityOptions = [
@@ -41,12 +39,6 @@ export const periodicityOptions = [
     ),
     value: BIWEEKLY,
   },
-  {
-    label: (
-      <FormattedMessage id="createRound.form.label.periodicityOptions.monthly" />
-    ),
-    value: MONTHLY,
-  },
 ];
 
 export const participantsOptions = [
@@ -61,25 +53,5 @@ export const participantsOptions = [
   {
     label: "5",
     value: 5,
-  },
-  {
-    label: "6",
-    value: 6,
-  },
-  {
-    label: "7",
-    value: 7,
-  },
-  {
-    label: "8",
-    value: 8,
-  },
-  {
-    label: "9",
-    value: 9,
-  },
-  {
-    label: "10",
-    value: 10,
   },
 ];

@@ -26,7 +26,7 @@
     "titleReceipt": "Pagar depósito de seguridad",
     "labels": {
       "payPerRound": "Monto pagado por ronda",
-      "rewards": "Tu recibiras",
+      "rewards": "Tú recibirás",
       "amount": "Cada participante pagará",
       "receiptAmount": "A su vez recibirá",
       "roundTime": "Tiempo de duración por ronda",
@@ -40,8 +40,7 @@
         "periodicityOptions": {
           "day": "Diario",
           "weekly": "Semanal",
-          "biweekly": "Quincenal",
-          "monthly": "Mensual"
+          "biweekly": "Quincenal"
         },
         "name":"Nombre de la ronda",
         "motivation":"Motivación personal",

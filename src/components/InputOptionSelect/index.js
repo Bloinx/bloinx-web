@@ -17,6 +17,7 @@ export default function InputOptionSelect({
     <span className={styles.InputOptionSelect}>
       <Text className={styles.InputOptionSelectLabel}>{label}</Text>
       <Radio.Group
+        className={styles.InputCheck}
         options={options}
         onChange={onChange}
         value={value}
