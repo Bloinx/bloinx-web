@@ -46,10 +46,13 @@ function Form({ roundId }) {
       <Paragraph>
         <FormattedMessage id="invitations.description" />
       </Paragraph>
+      <Paragraph>
+        <FormattedMessage id="invitations.caption" />
+      </Paragraph>
       <InputEmailTags
         label={<FormattedMessage id="invitations.form.label.emails" />}
         name="email"
-        placeholder="Por favor ingresa"
+        placeholder="Ingresa el email"
         value={mailList}
         onChangeValue={handlerOnChangeEmailList}
       />

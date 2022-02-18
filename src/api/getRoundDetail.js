@@ -44,9 +44,11 @@ const getRoundDetail = async (roundId) => {
         admin: admin === user.address,
         dateToWithdraw:
           startTime === "0"
-            ? moment(new Date()).format("DD - MMM - YYYY HH:mm")
+            ? "---"
             : moment(
-                new Date((Number(startTime) + user.position * payTime) * 1000)
+                new Date(
+                  (Number(startTime) + user.position * payTime + 10) * 1000
+                )
               ).format("DD - MMM - YYYY HH:mm"),
       };
     });
