@@ -1,0 +1,63 @@
+@import "../../theme.scss";
+
+.SignUp {
+  background-image: url("../../assets/background.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.SignUpTitle {
+  margin: 40px;
+}
+
+.SignUpCard {
+  background-color: rgba($gray, 0.9);
+  max-width: 400px;
+  width: 100%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.SignUpHeader {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  img {
+    max-height: 80px;
+  }
+
+  span {
+    margin-top: 5px;
+    color: #fff;
+    border-left: 1px solid #fff;
+    font-size: 18px;
+    padding-left: 10px;
+  }
+}
+
+.SignUpContent {
+  display: flex;
+  flex-direction: column;
+}
+.SignUpText {
+  color: white;
+}
+.SignUpOptions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 30px;
+  border-top: 1px solid white;
+  padding-top: 20px;
+
+  p {
+    margin-bottom: 10px;
+  }
+}

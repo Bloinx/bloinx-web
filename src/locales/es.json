@@ -1,0 +1,109 @@
+{
+  "navAside": {
+    "dashboard": "Mis Rondas",
+    "createbatch": "Crear Ronda",
+    "registerpay": "Pagos",
+    "batchDetails": "Detalle",
+    "logout": "Cerrar sesión",
+    "docs": "Tutoriales"
+  },
+  "dashboardPage": {
+    "title": "Mis Rondas",
+    "subtitle": "Invitaciones a las rondas",
+    "roundCaption": "Comienza ahora creando tu círculo de ahorro con tu familia y amigos",
+    "table": {
+      "name": "Nombre",
+      "address": "Dirección de contrato",
+      "startDate": "Inicio",
+      "participants": "Paritipantes",
+      "liquidity": "Liquidez",
+      "status": "Estatus"
+    }
+  },
+  "createRound":{
+    "title": "Confirma nueva ronda",
+    "titleConfirm": "Personaliza tu ronda",
+    "titleReceipt": "Tu ronda se esta creando",
+    "labels": {
+      "payPerRound": "A pagar por turno",
+      "rewards": "A recibir en turno",
+      "amount": "A pagar por turno",
+      "receiptAmount": "A recibir en turno",
+      "roundTime": "Tiempo de duración por ronda",
+      "terms": "Entiendo completamente como el depósito de seguridad funciona"
+    },
+    "form":{
+      "label":{
+    "participants": "Número de participantes",
+        "amount": "Monto por ronda",
+        "periodicity": "Duración de ronda",
+        "periodicityOptions": {
+          "weekly": "Semanal",
+          "biweekly": "Quincenal",
+          "monthly": "Mensual"
+        },
+        "name":"Nombre de la ronda",
+        "motivation":"Motivación personal",
+        "turn": "Turno para recibir la ronda"
+      },
+      "placeholder": {
+        "batchName":"Nombre de la ronda"
+      }
+    },
+    "actions":{
+      "registerMe": "Registrarme",
+      "payGuarantee": "Crear ronda",
+      "chooseTurn": "Elige tu lugar en la ronda",
+      "continue": "Continuar"
+    }
+  },
+  "payments":{
+    "wallet":{
+      "title": "Cartera Digital",
+      "description": "Por favor ingresa tu wallet desde la barra de navegación."
+    },
+    "round": {
+      "title": "Pago de ronda",
+      "labels": {
+        "latePayment": "Pago tardio",
+        "guaranteePayment": "Pago de garantia",
+        "roundPayment": "Pago de ronda",
+        "networkCommission": "Comision de red",
+        "totalReceivable": "Total a cobrar"
+      }
+    },
+    "details": {
+      "title": "Detalles del Pago",
+      "subtitle": "Vas a depositar:",
+      "securityDeposit": "Depósito de Seguridad (reintegrable)",
+      "serviceFee": "Tarifa de Servicio"
+    }
+  },
+  "invitations": {
+    "title": "Invitaciones",
+    "description": "Por favor ingresa los correos de todos tu invitados a esta ronda.",
+    "form": {
+      "label": {
+        "emails": "Ingresa los emails"
+      }
+    }
+  },
+  "commons": {
+    "buttons": {
+      "next": "Siguiente",
+      "back": "Regresar",
+      "continue": "Continuar",
+      "send": "Enviar",
+      "end": "Terminar",
+      "sendAndEnd": "Enviar y terminar"
+    }
+  },
+  "infoLabels": {
+    "withoutWallet": "Sin Wallet encontrada",
+    "connectWalletMessage": "Por favor conecta tu wallet para continuar",
+    "withoutInfo": "Sin información para mostrar",
+    "createRoundMessage": "Por favor crea una ronda",
+    "guaranteeInfo": "¿Qué es la garantía? \n Es un pago que se regresará al final de la ronda. Si alguno de ustedes no paga a tiempo, será aplicado automáticamente al turno que corresponda y no lo podrá recuperar. \n ¡Ojo! si alguno de ustedes olvida hacer más de un pago, el monto a regresar de la garantía de todos los participantes será afectado."
+  },
+  "copyright": "Bloinx 2021 (c) Todos los derechos reservados."
+}
