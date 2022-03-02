@@ -182,6 +182,20 @@ function Wallets({ currentAddressWallet }) {
           )}
           {loading && <Spin size="large" tip="Loading..." />}
         </div>
+        <div className={styles.Loading}>
+          <Title level={5}>Elige tu Wallet dentro de Metamask</Title>
+          {!loading && !error && (
+            <Button
+              type="primary"
+              icon={<DownloadOutlined />}
+              size="large"
+              shape="round"
+            >
+              VALORA
+            </Button>
+          )}
+          {loading && <Spin size="large" tip="Loading..." />}
+        </div>
         {!loading && error && (
           <Result
             status={errorData.status}
