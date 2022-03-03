@@ -5,8 +5,8 @@ import { DownloadOutlined } from "@ant-design/icons";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { Button, Drawer, Typography, Spin, Result } from "antd";
 
-import { getWeb3 } from "../../utils/web3";
-import { getCurrentWallet } from "../../redux/actions/main";
+import Web3, { walletConnect } from "../../api/config.main.web3";
+import { getCurrentWallet, getCurrentProvider } from "../../redux/actions/main";
 
 import styles from "./styles.module.scss";
 
@@ -48,7 +48,7 @@ const errorMessages = [
 
 const { Title } = Typography;
 
-function Wallets({ currentAddressWallet }) {
+function Wallets({ currentAddressWallet, currentProvider }) {
   const [accountData, setAccountData] = useState({
     publicAddress: null,
     originalAdress: null,
@@ -59,9 +59,12 @@ function Wallets({ currentAddressWallet }) {
 
   const handleToggleDrawer = () => setOpen(!open);
 
-  const handleReset = () => {
+  const handleReset = async () => {
     setAccountData({ publicAddress: null, originalAdress: null });
+    const { provider } = await walletConnect();
+    await provider.disconnect();
     setError(null);
+    window.location.reload();
   };
 
   function getAddress(originalAdress) {
@@ -110,10 +113,11 @@ function Wallets({ currentAddressWallet }) {
   const loadWeb3Provider = async () => {
     setLoading(true);
     const provider = await detectEthereumProvider();
+    currentProvider("Metamask");
     if (provider) {
       try {
         await provider.enable();
-        const web3Loadie = getWeb3();
+        const web3Loadie = Web3().web3Provider;
         if (web3Loadie) {
           loadPubKeyData(provider);
           setLoading(false);
@@ -127,6 +131,28 @@ function Wallets({ currentAddressWallet }) {
         setError(503);
       }
     } else {
+      setLoading(false);
+      setError(500);
+    }
+  };
+
+  const loadWalletConnectProvider = async () => {
+    setLoading(true);
+    try {
+      const { provider } = await walletConnect();
+      currentProvider("WalletConnect");
+      await provider.on("accountsChanged", (newAccount) => {
+        setLoading(true);
+        setTimeout(() => {
+          getAddress(newAccount[0]);
+          setLoading(false);
+        }, 2000);
+      });
+      getAddress(provider.accounts[0]);
+      setLoading(false);
+      handleToggleDrawer();
+    } catch (err) {
+      console.log("Error ", err);
       setLoading(false);
       setError(500);
     }
@@ -170,15 +196,26 @@ function Wallets({ currentAddressWallet }) {
         <div className={styles.Loading}>
           <Title level={5}>Elige tu Wallet dentro de Metamask</Title>
           {!loading && !error && (
-            <Button
-              type="primary"
-              icon={<DownloadOutlined />}
-              size="large"
-              shape="round"
-              onClick={loadWeb3Provider}
-            >
-              METAMASK
-            </Button>
+            <div>
+              <Button
+                type="primary"
+                icon={<DownloadOutlined />}
+                size="large"
+                shape="round"
+                onClick={loadWeb3Provider}
+              >
+                METAMASK
+              </Button>
+              <Button
+                type="primary"
+                icon={<DownloadOutlined />}
+                size="large"
+                shape="round"
+                onClick={loadWalletConnectProvider}
+              >
+                Valora
+              </Button>
+            </div>
           )}
           {loading && <Spin size="large" tip="Loading..." />}
         </div>
@@ -197,14 +234,17 @@ function Wallets({ currentAddressWallet }) {
 
 Wallets.defaultProps = {
   currentAddressWallet: () => {},
+  currentProvider: () => {},
 };
 
 Wallets.propTypes = {
   currentAddressWallet: PropTypes.func,
+  currentProvider: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   currentAddressWallet: (address) => dispatch(getCurrentWallet(address)),
+  currentProvider: (provider) => dispatch(getCurrentProvider(provider)),
 });
 
 export default connect(null, mapDispatchToProps)(Wallets);

@@ -12,7 +12,7 @@ const getRoundRegisterDetail = async (roundId) => {
     const docSnap = await getDoc(docRef);
     const data = docSnap.data();
 
-    const sg = config(data.contract);
+    const sg = await config(data.contract);
     const positionsAvailable = await MethodGetAvailablePlaces(sg.methods);
     const cashIn = await MethodGetCashIn(sg.methods);
     const feeCost = await MethodGetFeeCost(sg.methods);

@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Layout } from "antd";
 import PropTypes from "prop-types";
 import { FormattedMessage } from "react-intl";
 
 import Navbar from "../../components/Navbar";
 import NavAside from "../../components/NavAside";
-import getSavingGroupsMethods from "../../utils/getSGContract";
+// import getSavingGroupsMethods from "../../utils/getSGContract";
 import useWindowDimensions from "../../utils/useWindowDimensions";
 
 const { Header, Content, Footer } = Layout;
 
-function Markup({ children, initialContractInstance }) {
+function Markup({ children }) {
+  // initialContractInstance
   const { width } = useWindowDimensions();
   const [visible, setVisible] = useState(false);
 
@@ -22,14 +23,14 @@ function Markup({ children, initialContractInstance }) {
     }
   };
 
-  const instanceContractsEnviroment = async () => {
-    const instance = await getSavingGroupsMethods();
-    initialContractInstance(instance);
-  };
+  // const instanceContractsEnviroment = async () => {
+  //   const instance = await getSavingGroupsMethods();
+  //   initialContractInstance(instance);
+  // };
 
-  useEffect(() => {
-    instanceContractsEnviroment();
-  }, []);
+  // useEffect(() => {
+  //   instanceContractsEnviroment();
+  // }, []);
 
   return (
     <Layout className="appLayout">
@@ -49,7 +50,7 @@ function Markup({ children, initialContractInstance }) {
 
 Markup.propTypes = {
   children: PropTypes.node.isRequired,
-  initialContractInstance: PropTypes.func.isRequired,
+  // initialContractInstance: PropTypes.func.isRequired,
 };
 
 export default Markup;

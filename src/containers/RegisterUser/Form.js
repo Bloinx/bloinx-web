@@ -25,7 +25,7 @@ import { confirmValidation } from "./validations";
 import { motivationOptions } from "./constants";
 import { getOptions } from "./utils";
 
-function Form({ form, setForm, roundData, walletAddress }) {
+function Form({ form, setForm, roundData, walletAddress, provider }) {
   const user = getAuth().currentUser;
   const history = useHistory();
   const [loading, setLoading] = useState(false);
@@ -45,6 +45,7 @@ function Form({ form, setForm, roundData, walletAddress }) {
         name: values.name,
         motivation: values.motivation,
         position: values.turnSelected,
+        provider,
       })
         .then((receipt) => {
           console.log(receipt);

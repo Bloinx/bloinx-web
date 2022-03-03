@@ -10,7 +10,7 @@ const getFuturePayments = async (roundId, currentAddress) => {
     const docRef = doc(db, "round", roundId);
     const docSnap = await getDoc(docRef);
     const data = docSnap.data();
-    const sg = config(data.contract);
+    const sg = await config(data.contract);
 
     const futurePayments = await MethodGetFuturePayments(
       sg.methods,

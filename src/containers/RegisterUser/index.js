@@ -12,7 +12,7 @@ import APIgetRoundRegisterDetail from "../../api/getRoundRegisterDetail";
 
 import { INITIAL_FORM_VALUES } from "./constants";
 
-function RegisterUser({ walletAddress }) {
+function RegisterUser({ walletAddress, provider }) {
   const history = useHistory();
   const baseUrl = "/register-user";
   const { roundId } = getUrlParams(history.location.search);
@@ -38,6 +38,7 @@ function RegisterUser({ walletAddress }) {
             roundData={roundData}
             walletAddress={walletAddress}
             baseUrl={baseUrl}
+            provider={provider}
           />
         )}
       />
@@ -49,6 +50,7 @@ function RegisterUser({ walletAddress }) {
             setForm={setForm}
             roundData={roundData}
             walletAddress={walletAddress}
+            provider={provider}
           />
         )}
       />
@@ -59,15 +61,19 @@ function RegisterUser({ walletAddress }) {
 
 RegisterUser.defaultProps = {
   walletAddress: undefined,
+  provider: null,
 };
 
 RegisterUser.propTypes = {
   walletAddress: PropTypes.string,
+  provider: PropTypes.string,
 };
 
 const mapStateToProps = (state) => {
+  console.log("RGUser ", state);
   const walletAddress = state?.main?.currentAddress;
-  return { walletAddress };
+  const provider = state?.main?.currentProvider;
+  return { walletAddress, provider };
 };
 
 const mapDispatchToProps = () => ({});

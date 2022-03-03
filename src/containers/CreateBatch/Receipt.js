@@ -22,7 +22,7 @@ import {
   paymentTime,
 } from "./constants";
 
-const Receipt = ({ form, setForm, walletAddress }) => {
+const Receipt = ({ form, setForm, walletAddress, provider }) => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
 
@@ -55,6 +55,7 @@ const Receipt = ({ form, setForm, walletAddress }) => {
         payTime: paymentTime[form.periodicity],
         isPublic: false,
         walletAddress,
+        provider,
       })
         .then(() => {
           setLoading(false);
@@ -131,7 +132,8 @@ Receipt.propTypes = {
 
 const mapStateToProps = (state) => {
   const walletAddress = state?.main?.currentAddress;
-  return { walletAddress };
+  const provider = state?.main?.currentProvider;
+  return { walletAddress, provider };
 };
 
 const mapDispatchToProps = () => ({});

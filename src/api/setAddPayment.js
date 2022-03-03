@@ -12,7 +12,7 @@ const setAddPayment = async (props) => {
   const docSnap = await getDoc(docRef);
   const data = await docSnap.data();
 
-  const sg = config(data.contract);
+  const sg = await config(data.contract);
   const saveAmount = await MethodGetSaveAmount(sg.methods);
   // const cashIn = await MethodGetCashIn(sg.methods);
 
