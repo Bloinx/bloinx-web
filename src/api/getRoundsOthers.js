@@ -43,7 +43,7 @@ const getRounds = async ({ userId, walletAddress }) => {
 
     otherList.forEach(async (doc) => {
       const data = doc.data();
-      const sg = config(data.contract);
+      const sg = await config(data.contract);
 
       const positionData =
         data.positions.find((pos) => pos.walletAddress === walletAddress) || {};

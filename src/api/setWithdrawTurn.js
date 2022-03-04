@@ -18,7 +18,7 @@ const setWithdrawTurn = async (roundId, walletAddress) => {
   //     (position) => position.walletAddress === walletAddress
   //   ) || {};
 
-  const sg = config(data.contract);
+  const sg = await config(data.contract);
   const groupSize = await MethodGetGroupSize(sg.methods);
   const realTurn = await MethodGetRealTurn(sg.methods);
 

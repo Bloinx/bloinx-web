@@ -34,7 +34,7 @@ const getRounds = async ({ userId, walletAddress }) => {
 
     querySnapshot.forEach(async (doc) => {
       const data = doc.data();
-      const sg = config(data.contract);
+      const sg = await config(data.contract);
       console.log(sg);
 
       const positionData =

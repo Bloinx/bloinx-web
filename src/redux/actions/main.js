@@ -1,4 +1,8 @@
-import { INITIAL_CONTRACT_INSTANCE, CURRENT_ADDRESS_WALLET } from "../types";
+import {
+  INITIAL_CONTRACT_INSTANCE,
+  CURRENT_ADDRESS_WALLET,
+  CURRENT_PROVIDER,
+} from "../types";
 
 const getInitialContractInstance = (instance) => ({
   type: INITIAL_CONTRACT_INSTANCE,
@@ -10,4 +14,9 @@ const getCurrentWallet = (address) => ({
   payload: address,
 });
 
-export { getInitialContractInstance, getCurrentWallet };
+const getCurrentProvider = (provider) => ({
+  type: CURRENT_PROVIDER,
+  payload: provider,
+});
+
+export { getInitialContractInstance, getCurrentWallet, getCurrentProvider };

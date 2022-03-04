@@ -20,7 +20,7 @@ const getRoundDetail = async (roundId) => {
     const positionData =
       positions.find((position) => position.userId === createByUser) || {};
 
-    const sg = config(contract);
+    const sg = await config(contract);
     const admin = await MethodGetAdmin(sg.methods);
     const orderList = await MethodGetAddressOrderList(sg.methods);
     const stage = await MethodGetStage(sg.methods);
