@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { DownloadOutlined } from "@ant-design/icons";
+import { WalletOutlined } from "@ant-design/icons";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { Button, Drawer, Typography, Spin, Result } from "antd";
 
@@ -216,6 +216,22 @@ function Wallets({ currentAddressWallet, currentProvider }) {
                 Valora
               </Button>
             </div>
+          )}
+          {loading && <Spin size="large" tip="Loading..." />}
+        </div>
+        <div className={styles.Loading}>
+          <Title level={5}>Elige tu Wallet dentro de Valora</Title>
+          {!loading && !error && (
+            <Button
+              type="primary"
+              ghost
+              icon={<WalletOutlined />}
+              size="large"
+              shape="round"
+              onClick={loadWalletConnectProvider}
+            >
+              VALORA
+            </Button>
           )}
           {loading && <Spin size="large" tip="Loading..." />}
         </div>
