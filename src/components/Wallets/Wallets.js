@@ -5,15 +5,9 @@ import { WalletOutlined } from "@ant-design/icons";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { Button, Drawer, Typography, Spin, Result } from "antd";
 
-<<<<<<< HEAD
-import { getWeb3 } from "../../utils/web3";
-import { getCurrentWallet } from "../../redux/actions/main";
-import "./styles.css";
-=======
 import Web3, { walletConnect } from "../../api/config.main.web3";
 import { getCurrentWallet, getCurrentProvider } from "../../redux/actions/main";
 
->>>>>>> feat/valoraIntegration
 import styles from "./styles.module.scss";
 
 const errorMessages = [
