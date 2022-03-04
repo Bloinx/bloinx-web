@@ -61,8 +61,10 @@ function Wallets({ currentAddressWallet, currentProvider }) {
 
   const handleReset = async () => {
     setAccountData({ publicAddress: null, originalAdress: null });
-    const { provider } = await walletConnect();
-    await provider.disconnect();
+    if (!window.ethereum?.isMetaMask) {
+      const { provider } = await walletConnect();
+      await provider.disconnect();
+    }
     setError(null);
     window.location.reload();
   };
@@ -155,6 +157,7 @@ function Wallets({ currentAddressWallet, currentProvider }) {
       console.log("Error ", err);
       setLoading(false);
       setError(500);
+      window.location.reload();
     }
   };
 
@@ -196,26 +199,15 @@ function Wallets({ currentAddressWallet, currentProvider }) {
         <div className={styles.Loading}>
           <Title level={5}>Elige tu Wallet dentro de Metamask</Title>
           {!loading && !error && (
-            <div>
-              <Button
-                type="primary"
-                icon={<DownloadOutlined />}
-                size="large"
-                shape="round"
-                onClick={loadWeb3Provider}
-              >
-                METAMASK
-              </Button>
-              <Button
-                type="primary"
-                icon={<DownloadOutlined />}
-                size="large"
-                shape="round"
-                onClick={loadWalletConnectProvider}
-              >
-                Valora
-              </Button>
-            </div>
+            <Button
+              type="primary"
+              icon={<WalletOutlined />}
+              size="large"
+              shape="round"
+              onClick={loadWeb3Provider}
+            >
+              METAMASK
+            </Button>
           )}
           {loading && <Spin size="large" tip="Loading..." />}
         </div>
@@ -224,7 +216,6 @@ function Wallets({ currentAddressWallet, currentProvider }) {
           {!loading && !error && (
             <Button
               type="primary"
-              ghost
               icon={<WalletOutlined />}
               size="large"
               shape="round"
