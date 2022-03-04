@@ -1,8 +1,13 @@
-import { INITIAL_CONTRACT_INSTANCE, CURRENT_ADDRESS_WALLET } from "../types";
+import {
+  INITIAL_CONTRACT_INSTANCE,
+  CURRENT_ADDRESS_WALLET,
+  CURRENT_PROVIDER,
+} from "../types";
 
 const initialState = {
   contract: null,
   currentAddress: null,
+  currentProvider: null,
 };
 
 export default function main(state = initialState, action) {
@@ -16,6 +21,11 @@ export default function main(state = initialState, action) {
       return {
         ...state,
         contract: action.payload,
+      };
+    case CURRENT_PROVIDER:
+      return {
+        ...state,
+        currentProvider: action.payload,
       };
     default:
       return state;

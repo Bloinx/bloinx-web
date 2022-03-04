@@ -5,16 +5,15 @@ import { CUSD_TOKEN_CELO_MAINNET, configCUSD } from "./config.main.web3";
 const db = getFirestore();
 
 const setRegisterUser = async (props) => {
-  const { walletAddress, roundId } = props;
-
+  const { walletAddress, roundId, provider } = props;
   const docRef = doc(db, "round", roundId);
   const docSnap = await getDoc(docRef);
   const data = await docSnap.data();
+  const cUSD = await configCUSD(provider);
 
   return new Promise((resolve, reject) => {
-    const cUSD = configCUSD();
     cUSD.methods
-      .approve(data.contract, "30000000000000000000")
+      .approve(data.contract, "300000000000000000000")
       .send({ from: walletAddress, to: CUSD_TOKEN_CELO_MAINNET })
       .once("receipt", async (receipt) => {
         resolve(receipt);

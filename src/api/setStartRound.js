@@ -9,7 +9,7 @@ const api = async (roundId) => {
   const docSnap = await getDoc(docRef);
   const data = await docSnap.data();
 
-  const sg = config(data.contract);
+  const sg = await config(data.contract);
   return new Promise((resolve, reject) => {
     sg.methods
       .startRound()

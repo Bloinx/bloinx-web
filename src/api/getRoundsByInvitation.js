@@ -33,7 +33,7 @@ const getRounds = async ({ email }) => {
       const docSnap = await getDoc(docRef);
       const userData = docSnap.data();
 
-      const sg = config(data.contract);
+      const sg = await config(data.contract);
 
       const stage = await MethodGetStage(sg.methods);
 

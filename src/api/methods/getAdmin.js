@@ -1,5 +1,5 @@
-const getCashIn = (methods) =>
-  new Promise((resolve) => {
+const getCashIn = (methods) => {
+  return new Promise((resolve) => {
     methods
       .admin()
       .call()
@@ -7,5 +7,6 @@ const getCashIn = (methods) =>
         resolve(admin);
       });
   });
+};
 
 export default getCashIn;

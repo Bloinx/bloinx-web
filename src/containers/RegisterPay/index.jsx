@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 import { Typography, Row, Col, Button, Space } from "antd";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
+import Web3 from "web3";
 
-import { getWeb3 } from "../../utils/web3";
 import InputSelect from "../../components/InputSelect";
 import InputSwitch from "../../components/InputSwitch";
 
@@ -57,7 +57,7 @@ function RegisterPay({ main }) {
       .registerUser(userTurn)
       .send({
         from: currentAddress,
-        value: getWeb3().utils.toWei("1", "ether"),
+        value: Web3.utils.toWei("1", "ether"),
       })
       .once("receipt", async (receipt) => receipt)
       .on("error", async (error) => error);
@@ -68,7 +68,7 @@ function RegisterPay({ main }) {
       .payTurn()
       .send({
         from: currentAddress,
-        value: getWeb3().utils.toWei("1", "ether"),
+        value: Web3.utils.toWei("1", "ether"),
       })
       .once("receipt", async (receipt) => receipt)
       .on("error", async (error) => error);
@@ -79,7 +79,7 @@ function RegisterPay({ main }) {
       .payLateTurn()
       .send({
         from: currentAddress,
-        value: getWeb3().utils.toWei("1", "ether"),
+        value: Web3.utils.toWei("1", "ether"),
       })
       .once("receipt", async (receipt) => receipt)
       .on("error", async (error) => error);
