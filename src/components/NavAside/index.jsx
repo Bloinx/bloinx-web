@@ -16,7 +16,7 @@ import {
 import LogOut from "../../api/setLogout";
 
 import styles from "./styles.module.scss";
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/bloinxLogo.png";
 import icon from "../../assets/icon.png";
 
 const { Sider } = Layout;
