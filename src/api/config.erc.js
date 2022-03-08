@@ -1,20 +1,15 @@
 import Web3 from "web3";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { newKitFromWeb3 } from "@celo/contractkit";
-import Main from "../abis/Main.json";
+import cUSD from "../abis/cUSD.json";
 
-export const MAIN_FACTORY_ALFAJORES =
-  "0xC5E571593e94780bA74878f70b899004189E48c3";
+export const CUSD_TOKEN_ALFAJORES =
+  "0x874069fa1eb16d44d622f2e0ca25eea172369bc1"; // cUSD
 
-export const MAIN_FACTORY_CELO_MAINNET =
-  "0x58a261C38FC43384AaF6C4968426CDFd4be83f29";
+export const CUSD_TOKEN_CELO_MAINNET =
+  "0x765DE816845861e75A25fCA122bb6898B8B1282a"; // cUSD
 
-export async function getContract(provider, abi, contractAddress) {
-  const contract = await new provider.eth.Contract(abi, contractAddress);
-  return contract;
-}
-
-export default async function config() {
+export async function configCUSD() {
   try {
     const httpProvider = new Web3.providers.HttpProvider(
       "https://forno.celo.org",
@@ -26,13 +21,12 @@ export default async function config() {
     const web3Provider = new Web3(
       window?.web3?.currentProvider || httpProvider
     );
-    const contract = await getContract(
-      web3Provider,
-      Main,
-      MAIN_FACTORY_CELO_MAINNET
+    const contract = new web3Provider.eth.Contract(
+      cUSD,
+      CUSD_TOKEN_CELO_MAINNET
     );
 
-    return { contract, web3Provider };
+    return contract;
   } catch (error) {
     console.log(error);
     return error;
@@ -53,6 +47,7 @@ export async function walletConnect() {
   kit.defaultAccount = provider.accounts[0];
   kit.defaultFeeCurrency = await kit.contracts.getStableToken();
 
-  const contract = await getContract(kit.web3, Main, MAIN_FACTORY_CELO_MAINNET);
-  return { contract, provider };
+  const contract = new web3Provider.eth.Contract(cUSD, CUSD_TOKEN_CELO_MAINNET);
+
+  return contract;
 }

@@ -1,16 +1,27 @@
 import { doc, getFirestore, getDoc } from "firebase/firestore";
-import config from "./config.sg.web3";
+import config, { walletConnect } from "./config.sg.web3";
 
 import MethodGetFuturePayments from "./methods/getFuturePayments";
 
 const db = getFirestore();
 
-const getFuturePayments = async (roundId, currentAddress) => {
+const getFuturePayments = async (roundId, currentAddress, currentProvider) => {
   try {
     const docRef = doc(db, "round", roundId);
     const docSnap = await getDoc(docRef);
     const data = docSnap.data();
-    const sg = await config(data.contract);
+    const sg = await new Promise((resolve, reject) => {
+      try {
+        if (currentProvider !== "WalletConnect") {
+          resolve(config(data.contract));
+        } else {
+          resolve(walletConnect(data.contract));
+        }
+      } catch (error) {
+        reject(error);
+      }
+    });
+    // const sg = await config(data.contract);
 
     const futurePayments = await MethodGetFuturePayments(
       sg.methods,
