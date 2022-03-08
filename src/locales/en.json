@@ -103,7 +103,8 @@
     "connectWalletMessage": "Please connect your wallet to continue",
     "withoutInfo": "Without info to show",
     "createRoundMessage": "Please create a round",
-    "guaranteeInfo": "What is a security deposit? This payment will be returned at the end of the rund and it will be used in case you miss one of your commited payments. If you miss more than one payment, you can affect the return of the security deposit of other participants in your group."
+    "guaranteeInfo": "What is a security deposit? This payment will be returned at the end of the round and it will be used in case you miss one of your committed payments. If you miss more than one payment, you can affect the return of the security deposit of other participants in your group.",
+    "waiting": "Please wait..."
   },
   "copyright": "Bloinx 2021 (c) All rights reserved."
 }

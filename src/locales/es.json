@@ -104,7 +104,8 @@
     "connectWalletMessage": "Por favor conecta tu wallet para continuar",
     "withoutInfo": "Sin información para mostrar",
     "createRoundMessage": "Por favor crea una ronda",
-    "guaranteeInfo": "¿Qué es la garantía? \n Es un pago que se regresará al final de la ronda. Si alguno de ustedes no paga a tiempo, será aplicado automáticamente al turno que corresponda y no lo podrá recuperar. \n ¡Ojo! si alguno de ustedes olvida hacer más de un pago, el monto a regresar de la garantía de todos los participantes será afectado."
+    "guaranteeInfo": "¿Qué es la garantía? \n Es un pago que se regresará al final de la ronda. Si alguno de ustedes no paga a tiempo, será aplicado automáticamente al turno que corresponda y no lo podrá recuperar. \n ¡Ojo! si alguno de ustedes olvida hacer más de un pago, el monto a regresar de la garantía de todos los participantes será afectado.",
+    "waiting": "Espere a que se confirme la transacción"
   },
   "copyright": "Bloinx 2021 (c) Todos los derechos reservados."
 }
