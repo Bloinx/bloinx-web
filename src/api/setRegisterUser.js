@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { doc, getDoc, updateDoc, getFirestore } from "firebase/firestore";
 
-import config, { walletConnect } from "./config.sg.web3";
+import config from "./config.sg.web3";
 
 const db = getFirestore();
 
@@ -24,18 +24,7 @@ const setRegisterUser = async (props) => {
   const userSnap = await getDoc(userRef);
   const userData = await userSnap.data();
 
-  const sg = await new Promise((resolve, reject) => {
-    try {
-      if (provider !== "WalletConnect") {
-        resolve(config(data.contract));
-      } else {
-        resolve(walletConnect(data.contract));
-      }
-    } catch (error) {
-      reject(error);
-    }
-  });
-  // const sg = await config(data.contract, provider);
+  const sg = await config(data.contract, provider);
 
   return new Promise((resolve, reject) =>
     sg.methods
