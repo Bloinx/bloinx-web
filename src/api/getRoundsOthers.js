@@ -1,5 +1,5 @@
 import { collection, query, getFirestore, getDocs } from "firebase/firestore";
-import config from "./config.sg.web3";
+import config, { walletConnect } from "./config.sg.web3";
 
 import MethodGetAddressOrderList from "./methods/getAddressOrderList";
 import MethodGetGroupSize from "./methods/getGroupSize";
@@ -17,7 +17,7 @@ import MethodGetAdmin from "./methods/getAdmin";
 
 const db = getFirestore();
 
-const getRounds = async ({ userId, walletAddress }) => {
+const getRounds = async ({ userId, walletAddress, provider }) => {
   const querySnapshot = await getDocs(query(collection(db, "round")));
   const otherDocs = querySnapshot.docs.filter((a) => {
     return a
@@ -25,12 +25,6 @@ const getRounds = async ({ userId, walletAddress }) => {
       .positions.find((position) => position.walletAddress === walletAddress);
   });
   const otherList = otherDocs.filter((otherItem) => {
-    console.log(
-      otherItem.data().createByWallet,
-      walletAddress,
-      otherItem.data().createByUser,
-      userId
-    );
     return (
       otherItem.data().createByWallet !== walletAddress &&
       otherItem.data().createByUser !== userId
@@ -43,7 +37,10 @@ const getRounds = async ({ userId, walletAddress }) => {
 
     otherList.forEach(async (doc) => {
       const data = doc.data();
-      const sg = await config(data.contract);
+      const sg =
+        (await provider) !== "WalletConnect"
+          ? await config(data.contract)
+          : await walletConnect(data.contract);
 
       const positionData =
         data.positions.find((pos) => pos.walletAddress === walletAddress) || {};
