@@ -13,12 +13,12 @@ import InputEmailTags from "../../components/InputEmailTags";
 
 const { Paragraph } = Typography;
 
-function Form({ roundId, provider }) {
+function Form({ roundId }) {
   const history = useHistory();
   const [mailList, setMailList] = useState([]);
 
   const handleSendEmails = () => {
-    APISetSaveInvitations(mailList, roundId, provider)
+    APISetSaveInvitations(mailList, roundId)
       .then((status) => {
         console.log(status);
         Modal.success({
@@ -67,12 +67,10 @@ function Form({ roundId, provider }) {
 
 Form.defaultProps = {
   roundId: undefined,
-  provider: undefined,
 };
 
 Form.propTypes = {
   roundId: PropTypes.string,
-  provider: PropTypes.string,
 };
 
 export default Form;

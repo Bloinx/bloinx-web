@@ -5,7 +5,7 @@ import { WalletOutlined } from "@ant-design/icons";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { Button, Drawer, Typography, Spin, Result } from "antd";
 
-import config, { walletConnect } from "../../api/config.main.web3";
+import Web3, { walletConnect } from "../../api/config.main.web3";
 import { getCurrentWallet, getCurrentProvider } from "../../redux/actions/main";
 
 import "./styles.css";
@@ -120,7 +120,7 @@ function Wallets({ currentAddressWallet, currentProvider }) {
     if (provider) {
       try {
         await provider.enable();
-        const web3Loadie = await config();
+        const web3Loadie = Web3().web3Provider;
         if (web3Loadie) {
           loadPubKeyData(provider);
           setLoading(false);

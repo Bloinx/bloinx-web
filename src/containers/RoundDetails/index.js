@@ -8,7 +8,7 @@ import { getUrlParams } from "../../utils/browser";
 
 import Details from "./Details";
 
-function RoundDetails({ walletAddress, currentProvider }) {
+function RoundDetails({ walletAddress }) {
   const history = useHistory();
   const baseUrl = "/round-details";
   const { roundId } = getUrlParams(history.location.search);
@@ -16,7 +16,7 @@ function RoundDetails({ walletAddress, currentProvider }) {
   const [roundData, setRoundData] = useState({});
 
   useEffect(() => {
-    APIGetRoundDetail(roundId, currentProvider).then((dataRound) => {
+    APIGetRoundDetail(roundId).then((dataRound) => {
       setRoundData(dataRound);
     });
   }, []);
@@ -39,17 +39,11 @@ function RoundDetails({ walletAddress, currentProvider }) {
 
 RoundDetails.propTypes = {
   walletAddress: PropTypes.string.isRequired,
-  currentProvider: PropTypes.string,
-};
-
-RoundDetails.defaultProps = {
-  currentProvider: undefined,
 };
 
 const mapStateToProps = (state) => {
   const walletAddress = state?.main?.currentAddress;
-  const currentProvider = state?.main?.currentProvider;
-  return { walletAddress, currentProvider };
+  return { walletAddress };
 };
 
 const mapDispatchToProps = () => ({});

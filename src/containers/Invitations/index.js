@@ -8,7 +8,7 @@ import Form from "./Form";
 import Receipt from "./Receipt";
 import { getUrlParams } from "../../utils/browser";
 
-function RegisterUser({ walletAddress, provider }) {
+function RegisterUser({ walletAddress }) {
   const history = useHistory();
   const baseUrl = "/invitations";
   const { roundId } = getUrlParams(history.location.search);
@@ -20,7 +20,6 @@ function RegisterUser({ walletAddress, provider }) {
         component={() => (
           <Form
             roundId={roundId}
-            provider={provider}
             // walletAddress={walletAddress}
           />
         )}
@@ -32,18 +31,15 @@ function RegisterUser({ walletAddress, provider }) {
 
 RegisterUser.defaultProps = {
   walletAddress: undefined,
-  provider: undefined,
 };
 
 RegisterUser.propTypes = {
   walletAddress: PropTypes.string,
-  provider: PropTypes.string,
 };
 
 const mapStateToProps = (state) => {
   const walletAddress = state?.main?.currentAddress;
-  const provider = state?.main?.currentProvider;
-  return { walletAddress, provider };
+  return { walletAddress };
 };
 
 const mapDispatchToProps = () => ({});

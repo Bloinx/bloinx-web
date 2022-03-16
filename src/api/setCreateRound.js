@@ -6,8 +6,8 @@ import { getFirestore, collection, addDoc } from "firebase/firestore";
 import config, {
   walletConnect,
   MAIN_FACTORY_CELO_MAINNET,
+  CUSD_TOKEN_CELO_MAINNET,
 } from "./config.main.web3";
-import { CUSD_TOKEN_CELO_MAINNET } from "./config.erc";
 
 const setCreateRound = async ({
   name,
@@ -22,11 +22,7 @@ const setCreateRound = async ({
   (async function getFactoryMethods() {
     try {
       const factory = await new Promise((resolve, reject) => {
-        if (provider !== "WalletConnect") {
-          resolve(config());
-        } else {
-          resolve(walletConnect());
-        }
+        resolve(provider === "Metamask" ? config() : walletConnect());
       });
 
       const db = getFirestore();
