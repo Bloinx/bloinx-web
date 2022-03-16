@@ -191,12 +191,12 @@ function Dashboard({ currentAddress }) {
     <>
       <PageHeader
         title={<FormattedMessage id="dashboardPage.title" />}
-        action={
-          <PlusCircleOutlined
-            onClick={goToCreate}
-            style={{ fontSize: "20px", color: "white" }}
-          />
-        }
+        // action={
+        //   <PlusCircleOutlined
+        //     onClick={goToCreate}
+        //     style={{ fontSize: "20px", color: "white" }}
+        //   />
+        // }
       />
       <div className={styles.RoundCards}>
         {currentAddress && completeRoundList.length === 0 && (

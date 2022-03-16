@@ -85,7 +85,7 @@ function NavAside({ user, width, toggleDrawer, visible }) {
           styles.MenuItem,
           selected === 2 && styles.MenuItemSelected
         )}
-        key={2}
+        key={3}
         icon={<DesktopOutlined />}
         onClick={toggleDrawer}
       >
