@@ -8,6 +8,7 @@ import { Button, Drawer, Typography, Spin, Result } from "antd";
 import config, { walletConnect } from "../../api/config.main.web3";
 import { getCurrentWallet, getCurrentProvider } from "../../redux/actions/main";
 
+import "./styles.css";
 import styles from "./styles.module.scss";
 
 const errorMessages = [
@@ -197,7 +198,7 @@ function Wallets({ currentAddressWallet, currentProvider }) {
         width={400}
       >
         <div className={styles.Loading}>
-          <Title level={5}>Elige tu Wallet dentro de Metamask</Title>
+          <Title level={5}>Elige tu cuenta dentro de Metamask</Title>
           {!loading && !error && (
             <Button
               type="primary"
@@ -212,7 +213,7 @@ function Wallets({ currentAddressWallet, currentProvider }) {
           {loading && <Spin size="large" tip="Loading..." />}
         </div>
         <div className={styles.Loading}>
-          <Title level={5}>Elige tu Wallet dentro de Valora</Title>
+          <Title level={5}>o Valora</Title>
           {!loading && !error && (
             <Button
               type="primary"
