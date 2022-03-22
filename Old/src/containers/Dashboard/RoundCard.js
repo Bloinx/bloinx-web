@@ -6,7 +6,7 @@ import { RightOutlined } from "@ant-design/icons";
 import { CubeSpinner } from "react-spinners-kit";
 
 import styles from "./RoundCard.module.scss";
-import Stepper from "../../components/Stepper";
+import Stepper from "../../components/Stepper/index";
 import { formatAddress } from "../../utils/format";
 import logoIcon from "../../assets/bloinxIcon.png";
 

@@ -1,16 +1,18 @@
-import React from "react";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { Formik } from "formik";
+import React from 'react';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { Formik } from 'formik';
 
-import PageHeader from "../../components/PageHeader";
-import Checkbox from "../../components/Checkbox";
+import PageHeader from '../../components/PageHeader';
+import Checkbox from '../../components/Checkbox';
 
-import styles from "./Approve.module.scss";
-import { validationsApprove } from "./validations";
-import { setRegisterUserStable } from "./utils";
+import styles from './Approve.module.scss';
+import { validationsApprove } from './validations';
+import { setRegisterUserStable } from './utils';
+import { Grid } from '@mui/material';
+import ButtonOnlyOneStep from '../../components/ButtonOnlyOneStep';
 
 function Approve({ dataForm, setDataForm }) {
   const { t } = useTranslation();
@@ -44,33 +46,36 @@ function Approve({ dataForm, setDataForm }) {
 
         return (
           <form onSubmit={handleSubmit}>
-            <PageHeader title={t("createRound.title")} />
+            <PageHeader title={t('stepper.title.approve')} />
             <div className={styles.ApproveCard}>
               <Typography variant="body1" component="p">
-                ¿Qué es el depósito de seguridad?
+                {t('infoLabels.securityDeposit')}
               </Typography>
-              <ul>
-                <Typography variant="body1" component="li">
-                  Este pago se devolverá al terminar la rosca y se utilizará en
-                  caso de que pierda uno de sus pagos comprometidos.
+              <ol>
+                <Typography variant="body1" component="li" mb={2}>
+                  {t('infoLabels.paymentInfo')}
                 </Typography>
                 <Typography variant="body1" component="li">
-                  Si omite más de un pago, puede afectar la devolución del
-                  depósito de seguridad de otros participantes en su grupo.
+                  {t('infoLabels.paymentRefound')}
                 </Typography>
-              </ul>
+              </ol>
               <Checkbox
                 name="approve"
                 onChange={handleChange}
-                label="Entiendo cómo funciona el depósito"
+                label={t('createRound.labels.terms')}
                 error={touched.approve && errors.approve}
                 helperText={touched.approve && errors.approve}
                 checked={values.approve}
               />
             </div>
-            <Button variant="contained" type="submit">
-              Aprobar
-            </Button>
+            <Grid container rowSpacing={1} justifyContent={'center'}>
+              <Grid item>
+                <ButtonOnlyOneStep
+                  label={t('stepper.actions.approve')}
+                  onClick={handlerOnSubmit}
+                />
+              </Grid>
+            </Grid>
           </form>
         );
       }}

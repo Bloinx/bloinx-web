@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-import ButtonOnlyOneStep from "../../components/ButtonOnlyOneStep";
-import Loader from "../../components/Loader";
+import ButtonOnlyOneStep from '../../components/ButtonOnlyOneStep';
+import Loader from '../../components/Loader';
 
-import styles from "./Receipt.module.scss";
-import { WEEKLY, BIWEEKLY, MONTHLY } from "./constants";
-import setCreateRound from "./utils";
-import { Card, Grid, IconButton, Link, Typography } from "@mui/material";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import styles from './Receipt.module.scss';
+import { WEEKLY, BIWEEKLY, MONTHLY } from './constants';
+import setCreateRound from './utils';
+import { Card, Grid, IconButton, Link, Typography } from '@mui/material';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 const Confirm = ({ formData }) => {
   const { t } = useTranslation();
@@ -18,9 +18,9 @@ const Confirm = ({ formData }) => {
   const [loading, setLoading] = useState(false);
 
   const periodicityOptions = {
-    [WEEKLY]: "createRound.form.label.periodicityOptions.weekly",
-    [BIWEEKLY]: "createRound.form.label.periodicityOptions.biweekly",
-    [MONTHLY]: "createRound.form.label.periodicityOptions.monthly",
+    [WEEKLY]: 'createRound.form.label.periodicityOptions.weekly',
+    [BIWEEKLY]: 'createRound.form.label.periodicityOptions.biweekly',
+    [MONTHLY]: 'createRound.form.label.periodicityOptions.monthly',
   };
 
   const paymentTime = {
@@ -30,7 +30,7 @@ const Confirm = ({ formData }) => {
   };
 
   const handlerOnSubmit = () => {
-    const currentWallet = localStorage.getItem("currentWallet");
+    const currentWallet = localStorage.getItem('currentWallet');
     if (currentWallet) {
       setLoading(true);
       setCreateRound({
@@ -43,11 +43,11 @@ const Confirm = ({ formData }) => {
       })
         .then(() => {
           setLoading(false);
-          navigate("/create-round/status/success");
+          navigate('/create-round/status/success');
         })
         .catch((err) => {
           setLoading(false);
-          navigate("/create-round/status/error");
+          navigate('/create-round/status/error');
         });
     }
   };
@@ -71,7 +71,7 @@ const Confirm = ({ formData }) => {
             </Grid>
             <Grid item xs={11} md={11}>
               <Typography variant="h5" component="h1">
-                {t("createRound.title")}
+                {t('createRound.title')}
               </Typography>
             </Grid>
           </Grid>
@@ -80,8 +80,8 @@ const Confirm = ({ formData }) => {
               container
               rowSpacing={1}
               columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-              justifyContent={"space-between"}
-              alignContent={"center"}
+              justifyContent={'space-between'}
+              alignContent={'center'}
             >
               <Grid item xs={6} md={6}>
                 <Typography
@@ -89,11 +89,11 @@ const Confirm = ({ formData }) => {
                   variant="h6"
                   component="h1"
                 >
-                  Resumen de selección
+                  {t('createRound.subtitleConfirm')}
                 </Typography>
               </Grid>
               <Grid item xs={6} md={6} className={styles.ReceiptCardItemRight}>
-                <Link onClick={() => navigate("/create-round/")}>Editar</Link>
+                <Link onClick={() => navigate('/create-round/')}>Editar</Link>
               </Grid>
               <Grid item xs={6} md={6}>
                 <Typography
@@ -101,7 +101,7 @@ const Confirm = ({ formData }) => {
                   variant="subtitle2"
                   component="p"
                 >
-                  {t("createRound.form.label.participants")}
+                  {t('createRound.form.label.participants')}
                 </Typography>
               </Grid>
               <Grid item xs={6} md={6}>
@@ -119,7 +119,7 @@ const Confirm = ({ formData }) => {
                   variant="subtitle2"
                   component="p"
                 >
-                  {t("createRound.labels.amount")}
+                  {t('createRound.labels.amount')}
                 </Typography>
               </Grid>
               <Grid item xs={6} md={6}>
@@ -137,7 +137,7 @@ const Confirm = ({ formData }) => {
                   variant="subtitle2"
                   component="p"
                 >
-                  {t("createRound.labels.receiptAmount")}
+                  {t('createRound.labels.receiptAmount')}
                 </Typography>
               </Grid>
               <Grid item xs={6} md={6}>
@@ -155,7 +155,7 @@ const Confirm = ({ formData }) => {
                   variant="subtitle2"
                   component="p"
                 >
-                  {t("createRound.labels.roundTime")}
+                  {t('createRound.labels.roundTime')}
                 </Typography>
               </Grid>
               <Grid item xs={6} md={6}>
@@ -171,14 +171,14 @@ const Confirm = ({ formData }) => {
           </Card>
           <Grid
             container
-            direction={"column"}
-            justifyContent={"center"}
-            alignItems={"center"}
+            direction={'column'}
+            justifyContent={'center'}
+            alignItems={'center'}
           >
             <Grid item>
               <ButtonOnlyOneStep
                 loading={loading}
-                label={t("createRound.actions.payGuarantee")}
+                label={t('createRound.actions.payGuarantee')}
                 onClick={handlerOnSubmit}
               />
             </Grid>

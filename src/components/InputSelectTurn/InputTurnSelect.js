@@ -13,7 +13,7 @@ const breakPoints = [
   { width: 1200, itemsToShow: 10 },
 ];
 
-export default function InputParticipantSelect({
+export default function InputTurnSelect({
   label,
   value,
   options,
@@ -60,12 +60,12 @@ export default function InputParticipantSelect({
   );
 }
 
-InputParticipantSelect.defaultProps = {
+InputTurnSelect.defaultProps = {
   label: '',
   value: '',
 };
 
-InputParticipantSelect.propTypes = {
+InputTurnSelect.propTypes = {
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   value: PropTypes.oneOfType([
     PropTypes.string,

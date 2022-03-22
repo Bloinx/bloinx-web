@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { Formik } from 'formik';
-import { useNavigate } from 'react-router-dom';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import DatePicker from '@mui/lab/DatePicker';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import React, { useState } from "react";
+import { Formik } from "formik";
+import { useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import DatePicker from "@mui/lab/DatePicker";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
 
-import Loader from '../../components/Loader';
-import validations from './validations';
-import supabase from '../../supabase';
-import styles from './Form.module.scss';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import Loader from "../../components/Loader";
+import validations from "./validations";
+import supabase from "../../supabase";
+import styles from "./Form.module.scss";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import {
   FormControl,
   FormHelperText,
   InputLabel,
   MenuItem,
   Select,
-} from '@mui/material';
+} from "@mui/material";
 
 function Form() {
   const [loading, setLoading] = useState(false);
@@ -48,7 +48,7 @@ function Form() {
       }
     );
     if (data.user) {
-      navigate('/dashboard');
+      navigate("/dashboard");
       setLoading(false);
     } else {
       setLoading(false);
@@ -62,9 +62,9 @@ function Form() {
   return (
     <Formik
       initialValues={{
-        email: '',
-        password: '',
-        repeatPassword: '',
+        email: "",
+        password: "",
+        repeatPassword: "",
       }}
       validate={validations}
       onSubmit={handleSignUp}
@@ -147,7 +147,7 @@ function Form() {
             />
             <DatePicker
               openTo="year"
-              views={['year', 'month', 'day']}
+              views={["year", "day", "month"]}
               label="Fecha de nacimiento"
               value={birthDate}
               margin="normal"
@@ -184,9 +184,9 @@ function Form() {
                 disabled={isSubmitting}
                 className={styles.SignUpInput}
               >
-                <MenuItem value={'female'}>Mujer</MenuItem>
-                <MenuItem value={'male'}>Hombre</MenuItem>
-                <MenuItem value={'other'}>Prefiero no decir</MenuItem>
+                <MenuItem value={"female"}>Mujer</MenuItem>
+                <MenuItem value={"male"}>Hombre</MenuItem>
+                <MenuItem value={"other"}>Prefiero no decir</MenuItem>
               </Select>
             </FormControl>
             <Button

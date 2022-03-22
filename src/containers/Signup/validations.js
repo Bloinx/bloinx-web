@@ -1,10 +1,10 @@
 function validations(values) {
   const errors = {};
   if (!values.name) {
-    errors.password = "Ingrese una nombre.";
+    errors.password = "Ingresa tu nombre.";
   }
   if (!values.lastName) {
-    errors.password = "Ingrese un apellido.";
+    errors.password = "Ingresa tu apellido.";
   }
   if (!values.email) {
     errors.email = "Ingrese un email.";
