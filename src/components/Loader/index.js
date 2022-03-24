@@ -8,7 +8,7 @@ const Loader = () => (
   <div className={styles.Loader}>
     <CubeSpinner frontColor="#F58F98" size={30} />
     <p>
-      <FormattedMessage id="infoLabels.waiting" />
+      <FormattedMessage />
     </p>
   </div>
 );

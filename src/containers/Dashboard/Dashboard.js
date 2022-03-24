@@ -23,7 +23,7 @@ import APIGetFuturePayments from "../../api/getFuturePayments";
 import Placeholder from "../../components/Placeholder";
 import NotFoundPlaceholder from "../../components/NotFoundPlaceholder";
 
-function Dashboard({ currentAddress, currentProvider }) {
+function Dashboard({ currentAddress }) {
   const history = useHistory();
   const user = getAuth().currentUser;
   const [roundList, setRoundList] = useState([]);
@@ -45,7 +45,6 @@ function Dashboard({ currentAddress, currentProvider }) {
       APIGetRounds({
         userId: user.uid,
         walletAddress: currentAddress,
-        provider: currentProvider,
       }).then((rounds) => {
         console.log("ACTUALIZADO MIS RONDAS");
         setRoundList(rounds);
@@ -53,7 +52,6 @@ function Dashboard({ currentAddress, currentProvider }) {
       APIGetRoundsByInvitation({
         email: user.email,
         walletAddress: currentAddress,
-        provider: currentProvider,
       }).then((invitations) => {
         console.log("ACTUALIZADO MIS INVITES");
         setInvitationsList(invitations);
@@ -61,7 +59,6 @@ function Dashboard({ currentAddress, currentProvider }) {
       APIGetOtherRounds({
         userId: user.uid,
         walletAddress: currentAddress,
-        provider: currentProvider,
       }).then((other) => {
         console.log("ACTUALIZADO OTRAS RONDAS");
         setOtherList(other);
@@ -71,7 +68,7 @@ function Dashboard({ currentAddress, currentProvider }) {
 
   const handleStartRound = (roundId) => {
     setLoading(true);
-    APISetStartRound(roundId, currentProvider)
+    APISetStartRound(roundId)
       .then((receip) => {
         Modal.success({
           title: "Ronda iniciada correctamente",
@@ -91,19 +88,11 @@ function Dashboard({ currentAddress, currentProvider }) {
 
   const handlePayRound = (roundId) => {
     setLoading(true);
-    const remainingAmount = APIGetFuturePayments(
-      roundId,
-      currentAddress,
-      currentProvider
-    );
+    const remainingAmount = APIGetFuturePayments(roundId, currentAddress);
     remainingAmount
       .then((amount) => {
         if (amount > 0) {
-          APISetAddPayment({
-            roundId,
-            walletAddress: currentAddress,
-            provider: currentProvider,
-          })
+          APISetAddPayment({ roundId, walletAddress: currentAddress })
             .then((success) => {
               Modal.success({
                 title: "Pago correcto",
@@ -138,7 +127,7 @@ function Dashboard({ currentAddress, currentProvider }) {
 
   const handleWithdrawRound = (roundId) => {
     setLoading(true);
-    APISetWithdrawTurn(roundId, currentAddress, currentProvider)
+    APISetWithdrawTurn(roundId, currentAddress)
       .then(() => {
         Modal.success({
           title: "Cobro correcto",
@@ -313,12 +302,10 @@ function Dashboard({ currentAddress, currentProvider }) {
 
 Dashboard.propTypes = {
   currentAddress: PropTypes.string,
-  currentProvider: PropTypes.string,
 };
 
 Dashboard.defaultProps = {
   currentAddress: undefined,
-  currentProvider: undefined,
 };
 
 export default Dashboard;

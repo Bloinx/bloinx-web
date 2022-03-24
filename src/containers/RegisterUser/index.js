@@ -21,7 +21,7 @@ function RegisterUser({ walletAddress, provider }) {
   const [roundData, setRoundData] = useState({});
 
   useEffect(() => {
-    APIgetRoundRegisterDetail(roundId, provider).then((dataRound) => {
+    APIgetRoundRegisterDetail(roundId).then((dataRound) => {
       setRoundData(dataRound);
     });
   }, []);
