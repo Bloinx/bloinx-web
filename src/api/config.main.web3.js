@@ -4,7 +4,7 @@ import { newKitFromWeb3 } from "@celo/contractkit";
 import Main from "../abis/Main.json";
 
 export const MAIN_FACTORY_ALFAJORES =
-  "0xC5E571593e94780bA74878f70b899004189E48c3";
+  "0xD154C2C4F1b72B3CFDD3d0076B867671a3D124Bb";
 
 export const MAIN_FACTORY_CELO_MAINNET =
   "0x58a261C38FC43384AaF6C4968426CDFd4be83f29";
