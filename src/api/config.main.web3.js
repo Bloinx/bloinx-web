@@ -5,7 +5,7 @@ import Main from "../abis/Main.json";
 import cUSD from "../abis/cUSD.json";
 
 export const MAIN_FACTORY_ALFAJORES =
-  "0xC5E571593e94780bA74878f70b899004189E48c3";
+  "0xD154C2C4F1b72B3CFDD3d0076B867671a3D124Bb";
 export const CUSD_TOKEN_ALFAJORES =
   "0x874069fa1eb16d44d622f2e0ca25eea172369bc1"; // cUSD
 
