@@ -1,0 +1,32 @@
+.DetailParticipantsItem {
+  display: flex;
+  flex-direction: column;
+
+  tr {
+    display: flex;
+    flex-direction: row;
+    padding-left: 0px;
+
+    th {
+      margin-right: 10px;
+      list-style: none;
+      flex: 1;
+      border-bottom: 1px solid grey;
+    }
+  }
+}
+
+.DetailsSendEmails {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+
+  input {
+    min-width: 30vw;
+  }
+}
+
+.DetailsSendEmailsButton {
+  margin-bottom: 20px;
+  margin-left: 10px;
+}

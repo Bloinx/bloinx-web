@@ -1,0 +1,11 @@
+.ant-drawer-body {
+  background-color: #2b2d33 !important;
+  color: #fff;
+}
+.ant-drawer-header {
+  background-color: #2b2d33 !important;
+  border-radius: 0;
+}
+.ant-drawer-title {
+  color: #fff !important;
+}

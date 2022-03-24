@@ -1,0 +1,19 @@
+@import "../../theme.scss";
+
+.CreateRound {
+  background-color: $gray;
+  border-radius: 5px;
+  padding: 10px 17px;
+  margin-bottom: 20px;
+  & div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+.CreateRoundTitle {
+  color: $gray-light;
+}
+.CreateRoundAmount {
+  color: white;
+}
