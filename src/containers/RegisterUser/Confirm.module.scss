@@ -1,0 +1,19 @@
+@import "../../theme.scss";
+
+.ConfirmCard {
+  background-color: $gray;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 15px 17px 25px 17px;
+}
+.TextPaymentDetails {
+  color: white;
+  margin: 5px 3px;
+}
+.PaymentDetails {
+  & div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,22 @@
+@import '../../theme.scss';
+
+.RegisterUser{
+    background-color: $blue-strong;
+    height: 100%;
+    width: 100%;
+}
+.RegisterUserHeader{
+    span {
+        color: white !important;
+    }
+}
+.RegisterUserContent{
+    margin: 0px 20px 0px 57px;
+}
+.RegisterUserContentAction{
+    display: flex;
+    justify-content: flex-end;
+  }
+.RegisterUserContract{
+    color: white;
+}

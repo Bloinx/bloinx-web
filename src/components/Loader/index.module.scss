@@ -1,0 +1,14 @@
+@import "../../theme.scss";
+
+.Loader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  p {
+    color: $gray-light;
+    margin-top: 20px;
+  }
+}

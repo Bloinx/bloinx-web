@@ -1,0 +1,16 @@
+@import "../../theme.scss";
+
+.Placeholder {
+  background-color: $blue-strong;
+  padding: 40px 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 18px;
+  span {
+    font-size: 12px;
+  }
+}
