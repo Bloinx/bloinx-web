@@ -214,6 +214,7 @@ function Wallets({ currentAddressWallet, currentProvider }) {
         </div>
         <div className={styles.Loading}>
           <Title level={5}>o Valora</Title>
+          <Title>o Valora</Title>
           {!loading && !error && (
             <Button
               type="primary"
