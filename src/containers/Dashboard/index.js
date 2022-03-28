@@ -38,4 +38,5 @@ function Dashboard() {
   );
 }
 
-export default React.memo(withAuthProvider(Dashboard));
+// export default React.memo(withAuthProvider(Dashboard));
+export default React.memo(Dashboard);
