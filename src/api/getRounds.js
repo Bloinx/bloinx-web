@@ -30,9 +30,9 @@ const getRounds = async ({ userId, walletAddress }) => {
 
   return new Promise((resolve) => {
     const rounds = [];
-    let i = 1;
+    let i = 0;
 
-    querySnapshot.docs.forEach(async (doc) => {
+    querySnapshot.forEach(async (doc) => {
       const data = doc.data();
       const sg = await config(data.contract);
       console.log(sg);
@@ -132,7 +132,7 @@ const getRounds = async ({ userId, walletAddress }) => {
       };
       rounds.push(roundData);
 
-      if (i <= querySnapshot.size) {
+      if (i === querySnapshot.size - 1) {
         console.log("Rondas::", rounds);
         resolve(rounds.sort());
       } else {
