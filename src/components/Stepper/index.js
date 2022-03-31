@@ -43,7 +43,7 @@ Stepper.defaultProps = {
 };
 
 Stepper.propTypes = {
-  steps: PropTypes.arrayOf(PropTypes.object),
+  steps: PropTypes.objectOf,
   current: PropTypes.number,
   turnWithDraw: PropTypes.number,
 };

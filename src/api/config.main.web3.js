@@ -29,7 +29,7 @@ export default async function config() {
     const contract = await getContract(
       web3Provider,
       Main,
-      MAIN_FACTORY_CELO_MAINNET
+      MAIN_FACTORY_ALFAJORES
     );
 
     return { contract, web3Provider };

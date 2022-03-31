@@ -29,7 +29,8 @@ function RoundDetails({ walletAddress, currentProvider }) {
           <Details
             roundData={roundData}
             roundId={roundId}
-            walletAddress={walletAddress}
+            currentAddress={walletAddress}
+            currentProvider={currentProvider}
           />
         )}
       />

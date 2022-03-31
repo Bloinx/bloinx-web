@@ -216,6 +216,8 @@ function Dashboard({ currentAddress, currentProvider }) {
   }
 
   const completeRoundList = roundList.concat(invitationsList);
+  console.log("this is");
+  console.log(completeRoundList);
 
   return (
     <>
@@ -237,6 +239,7 @@ function Dashboard({ currentAddress, currentProvider }) {
             if (round.stage === "ON_REGISTER_STAGE" && round.toRegister) {
               return (
                 <RoundCardNew
+                  key={round.roundKey}
                   fromInvitation={round.fromInvitation}
                   fromEmail={round.fromEmail}
                   onClick={() => goToJoin(round.roundKey)}
