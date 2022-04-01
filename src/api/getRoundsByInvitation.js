@@ -8,13 +8,13 @@ import {
   getDoc,
   doc,
 } from "firebase/firestore";
-import config from "./config.sg.web3";
+import config, { walletConnect } from "./config.sg.web3";
 
 import MethodGetStage from "./methods/getStage";
 
 const db = getFirestore();
 
-const getRounds = async ({ email }) => {
+const getRounds = async ({ email, provider }) => {
   const queryByEmailSnapshot = await getDocs(
     query(
       collection(db, "round"),
@@ -33,8 +33,10 @@ const getRounds = async ({ email }) => {
       const docSnap = await getDoc(docRef);
       const userData = docSnap.data();
 
-      const sg = await config(data.contract);
-
+      const sg =
+        (await provider) !== "WalletConnect"
+          ? await config(data.contract)
+          : await walletConnect(data.contract);
       const stage = await MethodGetStage(sg.methods);
 
       const roundData = {

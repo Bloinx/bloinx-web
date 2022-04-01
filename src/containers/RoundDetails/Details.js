@@ -4,7 +4,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { MailOutlined } from "@ant-design/icons";
 
@@ -14,8 +14,25 @@ import InputLabel from "../../components/InputLabel";
 
 import { formatAddress } from "../../utils/format";
 import styles from "./Details.module.scss";
+import getFuturePayments from "../../api/getFuturePayments";
 
-function Details({ roundData, roundId }) {
+function Details({ roundData, roundId, currentAdress, currentProvider }) {
+  const [futurePayment, setFuturePayment] = useState("");
+
+  const totalRemain = async () => {
+    const response = await getFuturePayments(
+      roundId,
+      currentAdress,
+      currentProvider
+    );
+    if (response) {
+      setFuturePayment(response);
+    } else {
+      console.log("Something went wrong");
+    }
+  };
+  totalRemain();
+
   return (
     <>
       <PageHeader title={roundData.positionData?.name} />
@@ -24,6 +41,7 @@ function Details({ roundData, roundId }) {
         value={formatAddress(roundData.contract)}
       />
       <InputLabel label="Estatus de la ronda" value={roundData.stage} />
+      <InputLabel label="Total restante" value={futurePayment} />
       <InputLabel
         label="Participantes"
         value={

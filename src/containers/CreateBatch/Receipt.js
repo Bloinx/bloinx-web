@@ -35,7 +35,6 @@ const Receipt = ({ form, setForm, walletAddress, provider }) => {
 
   useEffect(() => {
     if (form.isComplete && !walletAddress) {
-      console.log(1);
       Modal.warning({
         title: "Wallet no encontrada",
         content: "Por favor conecta tu wallet antes de continuar.",

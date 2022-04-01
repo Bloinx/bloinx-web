@@ -2,23 +2,30 @@
 
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 
-import config from "./config.sg.web3";
+import config, { walletConnect } from "./config.sg.web3";
 import MethodGetRealTurn from "./methods/getRealTurn";
 import MethodGetGroupSize from "./methods/getGroupSize";
 import MethodSetEndRound from "./methods/setEndRound";
 
 const db = getFirestore();
 
-const setWithdrawTurn = async (roundId, walletAddress) => {
+const setWithdrawTurn = async (roundId, walletAddress, provider) => {
   const docRef = doc(db, "round", roundId);
   const docSnap = await getDoc(docRef);
-  const data = await docSnap.data();
-  // const roundData =
-  //   data.positions.find(
-  //     (position) => position.walletAddress === walletAddress
-  //   ) || {};
+  const data = docSnap.data();
+  const sg = await new Promise((resolve, reject) => {
+    try {
+      if (provider !== "WalletConnect") {
+        resolve(config(data.contract));
+      } else {
+        resolve(walletConnect(data.contract));
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
 
-  const sg = await config(data.contract);
+  // const sg = await config(data.contract);
   const groupSize = await MethodGetGroupSize(sg.methods);
   const realTurn = await MethodGetRealTurn(sg.methods);
 
@@ -30,14 +37,13 @@ const setWithdrawTurn = async (roundId, walletAddress) => {
         to: data.contract,
       })
       .once("receipt", async (receipt) => {
-        console.log(">>>>>>", realTurn, groupSize);
         if (Number(realTurn) > Number(groupSize)) {
           MethodSetEndRound(sg.methods, {
             walletAddress,
             contract: data.contract,
           })
             .then((endReceipt) => {
-              console.log("OK END", endReceipt);
+
               resolve([receipt, endReceipt]);
             })
             .catch((endErr) => {

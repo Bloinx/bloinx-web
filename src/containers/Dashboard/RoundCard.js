@@ -54,9 +54,11 @@ export function RoundCard({
           <div className={styles.RoundCardSubject}>
             Creado por {formatAddress(contractKey)}
           </div>
-          <div className={styles.RoundCardSubject}>
-            Podran iniciarla cuando todos los participantes se hayan unido
-          </div>
+          {arePending && (
+            <div className={styles.RoundCardSubject}>
+              Podran iniciarla cuando todos los participantes se hayan unido
+            </div>
+          )}
         </div>
       </div>
       <div className={styles.RoundCardSeparation}>

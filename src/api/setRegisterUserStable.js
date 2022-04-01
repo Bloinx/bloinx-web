@@ -1,6 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { doc, getDoc, getFirestore } from "firebase/firestore";
-import { CUSD_TOKEN_CELO_MAINNET, configCUSD } from "./config.main.web3";
+import {
+  CUSD_TOKEN_CELO_MAINNET,
+  configCUSD,
+  walletConnect,
+} from "./config.erc";
 
 const db = getFirestore();
 
@@ -8,8 +12,19 @@ const setRegisterUser = async (props) => {
   const { walletAddress, roundId, provider } = props;
   const docRef = doc(db, "round", roundId);
   const docSnap = await getDoc(docRef);
-  const data = await docSnap.data();
-  const cUSD = await configCUSD(provider);
+  const data = docSnap.data();
+
+  const cUSD = await new Promise((resolve, reject) => {
+    try {
+      if (provider !== "WalletConnect") {
+        resolve(configCUSD());
+      } else {
+        resolve(walletConnect());
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
 
   return new Promise((resolve, reject) => {
     cUSD.methods

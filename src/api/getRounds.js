@@ -5,7 +5,7 @@ import {
   getFirestore,
   getDocs,
 } from "firebase/firestore";
-import config from "./config.sg.web3";
+import config, { walletConnect } from "./config.sg.web3";
 
 import MethodGetAddressOrderList from "./methods/getAddressOrderList";
 import MethodGetGroupSize from "./methods/getGroupSize";
@@ -23,7 +23,7 @@ import MethodGetAdmin from "./methods/getAdmin";
 
 const db = getFirestore();
 
-const getRounds = async ({ userId, walletAddress }) => {
+const getRounds = async ({ userId, walletAddress, provider }) => {
   const querySnapshot = await getDocs(
     query(collection(db, "round"), where("createByUser", "==", userId))
   );
@@ -34,8 +34,10 @@ const getRounds = async ({ userId, walletAddress }) => {
 
     querySnapshot.docs.forEach(async (doc) => {
       const data = doc.data();
-      const sg = await config(data.contract);
-      console.log(sg);
+      const sg =
+        (await provider) !== "WalletConnect"
+          ? await config(data.contract)
+          : await walletConnect(data.contract);
 
       const positionData =
         data.positions.find((pos) => pos.walletAddress === walletAddress) || {};
@@ -133,7 +135,7 @@ const getRounds = async ({ userId, walletAddress }) => {
       rounds.push(roundData);
 
       if (i <= querySnapshot.size) {
-        console.log("Rondas::", rounds);
+      
         resolve(rounds.sort());
       } else {
         i += 1;

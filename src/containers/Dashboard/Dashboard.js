@@ -23,7 +23,7 @@ import APIGetFuturePayments from "../../api/getFuturePayments";
 import Placeholder from "../../components/Placeholder";
 import NotFoundPlaceholder from "../../components/NotFoundPlaceholder";
 
-function Dashboard({ currentAddress }) {
+function Dashboard({ currentAddress, currentProvider }) {
   const history = useHistory();
   const user = getAuth().currentUser;
   const [roundList, setRoundList] = useState([]);
@@ -45,6 +45,7 @@ function Dashboard({ currentAddress }) {
       APIGetRounds({
         userId: user.uid,
         walletAddress: currentAddress,
+        provider: currentProvider,
       }).then((rounds) => {
         console.log("ACTUALIZADO MIS RONDAS");
         setRoundList(rounds);
@@ -52,6 +53,7 @@ function Dashboard({ currentAddress }) {
       APIGetRoundsByInvitation({
         email: user.email,
         walletAddress: currentAddress,
+        provider: currentProvider,
       }).then((invitations) => {
         console.log("ACTUALIZADO MIS INVITES");
         setInvitationsList(invitations);
@@ -59,6 +61,7 @@ function Dashboard({ currentAddress }) {
       APIGetOtherRounds({
         userId: user.uid,
         walletAddress: currentAddress,
+        provider: currentProvider,
       }).then((other) => {
         console.log("ACTUALIZADO OTRAS RONDAS");
         setOtherList(other);
@@ -68,7 +71,7 @@ function Dashboard({ currentAddress }) {
 
   const handleStartRound = (roundId) => {
     setLoading(true);
-    APISetStartRound(roundId)
+    APISetStartRound(roundId, currentProvider)
       .then((receip) => {
         Modal.success({
           title: "Ronda iniciada correctamente",
@@ -88,11 +91,19 @@ function Dashboard({ currentAddress }) {
 
   const handlePayRound = (roundId) => {
     setLoading(true);
-    const remainingAmount = APIGetFuturePayments(roundId, currentAddress);
+    const remainingAmount = APIGetFuturePayments(
+      roundId,
+      currentAddress,
+      currentProvider
+    );
     remainingAmount
       .then((amount) => {
         if (amount > 0) {
-          APISetAddPayment({ roundId, walletAddress: currentAddress })
+          APISetAddPayment({
+            roundId,
+            walletAddress: currentAddress,
+            provider: currentProvider,
+          })
             .then((success) => {
               Modal.success({
                 title: "Pago correcto",
@@ -127,7 +138,7 @@ function Dashboard({ currentAddress }) {
 
   const handleWithdrawRound = (roundId) => {
     setLoading(true);
-    APISetWithdrawTurn(roundId, currentAddress)
+    APISetWithdrawTurn(roundId, currentAddress, currentProvider)
       .then(() => {
         Modal.success({
           title: "Cobro correcto",
@@ -205,7 +216,6 @@ function Dashboard({ currentAddress }) {
   }
 
   const completeRoundList = roundList.concat(invitationsList);
-
   return (
     <>
       <PageHeader
@@ -226,6 +236,7 @@ function Dashboard({ currentAddress }) {
             if (round.stage === "ON_REGISTER_STAGE" && round.toRegister) {
               return (
                 <RoundCardNew
+                  key={round.roundKey}
                   fromInvitation={round.fromInvitation}
                   fromEmail={round.fromEmail}
                   onClick={() => goToJoin(round.roundKey)}
@@ -302,10 +313,12 @@ function Dashboard({ currentAddress }) {
 
 Dashboard.propTypes = {
   currentAddress: PropTypes.string,
+  currentProvider: PropTypes.string,
 };
 
 Dashboard.defaultProps = {
   currentAddress: undefined,
+  currentProvider: undefined,
 };
 
 export default Dashboard;
