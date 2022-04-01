@@ -216,9 +216,6 @@ function Dashboard({ currentAddress, currentProvider }) {
   }
 
   const completeRoundList = roundList.concat(invitationsList);
-  console.log("this is");
-  console.log(completeRoundList);
-
   return (
     <>
       <PageHeader

@@ -10,7 +10,6 @@ import MethodSetEndRound from "./methods/setEndRound";
 const db = getFirestore();
 
 const setWithdrawTurn = async (roundId, walletAddress, provider) => {
-  console.log("Prov ", provider);
   const docRef = doc(db, "round", roundId);
   const docSnap = await getDoc(docRef);
   const data = docSnap.data();
@@ -44,7 +43,7 @@ const setWithdrawTurn = async (roundId, walletAddress, provider) => {
             contract: data.contract,
           })
             .then((endReceipt) => {
-              console.log("OK END", endReceipt);
+
               resolve([receipt, endReceipt]);
             })
             .catch((endErr) => {
