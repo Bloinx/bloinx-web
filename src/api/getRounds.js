@@ -135,7 +135,7 @@ const getRounds = async ({ userId, walletAddress, provider }) => {
       rounds.push(roundData);
 
       if (i <= querySnapshot.size) {
-        console.log("Rondas::", rounds);
+      
         resolve(rounds.sort());
       } else {
         i += 1;

@@ -6,7 +6,7 @@ import MethodGetFeeCost from "./methods/getFeeCost";
 import config, { walletConnect } from "./config.sg.web3";
 
 const getRoundRegisterDetail = async (roundId, provider) => {
-  console.log(provider);
+
   try {
     const db = getFirestore();
     const docRef = doc(db, "round", roundId);

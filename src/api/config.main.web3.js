@@ -34,7 +34,6 @@ export default async function config() {
 
     return { contract, web3Provider };
   } catch (error) {
-    console.log(error);
     return error;
   }
 }
