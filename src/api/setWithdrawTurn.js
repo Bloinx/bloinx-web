@@ -43,7 +43,6 @@ const setWithdrawTurn = async (roundId, walletAddress, provider) => {
             contract: data.contract,
           })
             .then((endReceipt) => {
-
               resolve([receipt, endReceipt]);
             })
             .catch((endErr) => {

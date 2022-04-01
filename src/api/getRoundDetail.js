@@ -72,7 +72,6 @@ const getRoundDetail = async (roundId, currentProvider) => {
       positionData,
       participantsData,
     };
-   
     return a;
   } catch (err) {
     return err;

@@ -38,7 +38,6 @@ const setAddPayment = async (props) => {
         resolve(receipt);
       })
       .on("error", async (error) => {
-      
         reject(error);
       });
   });
