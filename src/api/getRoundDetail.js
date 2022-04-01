@@ -7,9 +7,9 @@ import MethodGetAdmin from "./methods/getAdmin";
 import MethodGetStage from "./methods/getStage";
 import MethodGetPayTime from "./methods/getPayTime";
 import MethodGetStartTime from "./methods/getStartTime";
-import config from "./config.sg.web3";
+import config, { walletConnect } from "./config.sg.web3";
 
-const getRoundDetail = async (roundId) => {
+const getRoundDetail = async (roundId, currentProvider) => {
   try {
     const db = getFirestore();
     const docRef = doc(db, "round", roundId);
@@ -20,7 +20,19 @@ const getRoundDetail = async (roundId) => {
     const positionData =
       positions.find((position) => position.userId === createByUser) || {};
 
-    const sg = await config(contract);
+    const sg = await new Promise((resolve, reject) => {
+      try {
+        if (currentProvider !== "WalletConnect") {
+          resolve(config(contract));
+        } else {
+          resolve(walletConnect(contract));
+        }
+      } catch (error) {
+        reject(error);
+      }
+    });
+
+    // const sg = await config(contract);
     const admin = await MethodGetAdmin(sg.methods);
     const orderList = await MethodGetAddressOrderList(sg.methods);
     const stage = await MethodGetStage(sg.methods);

@@ -7,5 +7,4 @@ const getFuturePayments = (methods, address) =>
         resolve(remainingAmount);
       });
   });
-
 export default getFuturePayments;
