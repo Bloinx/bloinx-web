@@ -5,7 +5,8 @@ import Dashboard from "./Dashboard";
 
 const mapStateToProps = (state) => {
   const currentAddress = state?.main?.currentAddress;
-  return { currentAddress };
+  const currentProvider = state?.main?.currentProvider;
+  return { currentAddress, currentProvider };
 };
 
 const mapDispatchToProps = () => ({});

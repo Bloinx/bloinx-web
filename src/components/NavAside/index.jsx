@@ -48,7 +48,7 @@ function NavAside({ user, width, toggleDrawer, visible }) {
           <img src={sliderStatus ? icon : logo} alt="bloinx-logo" />
         </div>
       )}
-      <Menu.Item className={styles.MenuItem} onClick={toggleDrawer}>
+      <Menu.Item key={0} className={styles.MenuItem} onClick={toggleDrawer}>
         <span>{user.email}</span>
       </Menu.Item>
       <Menu.Item
@@ -83,9 +83,9 @@ function NavAside({ user, width, toggleDrawer, visible }) {
       <Menu.Item
         className={classnames(
           styles.MenuItem,
-          selected === 2 && styles.MenuItemSelected
+          selected === 3 && styles.MenuItemSelected
         )}
-        key={2}
+        key={3}
         icon={<DesktopOutlined />}
         onClick={toggleDrawer}
       >
