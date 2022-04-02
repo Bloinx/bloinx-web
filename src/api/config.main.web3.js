@@ -4,10 +4,10 @@ import { newKitFromWeb3 } from "@celo/contractkit";
 import Main from "../abis/Main.json";
 
 export const MAIN_FACTORY_ALFAJORES =
-  "0xD154C2C4F1b72B3CFDD3d0076B867671a3D124Bb";
+  "0x5379Db9Fb4e50572F161A8c3E0685448271Df72F";
 
 export const MAIN_FACTORY_CELO_MAINNET =
-  "0x58a261C38FC43384AaF6C4968426CDFd4be83f29";
+  "0xaeCe4d1c7c8101bd41642bF8DBb51966B1B2E891";
 
 export async function getContract(provider, abi, contractAddress) {
   const contract = await new provider.eth.Contract(abi, contractAddress);
@@ -29,7 +29,7 @@ export default async function config() {
     const contract = await getContract(
       web3Provider,
       Main,
-      MAIN_FACTORY_ALFAJORES
+      MAIN_FACTORY_CELO_MAINNET
     );
 
     return { contract, web3Provider };

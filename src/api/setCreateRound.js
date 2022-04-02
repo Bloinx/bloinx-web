@@ -9,6 +9,8 @@ import config, {
 } from "./config.main.web3";
 import { CUSD_TOKEN_CELO_MAINNET } from "./config.erc";
 
+const adminFee = 2;
+
 const setCreateRound = async ({
   name,
   warranty,
@@ -38,6 +40,7 @@ const setCreateRound = async ({
             warranty,
             saving,
             groupSize,
+            adminFee,
             payTime,
             CUSD_TOKEN_CELO_MAINNET
           )

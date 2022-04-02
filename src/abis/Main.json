@@ -1,5 +1,37 @@
 [
 	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "previousOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "OwnershipTransferred",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "contract SavingGroups",
+				"name": "childRound",
+				"type": "address"
+			}
+		],
+		"name": "RoundCreated",
+		"type": "event"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -14,6 +46,11 @@
 			{
 				"internalType": "uint256",
 				"name": "_groupSize",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_adminFee",
 				"type": "uint256"
 			},
 			{
@@ -39,17 +76,62 @@
 		"type": "function"
 	},
 	{
-		"anonymous": false,
-		"inputs": [
+		"inputs": [],
+		"name": "devAddress",
+		"outputs": [
 			{
-				"indexed": false,
-				"internalType": "contract SavingGroups",
-				"name": "childRound",
+				"internalType": "address",
+				"name": "",
 				"type": "address"
 			}
 		],
-		"name": "RoundCreated",
-		"type": "event"
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_devAddress",
+				"type": "address"
+			}
+		],
+		"name": "setDevAddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	}
 ]
-

@@ -23,12 +23,22 @@
 			},
 			{
 				"internalType": "uint256",
+				"name": "_adminFee",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
 				"name": "_payTime",
 				"type": "uint256"
 			},
 			{
 				"internalType": "contract IERC20",
 				"name": "_token",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_devAddress",
 				"type": "address"
 			}
 		],
@@ -271,6 +281,19 @@
 	},
 	{
 		"inputs": [],
+		"name": "adminFee",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "cUSD",
 		"outputs": [
 			{
@@ -306,6 +329,13 @@
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "emergencyWithdraw",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -715,4 +745,3 @@
 		"type": "function"
 	}
 ]
-
