@@ -263,6 +263,7 @@ function Dashboard({ currentAddress, currentProvider }) {
                 onWithdraw={withdrawAction}
                 stage={round.stage}
                 saveAmount={round.saveAmount}
+                byInvitation={false}
               />
             );
           })}
@@ -275,15 +276,6 @@ function Dashboard({ currentAddress, currentProvider }) {
       {currentAddress &&
         otherList &&
         otherList.map((round) => {
-          // if (round.stage === "ON_REGISTER_STAGE" && round.toRegister) {
-          //   return (
-          //     <RoundCardNew
-          //       fromInvitation={round.fromInvitation}
-          //       fromEmail={round.fromEmail}
-          //       onClick={() => goToJoin(round.roundKey)}
-          //     />
-          //   );
-          // }
           const { disable, text, action, withdrawText, withdrawAction } =
             handleButton(round);
           return (
@@ -304,6 +296,7 @@ function Dashboard({ currentAddress, currentProvider }) {
               onWithdraw={withdrawAction}
               stage={round.stage}
               saveAmount={round.saveAmount}
+              byInvitation
             />
           );
         })}

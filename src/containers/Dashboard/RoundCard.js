@@ -27,6 +27,7 @@ export function RoundCard({
   onWithdraw,
   stage,
   saveAmount,
+  byInvitation,
 }) {
   const handleGetSteps = () => {
     const indents = [];
@@ -68,7 +69,7 @@ export function RoundCard({
           turnWithDraw={positionToWithdrawPay}
         />
       </div>
-      {arePending && (
+      {arePending && !byInvitation && (
         <p>
           Necesitas invitar a {missingPositions} amigos para para poder inciar
           la ronda
@@ -142,6 +143,7 @@ RoundCard.defaultProps = {
   onWithdraw: undefined,
   stage: "",
   saveAmount: "",
+  byInvitation: false,
 };
 
 RoundCard.propTypes = {
@@ -160,6 +162,7 @@ RoundCard.propTypes = {
   onWithdraw: PropTypes.func,
   stage: PropTypes.string,
   saveAmount: PropTypes.string,
+  byInvitation: PropTypes.bool,
 };
 
 export default React.memo(RoundCard);
