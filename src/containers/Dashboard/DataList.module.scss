@@ -1,35 +1,39 @@
 @import "../../theme.scss";
 
-.RoundsList {
+.DataList {
   padding: 10px;
   box-sizing: border-box;
 }
 
-.RoundsListHead {
+.DataListHead {
   border-bottom: 2px solid white;
   display: flex;
   flex-direction: row;
   padding-bottom: 5px;
 }
-.RoundsListHeader {
+.DataListHeader {
   display: flex;
   flex: 1;
   padding: 0px 5px;
   color: white;
 }
 
-.RoundsListRow {
+.DataListRow {
   display: flex;
   flex-direction: row;
   border-bottom: 1px solid $gray-light;
   padding-bottom: 5px;
   padding-top: 5px;
 }
-.RoundsListItem {
+.DataListItem {
   display: flex;
   flex: 1;
   padding: 0px 5px;
   color: white;
   align-items: center;
   justify-content: space-between;
+}
+
+.DataBorder{
+  border-radius: 10px;
 }

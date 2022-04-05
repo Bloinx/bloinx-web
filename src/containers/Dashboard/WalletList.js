@@ -7,16 +7,16 @@ import { useNavigate } from "react-router-dom";
 import { getRoundsList } from "./utils";
 import styles from "./DataList.module.scss";
 
-function RoundsList() {
+function WalletList() {
   const navigate = useNavigate();
 
-  const [roundsList, setRoundsList] = useState([]);
+  const [WalletList, setWalletList] = useState([]);
 
-  const getRounds = () => {
+  const getWallet = () => {
     getRoundsList()
       .then((data) => {
         console.log(data);
-        setRoundsList(data);
+        setWalletList(data);
       })
       .catch((err) => {
         console.log(err);
@@ -24,17 +24,17 @@ function RoundsList() {
   };
 
   useEffect(() => {
-    getRounds();
+    getWallet();
   }, []);
 
   return (
     <Card variant="outlined" className={styles.DataBorder}>
       <div className={styles.DataList}>
         <div className={styles.DataListHead}>
-          <div className={styles.DataListHeader}>Nombre de Ronda</div>
-          <div className={styles.DataListHeader}>Próximo Pago</div>
+          <div className={styles.DataListHeader}>Moneda digital</div>
+          <div className={styles.DataListHeader}>Balance</div>
         </div>
-        {roundsList.map((round) => (
+        {WalletList.map((round) => (
           <div key={round.contract} className={styles.DataListRow}>
             <div className={styles.DataListItem}>
               {round.isAdmin && !round.isRegistered && "Nueva ronda vacia"}
@@ -60,4 +60,4 @@ function RoundsList() {
   );
 }
 
-export default React.memo(RoundsList);
+export default React.memo(WalletList);
