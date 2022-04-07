@@ -10,6 +10,9 @@
   "dashboardPage": {
     "title": "My Rounds",
     "subtitle": "Invitations to Rounds",
+    "bannerFirst": "Make sure you are at ",
+    "bannerUrl": "https://bloinx.web.app/",
+    "bannerSecond": " We will never ask you for your seed phrase!",
     "roundCaption": "Start your saving circle with your friends or family now.",
     "table": {
       "name": "Name",

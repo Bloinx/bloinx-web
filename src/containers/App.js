@@ -1,6 +1,10 @@
 import React, { Suspense } from "react";
 import { useRoutes, BrowserRouter } from "react-router-dom";
 
+
+
+
+
 const Login = React.lazy(() => import("./Login"));
 const SignUp = React.lazy(() => import("./Signup"));
 const Logout = React.lazy(() => import("./Logout"));
@@ -82,9 +86,11 @@ const privateRoutes = [
 const AppWrapper = () => {
   const App = () => useRoutes([...publicRoutes, ...privateRoutes]);
   return (
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+
   );
 };
 

@@ -1,8 +1,13 @@
 @import "../../theme.scss";
 
-.Dashboard {
-}
 
+
+.createRound{
+  width: 100% !important;
+  margin-top: 15px !important;
+  margin-bottom: 20px !important;
+  font-weight: bold !important;
+}
 @include media("<desktop") {
   .Dashboard {
     border-color: green;

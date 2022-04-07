@@ -1,13 +1,16 @@
 @import "../../theme.scss";
 
 .Notification {
-  height: 85px;
+  height: 74px;
   background-color: $blue-strong;
-  border-bottom-right-radius: 20px;
-  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   color: white;
+  text-align: center;
+  margin-left: -20px;
+  margin-right: -20px;
 }
