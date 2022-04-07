@@ -60,6 +60,15 @@
       "continue": "Continue"
     }
   },
+  "motivation":{
+    "debts":"Debts",
+    "gifts":"Gifts",
+    "entertainment":"Entertainment",
+    "health":"Health",
+    "car/home":"Car/Home",
+    "business":"Business",
+    "education":"Education"
+  },
   "payments": {
     "wallet": {
       "title": "Digital wallet",
@@ -101,12 +110,29 @@
       "sendAndEnd": "Send and End"
     }
   },
+  "stepper":{
+    "actions":{
+      "turn":"Turn",
+      "approve": "Approve",
+      "pay": "Pay",
+      "invite": "Invite"
+    },
+  "title":{
+    "turn":"Customize your round",
+    "approve": "Approve the deposit",
+    "pay": "pay the deposit",
+    "invite": "invite your friends"
+  }
+},
   "infoLabels": {
     "withoutWallet": "No Wallet found",
     "connectWalletMessage": "Please connect your wallet to continue",
     "withoutInfo": "Without info to show",
     "createRoundMessage": "Please create a round",
-    "guaranteeInfo": "What is a security deposit? This payment will be returned at the end of the rund and it will be used in case you miss one of your commited payments. If you miss more than one payment, you can affect the return of the security deposit of other participants in your group."
+    "guaranteeInfo": "What is a security deposit? This payment will be returned at the end of the rund and it will be used in case you miss one of your commited payments. If you miss more than one payment, you can affect the return of the security deposit of other participants in your group.",
+    "securityDeposit": "What is the security deposit?",
+    "paymentInfo":"This payment will be returned at the end of the round and will be used in case you miss one of your committed payments.",
+    "paymentRefound":"If you miss more than one payment, it may affect the security deposit return of other participants in your group."
   },
   "copyright": "Bloinx 2021 (c) All rights reserved."
 }

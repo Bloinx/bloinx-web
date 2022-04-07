@@ -19,7 +19,7 @@ export default function Navbar({ width, toggleDrawer, visible }) {
           <Grid item xs={6} md={6}>
             <img src={icon} alt="bloinx-icon" className={styles.NavbarLogo} />
           </Grid>
-          <Grid item xs={6} md={6} textAlign={'right'}>
+          <Grid item xs={6} md={6} textAlign={"right"}>
             <Wallets />
           </Grid>
         </Toolbar>

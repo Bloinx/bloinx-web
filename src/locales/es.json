@@ -27,6 +27,7 @@
   "createRound":{
     "title": "Confirma nueva ronda",
     "titleConfirm": "Personaliza tu ronda",
+    "subtitleConfirm": "Resumen de selección",
     "titleReceipt": "Tu ronda se esta creando",
     "labels": {
       "payPerRound": "A pagar por turno",
@@ -34,11 +35,11 @@
       "amount": "A pagar por turno",
       "receiptAmount": "A recibir en turno",
       "roundTime": "Tiempo de duración por ronda",
-      "terms": "Entiendo completamente como el depósito de seguridad funciona"
+      "terms": "Entiendo cómo funciona el depósito"
     },
     "form":{
       "label":{
-    "participants": "Número de participantes",
+        "participants": "Número de participantes",
         "amount": "Monto por ronda",
         "periodicity": "Duración de ronda",
         "periodicityOptions": {
@@ -48,7 +49,7 @@
         },
         "name":"Nombre de la ronda",
         "motivation":"Motivación personal",
-        "turn": "Turno para recibir la ronda"
+        "turn": "Turno para cobrar"
       },
       "placeholder": {
         "batchName":"Nombre de la ronda"
@@ -58,8 +59,18 @@
       "registerMe": "Registrarme",
       "payGuarantee": "Crear ronda",
       "chooseTurn": "Elige tu lugar en la ronda",
-      "continue": "Continuar"
+      "continue": "Continuar",
+      "pay": "Pagar"
     }
+  },
+  "motivation":{
+    "debts":"Deudas",
+    "gifts":"Regalos",
+    "entertainment":"Entretenimiento",
+    "health":"Salud",
+    "car/home":"Auto/Casa",
+    "business":"Negocio",
+    "education":"Educación"
   },
   "payments":{
     "wallet":{
@@ -79,7 +90,7 @@
     "details": {
       "title": "Detalles del Pago",
       "subtitle": "Vas a depositar:",
-      "securityDeposit": "Depósito de Seguridad (reintegrable)",
+      "securityDeposit": "Depósito de Seguridad",
       "serviceFee": "Tarifa de Servicio"
     }
   },
@@ -102,12 +113,34 @@
       "sendAndEnd": "Enviar y terminar"
     }
   },
+  "resume":{
+    "title": "Detalles de la Ronda",
+    "motivation":"Motivo de la ronda",
+    "turn":"Turno para recibir"
+  },
+  "stepper":{
+    "actions":{
+      "turn":"Turno",
+      "approve": "Aprobar",
+      "pay": "Paga",
+      "invite": "Invita"
+    },
+  "title":{
+    "turn":"Personaliza tu ronda",
+    "approve": "Aprueba el depósito",
+    "pay": "Paga el depósito",
+    "invite": "Invita a tus amigos"
+  }
+  },
   "infoLabels": {
     "withoutWallet": "Sin Wallet encontrada",
     "connectWalletMessage": "Por favor conecta tu wallet para continuar",
     "withoutInfo": "Sin información para mostrar",
     "createRoundMessage": "Por favor crea una ronda",
-    "guaranteeInfo": "¿Qué es la garantía? \n Es un pago que se regresará al final de la ronda. Si alguno de ustedes no paga a tiempo, será aplicado automáticamente al turno que corresponda y no lo podrá recuperar. \n ¡Ojo! si alguno de ustedes olvida hacer más de un pago, el monto a regresar de la garantía de todos los participantes será afectado."
+    "guaranteeInfo": "¿Qué es la garantía? \n Es un pago que se regresará al final de la ronda. Si alguno de ustedes no paga a tiempo, será aplicado automáticamente al turno que corresponda y no lo podrá recuperar. \n ¡Ojo! si alguno de ustedes olvida hacer más de un pago, el monto a regresar de la garantía de todos los participantes será afectado.",
+    "securityDeposit": "¿Qué es el depósito de seguridad?",
+    "paymentInfo":"Este pago se devolverá al terminar la ronda y se utilizará en caso de que pierda uno de sus pagos comprometidos.",
+    "paymentRefound":"Si omite más de un pago, puede afectar la devolución del depósito de seguridad de otros participantes en su grupo."
   },
   "copyright": "Bloinx 2021 (c) Todos los derechos reservados."
 }
