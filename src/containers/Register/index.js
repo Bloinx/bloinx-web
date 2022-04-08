@@ -26,7 +26,7 @@ function Register() {
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <Pay handleNext={handleNext} handleBack={handleBack} />;
+        return <Form handleNext={handleNext} handleBack={handleBack} />;
       case 1:
         return <Approve handleNext={handleNext} handleBack={handleBack} />;
       case 2:
@@ -36,7 +36,7 @@ function Register() {
             handleBack={handleBack}
             activeStep={activeStep}
             steps={steps}
-          /> */ <h1>Aqui va el status</h1>
+          /> */ <Status handleNext={handleNext} handleBack={handleBack} />
         );
       case 3:
         return (
