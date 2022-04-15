@@ -8,7 +8,8 @@ import { createClient } from "@supabase/supabase-js";
 //   detectSessionInUrl: true,
 // };
 
+
 export default createClient(
-  "https://ewtpaspwertzclcscwfy.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MTQyNzU1MSwiZXhwIjoxOTU3MDAzNTUxfQ.gqce-yOrxWHCnquH20TQEmeQnpRiHxmF9P55oeZCEkU"
+  "https://izwkhdbeqviiknksxnqb.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml6d2toZGJlcXZpaWtua3N4bnFiIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY0NzU3MzcwMywiZXhwIjoxOTYzMTQ5NzAzfQ.GLxvCpl8SNTYpgKE25ndF8JdQqr8_QvDLV7ApFFE9u8"
 );

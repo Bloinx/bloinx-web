@@ -13,7 +13,6 @@ import styles from "./Form.module.scss";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import {
   FormControl,
-  FormHelperText,
   InputLabel,
   MenuItem,
   Select,
@@ -33,7 +32,7 @@ function Form() {
     gender,
   }) => {
     setLoading(true);
-    const data = await supabase.auth.signUp(
+    const {data, error} = await supabase.auth.signUp(
       {
         email,
         password,
@@ -47,12 +46,19 @@ function Form() {
         },
       }
     );
-    if (data.user) {
-      navigate("/dashboard");
+    if(!error)
+    {
+      console.log(data);
+      navigate('/login');
       setLoading(false);
-    } else {
+      
+    }
+    else
+    {
+    console.log(error.message);
       setLoading(false);
     }
+          
   };
 
   if (loading) {
