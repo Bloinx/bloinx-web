@@ -102,6 +102,14 @@ function Form() {
             >
               Iniciar sesión
             </Button>
+          <Button
+           type="button"
+           variant="contained"
+           className={styles.Button}
+           
+           >
+           Olvidaste tu Contraseña
+           </Button>
           </form>
         )}
       </Formik>

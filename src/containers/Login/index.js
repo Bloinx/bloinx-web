@@ -24,6 +24,7 @@ function Login() {
         <div className={styles.LoginContent}>
           <Form />
           <div className={styles.LoginOptions}>
+          
             <Typography
               variant="caption"
               component="p"
